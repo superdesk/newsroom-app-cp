@@ -24,7 +24,10 @@ URL_PREFIX = env("MGMTAPI_URL_PREFIX", server_url.path.strip("/")) or ""
 
 BLUEPRINTS = []
 
-CORE_APPS = []
+CORE_APPS = [
+    'cp.mgmt_api.companies',
+    'cp.mgmt_api.users'
+]
 
 INSTALLED_APPS = []
 
