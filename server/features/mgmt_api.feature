@@ -105,3 +105,18 @@ Feature: Management API
         """
         {"last_name": "wick"}
         """
+
+
+    Scenario: Delete a user
+        Given empty "users"
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com"
+        }
+        """
+        When we delete latest
+        Then we get ok response
+
