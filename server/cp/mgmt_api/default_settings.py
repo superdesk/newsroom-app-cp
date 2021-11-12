@@ -26,7 +26,8 @@ BLUEPRINTS = []
 
 CORE_APPS = [
     'cp.mgmt_api.companies',
-    'cp.mgmt_api.users'
+    'cp.mgmt_api.users',
+    'cp.mgmt_api.products'
 ]
 
 INSTALLED_APPS = []
