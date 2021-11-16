@@ -33,5 +33,8 @@ ENV TZ=Europe/London
 
 COPY . .
 
-ENTRYPOINT ["sh", "/opt/newsroom/scripts/start.sh"]
+# fix line endings on windows
+RUN dos2unix /opt/newsroom/scripts/start.sh
+
+ENTRYPOINT ["bash", "/opt/newsroom/scripts/start.sh"]
 CMD ["honcho", "start", "-p 5050"]
