@@ -1,18 +1,20 @@
 openapi: '3.0.3'
+
 info:
   title: CP NewsPro Management API
   version: "0.1"
+
 servers:
   - url: https://cp-dev.newshub.pro/mapi
     description: Staging server.
+  - url: https://cp.newshub.pro/mapi
+    description: Production server.
+
 paths:
   /users/{id}:
     parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            $ref: '#components/schemas/ObjectId'
+      - $ref: '#/components/parameters/idParam'
+
     get:
       summary: Get a user by ID.
       responses:
@@ -23,67 +25,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '404':
-          description: User not found.
+          $ref: '#/components/responses/NotFound'
+
     patch:
       summary: Update user.
       parameters:
-        - $ref: '#components/parameters/IfMatch'
+        - $ref: '#/components/parameters/IfMatchHeader'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/User'
+              $ref: '#/components/schemas/User'
       responses:
         '200':
-          description: User updated.
+          $ref: '#/components/responses/Updated'
         '412':
-          description: If-Match header value does not match etag in database.
+          $ref: '#/components/responses/PreconditionFailed'
+
     delete:
       summary: Delete user.
       parameters:
-        - in: header
-          name: If-Match
-          schema:
-            type: string
-          required: true
-          description: Etag of the resource being deleted.
+        - $ref: '#/components/parameters/IfMatchHeader'
       responses:
         '200':
-          description: User deleted.
+          $ref: '#/components/responses/Deleted'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
 
   /users:
     get:
       summary: Returns a list of users.
       parameters:
-        - in: query
-          name: q
-          schema:
-            type: string
-          description: User name/email query.
-        - in: query
-          name: where
-          schema:
-            type: object
-          description: Filter using key/value pairs.
-        - in: query
-          name: page
-          schema:
-            type: integer
-            default: 1
-          description: Pagination.
-        - in: query
-          name: max_results
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 250
-            default: 25
-          description: The number of items to return.
-        - in: query
-          name: sort
-          schema:
-            type: string
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
       responses:
         '200':
           description: A JSON array of users.
@@ -97,7 +75,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/User'
                   _meta:
-                    $ref: '#components/schemas/Meta'
+                    $ref: '#/components/schemas/Meta'
+
     post:
       summary: Creates a new user.
       requestBody:
@@ -108,22 +87,178 @@ paths:
               $ref: '#/components/schemas/User'
       responses:
         '201':
-          description: New user created.
+          $ref: '#/components/responses/Created'
+
+  /companies/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get a company by ID.
+      responses:
+        '200':
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Base'
+                $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      summary: Update company.
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          $ref: '#/components/responses/Updated'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+    delete:
+      summary: Delete company.
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /companies:
+    get:
+      summary: Returns a list of companies.
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of companies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+
+    post:
+      summary: Creates a new company.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
 
 components:
   parameters:
-    IfMatch:
+
+    IfMatchHeader:
       in: header
       name: If-Match
       schema:
         type: string
       required: true
       description: Etag of modified resource.
+
+    idParam:
+      in: path
+      name: id
+      schema:
+        $ref: '#/components/schemas/ObjectId'
+      required: true
+      description: Resource id.
+
+    qParam:
+      in: query
+      name: q
+      schema:
+        type: string
+      description: Filter using fulltext.
+    
+    whereParam:
+      in: query
+      name: where
+      schema:
+        type: object
+      description: Filter using key/value pairs.
+    
+    pageParam:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      description: Skip to the page.
+    
+    maxResultsParam:
+      in: query
+      name: max_results
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 250
+        default: 25
+      description: The number of items to return.
+    
+    sortParam:
+      in: query
+      name: sort
+      schema:
+        type: string
+      description: Field name to sort by.
+
+  responses:
+
+    Created:
+      description: Resource created.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Base'
+
+    Updated:
+      description: Resource updated.
+      content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Base'
+
+    Deleted:
+      description: Resource deleted.
+
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    PreconditionFailed:
+      description: If-Match header value does not match etag in database.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
   schemas:
+
     ObjectId:
       type: string
       example: 619277ef8bbbbfac6034aab7
@@ -134,6 +269,21 @@ components:
         total:
           type: integer
     
+    Error:
+      type: object
+      properties:
+        _status:
+          type: string
+          enum:
+            - ERR
+        _error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+  
     Base:
       type: object
       properties:
@@ -151,7 +301,6 @@ components:
           type: string
           enum:
             - OK
-            - ERROR
 
     User:
       type: object
@@ -171,7 +320,7 @@ components:
         company:
           type: string
           description: Company ID.
-          $ref: '#components/schemas/ObjectId'
+          $ref: '#/components/schemas/ObjectId'
         user_type:
           type: string
           enum:
@@ -197,11 +346,51 @@ components:
         original_creator:
           type: string
           description: User ID.
-          $ref: '#components/schemas/ObjectId'
+          $ref: '#/components/schemas/ObjectId'
         version_creator:
           type: string
           description: User ID.
-          $ref: '#components/schemas/ObjectId'
-
+          $ref: '#/components/schemas/ObjectId'
       required:
         - email
+
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+        sd_subscriber_id:
+          type: string
+        is_enabled:
+          type: boolean
+        contact_name:
+          type: string
+        contact_email:
+          type: string
+          format: email
+        phone:
+          type: string
+        country:
+          type: string
+        expiry_date:
+          type: string
+          format: date-time
+        archive_access:
+          type: boolean
+        events_only:
+          type: boolean
+        account_manager:
+          type: string
+          description: User Id.
+        monitoring_administrator:
+          type: string
+          description: User Id.
+        original_creator:
+          type: string
+          description: User Id.
+        version_creator:
+          type: string
+          description: User Id.
