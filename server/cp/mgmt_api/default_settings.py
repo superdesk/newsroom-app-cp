@@ -23,7 +23,6 @@ server_url = urlparse(MGMTAPI_URL)
 URL_PREFIX = env("MGMTAPI_URL_PREFIX", server_url.path.strip("/")) or ""
 
 BLUEPRINTS = [
-    'cp.mgmt_api.companies'
 ]
 
 CORE_APPS = [

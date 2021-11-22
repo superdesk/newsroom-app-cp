@@ -1,36 +1,30 @@
-from bson import ObjectId
-from flask import Blueprint, jsonify, request
+import newsroom
 from newsroom.companies import CompaniesResource, CompaniesService
-from newsroom.utils import get_entity_or_404
+from newsroom.utils import query_resource
 import superdesk
-
-blueprint = Blueprint('companies', __name__)
+from superdesk.utils import ListCursor
 
 
 def init_app(app):
     CompaniesResource.internal_resource = False
     superdesk.register_resource('companies', CompaniesResource, CompaniesService, _app=app)
 
-
-@blueprint.route('/api/companies/<_id>/products', methods=['GET', 'OPTIONS'])
-def get_company_products(_id):
-    """ Fetches the company products by given id """
-    products = superdesk.get_resource_service('products').find({'companies': ObjectId(_id)})
-    return jsonify(list(products)), 200
+    endpoint_name = "company_products"
+    service = CompanyProductsService(endpoint_name, backend=superdesk.get_backend())
+    CompanyProductsResource(endpoint_name, app=app, service=service)
 
 
-@blueprint.route('/api/companies/<product_id>/products', methods=['PATCH'])
-def patch_company_products(product_id):
-    """ Updates the company products by given id """
-    get_entity_or_404(ObjectId(product_id), 'products')
-    updates = request.get_json()
-    superdesk.get_resource_service('products').patch(id=ObjectId(product_id), updates=updates)
-    return jsonify({'success': True}), 200
+class CompanyProductsResource(newsroom.Resource):
+    url = 'companies/<regex("[a-f0-9]{24}"):company_id>/products'
+    resource_methods = ["GET"]
 
 
-@blueprint.route('/api/companies/<product_id>/products', methods=['DELETE'])
-def delete_company_products(product_id):
-    """ Deletes the company products by given id """
-    get_entity_or_404(ObjectId(product_id), 'products')
-    superdesk.get_resource_service('products').delete_action({'_id': ObjectId(product_id)})
-    return jsonify({'success': True}), 200
+class CompanyProductsService(newsroom.Service):
+    def get(self, req, lookup):
+        products = query_resource('products', lookup={"is_enabled": True})
+        company_products = []
+        for product in products:
+            if product.get('companies') and lookup['company_id'] in product.get('companies'):
+                company_products.append(product)
+
+        return ListCursor(company_products)
