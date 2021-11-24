@@ -1,0 +1,659 @@
+openapi: '3.0.2'
+info:
+  title: CP NewsPro Management API
+  version: "0.1"
+
+servers:
+  - url: https://cp-dev.newshub.pro/mapi
+    description: Staging server.
+  - url: https://cp.newshub.pro/mapi
+    description: Production server.
+
+paths:
+  /users/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+
+    get:
+      summary: Get a user by ID.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      summary: Update user.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          $ref: '#/components/responses/Updated'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+    delete:
+      summary: Delete user.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /users:
+    get:
+      summary: Returns a list of users.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+
+    post:
+      summary: Creates a new user.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+
+  /companies/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get a company by ID.
+      tags:
+        - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      summary: Update company.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          $ref: '#/components/responses/Updated'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+    delete:
+      summary: Delete company.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+  /companies:
+    get:
+      summary: Returns a list of companies.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of companies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+
+    post:
+      summary: Creates a new company.
+      tags:
+        - Companies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+
+  /products:
+    get:
+      summary: Returns a list of products
+      tags:
+        - Products (TBD)
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+
+  /topics:
+    get:
+      summary: Returns a list of Topics
+      tags:
+        - Topics (TBD)
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of topics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+
+  /navigations:
+    get:
+      summary: Returns a list of Navigations
+      tags:
+        - Navigations (TBD)
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of navigations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Navigation'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+
+  /companies/{id}/products:
+    get:
+      summary: Returns list of products a company is permissioned for.
+      tags:
+        - Company Products (TBD)
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+    post:
+      summary: Set the list of products a company is permissioned for.
+      tags:
+        - Company Products (TBD)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectId'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+
+components:
+  parameters:
+
+    IfMatchHeader:
+      in: header
+      name: If-Match
+      schema:
+        type: string
+      required: true
+      description: Etag of modified resource.
+
+    idParam:
+      in: path
+      name: id
+      schema:
+        $ref: '#/components/schemas/ObjectId'
+      required: true
+      description: Resource id.
+
+    qParam:
+      in: query
+      name: q
+      schema:
+        type: string
+      description: Filter using fulltext.
+    
+    whereParam:
+      in: query
+      name: where
+      schema:
+        type: object
+      description: Filter using key/value pairs.
+    
+    pageParam:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      description: Skip to the page.
+    
+    maxResultsParam:
+      in: query
+      name: max_results
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 250
+        default: 25
+      description: The number of items to return.
+    
+    sortParam:
+      in: query
+      name: sort
+      schema:
+        type: string
+      description: Field name to sort by.
+
+  responses:
+
+    Created:
+      description: Resource created.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Base'
+
+    Updated:
+      description: Resource updated.
+      content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Base'
+
+    Deleted:
+      description: Resource deleted.
+
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    PreconditionFailed:
+      description: If-Match header value does not match etag in database.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+
+    ObjectId:
+      type: string
+      example: 619277ef8bbbbfac6034aab7
+
+    ProductType:
+      type: string
+      default: 'wire'
+      enum:
+        - wire
+        - agenda
+
+    Meta:
+      type: object
+      properties:
+        total:
+          type: integer
+    
+    Error:
+      type: object
+      properties:
+        _status:
+          type: string
+          enum:
+            - ERR
+        _error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+  
+    Base:
+      type: object
+      properties:
+        _id:
+          type: string
+          $ref: '#/components/schemas/ObjectId'
+          readOnly: true
+        _etag:
+          type: string
+        _created:
+          type: string
+          format: date-time
+        _updated:
+          type: string
+          format: date-time
+        _status:
+          type: string
+          enum:
+            - OK
+
+    User:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        mobile:
+          type: string
+        role:
+          type: string
+        country:
+          type: string
+        company:
+          type: string
+          description: Company ID.
+          $ref: '#/components/schemas/ObjectId'
+        user_type:
+          type: string
+          default: 'public'
+          enum:
+            - administrator
+            - internal
+            - public
+            - account_manager
+        is_validated:
+          type: boolean
+          default: false
+        is_enabled:
+          type: boolean
+          default: true
+        is_approved:
+          type: boolean
+          default: false
+        expiry_alert:
+          type: boolean
+          default: false
+        receive_email:
+          type: boolean
+          default: true
+        locale:
+          type: string
+        last_active:
+          type: string
+          format: date-time
+        original_creator:
+          type: string
+          description: User ID.
+          $ref: '#/components/schemas/ObjectId'
+        version_creator:
+          type: string
+          description: User ID.
+          $ref: '#/components/schemas/ObjectId'
+      required:
+        - first_name
+        - last_name
+        - email
+        - phone
+        - user_type
+        - company
+
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+        sd_subscriber_id:
+          type: string
+        is_enabled:
+          type: boolean
+        contact_name:
+          type: string
+        contact_email:
+          type: string
+          format: email
+        phone:
+          type: string
+        country:
+          type: string
+        expiry_date:
+          type: string
+          format: date-time
+        archive_access:
+          type: boolean
+        events_only:
+          type: boolean
+        account_manager:
+          type: string
+          description: User Id.
+        monitoring_administrator:
+          type: string
+          description: User Id.
+        original_creator:
+          type: string
+          description: User Id.
+        version_creator:
+          type: string
+          description: User Id.
+      required:
+        - name
+
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        sd_product_id:
+          type: string
+        query:
+          type: string
+        planning_item_query:
+          type: string
+        is_enabled:
+          type: boolean
+          default: true
+        product_type:
+          type: string
+          $ref: '#/components/schemas/ProductType'
+        original_creator:
+          type: string
+          description: User ID.
+          $ref: '#/components/schemas/ObjectId'
+        version_creator:
+          type: string
+          description: User ID.
+          $ref: '#/components/schemas/ObjectId'
+      required:
+        - name
+        - product_type
+
+    Topic:
+      type: object
+      properties:
+        label:
+          type: string
+        query:
+          type: string
+        filter:
+          type: object
+        created:
+          type: object
+        user:
+          type: string
+          description: ID of the User that owns this Topic.
+          $ref: '#/components/schemas/ObjectId'
+        company:
+          type: string
+          description: Company ID
+          $ref: '#/components/schemas/ObjectId'
+        is_global:
+          type: boolean
+          description: If true, then available to all users within the company
+          default: false
+        subscribers:
+          type: array
+          description: List of User IDs that will receive email notifications for new items
+          items:
+            $ref: '#/components/schemas/ObjectId'
+        timezone_offset:
+          type: integer
+        topic_type:
+          type: string
+          $ref: '#/components/schemas/ProductType'
+        navigation:
+          type: array
+          description: Array of Navigation IDs
+          items:
+            $ref: '#/components/schemas/ObjectId'
+      required:
+        - label
+        - company
+        - user
+
+    Navigation:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        is_enabled:
+          type: boolean
+          default: true
+        order:
+          type: integer
+        product_type:
+          type: string
+          default: 'wire'
+          $ref: '#/components/schemas/ProductType'
+        original_creator:
+          type: string
+          description: User ID.
+          $ref: '#/components/schemas/ObjectId'
+        version_creator:
+          type: string
+          description: User ID.
+          $ref: '#/components/schemas/ObjectId'
+      required:
+        - name
