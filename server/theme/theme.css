@@ -244,7 +244,7 @@ a:hover {
 .card a.btn-outline-primary:hover {
     color: white;
 }
-[class^="icon--"], [class*=" icon--"] {
+[class^="icon--"], [class*=" icon--"], [class^="icon--"].icon--pink, [class*=" icon--"].icon--pink {
     color: #CC212C;
 }
 [class^="icon-small--"], [class*=" icon-small--"] {
@@ -295,6 +295,10 @@ a:hover {
     color: #CC212C;
     background-color: white;
 }
+.wire-column__main-header .badge-info {
+    color: white;
+    background-color: #CC212C;
+}
 .badge--top-right .badge {
     font-weight: 700;
 }
@@ -308,6 +312,9 @@ a:hover {
 .alertify-notifier .ajs-message.ajs-error {
     background: #CC212C;
     color: white;
+}
+.wire-button__notif {
+    background: #CC212C;
 }
 
 @media only screen and (min-width: 360px) {
