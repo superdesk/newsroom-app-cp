@@ -16,7 +16,7 @@
 
 {{ javascript_tag('common') | safe }}
 {{ javascript_tag('newsroom_css') | safe }}
-<link rel="stylesheet" href="{{ url_for('theme', filename='theme.css') }}"/>
+<link rel="stylesheet" href="{{ theme_url('theme.css') }}"/>
 {% block sectioncss %}{% endblock %}
 </head>
 <body>
