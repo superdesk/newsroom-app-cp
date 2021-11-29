@@ -119,3 +119,32 @@ Feature: Management API
         """
         When we delete latest
         Then we get ok response
+
+
+    Scenario: Get company products
+		Given empty "companies"
+		When we post to "/companies"
+		"""
+		[{"name": "zzz company"}]
+		"""
+		Given empty "products"
+		When we post to "/products"
+		"""
+		[{"name": "A fishy Product",
+		"decsription": "a product for those interested in fish",
+		"companies" : [
+			"#companies._id#"
+		],
+		"query": "fish",
+		"product_type": "news_api"
+		}]
+		"""
+		When we get "companies/#companies._id#/products"
+		"""
+		"name": "A fishy Product",
+		"decsription": "a product for those interested in fish",
+		"query": "fish",
+		"product_type": "news_api"
+		"""
+		When we delete "companies/#companies._id#/products/#product._id#"
+		Then we get response code 204
