@@ -18,6 +18,26 @@ SERVICES = [
 
 SHOW_USER_REGISTER = False
 
+NEWS_ONLY_FILTERS = []
+
+LANGUAGES = ['en', 'fr_CA']
+DEFAULT_LANGUAGE = 'en'
+
 CLIENT_CONFIG.update({
-    'display_news_only': True  # Displays news only switch in wire
+    'display_news_only': False,  # Displays news only switch in wire
+
+    'time_format': 'HH:mm',
+    'date_format': 'MMM Do, YYYY',
+    'locale_formats': {
+        "en": {
+            "TIME_FORMAT": "HH:mm",
+            "DATE_FORMAT": "MMM Do, YYYY",
+            "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
+            "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYYY",
+        },
+        "fr_CA": {
+            "TIME_FORMAT": "HH:mm",
+            "DATE_FORMAT": "MMM Do, YYYY",
+        },
+    },
 })
