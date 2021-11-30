@@ -18,6 +18,9 @@
             "slugline": {
                 "displayed": true
             },
+            "abstract": {
+                "displayed": false
+            },
             "metadata_fields": [
               "urgency",
               "source",
