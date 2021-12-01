@@ -1,11 +1,10 @@
 from bson.objectid import ObjectId
-import newsroom
 from flask import request
+import newsroom
 from newsroom.companies import CompaniesResource, CompaniesService
 from newsroom.products.products import ProductsResource
-from newsroom.utils import find_one, query_resource
+from newsroom.utils import find_one
 import superdesk
-from superdesk.utils import ListCursor
 
 
 def init_app(app):
@@ -56,7 +55,9 @@ class CompanyProductsService(newsroom.Service):
                 company_id = ObjectId(request.view_args['companies'])
                 if company_id not in product_companies:
                     product_companies.append(company_id)
-                    superdesk.get_resource_service('products').system_update(ObjectId(id), {"companies": product_companies}, product)
+                    superdesk.get_resource_service('products').system_update(
+                        ObjectId(id), {"companies": product_companies}, product
+                    )
                 ids.append(id)
         return ids
 
@@ -64,18 +65,20 @@ class CompanyProductsService(newsroom.Service):
         product = find_one('products', _id=lookup["_id"])
         assert product
         product_companies = [_id for _id in product["companies"] if str(_id) != lookup["companies"]]
-        superdesk.get_resource_service('products').system_update(product["_id"], {"companies": product_companies}, product)
+        superdesk.get_resource_service('products').system_update(
+            product["_id"], {"companies": product_companies}, product
+        )
         return
-    
+
     def on_fetched(self, doc):
         for item in doc["_items"]:
             self._fix_link(item)
         return super().on_fetched(doc)
-    
+
     def on_fetched_item(self, doc):
         self._fix_link(doc)
         return super().on_fetched_item(doc)
-    
+
     def _fix_link(self, item):
         company_id = request.view_args['companies']
         item["_links"]["self"]["href"] = f"companies/{company_id}/products/{item['_id']}"
