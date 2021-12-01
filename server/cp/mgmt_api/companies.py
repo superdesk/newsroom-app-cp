@@ -2,7 +2,6 @@ from bson.objectid import ObjectId
 from flask import request
 import newsroom
 from newsroom.companies import CompaniesResource, CompaniesService
-from newsroom.products.products import ProductsResource
 from newsroom.utils import find_one
 import superdesk
 
@@ -28,8 +27,8 @@ class CompanyProductsResource(newsroom.Resource):
     datasource = {
         "source": "products",
         "projection": {
-            name: 1
-            for name in ProductsResource.schema.keys()
+            "name": 1,
+            "companies": 0
         }
     }
 
