@@ -2,7 +2,8 @@ from bson.objectid import ObjectId
 import newsroom
 from flask import request
 from newsroom.companies import CompaniesResource, CompaniesService
-from newsroom.utils import query_resource
+from newsroom.products.products import ProductsResource
+from newsroom.utils import find_one, query_resource
 import superdesk
 from superdesk.utils import ListCursor
 
@@ -14,37 +15,67 @@ def init_app(app):
 
 
 class CompanyProductsResource(newsroom.Resource):
-    url = 'companies/<regex("[a-f0-9]{24}"):company_id>/products'
+    endpoint_name = "company-product"
+    url = 'companies/<regex("[a-f0-9]{24}"):companies>/products'
+    item_url = r'regex("[a-f0-9]{24}")'
     resource_methods = ["GET", "POST"]
+    item_methods = ["GET", "DELETE"]
     schema = {
         'product_ids': {
             'type': 'list',
             'nullable': True,
         },
     }
+    datasource = {
+        "source": "products",
+        "projection": {
+            name: 1
+            for name in ProductsResource.schema.keys()
+        }
+    }
 
 
 class CompanyProductsService(newsroom.Service):
     def get(self, req, lookup):
-        products = query_resource('products', lookup={"is_enabled": True})
-        company_products = []
-        for product in products:
-            if product.get('companies') and lookup['company_id'] in product.get('companies'):
-                company_products.append(product)
+        company_id = lookup.pop("companies")
+        lookup["companies"] = {"$in": [ObjectId(company_id)]}
+        return super().get(req, lookup)
 
-        return ListCursor(company_products)
+    def find_one(self, req, **lookup):
+        lookup.pop("companies", None)
+        return super().find_one(req, **lookup)
 
     def create(self, docs, **kwargs):
+        ids = []
         for doc in docs:
             product_ids = doc.pop('product_ids', [])
-            if product_ids:
-                return_response = []
-                for id in product_ids:
-                    product = query_resource('products', lookup={"_id": id})[0]
-                    doc['companies'] = product.get('companies', [])
-                    company_id = request.view_args['company_id']
-                    if company_id not in doc['companies']:
-                        doc['companies'].append(company_id)
-                        superdesk.get_resource_service('products').patch(id=ObjectId(id), updates=doc)
-                        return_response.append(id)
-                return return_response
+            for id in product_ids:
+                product = find_one('products', _id=ObjectId(id))
+                assert product
+                product_companies = product.get('companies') or []
+                company_id = ObjectId(request.view_args['companies'])
+                if company_id not in product_companies:
+                    product_companies.append(company_id)
+                    superdesk.get_resource_service('products').system_update(ObjectId(id), {"companies": product_companies}, product)
+                ids.append(id)
+        return ids
+
+    def delete(self, lookup):
+        product = find_one('products', _id=lookup["_id"])
+        assert product
+        product_companies = [_id for _id in product["companies"] if str(_id) != lookup["companies"]]
+        superdesk.get_resource_service('products').system_update(product["_id"], {"companies": product_companies}, product)
+        return
+    
+    def on_fetched(self, doc):
+        for item in doc["_items"]:
+            self._fix_link(item)
+        return super().on_fetched(doc)
+    
+    def on_fetched_item(self, doc):
+        self._fix_link(doc)
+        return super().on_fetched_item(doc)
+    
+    def _fix_link(self, item):
+        company_id = request.view_args['companies']
+        item["_links"]["self"]["href"] = f"companies/{company_id}/products/{item['_id']}"

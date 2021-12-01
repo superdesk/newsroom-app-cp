@@ -127,24 +127,49 @@ Feature: Management API
 		"""
 		[{"name": "zzz company"}]
 		"""
+        Then we get response code 201
+
 		Given empty "products"
 		When we post to "/products"
 		"""
-		[{"name": "A fishy Product",
-		"decsription": "a product for those interested in fish",
-		"companies" : [
-			"#companies._id#"
-		],
-		"query": "fish",
-		"product_type": "news_api"
+		[{
+            "name": "A fishy Product",
+		    "description": "a product for those interested in fish",
+		    "query": "fish",
+		    "product_type": "news_api"
 		}]
 		"""
+        Then we get response code 201
+    
+		When we post to "companies/#companies._id#/products"
+        """
+        {"product_ids": ["#products._id#"]}
+        """
+        Then we get response code 201
+
 		When we get "companies/#companies._id#/products"
+        Then we get existing resource
 		"""
-		"name": "A fishy Product",
-		"decsription": "a product for those interested in fish",
-		"query": "fish",
-		"product_type": "news_api"
+        {"_items": [
+            {
+		        "name": "A fishy Product",
+		        "description": "a product for those interested in fish",
+		        "query": "fish",
+		        "product_type": "news_api"
+            }
+        ]}
 		"""
-		When we delete "companies/#companies._id#/products/#product._id#"
-		Then we get response code 204
+		When we delete "companies/#companies._id#/products/#products._id#"
+		Then we get ok response
+        
+        When we get "companies/#companies._id#/products"
+        Then we get existing resource
+		"""
+        {"_items": []}
+		"""
+      
+        When we get "products/#products._id#"
+        Then we get existing resource
+		"""
+        {"name": "A fishy Product"}
+        """
