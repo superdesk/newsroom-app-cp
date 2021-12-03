@@ -8,9 +8,7 @@ def init_app(app):
 
 
 class UserTopicsResource(TopicsResource):
-    item_url = r'regex("[a-f0-9]{24}")'
     resource_methods = ['GET', 'POST', 'DELETE']
-    item_methods = ['PATCH']
 
 
 class UserTopicsService(TopicsService):
