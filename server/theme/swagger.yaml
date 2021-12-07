@@ -304,6 +304,47 @@ paths:
         '201':
           $ref: '#/components/responses/Created'
 
+  /users/{id}/topics:
+    get:
+      summary: Returns list of topics belonging to a user.
+      tags:
+        - User Topics (TBD)
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of topics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+    post:
+      summary: Post topics on behalf of users.
+      tags:
+        - User Topics (TBD)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectId'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+
 components:
   parameters:
 
