@@ -308,7 +308,7 @@ paths:
     get:
       summary: Returns list of topics belonging to a user.
       tags:
-        - User Topics (TBD)
+        - User Topics
       parameters:
         - $ref: '#/components/parameters/qParam'
         - $ref: '#/components/parameters/whereParam'
@@ -332,13 +332,13 @@ paths:
     post:
       summary: Post topics on behalf of users.
       tags:
-        - User Topics (TBD)
+        - User Topics
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: array
+              type: object
               items:
                 $ref: '#/components/schemas/ObjectId'
       responses:
