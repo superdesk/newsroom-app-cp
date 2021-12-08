@@ -370,14 +370,14 @@ components:
       schema:
         type: string
       description: Filter using fulltext.
-    
+
     whereParam:
       in: query
       name: where
       schema:
         type: object
       description: Filter using key/value pairs.
-    
+
     pageParam:
       in: query
       name: page
@@ -385,7 +385,7 @@ components:
         type: integer
         default: 1
       description: Skip to the page.
-    
+
     maxResultsParam:
       in: query
       name: max_results
@@ -395,7 +395,7 @@ components:
         maximum: 250
         default: 25
       description: The number of items to return.
-    
+
     sortParam:
       in: query
       name: sort
@@ -454,7 +454,7 @@ components:
       properties:
         total:
           type: integer
-    
+
     Error:
       type: object
       properties:
@@ -469,7 +469,7 @@ components:
               type: integer
             message:
               type: string
-  
+
     Base:
       type: object
       properties:
