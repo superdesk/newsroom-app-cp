@@ -299,7 +299,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/ObjectId'
+                $ref: '#/components/schemas/Topic'
       responses:
         '201':
           $ref: '#/components/responses/Created'
