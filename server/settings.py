@@ -1,6 +1,6 @@
 import pathlib
 from flask_babel import lazy_gettext
-from newsroom.web.default_settings import CLIENT_CONFIG
+from newsroom.web.default_settings import CLIENT_CONFIG, CORE_APPS as _CORE_APPS
 
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
@@ -95,3 +95,8 @@ WIRE_AGGS = {
     "genre": {"terms": {"field": "genre.name", "size": 50}},
     "urgency": {"terms": {"field": "urgency"}},
 }
+
+CORE_APPS = [app for app in _CORE_APPS if app != 'newsroom.monitoring']
+INSTALLED_APPS = [
+    "cp.sidenav",
+]
