@@ -301,7 +301,7 @@ paths:
             schema:
               type: object
               items:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/Product_ids'
       responses:
         '201':
           $ref: '#/components/responses/Created'
@@ -632,6 +632,15 @@ components:
       required:
         - name
         - product_type
+
+    Product_ids:
+      type: object
+      properties:
+        product_ids:
+          type: array
+          description: List of product IDs that will be updated.
+          items:
+            $ref: '#/components/schemas/ObjectId'
 
     Topic:
       type: object
