@@ -16,14 +16,16 @@ def init_app(app):
 class CompanyProductsResource(newsroom.Resource):
     endpoint_name = "company-product"
     url = 'companies/<regex("[a-f0-9]{24}"):companies>/products'
-    item_url = r'regex("[a-f0-9]{24}")'
     resource_methods = ["GET", "POST"]
-    item_methods = ["GET", "DELETE"]
     schema = {
-        'product_ids': {
-            'type': 'list',
+        'product': {
+            'type': 'objectid',
             'nullable': True,
         },
+        'link': {
+            'type': 'boolean',
+            'nullable': False
+        }
     }
     datasource = {
         "source": "products",
@@ -47,10 +49,11 @@ class CompanyProductsService(newsroom.Service):
     def create(self, docs, **kwargs):
         ids = []
         for doc in docs:
-            product_ids = doc.pop('product_ids', [])
-            for id in product_ids:
-                product = find_one('products', _id=ObjectId(id))
-                assert product
+            id = doc.pop('product')
+            link = doc.pop('link')
+            product = find_one('products', _id=ObjectId(id))
+            assert product
+            if link:
                 product_companies = product.get('companies') or []
                 company_id = ObjectId(request.view_args['companies'])
                 if company_id not in product_companies:
@@ -59,16 +62,13 @@ class CompanyProductsService(newsroom.Service):
                         ObjectId(id), {"companies": product_companies}, product
                     )
                 ids.append(id)
+            else:
+                product_companies = [_id for _id in product["companies"] if str(_id) != request.view_args["companies"]]
+                superdesk.get_resource_service('products').system_update(
+                    product["_id"], {"companies": product_companies}, product
+                )
+                ids.append(id)
         return ids
-
-    def delete(self, lookup):
-        product = find_one('products', _id=lookup["_id"])
-        assert product
-        product_companies = [_id for _id in product["companies"] if str(_id) != lookup["companies"]]
-        superdesk.get_resource_service('products').system_update(
-            product["_id"], {"companies": product_companies}, product
-        )
-        return
 
     def on_fetched(self, doc):
         for item in doc["_items"]:
