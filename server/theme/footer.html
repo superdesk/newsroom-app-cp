@@ -1,10 +1,21 @@
 <footer class="footer" id="footer">
+    {% if get_locale() == 'en' %}
     <div class="d-none d-md-block mr-3">
-        <img src="{{ url_for('theme', filename = 'logo-footer.svg') }}" />
+        &copy; The Canadian Press {{ format_datetime(format='yyyy') }}
     </div>
     <div>
-        <a href="{{ url_for('public.page', template='privacy') }}" target="_blank">{{ gettext('Privacy Policy') }}</a>
-        <a href="{{ url_for('public.page', template='terms') }}" target="_blank">{{ gettext('Terms and Conditions') }}</a>
-        <a href="{{ url_for('public.page', template='contact') }}" target="_blank">{{ gettext('Contact Us') }}</a>
+        <a href="https://www.thecanadianpress.com/terms-of-use-cp/" target="_blank">Terms of Use</a>
+        <a href="https://www.thecanadianpress.com/privacy-policy/" target="_blank">Privacy and Accessibility</a>
+        <a href="https://www.thecanadianpress.com/contact/" target="_blank">Contact</a>
     </div>
+    {% else %}
+    <div class="d-none d-md-block mr-3">
+        &copy; La Presse Canadienne {{ format_datetime(format='yyyy') }}
+    </div>
+    <div>
+        <a href="https://www.thecanadianpress.com/terms-of-use-cp/?lang=fr" target="_blank">Conditions d'utilisation</a>
+        <a href="https://www.thecanadianpress.com/privacy-policy/?lang=fr" target="_blank">Confidentialité et accessibilité</a>
+        <a href="https://www.thecanadianpress.com/comment-vous-aider/?lang=fr" target="_blank">Contact</a>
+    </div>
+    {% endif %}
 </footer>

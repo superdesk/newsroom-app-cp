@@ -10,6 +10,7 @@ libxml2-dev libxslt-dev \
 libjpeg-dev zlib1g-dev \
 # magic
 libmagic-dev \
+dos2unix \
 && rm -rf /var/lib/apt/lists/* 
 
 # setup venv
@@ -32,5 +33,8 @@ ENV TZ=Europe/London
 
 COPY . .
 
-ENTRYPOINT [ "/opt/newsroom/scripts/start.sh" ]
+# fix line endings on windows
+RUN dos2unix /opt/newsroom/scripts/start.sh
+
+ENTRYPOINT ["bash", "/opt/newsroom/scripts/start.sh"]
 CMD ["honcho", "start", "-p 5050"]

@@ -173,3 +173,55 @@ Feature: Management API
 		"""
         {"name": "A fishy Product"}
         """
+
+
+    Scenario: manage user topics
+        Given empty "users"
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com"
+        }
+        """
+        Then we get response code 201
+        Given empty "companies"
+        When we post to "/companies"
+        """
+        [
+            {
+                "name": "zzz company"
+            }
+        ]
+        """
+        Then we get response code 201
+        When we post to "users/#users._id#/topics"
+        """
+        {
+            "label": "new topic",
+            "company": "#companies._id#"
+        }
+        """
+        Then we get response code 201
+        When we get "users/#users._id#/topics"
+        Then we get existing resource
+        """
+        {
+            "_items": [
+                {
+                    "label": "new topic",
+                    "company": "#companies._id#"
+                }
+            ]
+        }
+        """
+        When we delete "users/#users._id#/topics"
+        Then we get ok response
+        When we get "users/#users._id#/topics"
+        Then we get existing resource
+        """
+        {
+            "_items": []
+        }
+        """

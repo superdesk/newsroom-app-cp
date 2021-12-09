@@ -16,7 +16,7 @@
 
 {{ javascript_tag('common') | safe }}
 {{ javascript_tag('newsroom_css') | safe }}
-<link rel="stylesheet" href="{{ url_for('theme', filename='theme.css') }}"/>
+<link rel="stylesheet" href="{{ theme_url('theme.css') }}"/>
 {% block sectioncss %}{% endblock %}
 </head>
 <body>
@@ -25,7 +25,8 @@
     {% block topnav %}
         <nav class="main navbar justify-content-start align-items-stretch flex-nowrap">
             {% include 'logo.html' %}
-            <div class="navbar-brand d-flex align-items-center ml-0 ml-sm-1 ml-md-2 mr-0 mr-sm-4">
+            {% include 'logo-additional.html' %}
+            <div class="navbar-brand d-flex align-items-center ml-0 ml-sm-3 mr-0 mr-sm-4 mt-2">
                 <nav>
                     {% block breadcrumb %}{% endblock %}
                 </nav>
@@ -33,14 +34,14 @@
 
             {% if session.get('name') %}
             <div class="form-inline my-lg-0 ml-auto flex-shrink-0 flex-grow-0">
-                <div class="mr-2 d-none d-md-block">{{ get_date() | date_header }}</div>
+                <div class="mr-2 mt-2 d-none d-md-block">{{ get_date() | date_header }}</div>
                 <div class="notif" id="header-notification"></div>
                 <div id="header-profile-toggle"></div>
             </div>
             {% else %}
             <div class="form-inline my-lg-0 ml-auto pr-2 pr-sm-3">
-                <div class="mr-3 d-none d-md-block">{{ get_date() | date_header }}</div>
-                <a class="nav-link" href="{{ url_for('auth.login') }}">{{ gettext('Login') }}</a>
+                <div class="mr-2 mt-2 d-none d-md-block">{{ get_date() | date_header }}</div>
+                <a class="nav-link mt-2" href="{{ url_for('auth.login') }}">{{ gettext('Login') }}</a>
             </div>
             {% endif %}
         </nav>
@@ -100,7 +101,7 @@
     window.profileData = {{ get_user_profile_data() | tojson | safe }};
     window.translations = {{ get_client_translations() | tojson | safe }};
     window.locales = {{ get_client_locales() | tojson | safe }};
-    window.locale = {{ get_locale() | tojson | safe }};
+    window.locale = '{{ get_locale() | tojson }}';
 </script>
 
 {{ javascript_tag('newsroom_js') | safe }}
@@ -120,7 +121,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', {{ get_setting('google_analytics') | tojson | safe }}, {
+  gtag('config', '{{ get_setting('google_analytics') | tojson }}', {
       custom_map: {
           dimension1: 'company',
           dimension2: 'user',
@@ -128,7 +129,7 @@
   });
 
   {% if session.get('user') %}
-  gtag('set', {'user_id': {{ hash(session['user']) | tojson | safe }} });
+  gtag('set', {'user_id': '{{ hash(session['user']) | tojson }}'});
   {% endif %}
 
   {% with messages = get_flashed_messages(category_filter=['analytics']) %}
