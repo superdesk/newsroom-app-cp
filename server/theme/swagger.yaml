@@ -297,7 +297,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
+              type: object
               items:
                 $ref: '#/components/schemas/Topic'
       responses:
@@ -340,7 +340,7 @@ paths:
             schema:
               type: object
               items:
-                $ref: '#/components/schemas/ObjectId'
+                $ref: '#/components/schemas/Topic'
       responses:
         '201':
           $ref: '#/components/responses/Created'
