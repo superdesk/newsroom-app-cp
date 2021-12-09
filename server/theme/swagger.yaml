@@ -264,6 +264,8 @@ paths:
                     $ref: '#/components/schemas/Meta'
 
   /companies/{id}/products:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
     get:
       summary: Returns list of products a company is permissioned for.
       tags:
@@ -299,12 +301,14 @@ paths:
             schema:
               type: object
               items:
-                $ref: '#/components/schemas/Topic'
+                $ref: '#/components/schemas/Product'
       responses:
         '201':
           $ref: '#/components/responses/Created'
 
   /users/{id}/topics:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
     get:
       summary: Returns list of topics belonging to a user.
       tags:
