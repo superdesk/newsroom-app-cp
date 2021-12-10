@@ -16,7 +16,7 @@
 
 {{ javascript_tag('common') | safe }}
 {{ javascript_tag('newsroom_css') | safe }}
-<link rel="stylesheet" href="{{ url_for('theme', filename='theme.css') }}"/>
+<link rel="stylesheet" href="{{ theme_url('theme.css') }}"/>
 {% block sectioncss %}{% endblock %}
 </head>
 <body>
@@ -101,7 +101,7 @@
     window.profileData = {{ get_user_profile_data() | tojson | safe }};
     window.translations = {{ get_client_translations() | tojson | safe }};
     window.locales = {{ get_client_locales() | tojson | safe }};
-    window.locale = {{ get_locale() | tojson | safe }};
+    window.locale = '{{ get_locale() | tojson }}';
 </script>
 
 {{ javascript_tag('newsroom_js') | safe }}
@@ -121,7 +121,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', {{ get_setting('google_analytics') | tojson | safe }}, {
+  gtag('config', '{{ get_setting('google_analytics') | tojson }}', {
       custom_map: {
           dimension1: 'company',
           dimension2: 'user',
@@ -129,7 +129,7 @@
   });
 
   {% if session.get('user') %}
-  gtag('set', {'user_id': {{ hash(session['user']) | tojson | safe }} });
+  gtag('set', {'user_id': '{{ hash(session['user']) | tojson }}'});
   {% endif %}
 
   {% with messages = get_flashed_messages(category_filter=['analytics']) %}

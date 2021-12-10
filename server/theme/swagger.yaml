@@ -264,6 +264,8 @@ paths:
                     $ref: '#/components/schemas/Meta'
 
   /companies/{id}/products:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
     get:
       summary: Returns list of products a company is permissioned for.
       tags:
@@ -297,9 +299,52 @@ paths:
         content:
           application/json:
             schema:
-              type: array
+              type: object
               items:
-                $ref: '#/components/schemas/ObjectId'
+                $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+
+  /users/{id}/topics:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Returns list of topics belonging to a user.
+      tags:
+        - User Topics
+      parameters:
+        - $ref: '#/components/parameters/qParam'
+        - $ref: '#/components/parameters/whereParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/maxResultsParam'
+        - $ref: '#/components/parameters/sortParam'
+      responses:
+        '200':
+          description: A JSON array of topics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+                  _meta:
+                    $ref: '#/components/schemas/Meta'
+    post:
+      summary: Post topics on behalf of users.
+      tags:
+        - User Topics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: '#/components/schemas/Topic'
       responses:
         '201':
           $ref: '#/components/responses/Created'
@@ -329,14 +374,14 @@ components:
       schema:
         type: string
       description: Filter using fulltext.
-    
+
     whereParam:
       in: query
       name: where
       schema:
         type: object
       description: Filter using key/value pairs.
-    
+
     pageParam:
       in: query
       name: page
@@ -344,7 +389,7 @@ components:
         type: integer
         default: 1
       description: Skip to the page.
-    
+
     maxResultsParam:
       in: query
       name: max_results
@@ -354,7 +399,7 @@ components:
         maximum: 250
         default: 25
       description: The number of items to return.
-    
+
     sortParam:
       in: query
       name: sort
@@ -413,7 +458,7 @@ components:
       properties:
         total:
           type: integer
-    
+
     Error:
       type: object
       properties:
@@ -428,7 +473,7 @@ components:
               type: integer
             message:
               type: string
-  
+
     Base:
       type: object
       properties:

@@ -14,8 +14,8 @@ until $(curl --output /dev/null --silent --fail "${WEBPACK_SERVER_URL}/manifest.
 done
 
 # app init
+python3 manage.py initialize_data
 python3 manage.py create_user admin@localhost.com admin admin admin true
-python3 manage.py elastic_init
 
 if [[ -d dump ]]; then
     mongorestore -h mongo --gzip dump
