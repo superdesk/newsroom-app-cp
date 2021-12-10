@@ -1,5 +1,9 @@
 <div class="navbar__logo">
     <a href="{{ url_for('wire.index') }}" class="mr-2">
-        <img src="{{ url_for('theme', filename = 'logo.svg') }}" />
+        {% if get_locale() == "en"  %}
+        <img src="{{ theme_url('logo.svg') }}" />
+        {% else %}
+        <img src="{{ theme_url('logo-fr.svg') }}" class="navbar__logo--fr" />
+        {% endif %}
     </a>
 </div>
