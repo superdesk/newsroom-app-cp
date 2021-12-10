@@ -53,21 +53,17 @@ class CompanyProductsService(newsroom.Service):
             link = doc.pop('link')
             product = find_one('products', _id=ObjectId(id))
             assert product
-            if link:
-                product_companies = product.get('companies') or []
-                company_id = ObjectId(request.view_args['companies'])
-                if company_id not in product_companies:
-                    product_companies.append(company_id)
-                    superdesk.get_resource_service('products').system_update(
-                        ObjectId(id), {"companies": product_companies}, product
-                    )
-                ids.append(id)
-            else:
-                product_companies = [_id for _id in product["companies"] if str(_id) != request.view_args["companies"]]
-                superdesk.get_resource_service('products').system_update(
-                    product["_id"], {"companies": product_companies}, product
-                )
-                ids.append(id)
+            product_companies = product.get('companies') or []
+            company_id = ObjectId(request.view_args['companies'])
+            if link and company_id not in product_companies:
+                product_companies.append(company_id)
+            elif not link and company_id in product_companies:
+                product_companies.remove(company_id)
+            doc['companies'] = product_companies
+            superdesk.get_resource_service('products').system_update(
+                id, doc, product
+            )
+            ids.append(id)
         return ids
 
     def on_fetched(self, doc):
