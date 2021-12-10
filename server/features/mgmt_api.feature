@@ -140,10 +140,15 @@ Feature: Management API
 		}]
 		"""
         Then we get response code 201
-    
+
 		When we post to "companies/#companies._id#/products"
         """
-        {"product_ids": ["#products._id#"]}
+        [
+            {
+                "product": "#products._id#",
+                "link": true
+            }
+        ]
         """
         Then we get response code 201
 
@@ -159,20 +164,21 @@ Feature: Management API
             }
         ]}
 		"""
-		When we delete "companies/#companies._id#/products/#products._id#"
-		Then we get ok response
-        
+        When we post to "companies/#companies._id#/products"
+        """
+        [
+            {
+                "product": "#products._id#",
+                "link": false
+            }
+        ]
+        """
+        Then we get response code 201
         When we get "companies/#companies._id#/products"
         Then we get existing resource
 		"""
         {"_items": []}
 		"""
-      
-        When we get "products/#products._id#"
-        Then we get existing resource
-		"""
-        {"name": "A fishy Product"}
-        """
 
 
     Scenario: manage user topics
