@@ -1,3 +1,7 @@
-<div class="navbar__additional-logo d-none d-sm-block">
-    <img src="{{ url_for('theme', filename = 'logo-newspro.svg') }}" />
+<div class="navbar__additional-logo d-none d-lg-flex">
+    {% if get_locale() == "en"  %}
+    <img src="{{ theme_url('logo-newspro.svg') }}" />
+    {% else %}
+    <img src="{{ theme_url('logo-newspro-fr.svg') }}" />
+    {% endif %}
 </div>
