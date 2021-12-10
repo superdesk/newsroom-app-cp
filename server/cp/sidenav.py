@@ -1,4 +1,3 @@
-from flask_babel import lazy_gettext
 
 def init_app(app):
     app.sidenav(
@@ -16,4 +15,3 @@ def init_app(app):
         group=8,
         locale="fr_CA",
     )
-
