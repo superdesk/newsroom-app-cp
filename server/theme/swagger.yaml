@@ -299,7 +299,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              type: array
               items:
                 $ref: '#/components/schemas/Product_ids'
       responses:
@@ -636,11 +636,10 @@ components:
     Product_ids:
       type: object
       properties:
-        product_ids:
-          type: array
-          description: List of product IDs that will be updated.
-          items:
-            $ref: '#/components/schemas/ObjectId'
+        product:
+          type: string
+        link:
+          type: boolean
 
     Topic:
       type: object
