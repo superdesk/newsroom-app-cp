@@ -34,10 +34,12 @@ CLIENT_CONFIG.update(
                 "DATE_FORMAT": "MMM Do, YYYY",
                 "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
                 "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYYY",
+                "DATE_FORMAT_HEADER": "EEEE, MMMM d, yyyy",
             },
             "fr_CA": {
                 "TIME_FORMAT": "HH:mm",
                 "DATE_FORMAT": "MMM Do, YYYY",
+                "DATE_FORMAT_HEADER": "EEEE, 'le' d MMMM yyyy",
             },
         },
     }
