@@ -121,6 +121,66 @@ Feature: Management API
         Then we get ok response
 
 
+    Scenario: Get company products
+		Given empty "companies"
+		When we post to "/companies"
+		"""
+		[{"name": "zzz company"}]
+		"""
+        Then we get response code 201
+
+		Given empty "products"
+		When we post to "/products"
+		"""
+		[{
+            "name": "A fishy Product",
+		    "description": "a product for those interested in fish",
+		    "query": "fish",
+		    "product_type": "news_api"
+		}]
+		"""
+        Then we get response code 201
+
+		When we post to "companies/#companies._id#/products"
+        """
+        [
+            {
+                "product": "#products._id#",
+                "link": true
+            }
+        ]
+        """
+        Then we get response code 201
+
+		When we get "companies/#companies._id#/products"
+        Then we get existing resource
+		"""
+        {"_items": [
+            {
+		        "name": "A fishy Product",
+		        "description": "a product for those interested in fish",
+		        "query": "fish",
+		        "product_type": "news_api"
+            }
+        ]}
+		"""
+        When we post to "companies/#companies._id#/products"
+        """
+        [
+            {
+                "product": "#products._id#",
+                "link": false
+            }
+        ]
+        """
+        Then we get response code 201
+        When we get "companies/#companies._id#/products"
+        Then we get existing resource
+		"""
+        {"_items": []}
+		"""
+
+
     Scenario: manage user topics
         Given empty "users"
         When we post to "/users"

@@ -47,7 +47,7 @@
     },
     {
         "_id": "home",
-        "init_version": 1,
+        "init_version": 3,
         "list": {
             "wordcount": {
                 "displayed": true
@@ -69,6 +69,7 @@
             "slugline": {
                 "displayed": true
             }
-        }
+        },
+        "search": true
     }
 ]

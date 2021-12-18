@@ -299,9 +299,9 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              type: array
               items:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/Product_ids'
       responses:
         '201':
           $ref: '#/components/responses/Created'
@@ -632,6 +632,14 @@ components:
       required:
         - name
         - product_type
+
+    Product_ids:
+      type: object
+      properties:
+        product:
+          type: string
+        link:
+          type: boolean
 
     Topic:
       type: object
