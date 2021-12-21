@@ -1,6 +1,5 @@
 import superdesk
 from . import oauth2
-from superdesk.auth_server.scopes import allowed_scopes
 from superdesk.auth_server.clients import AuthServerClientsResource, AuthServerClientsService
 
 
