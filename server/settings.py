@@ -101,4 +101,5 @@ WIRE_AGGS = {
 CORE_APPS = [app for app in _CORE_APPS if app != 'newsroom.monitoring']
 INSTALLED_APPS = [
     "cp.sidenav",
+    "cp.signals",
 ]
