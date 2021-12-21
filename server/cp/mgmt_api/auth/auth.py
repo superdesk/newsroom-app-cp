@@ -7,6 +7,10 @@ from eve.auth import TokenAuth
 from superdesk import get_resource_privileges
 
 
+def get_auth_instance(**kwargs):
+    return JWTAuth()
+
+
 class JWTAuth(TokenAuth):
     """
     Implements JWT auth logic.
