@@ -25,22 +25,22 @@
     {% block topnav %}
         <nav class="main navbar justify-content-start flex-nowrap">
             {% include 'logo.html' %}
-            {% include 'logo-additional.html' %}
-            <div class="navbar-brand d-none d-sm-flex align-items-center ml-0 ml-sm-3 mr-0 mr-sm-1 mr-lg-4 mt-2">
+            {% include 'logo-additional.html' %}            
+
+            {% if session.get('name') %}
+            <div class="navbar-brand d-none d-sm-flex align-items-center">
                 <nav>
                     {% block breadcrumb %}{% endblock %}
                 </nav>
             </div>
-
-            {% if session.get('name') %}
             <div class="form-inline my-lg-0 ml-auto flex-shrink-0 flex-grow-0">
-                <div class="mr-2 mt-2 d-none d-md-block">{{ get_date() | date_header }}</div>
+                <div class="navbar__date d-none d-md-block">{{ get_date() | date_header }}</div>
                 <div class="notif" id="header-notification"></div>
                 <div id="header-profile-toggle"></div>
             </div>
             {% else %}
             <div class="form-inline my-lg-0 ml-auto pr-2 pr-sm-3">
-                <div class="mr-2 mt-2 d-none d-md-block">{{ get_date() | date_header }}</div>
+                <div class="navbar__date d-none d-md-block">{{ get_date() | date_header }}</div>
                 <a class="nav-link mt-2" href="{{ url_for('auth.login') }}">{{ gettext('Login') }}</a>
             </div>
             {% endif %}
