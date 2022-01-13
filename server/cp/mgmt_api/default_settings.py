@@ -22,16 +22,13 @@ MGMTAPI_URL = env('MGMTAPI_URL', 'http://localhost:5500/api')
 server_url = urlparse(MGMTAPI_URL)
 URL_PREFIX = env("MGMTAPI_URL_PREFIX", server_url.path.strip("/")) or ""
 
-BLUEPRINTS = [
-    'cp.mgmt_api.auth_server.oauth2'
-]
+BLUEPRINTS = []
 
 CORE_APPS = [
     'cp.mgmt_api.companies',
     'cp.mgmt_api.users',
     'cp.mgmt_api.products',
     'cp.mgmt_api.topics',
-    "cp.mgmt_api.auth_server.client"
 ]
 
 INSTALLED_APPS = []
@@ -49,5 +46,4 @@ FILTER_AGGREGATIONS = False
 ELASTIC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 MGMT_API_AUTH_TYPE = env('MGMT_API_AUTH_TYPE', 'cp.mgmt_api.auth.auth')
-AUTH_SERVER_EXPIRATION_DELAY = env("AUTH_SERVER_EXPIRATION_TIME", 60 * 60 * 24)  # 1 day by default
 AUTH_SERVER_SHARED_SECRET = env("AUTH_SERVER_SHARED_SECRET", "")
