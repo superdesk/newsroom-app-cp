@@ -217,6 +217,9 @@ a:hover {
 .table-hover tbody tr.table--selected {
     outline: 1px solid #CC212C;
 }
+.table tr:focus-visible {
+    box-shadow: 0 0 0 1px rgba(204, 33, 44, .6), 0 0 3px 4px rgba(204, 33, 44, .4);
+}
 .navbar.main { 
     background-color: #262424;
     color: #A6A6A6;
