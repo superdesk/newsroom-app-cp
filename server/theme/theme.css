@@ -75,6 +75,11 @@ a:hover {
     border-color: #000;
     color: white !important;
 }
+.btn-outline-secondary:focus-visible,
+.search__form .search__clear:focus-visible {
+    box-shadow: 0 0 0 1px rgba(204, 33, 44, .6), 0 0 3px 4px rgba(204, 33, 44, .4);
+}
+
 .btn-outline-primary:not([disabled]):not(.disabled):active,
 .btn-outline-primary:not([disabled]):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle {
@@ -340,6 +345,9 @@ a:hover {
 }
 .custom-control-input:checked ~ .custom-control-label::before {
     border-color: #CC212C;
+}
+.custom-control-input:focus-visible ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px rgba(204, 33, 44, .6), 0 0 3px 4px rgba(204, 33, 44, .4);
 }
 .circle-checkbox .css-checkbox:checked + i {
     background: #CC212C;
