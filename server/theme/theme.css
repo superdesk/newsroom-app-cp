@@ -43,6 +43,9 @@ a,
 a:hover {
     color: #a50606;
 }
+.btn {
+    font-weight: 700;
+}
 .btn-primary, 
 .card a.btn-outline-primary:hover,
 .btn-outline-primary:hover,
