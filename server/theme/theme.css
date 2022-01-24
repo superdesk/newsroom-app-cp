@@ -170,7 +170,7 @@ a:hover {
 .side-navigation__btn.active {
     color: #CC212C !important;
 }
-.no-touch .dropdown-item:active {
+.no-touch .dropdown-item:active, .no-touch .dropdown-item:active [class^="icon--"] {
     color: #CC212C !important;
 }
 .side-navigation__btn {
@@ -292,7 +292,8 @@ a:hover {
 .wire-articles__item.wire-articles__item--selected {
     outline: 1px solid #CC212C;
 }
-.no-touch .dropdown-item:hover, .no-touch .dropdown-item:focus {
+.no-touch .dropdown-item:hover, .no-touch .dropdown-item:focus, .no-touch .dropdown-item:active {
+    color: #333 !important;
     background-color: #f6efef !important;
 }
 .multi-action-bar {
