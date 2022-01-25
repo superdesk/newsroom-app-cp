@@ -71,29 +71,7 @@ WIRE_GROUPS = [
 WIRE_AGGS = {
     "source": {"terms": {"field": "source", "size": 50}},
     "service": {"terms": {"field": "service.name", "size": 50}},
-    "subject": {
-        "terms": {
-            "field": "subject.name",
-            "size": 20,
-            "include": [
-                "Print",
-                "Broadcast",
-                "Print / Broadcast",
-                "QuickHit",
-                "NewsBase",
-                "DataSpecials",
-                "Sports",
-                "Politics",
-                "Business",
-                "Health",
-                "Environment",
-                "Science",
-                "Lifestyle",
-                "Religion",
-                "Education",
-            ],
-        }
-    },
+    "subject": {"terms": {"field": "subject.name", "size": 50}},
     "genre": {"terms": {"field": "genre.name", "size": 50}},
     "urgency": {"terms": {"field": "urgency"}},
 }
@@ -102,4 +80,9 @@ CORE_APPS = [app for app in _CORE_APPS if app != 'newsroom.monitoring']
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
+]
+
+WIRE_SUBJECT_SCHEME_WHITELIST = [
+    "distribution",
+    "subject_custom",
 ]
