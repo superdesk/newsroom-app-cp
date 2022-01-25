@@ -22,14 +22,13 @@ MGMTAPI_URL = env('MGMTAPI_URL', 'http://localhost:5500/api')
 server_url = urlparse(MGMTAPI_URL)
 URL_PREFIX = env("MGMTAPI_URL_PREFIX", server_url.path.strip("/")) or ""
 
-BLUEPRINTS = [
-]
+BLUEPRINTS = []
 
 CORE_APPS = [
     'cp.mgmt_api.companies',
     'cp.mgmt_api.users',
     'cp.mgmt_api.products',
-    'cp.mgmt_api.topics'
+    'cp.mgmt_api.topics',
 ]
 
 INSTALLED_APPS = []
@@ -46,4 +45,5 @@ CONTENTAPI_ELASTICSEARCH_INDEX = env('CONTENTAPI_ELASTICSEARCH_INDEX', MONGO_DBN
 FILTER_AGGREGATIONS = False
 ELASTIC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
-MGMT_API_AUTH_TYPE = env('MGMT_API_AUTH_TYPE', 'cp.mgmt_api.auth.public')
+MGMT_API_AUTH_TYPE = env('MGMT_API_AUTH_TYPE', 'cp.mgmt_api.auth.jwt')
+AUTH_SERVER_SHARED_SECRET = env("AUTH_SERVER_SHARED_SECRET", "")
