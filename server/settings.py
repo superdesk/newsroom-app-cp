@@ -98,28 +98,7 @@ WIRE_AGGS = {
     "urgency": {"terms": {"field": "urgency"}},
 }
 
-AGENDA_GROUPS = [
-    {
-        "field": "source",
-        "label": lazy_gettext("Source"),
-    },
-    {
-        "field": "service",
-        "label": lazy_gettext("Wire Category"),
-    },
-    {
-        "field": "subject",
-        "label": lazy_gettext("Index/Subject"),
-    },
-    {
-        "field": "genre",
-        "label": lazy_gettext("Version"),
-    },
-    {
-        "field": "urgency",
-        "label": lazy_gettext("News Value"),
-    },
-]
+AGENDA_GROUPS = WIRE_GROUPS
 
 CORE_APPS = [app for app in _CORE_APPS if app != 'newsroom.monitoring']
 INSTALLED_APPS = [
