@@ -167,7 +167,8 @@ a:hover {
 .no-touch .dropdown-item:hover [class*=" icon--"],
 .no-touch .dropdown-item:focus [class^="icon--"],
 .no-touch .dropdown-item:focus [class*=" icon--"],
-.side-navigation__btn.active {
+.side-navigation__btn.active,
+.sidenav-icons .sidenav-icons__item.active i {
     color: #CC212C !important;
 }
 .no-touch .dropdown-item:active, .no-touch .dropdown-item:active [class^="icon--"] {
@@ -210,6 +211,10 @@ a:hover {
     right: 7px !important;
 }
 .sidenav-icons__item.active i {
+    color: #CC212C;
+}
+.sidenav-icons .sidenav-icons__item [class^="icon-small--"], 
+.sidenav-icons .sidenav-icons__item [class*=" icon-small--"] {
     color: #CC212C;
 }
 .wire-column__nav {
