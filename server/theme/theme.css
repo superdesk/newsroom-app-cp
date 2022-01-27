@@ -394,7 +394,7 @@ a:hover {
 }
 .alertify-notifier .ajs-message.ajs-error {
     background: #CC212C;
-    color: white;
+    color: white !important;
 }
 .wire-button__notif {
     background: #CC212C;
