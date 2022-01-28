@@ -17,7 +17,7 @@ SERVICES = [
     {"name": "Entertainment", "code": "e"},
 ]
 
-SHOW_USER_REGISTER = False
+SHOW_USER_REGISTER = True
 NEWS_ONLY_FILTERS = []
 
 LANGUAGES = ["en", "fr_CA"]
