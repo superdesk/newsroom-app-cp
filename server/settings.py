@@ -25,7 +25,7 @@ DEFAULT_LANGUAGE = "en"
 
 CLIENT_CONFIG.update(
     {
-        "display_news_only": False,  # Displays news only switch in wire
+        "display_news_only": True,  # Displays news only switch in wire
         "time_format": "HH:mm",
         "date_format": "MMM Do, YYYY",
         "locale_formats": {
