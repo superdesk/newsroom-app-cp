@@ -1,4 +1,5 @@
 openapi: '3.0.2'
+
 info:
   title: CP NewsPro Management API
   version: "0.1"
@@ -25,6 +26,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFound'
 
@@ -43,6 +46,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Updated'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
@@ -55,6 +60,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
@@ -83,6 +90,8 @@ paths:
                       $ref: '#/components/schemas/User'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
     post:
       summary: Creates a new user.
@@ -97,6 +106,8 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   /companies/{id}:
     parameters:
@@ -112,6 +123,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFound'
 
@@ -130,6 +143,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Updated'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
@@ -142,6 +157,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
 
@@ -170,6 +187,8 @@ paths:
                       $ref: '#/components/schemas/Company'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
     post:
       summary: Creates a new company.
@@ -184,6 +203,8 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   /products:
     get:
@@ -210,6 +231,8 @@ paths:
                       $ref: '#/components/schemas/Product'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   /topics:
     get:
@@ -236,6 +259,8 @@ paths:
                       $ref: '#/components/schemas/Topic'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   /navigations:
     get:
@@ -262,6 +287,8 @@ paths:
                       $ref: '#/components/schemas/Navigation'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   /companies/{id}/products:
     parameters:
@@ -290,6 +317,8 @@ paths:
                       $ref: '#/components/schemas/Product'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
     post:
       summary: Set the list of products a company is permissioned for.
       tags:
@@ -305,6 +334,8 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   /users/{id}/topics:
     parameters:
@@ -333,6 +364,8 @@ paths:
                       $ref: '#/components/schemas/Topic'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
     post:
       summary: Post topics on behalf of users.
       tags:
@@ -348,8 +381,29 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
 components:
+
+  securitySchemes:
+
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token is required for all API endpoints.
+
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /api/auth_server/token
+          scopes: {}
+      description: |
+        Use the Token URL to get the Bearer token for the Management API
+        using [client credentials flow](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/).
+
   parameters:
 
     IfMatchHeader:
@@ -439,6 +493,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            type: object
 
   schemas:
 
@@ -710,3 +771,6 @@ components:
           $ref: '#/components/schemas/ObjectId'
       required:
         - name
+
+security:
+  - BearerAuth: []
