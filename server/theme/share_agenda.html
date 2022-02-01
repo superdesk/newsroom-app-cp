@@ -1,0 +1,19 @@
+{% extends "email_layout.html" %}
+{% block name %}{% endblock %}
+{% block content %}
+<p>Hi {{ recipient.first_name }} {{ recipient.last_name }},<br />
+{{ sender.first_name }} {{ sender.last_name }} ({{ sender.email }}) shared the following item(s) with you.</p>
+{% include "message.html" %}
+{% for item in items %}
+    {% set map = maps[loop.index0] %}
+    {% set dateString = dateStrings[loop.index0] %}
+    {% set location = locations[loop.index0] %}
+    {% set contacts = contactList[loop.index0] %}
+    {% set links = linkList[loop.index0] %}
+
+    {% include "email_agenda.html" %}
+    <br><br>
+
+<hr />
+{% endfor %}
+{% endblock %}

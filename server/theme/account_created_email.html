@@ -1,0 +1,7 @@
+{% extends "email_layout.html" %}
+
+{% block content %}
+<p>A NewsPro account from The Canadian Press has been created for you. In order to access your account, please visit <a href="{{url}}">{{url}}</a> to reset your password.</p>
+<p>This link will expire after {{expires}} hours.</p>
+<p>If you believe this account was created in error, please ignore this email.</p>
+{% endblock %}

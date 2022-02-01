@@ -1,0 +1,8 @@
+{% extends "email_layout.fr_ca.txt" %}
+
+{% block content %}
+Nouvelle couverture reçue pour l’entrée de calendrier: {{ agenda.name }}:
+
+{% include "email_item.fr_ca.txt" %}
+
+{% endblock %}

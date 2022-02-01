@@ -1,0 +1,8 @@
+{% extends "email_layout.txt" %}
+{% block content %}
+A NewsPro account from The Canadian Press has been created for you. In order to access your account, please visit {{url}} to reset your password.
+
+This link will expire after {{expires}} hours.
+
+If you believe this account was created in error, please ignore this email.
+{% endblock %}

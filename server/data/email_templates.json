@@ -1,0 +1,64 @@
+[{
+    "_id": "reset_password_email",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ app_name }} - password reset",
+        "translations": {
+            "fr_ca": "{{ app_name }} - Réinitialisation de mot de passe"
+        }
+    }
+}, {
+    "_id": "account_created_email",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ app_name }} account created",
+        "translations": {
+            "fr_ca": "Compte {{ app_name }} créé"
+        }
+    }
+}, {
+    "_id": "new_wire_notification_email",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ item.headline }}",
+        "translations": {
+            "fr_ca": "{{ item.headline }}"
+        }
+    }
+}, {
+    "_id": "agenda_new_coverage_email",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ item.headline }}",
+        "translations": {
+            "fr_ca": "{{ item.headline }}"
+        }
+    }
+}, {
+    "_id": "share_items",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ subject_name }}",
+        "translations": {
+            "fr_ca": "{{ subject_name }}"
+        }
+    }
+}, {
+    "_id": "share_agenda",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ subject_name }}",
+        "translations": {
+            "fr_ca": "{{ subject_name }}"
+        }
+    }
+}, {
+    "_id": "share_topic",
+    "init_version": 1,
+    "subject": {
+        "default": "Shared topic: {{ topic.label }}",
+        "translations": {
+            "fr_ca": "Sujet partagé: {{ topic.label }}"
+        }
+    }
+}]

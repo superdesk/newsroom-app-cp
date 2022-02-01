@@ -1,0 +1,10 @@
+{% block name %}{% if name %}Bonjour {{ name }},{% endif %}{% endblock %}
+{% block content %}{% endblock %}
+
+{% block footer %}
+Cordialement,
+L’équipe de La Presse Canadienne
+
+Pour toutes questions, contactez ventes@lapressecanadienne.com du lundi au vendredi, entre 9h et 17h. En dehors de ces heures, écrivez à support@thecanadianpress.com (assistance en anglais seulement).
+Visitez notre https://www.thecanadianpress.com/?lang=fr pour plus de services de La Presse Canadienne – respectée, pertinente, fiable.
+{% endblock %}
