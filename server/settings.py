@@ -98,6 +98,8 @@ WIRE_AGGS = {
     "urgency": {"terms": {"field": "urgency"}},
 }
 
+AGENDA_GROUPS = WIRE_GROUPS
+
 CORE_APPS = [app for app in _CORE_APPS if app != 'newsroom.monitoring']
 INSTALLED_APPS = [
     "cp.sidenav",
