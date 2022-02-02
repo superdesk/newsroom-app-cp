@@ -2,5 +2,5 @@
 {% block name %}{% endblock %}
 {% block content %}
 {% if type == 'wire' %}{% include "email_item.fr_ca.txt" %}{% endif %}
-{% if type == 'agenda' %}{% include "email_agenda.txt" %}{% endif %}
+{% if type == 'agenda' %}{% include "email_agenda.fr_ca.txt" %}{% endif %}
 {% endblock %}

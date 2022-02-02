@@ -1,0 +1,59 @@
+<h1>{{ item.headline or item.name }}</h1>
+<a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a>
+
+{%  if item.event %}<p class="h3">{{ dateString }}</p>{% endif %}
+
+{% if location and location != '' %}
+    <p class="h3"><b>Où:</b> {{ location }}</p>
+{% endif %}
+
+{% if map and map != '' %}
+    <div><img style="height: auto!important; max-width: 700px!important; width: 100%!important"
+              src={{ map | safe }} ></div>
+{% endif %}
+
+{% if contacts | length is gt 1 %}
+    <p><b>Contact: </b>
+    {% for contact in contacts %}
+        <div>{{ contact.name or contact.organisation }}
+        {{ contact.phone }}
+        {{ contact.mobile }}
+        {{ contact.email }}</div>
+    {% endfor %}
+    </p>
+{% endif %}
+
+{% if links | length is gt 1 %}
+    <p><b>Web: </b>
+    {% for link in links %}
+        <div><a href={{ link | safe }}>{{ link }}</a></div>
+    {% endfor %}
+    </p>
+{% endif %}
+
+{%  for planning_item in item.get('planning_items', []) or [] %}
+    <div>
+        <div >
+            <h3>{{ planning_item.get('description_text') or planning_item.get('name') or '' }}</h3>
+        </div>
+
+        {% if planning_item.get('ednote') %}
+            <div>
+                <strong>Note de la rédaction:</strong>
+                {{ planning_item.get('ednote') }}
+            </div>
+        {% endif %}
+
+        {% if planning_item.get('coverages', []) %}
+            <p>
+                <div>
+                    <p><strong>Couverture:</strong></p>
+                </div>
+
+                {% for cov in planning_item.get('coverages', []) or [] %}
+                    <div>{{ get_coverage_email_text(cov) }}</div>{% if cov.get('planning', {}).get('ednote') %}{{ "\r\n" }}<div><i> Note de la rédaction: {{ cov['planning']['ednote'] }}</i>{% endif %}</div>{% if is_admin and cov.get('planning', {}).get('internal_note') %}{{ "\r\n" }}<div><i>Note interne: {{ cov['planning']['internal_note'] }}</i>{% endif %}<br><br>
+                {% endfor %}
+            </p>
+        {% endif %}
+    </div>
+{% endfor %}
