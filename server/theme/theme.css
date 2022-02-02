@@ -313,7 +313,7 @@ a:hover {
 .footer--home {
     margin-bottom: -50px;
 }
-.card a.btn-outline-primary {
+.card :not(.bg-white) a.btn-outline-primary {
     color: white;
     border-color: white;
 }
