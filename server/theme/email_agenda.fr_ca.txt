@@ -1,0 +1,21 @@
+
+{{ item.headline or item.name }}
+{{ url_for_agenda(item) }}
+{%  if item.event %}{{ dateString }}{% endif %}
+{% if location and location != '' %}Où: {{ location }}
+{% endif %}{% if contacts | length is gt 1 %}Contact: {% for contact in contacts %}{{ contact.name or contact.organisation }} {{ contact.phone }} {{ contact.mobile }} {{ contact.email }}
+{% endfor %}
+{% endif %}{% if links | length is gt 1 %}Web: {% for link in links %}{{ link }}
+{% endfor %}
+{% endif %}
+{%  for planning_item in item.get('planning_items', []) or [] %}
+{{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+{% if planning_item.get('ednote') %}Note de la rédaction: {{ planning_item.get('ednote') }}{% endif %}
+{% if planning_item.get('coverages', []) | length is gt 0 %}
+Couverture:
+{% for cov in planning_item.get('coverages', []) or [] %}
+{{ get_coverage_email_text(cov) }}{% if cov.get('planning', {}).get('ednote') %}
+Note de la rédaction: {{ cov['planning']['ednote'] }} {% endif %}{% if is_admin and cov.get('planning', {}).get('internal_note') %}Note interne: {{ cov['planning']['internal_note'] }}{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
