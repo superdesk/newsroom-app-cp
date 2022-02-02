@@ -1,0 +1,12 @@
+{{ item.headline }}
+
+{% if item.slugline %}Titre de rappel: {{ item.slugline }}{% endif %}
+{% if item.source %}Source: {{ item.source }}{% endif %}
+Publié: {{ item.versioncreated | datetime_long }}
+
+{% if item.body_txt %}{{ item.body_txt }}{% elif item.body_html %}{{ item.body_html | plain_text }}{% endif %}
+
+Nombre de mots: {{ item.word_count }}
+{% if item.service %}Catégorie: {{ item.service[0].name }}{% endif %}
+{% if topic and topic.name %}Nouvel élément pour votre sujet suivi: {{ topic.name }}{% endif %}
+Voir cet élément dans votre compte: {{ url_for_wire(item, True, section) }}

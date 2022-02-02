@@ -1,0 +1,8 @@
+{% extends "email_layout.fr_ca.txt" %}
+{% block content %}
+Un compte NouvellesPro de La Presse Canadienne a été créé pour vous. Afin d’accéder à votre compte, veuillez visiter {{url}} pour réinitialiser votre mot de passe.
+
+Ce lien expirera dans {{expires}} heures.
+
+Si vous croyez que ce compte a été créé par erreur, veuillez ignorer ce courriel.
+{% endblock %}

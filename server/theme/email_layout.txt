@@ -1,0 +1,10 @@
+{% block name %}{% if name %}Hi {{ name }},{% endif %}{% endblock %}
+{% block content %}{% endblock %}
+
+{% block footer %}
+Regards,
+The Canadian Press Team
+
+Contact us (https://www.thecanadianpress.com/contact/), 1-800-268-8149 or support@thecanadianpress.com.
+Visit https://www.thecanadianpress.com/for more services from Canada's trusted news leader.
+{% endblock %}
