@@ -47,7 +47,7 @@
     },
     {
         "_id": "home",
-        "init_version": 3,
+        "init_version": 4,
         "list": {
             "wordcount": {
                 "displayed": true
@@ -57,7 +57,28 @@
             },
             "slugline": {
                 "displayed": true
-            }
+            },
+            "metadata_fields": [
+              "embargo",
+              "source",
+              "//",
+              "wordcount",
+              "//",
+              "versioncreated"
+            ]
+            
+        },
+        "preview": {
+            "slugline": {
+                "displayed": true
+            },
+            "metadata_fields": [
+              "urgency",
+              "source",
+              "wordcount",
+              "previous_versions",
+              "embargo"
+            ]
         },
         "details": {
             "wordcount": {
@@ -68,7 +89,14 @@
             },
             "slugline": {
                 "displayed": true
-            }
+            },
+            "metadata_fields": [
+              "urgency",
+              "source",
+              "wordcount",
+              "previous_versions",
+              "embargo"
+            ]
         },
         "search": true
     }

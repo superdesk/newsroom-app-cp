@@ -64,7 +64,7 @@ WIRE_GROUPS = [
     },
     {
         "field": "urgency",
-        "label": lazy_gettext("News Value"),
+        "label": lazy_gettext("Ranking"),
     },
 ]
 
