@@ -452,6 +452,7 @@ a:hover {
     .navbar__additional-logo {
         width: auto;
         margin: 0;
+        min-width: 105px;
     }
     .sidenav-icons {
         padding-top: 10px;
