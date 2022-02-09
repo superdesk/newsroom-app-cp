@@ -171,7 +171,7 @@ a:hover {
 .sidenav-icons .sidenav-icons__item.active i {
     color: #CC212C !important;
 }
-.no-touch .dropdown-item:active, .no-touch .dropdown-item:active [class^="icon--"] {
+.no-touch .dropdown-item:active [class^="icon--"] {
     color: #CC212C !important;
 }
 .side-navigation__btn {

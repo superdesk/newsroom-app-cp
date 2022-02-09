@@ -1,9 +1,11 @@
 <div class="navbar__logo">
     <a href="{{ url_for('wire.index') }}" class="mr-2">
         {% if get_locale() == "en"  %}
-        <img src="{{ theme_url('logo.svg') }}" />
+        <h1 class="a11y-only">The Canadian Press</h1>
+        <img src="{{ theme_url('logo.svg') }}" alt="The Canadian Press" aria-hidden="true" />
         {% else %}
-        <img src="{{ theme_url('logo-fr.svg') }}" class="navbar__logo--fr" />
+        <h1 class="a11y-only">La Presse Canadienne</h1>
+        <img src="{{ theme_url('logo-fr.svg') }}" class="navbar__logo--fr" alt="La Presse Canadienne" aria-hidden="true" />
         {% endif %}
     </a>
 </div>
