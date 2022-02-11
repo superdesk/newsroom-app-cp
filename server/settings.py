@@ -1,6 +1,7 @@
 import pathlib
 from flask_babel import lazy_gettext
-from newsroom.web.default_settings import CLIENT_CONFIG, CORE_APPS as _CORE_APPS
+from newsroom.web.default_settings import CLIENT_CONFIG, CORE_APPS as DEFAULT_CORE_APPS, \
+    BLUEPRINTS as DEFAULT_BLUEPRINTS, CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE
 
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
@@ -78,7 +79,30 @@ WIRE_AGGS = {
 
 AGENDA_GROUPS = WIRE_GROUPS
 
-CORE_APPS = [app for app in _CORE_APPS if app != 'newsroom.monitoring']
+BLUEPRINTS = [
+    blueprint
+    for blueprint in DEFAULT_BLUEPRINTS
+    if blueprint not in [
+        "newsroom.design",
+        "newsroom.monitoring",
+        "newsroom.news_api.api_tokens"
+    ]
+]
+BLUEPRINTS.extend([
+    "cp.mgmt_api_docs"
+])
+
+CORE_APPS = [
+    app
+    for app in DEFAULT_CORE_APPS
+    if app not in [
+        "newsroom.monitoring",
+        "newsroom.news_api",
+        "newsroom.news_api.api_tokens",
+        "newsroom.news_api.api_audit",
+    ]
+]
+
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
@@ -88,3 +112,12 @@ WIRE_SUBJECT_SCHEME_WHITELIST = [
     "distribution",
     "subject_custom",
 ]
+
+CELERY_BEAT_SCHEDULE = {
+    key: val
+    for key, val in DEFAULT_CELERY_BEAT_SCHEDULE.items()
+    if key not in [
+        "newsroom:monitoring_schedule_alerts",
+        "newsroom:monitoring_immediate_alerts",
+    ]
+}
