@@ -9,7 +9,7 @@
 # AUTHORS and LICENSE files distributed with this source code, or
 # at https://www.sourcefabric.org/superdesk/license
 
-from superdesk.default_settings import urlparse, strtobool
+from superdesk.default_settings import urlparse
 from newsroom.web.default_settings import ( # noqa
     env,
     ELASTICSEARCH_URL,
@@ -18,8 +18,6 @@ from newsroom.web.default_settings import ( # noqa
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
     AUTH_SERVER_SHARED_SECRET,
 )
-
-DEBUG = strtobool(env("NEWSROOM_DEBUG"))
 
 MGMTAPI_URL = env('MGMTAPI_URL', 'http://localhost:5500/api')
 server_url = urlparse(MGMTAPI_URL)
