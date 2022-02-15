@@ -19,7 +19,7 @@ from newsroom.web.default_settings import ( # noqa
     AUTH_SERVER_SHARED_SECRET,
 )
 
-DEBUG=strtobool(env("NEWSROOM_DEBUG"))
+DEBUG = strtobool(env("NEWSROOM_DEBUG"))
 
 MGMTAPI_URL = env('MGMTAPI_URL', 'http://localhost:5500/api')
 server_url = urlparse(MGMTAPI_URL)
@@ -47,5 +47,3 @@ CONTENTAPI_ELASTICSEARCH_INDEX = env('CONTENTAPI_ELASTICSEARCH_INDEX', MONGO_DBN
 
 FILTER_AGGREGATIONS = False
 ELASTIC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
-
-MGMT_API_AUTH_TYPE = env('MGMT_API_AUTH_TYPE', 'cp.mgmt_api.auth.jwt')

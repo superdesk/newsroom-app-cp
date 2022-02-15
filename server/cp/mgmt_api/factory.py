@@ -11,7 +11,6 @@
 
 import os
 import logging
-from importlib import import_module
 import flask
 
 from elasticsearch.exceptions import RequestError as ElasticRequestError
