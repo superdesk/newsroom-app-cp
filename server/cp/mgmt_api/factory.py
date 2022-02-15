@@ -19,6 +19,7 @@ from werkzeug.exceptions import HTTPException
 from superdesk.errors import SuperdeskApiError
 
 from newsroom.factory import BaseNewsroomApp
+from newsroom.auth_server.auth import JWTAuth
 
 
 logger = logging.getLogger(__name__)
@@ -28,7 +29,7 @@ API_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class NewsroomMGMTAPI(BaseNewsroomApp):
     INSTANCE_CONFIG = 'settings_mgmtapi.py'
-    AUTH_SERVICE = None
+    AUTH_SERVICE = JWTAuth
 
     def __init__(self, import_name=__package__, config=None, **kwargs):
         if not getattr(self, 'settings'):
@@ -40,8 +41,6 @@ class NewsroomMGMTAPI(BaseNewsroomApp):
             config['INSTALLED_APPS'] = []
 
         super(NewsroomMGMTAPI, self).__init__(import_name=import_name, config=config, **kwargs)
-
-        self.setup_auth()
 
     def load_app_default_config(self):
         """
@@ -66,14 +65,6 @@ class NewsroomMGMTAPI(BaseNewsroomApp):
             raise RuntimeError('Management API is not enabled')
 
         super(NewsroomMGMTAPI, self).run(host, port, debug, **options)
-
-    def setup_auth(self):
-        if not self.config.get('MGMT_API_AUTH_TYPE'):
-            raise RuntimeError('Management API Auth Type not set')
-
-        mod = import_module(self.config['MGMT_API_AUTH_TYPE'])
-        get_auth_instance = getattr(mod, 'get_auth_instance')
-        self.auth = get_auth_instance()
 
     def setup_error_handlers(self):
         def json_error(err):
