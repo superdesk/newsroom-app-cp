@@ -1,4 +1,4 @@
-{% extends "email_layout.txt" %}
+{% extends "email_layout.fr_ca.txt" %}
 {% block content %}
 Bonjour {{ recipient.first_name }} {{ recipient.last_name }},
 {{ sender.first_name }} {{ sender.last_name }} ({{ sender.email }}) a partagé l’(es) entrée(s) de calendrier suivante(s) avec vous.
