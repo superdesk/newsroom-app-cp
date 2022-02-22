@@ -36,20 +36,20 @@
     }
 }, {
     "_id": "share_items",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "{{ subject_name }}",
+        "default": "{% if items | length is gt 1 %} {{ items | length }} items shared with you{% else %}{{ subject_name }}{% endif %}",
         "translations": {
-            "fr_ca": "{{ subject_name }}"
+            "fr_ca": "{% if items | length is gt 1 %} {{ items | length }} éléments partagés avec vous{% else %}{{ subject_name }}{% endif %}"
         }
     }
 }, {
     "_id": "share_agenda",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "{{ subject_name }}",
+        "default": "{% if items | length is gt 1 %} {{ items | length }} items shared with you{% else %}{{ subject_name }}{% endif %}",
         "translations": {
-            "fr_ca": "{{ subject_name }}"
+            "fr_ca": "{% if items | length is gt 1 %} {{ items | length }} éléments partagés avec vous{% else %}{{ subject_name }}{% endif %}"
         }
     }
 }, {
@@ -59,6 +59,24 @@
         "default": "Shared topic: {{ topic.label }}",
         "translations": {
             "fr_ca": "Sujet partagé: {{ topic.label }}"
+        }
+    }
+}, {
+    "_id": "agenda_updated_email",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ agenda.name or agenda.headline or agenda.slugline }} -{{ ' Coverage' if coverage_modified else '' }} updated",
+        "translations": {
+            "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline }} -{{ ' Couverture' if coverage_modified else '' }} mise à jour"
+        }
+    }
+}, {
+    "_id": "coverage_request_email",
+    "init_version": 1,
+    "subject": {
+        "default": "Coverage inquiry: {{ item.name or item.slugline }}",
+        "translations": {
+            "fr_ca": "Requête de couverture: {{ item.name or item.slugline }}"
         }
     }
 }]

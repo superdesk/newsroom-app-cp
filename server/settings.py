@@ -24,8 +24,48 @@ NEWS_ONLY_FILTERS = []
 LANGUAGES = ["en", "fr_CA"]
 DEFAULT_LANGUAGE = "en"
 
+# Copied from Superdesk CV
+COVERAGE_TYPES = {
+    "text": {
+        "name": "Text",
+        "icon": "text",
+        "translations": {"fr_ca": "Texte"},
+    },
+    "picture": {
+        "name": "Picture",
+        "icon": "photo",
+        "translations": {"fr_ca": "Photo"},
+    },
+    "video": {
+        "name": "Video",
+        "icon": "video",
+        "translations": {"fr_ca": "Vidéo"},
+    },
+    "audio": {
+        "name": "Audio",
+        "icon": "audio",
+        "translations": {"fr_ca": "Audio"},
+    },
+    "infographics": {
+        "name": "Infographics",
+        "icon": "infographics",
+        "translations": {"fr_ca": "Infographie"},
+    },
+    "live_video": {
+        "name": "Live Video",
+        "icon": "live-video",
+        "translations": {"fr_ca": "Vidéo en direct"},
+    },
+    "live_blog": {
+        "name": "Live Blog",
+        "icon": "live-blog",
+        "translations": {"fr_ca": "Blogue en direct"},
+    },
+}
+
 CLIENT_CONFIG.update(
     {
+        "coverage_types": COVERAGE_TYPES,
         "display_news_only": True,  # Displays news only switch in wire
         "time_format": "HH:mm",
         "date_format": "MMM Do, YYYY",

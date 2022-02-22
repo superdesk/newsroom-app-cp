@@ -1,0 +1,5 @@
+Les comptes d’entreprise suivants ont expiré ou doivent expirer dans les sept prochains jours (avant le {{expiry_date.strftime('%d-%m-%Y')}}):
+
+{% for company in companies %}
+    {{ company.get('name') }} (Courriel: {{ company.contact_email if company.contact_email else '-'}}), (Gestionnaire de compte: {{ company.account_manager if company.account_manager else '-' }}) expirant le {{ company.expiry_date.strftime('%d-%m-%Y')}}
+{% endfor %}

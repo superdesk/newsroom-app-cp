@@ -1,0 +1,7 @@
+{% block content %}
+<p>Une requête de couverture a été soumise par {{ name }} (<a href="mailto:{{ email }}?cc={{ recipients|join(',') }}&subject={{ subject }}">{{ email }}</a>) de {{ company }} au sujet de <a href="{{url}}">{{ item_name }}</a></p>
+
+Message:
+{% include "message.html" %}
+<a href="mailto:{{ email }}?cc={{ recipients|join(',') }}&subject={{ subject }}">Cliquez pour répondre</a>
+{% endblock %}

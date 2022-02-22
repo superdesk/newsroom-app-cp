@@ -1,0 +1,13 @@
+{% extends "email_layout.fr_ca.txt" %}
+
+{% block content %}
+
+{%- if agenda.event -%}
+L’événement que vous suivez {% include "agenda_status_text.txt" %}.
+{%- else -%}
+Le plan de couverture que vous suivez {% include "agenda_status_text.txt" %}.
+{%- endif -%}
+
+{% include "email_watched_agenda.fr_ca.txt" %}
+
+{% endblock %}
