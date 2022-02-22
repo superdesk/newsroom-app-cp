@@ -76,7 +76,7 @@ a:hover {
 .btn-outline-secondary:hover {
     background-color: #000;
     border-color: #000;
-    color: white !important;
+    color: white;
 }
 .btn-outline-secondary:focus-visible,
 .search__form .search__clear:focus-visible {
@@ -101,7 +101,8 @@ a:hover {
 }
 .wire-column__nav .tab-pane .btn-outline-primary {
     color: white;
-    border-color: white;
+    border-color: #CC212C;
+    background-color: #CC212C;
 }
 .wire-column__nav .tab-pane .btn-outline-primary:hover {
     color: white;
@@ -112,10 +113,17 @@ a:hover {
     border-color: white;
 }
 .wire-column__nav .tab-pane .btn-outline-secondary:hover {
-    color: white;
+    color: #CC212C;
     border-color: #CC212C;
-    background-color: #CC212C;
 }
+.wire-column__nav .tab-pane .btn-outline-secondary:not([disabled]):not(.disabled):active, 
+.wire-column__nav .tab-pane .btn-outline-secondary:not([disabled]):not(.disabled).active {
+    color: #CC212C;
+    background-color: transparent;
+    border-color: #CC212C;
+    box-shadow: 0 0 0 0.2rem rgba(236, 0, 0, 0.4);
+}
+
 .card.card--home h4.card-title {
     font-weight: 700;
 }
