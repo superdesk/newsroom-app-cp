@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{%- if agenda.event -%}
 L’événement que vous suivez {% include "agenda_status_text.txt" %}.
 {%- else -%}
 Le plan de couverture que vous suivez {% include "agenda_status_text.txt" %}.
