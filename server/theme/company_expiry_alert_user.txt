@@ -1,0 +1,2 @@
+Your company's account is expiring on {{expiry_date.strftime('%d-%m-%Y')}}
+Please contact The Canadian Press for further details.

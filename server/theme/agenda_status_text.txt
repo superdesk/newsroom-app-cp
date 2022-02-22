@@ -1,0 +1,9 @@
+{%- if agenda.state == 'cancelled' -%}
+    a été annulé
+{%- elif agenda.state == 'rescheduled' -%}
+    a été reprogrammé
+{%- elif agenda.state == 'postponed' -%}
+    a été reporté
+{%- else -%}
+    a été mis à jour
+{%- endif -%}

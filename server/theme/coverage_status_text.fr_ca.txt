@@ -1,0 +1,15 @@
+{%- if cov.workflow_status == 'cancelled' -%}
+    a été annulé
+{%- elif cov.workflow_status == 'draft' -%}
+    attendue à {{ get_coverage_date(cov) }}
+{%- elif cov.workflow_status == 'assigned' -%}
+    attendue à {{ get_coverage_date(cov) }}
+{%- elif cov.workflow_status == 'active' -%}
+    en cours à {{ get_coverage_date(cov) }}
+{%- elif cov.workflow_status == 'completed' -%}
+    {%- if cov.deliveries | length is gt 1 -%}
+        mis à jour à {{ get_coverage_publish_time(cov) }}
+    {%- else -%}
+        disponible à {{ get_coverage_publish_time(cov) }}
+    {%- endif -%}
+{%- endif -%}

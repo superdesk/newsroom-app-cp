@@ -1,0 +1,27 @@
+{{ agenda.name or agenda.definition_short }}
+
+{{ url_for_agenda(agenda) }}
+
+{% if time_updated %}! {% endif %}{{ dateString }}{% if agenda.definition_short %} - {{ agenda.definition_short }}{% endif %}
+{% if agenda.ednote %}Note: {{ agenda.ednote }}{% endif %}
+
+{% for cov in coverage_updates.cancelled_coverages -%}
+    ! Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}
+    {%- if cov.get('planning', {}).get('ednote') %}
+        Note de la rédaction: {{ cov['planning']['ednote'] }}
+    {%- endif %}
+{%- endfor %}
+
+{% for cov in coverage_updates.modified_coverages -%}
+    Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}
+    {%- if cov.get('planning', {}).get('ednote') %}
+        Note de la rédaction: {{ cov['planning']['ednote'] }}
+    {%- endif %}
+{%- endfor %}
+
+{% for cov in coverage_updates.unaltered_coverages -%}
+    Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}
+    {%- if cov.get('planning', {}).get('ednote') %}
+        Note de la rédaction: {{ cov['planning']['ednote'] }}
+    {%- endif %}
+{%- endfor %}
