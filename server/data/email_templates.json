@@ -70,4 +70,13 @@
             "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline }} -{{ ' Couverture' if coverage_modified else '' }} mise à jour"
         }
     }
+}, {
+    "_id": "coverage_request_email",
+    "init_version": 1,
+    "subject": {
+        "default": "Coverage inquiry: {{ item.name or item.slugline }}",
+        "translations": {
+            "fr_ca": "Requête de couverture: {{ item.name or item.slugline }}"
+        }
+    }
 }]
