@@ -337,6 +337,9 @@ a:hover {
 [class^="icon-small--"], [class*=" icon-small--"] {
     color: #CC212C;
 }
+[class^="icon--coverage-"], [class*=" icon--coverage-"] {
+    color: #747474;
+}
 .sidenav-icons [class^="icon--"], [class*=" icon--"] {
     color: white;
 }
