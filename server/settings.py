@@ -129,7 +129,8 @@ BLUEPRINTS = [
     ]
 ]
 BLUEPRINTS.extend([
-    "cp.mgmt_api_docs"
+    "cp.mgmt_api_docs",
+    "cp.auth",
 ])
 
 CORE_APPS = [
@@ -146,6 +147,7 @@ CORE_APPS = [
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
+    "cp.auth",
 ]
 
 WIRE_SUBJECT_SCHEME_WHITELIST = [

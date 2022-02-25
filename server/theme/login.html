@@ -3,6 +3,9 @@
 {% block contentMain %}
 
 <div class="container-fluid py-5 overflow-auto">
+
+    {% include "login_messages.html" %}
+
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mx-auto">
             <div class="card border-0 bg-white box-shadow--z1">
@@ -45,6 +48,7 @@
             </div>
         </div>
     </div>
-    {% include "login_messages.html" %}
+
+    {{ javascript_tag('login') | safe }}
 </div>
 {% endblock %}
