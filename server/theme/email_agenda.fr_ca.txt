@@ -14,8 +14,12 @@
 {% if planning_item.get('coverages', []) | length is gt 0 %}
 Couverture:
 {% for cov in planning_item.get('coverages', []) or [] %}
-{{ get_coverage_email_text(cov) }}{% if cov.get('planning', {}).get('ednote') %}
-Note de la rédaction: {{ cov['planning']['ednote'] }} {% endif %}{% if is_admin and cov.get('planning', {}).get('internal_note') %}Note interne: {{ cov['planning']['internal_note'] }}{% endif %}
+Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}
+{%- if cov.get('planning', {}).get('ednote') %}
+Note de la rédaction: {{ cov['planning']['ednote'] }} {% endif %}
+{%- if is_admin and cov.get('planning', {}).get('internal_note') %}
+Note interne: {{ cov['planning']['internal_note'] }}
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}
