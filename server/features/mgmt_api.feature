@@ -141,6 +141,19 @@ Feature: Management API
 		"""
         Then we get response code 201
 
+        When we get "/products"
+        Then we get existing resource
+        """
+        {"_items": [
+            {"name": "A fishy Product"}
+        ]}
+        """
+        When we patch "/products/#products._id#"
+        """
+        {"description": "new description"}
+        """
+        Then we get response code 200
+
 		When we post to "companies/#companies._id#/products"
         """
         [
@@ -158,7 +171,7 @@ Feature: Management API
         {"_items": [
             {
 		        "name": "A fishy Product",
-		        "description": "a product for those interested in fish",
+		        "description": "new description",
 		        "query": "fish",
 		        "product_type": "news_api"
             }
@@ -180,6 +193,8 @@ Feature: Management API
         {"_items": []}
 		"""
 
+        When we delete "/products/#products._id#"
+        Then we get response code 204
 
     Scenario: manage user topics
         Given empty "users"
