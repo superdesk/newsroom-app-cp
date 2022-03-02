@@ -4,6 +4,7 @@
     "build": "webpack --progress --profile --colors"
   },
   "dependencies": {
+    "firebase": "^9.6.7",
     "newsroom-core": "github:superdesk/newsroom-core#develop"
   },
   "devDependencies": {
