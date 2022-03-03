@@ -210,7 +210,7 @@ paths:
     get:
       summary: Returns a list of products
       tags:
-        - Products (TBD)
+        - Products
       parameters:
         - $ref: '#/components/parameters/qParam'
         - $ref: '#/components/parameters/whereParam'
@@ -233,6 +233,72 @@ paths:
                     $ref: '#/components/schemas/Meta'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+    post:
+      summary: Create new product.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /products/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get a product by ID.
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Product detail.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Product'
+                  - $ref: '#/components/schemas/Entity'
+    patch:
+      summary: Update product.
+      tags:
+        - Products
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          $ref: '#/components/responses/Updated'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+    delete:
+      summary: Delete product.
+      tags:
+        - Products
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
 
   /topics:
     get:
@@ -535,7 +601,7 @@ components:
             message:
               type: string
 
-    Base:
+    Entity:
       type: object
       properties:
         _id:
@@ -550,10 +616,16 @@ components:
         _updated:
           type: string
           format: date-time
-        _status:
-          type: string
-          enum:
-            - OK
+
+    Base:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            _status:
+              type: string
+              enum:
+                - OK
 
     User:
       type: object
@@ -690,6 +762,17 @@ components:
           type: string
           description: User ID.
           $ref: '#/components/schemas/ObjectId'
+        navigations:
+          description: List of Navigation Ids associted with the Product.
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectId'
+        companies:
+          description: List of Company Ids associated with the Product.
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectId'
+
       required:
         - name
         - product_type
