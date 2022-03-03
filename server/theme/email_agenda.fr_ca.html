@@ -51,7 +51,14 @@
                 </div>
 
                 {% for cov in planning_item.get('coverages', []) or [] %}
-                    <div>{{ get_coverage_email_text(cov) }}</div>{% if cov.get('planning', {}).get('ednote') %}{{ "\r\n" }}<div><i> Note de la rédaction: {{ cov['planning']['ednote'] }}</i>{% endif %}</div>{% if is_admin and cov.get('planning', {}).get('internal_note') %}{{ "\r\n" }}<div><i>Note interne: {{ cov['planning']['internal_note'] }}</i>{% endif %}<br><br>
+                    <div>Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}</div>
+                    {% if cov.get('planning', {}).get('ednote') %}
+                        <div><i> Note de la rédaction: {{ cov['planning']['ednote'] }}</i></div>
+                    {% endif %}
+                    {% if is_admin and cov.get('planning', {}).get('internal_note') %}
+                        <div><i>Note interne: {{ cov['planning']['internal_note'] }}</i></div>
+                    {% endif %}
+                    <br><br>
                 {% endfor %}
             </p>
         {% endif %}

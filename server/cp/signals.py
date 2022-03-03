@@ -6,9 +6,12 @@ from newsroom.signals import publish_item
 
 def on_publish_item(sender, item, **kwargs):
     try:
-        item["headline"] = item["extra"][cp.HEADLINE2]
+        headline = item["extra"][cp.HEADLINE2]
     except KeyError:
-        pass
+        return
+    else:
+        if headline:
+            item["headline"] = headline
 
 
 def init_app(app):

@@ -26,6 +26,15 @@
         }
     }
 }, {
+    "_id": "new_agenda_notification_email",
+    "init_version": 1,
+    "subject": {
+        "default": "{{ item.name }}",
+        "translations": {
+            "fr_ca": "{{ item.name }}"
+        }
+    }
+}, {
     "_id": "agenda_new_coverage_email",
     "init_version": 1,
     "subject": {
@@ -77,6 +86,24 @@
         "default": "Coverage inquiry: {{ item.name or item.slugline }}",
         "translations": {
             "fr_ca": "Requête de couverture: {{ item.name or item.slugline }}"
+        }
+    }
+}, {
+    "_id": "company_expiry_email",
+    "init_version": 1,
+    "subject": {
+        "default": "Companies expired or due to expire within the next 7 days ({{ expires_on }})",
+        "translations": {
+            "fr_ca": "Entreprises expiré ou doivent expirer dans les sept prochains jours ({{ expires_on }})"
+        }
+    }
+}, {
+    "_id": "company_expiry_alert_user",
+    "init_version": 1,
+    "subject": {
+        "default": "Your Company's account is expiring on {{ expires_on }}",
+        "translations": {
+            "fr_ca": "Le compte de votre entreprise expirera le {{ expires_on }}"
         }
     }
 }]
