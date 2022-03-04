@@ -30,6 +30,7 @@ CORE_APPS = [
     'cp.mgmt_api.users',
     'cp.mgmt_api.products',
     'cp.mgmt_api.topics',
+    'cp.mgmt_api.navigations',
 ]
 
 INSTALLED_APPS = []
