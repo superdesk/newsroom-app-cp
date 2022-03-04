@@ -328,11 +328,64 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
+  /navigations/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get a navigation by ID.
+      tags:
+        - Navigations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Navigation'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      summary: Update navigation.
+      tags:
+        - Navigations
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Navigation'
+      responses:
+        '200':
+          $ref: '#/components/responses/Updated'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+    delete:
+      summary: Delete navigation.
+      tags:
+        - Navigations
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
   /navigations:
     get:
-      summary: Returns a list of Navigations
+      summary: Returns a list of navigations.
       tags:
-        - Navigations (TBD)
+        - Navigations
       parameters:
         - $ref: '#/components/parameters/qParam'
         - $ref: '#/components/parameters/whereParam'
@@ -341,7 +394,7 @@ paths:
         - $ref: '#/components/parameters/sortParam'
       responses:
         '200':
-          description: A JSON array of navigations
+          description: A JSON array of navigations.
           content:
             application/json:
               schema:
@@ -353,6 +406,22 @@ paths:
                       $ref: '#/components/schemas/Navigation'
                   _meta:
                     $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+    post:
+      summary: Creates a new navigation.
+      tags:
+        - Navigations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Navigation'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
