@@ -302,9 +302,9 @@ paths:
 
   /topics:
     get:
-      summary: Returns a list of Topics
+      summary: Returns a list of topics
       tags:
-        - Topics (TBD)
+        - Topics
       parameters:
         - $ref: '#/components/parameters/qParam'
         - $ref: '#/components/parameters/whereParam'
@@ -327,6 +327,72 @@ paths:
                     $ref: '#/components/schemas/Meta'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+    post:
+      summary: Create new topic.
+      tags:
+        - Topics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topic'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /topics/{id}:
+    parameters:
+      - $ref: '#/components/parameters/idParam'
+    get:
+      summary: Get a topic by ID.
+      tags:
+        - Topics
+      responses:
+        '200':
+          description: topic detail.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Topic'
+                  - $ref: '#/components/schemas/Entity'
+    patch:
+      summary: Update product.
+      tags:
+        - Topics
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/Topic'
+      responses:
+        '200':
+          $ref: '#/components/responses/Updated'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+
+    delete:
+      summary: Delete topic.
+      tags:
+        - Topics
+      parameters:
+        - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        '200':
+          $ref: '#/components/responses/Deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
 
   /navigations/{id}:
     parameters:
