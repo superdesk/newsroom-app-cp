@@ -308,3 +308,87 @@ Feature: Management API
         """
         {"name": "navigation2"}
         """
+
+    Scenario: Create a topic
+        Given empty "companies"
+        When we post to "/companies"
+        """
+        [{"name": "zzz company"}]
+        """
+        Then we get response code 201
+        Given empty "topics"
+        When we post to "/topics"
+        """
+        {
+            "label": "topic1",
+            "company": "#companies._id#",
+            "topic_type": "wire",
+            "query": "topic1",
+            "is_global": true
+        }
+        """
+        Then we get response code 201
+        When we get "/topics"
+        Then we get existing resource
+        """
+        {
+        "_items" :
+            [
+                {
+                    "label": "topic1",
+                    "company": "#companies._id#",
+                    "topic_type": "wire",
+                    "query": "topic1",
+                    "is_global": true
+                }
+            ]
+        }
+        """
+
+    Scenario: Delete a topic
+        Given empty "companies"
+        When we post to "/companies"
+        """
+        [{"name": "zzz company"}]
+        """
+        Then we get response code 201
+        Given empty "topics"
+        When we post to "/topics"
+        """
+        [{
+            "label": "topic1",
+            "company": "#companies._id#",
+            "topic_type": "wire",
+            "query": "topic1",
+            "is_global": true
+        }]
+        """
+        When we delete latest
+        Then we get response code 204
+
+    Scenario: Update a topic
+        Given empty "companies"
+        When we post to "/companies"
+        """
+        [{"name": "zzz company"}]
+        """
+        Then we get response code 201
+        Given empty "topics"
+        When we post to "/topics"
+        """
+        [{
+            "label": "topic1",
+            "company": "#companies._id#",
+            "topic_type": "wire",
+            "query": "topic1",
+            "is_global": true
+        }]
+        """
+        When we patch latest
+        """
+        {"label": "topic2"}
+        """
+        Then we get updated response
+        """
+        {"label": "topic2"}
+        """
