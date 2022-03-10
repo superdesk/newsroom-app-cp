@@ -164,3 +164,6 @@ CELERY_BEAT_SCHEDULE = {
         "newsroom:monitoring_immediate_alerts",
     ]
 }
+
+#: CPNHUB-98
+MAXIMUM_FAILED_LOGIN_ATTEMPTS = 50
