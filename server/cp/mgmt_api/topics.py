@@ -4,12 +4,13 @@ import superdesk
 
 def init_app(app):
     TopicsResource.internal_resource = False
-    superdesk.register_resource('user_topics', UserTopicsResource, UserTopicsService, _app=app)
+    superdesk.register_resource('topics', GlobalTopicsResource, GlobalTopicsService, _app=app)
 
 
-class UserTopicsResource(TopicsResource):
+class GlobalTopicsResource(TopicsResource):
+    url = 'topics'
     resource_methods = ['GET', 'POST', 'DELETE']
 
 
-class UserTopicsService(TopicsService):
+class GlobalTopicsService(TopicsService):
     pass
