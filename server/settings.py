@@ -6,6 +6,7 @@ from newsroom.web.default_settings import CLIENT_CONFIG, CORE_APPS as DEFAULT_CO
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
 CLIENT_PATH = SERVER_PATH.parent.joinpath("client")
+TRANSLATIONS_PATH = SERVER_PATH.joinpath("translations")
 
 SITE_NAME = "CP NewsPro"
 COPYRIGHT_HOLDER = "CP"

@@ -1,0 +1,80 @@
+# Translations template for Newsroom App CP.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the Newsroom App CP
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# 
+# Translators:
+# Marie-Eve Ouellette <marie-eve.ouellette@lapressecanadienne.com>, 2022
+# Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2022
+# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2022
+# Simon Peacock <simon.peacock@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Newsroom App CP 0.0.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-03-15 13:56+0100\n"
+"PO-Revision-Date: 2022-03-15 12:58+0000\n"
+"Last-Translator: Simon Peacock <simon.peacock@gmail.com>, 2022\n"
+"Language-Team: French (Canada) (https://www.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+"Language: fr_CA\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: theme/base_layout.html:44 theme/login.html:13
+msgid "Login"
+msgstr "Ouvrir une session"
+
+#: theme/base_layout.html:56
+msgid "Settings"
+msgstr "Réglages"
+
+#: theme/base_layout.html:63
+msgid "Reports"
+msgstr "Rapports"
+
+#: theme/login.html:21 theme/login.html:23
+msgid "Sign up"
+msgstr "S'inscrire"
+
+#: theme/login.html:25
+msgid "Forgot your password?"
+msgstr "Mot de passe oublié?"
+
+#: theme/login.html:25
+msgid "Click here to reset."
+msgstr "Cliquez ici pour réinitialiser."
+
+#: theme/login.html:33
+msgid "Language"
+msgstr "Langue"
+
+#: theme/page-contact.html:3 theme/page-copyright.html:3
+#: theme/page-privacy.html:3 theme/page-terms.html:3
+msgid "Copyright"
+msgstr "Droits d'auteur"
+
+#: settings.py:93
+msgid "Source"
+msgstr "Source"
+
+#: settings.py:97
+msgid "Wire Category"
+msgstr ""
+
+#: settings.py:101
+msgid "Index/Subject"
+msgstr ""
+
+#: settings.py:105
+msgid "Version"
+msgstr "Version"
+
+#: settings.py:109
+msgid "Ranking"
+msgstr ""
