@@ -8,5 +8,5 @@ Published: {{ item.versioncreated | datetime_long }}
 
 Word count: {{ item.word_count }}
 {% if item.service %}Category: {{ item.service[0].name }}{% endif %}
-{% if topic and topic.name %}New item for followed topic: {{ topic.name }}{% endif %}
+{% if topic_name %}New item for followed topic: {{ topic_name }}{% endif %}
 View this item in your account: {{ url_for_wire(item, True, section) }}
