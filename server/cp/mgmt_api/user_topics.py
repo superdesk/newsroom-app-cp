@@ -9,6 +9,9 @@ def init_app(app):
 
 class UserTopicsResource(TopicsResource):
     resource_methods = ['GET', 'POST', 'DELETE']
+    datasource = {
+        "source": "topics",
+    }
 
 
 class UserTopicsService(TopicsService):
