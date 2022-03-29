@@ -8,5 +8,5 @@ Publié: {{ item.versioncreated | datetime_long }}
 
 Nombre de mots: {{ item.word_count }}
 {% if item.service %}Catégorie: {{ item.service[0].name }}{% endif %}
-{% if topic and topic.name %}Nouvel élément pour votre sujet suivi: {{ topic.name }}{% endif %}
+{% if topic_name %}Nouvel élément pour votre sujet suivi: {{ topic_name }}{% endif %}
 Voir cet élément dans votre compte: {{ url_for_wire(item, True, section) }}
