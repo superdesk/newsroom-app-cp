@@ -18,74 +18,74 @@
     }
 }, {
     "_id": "new_wire_notification_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "{{ item.headline }}",
+        "default": "{{ item.headline | safe }}",
         "translations": {
-            "fr_ca": "{{ item.headline }}"
+            "fr_ca": "{{ item.headline | safe }}"
         }
     }
 }, {
     "_id": "new_agenda_notification_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "{{ item.name }}",
+        "default": "{{ item.name | safe }}",
         "translations": {
-            "fr_ca": "{{ item.name }}"
+            "fr_ca": "{{ item.name | safe }}"
         }
     }
 }, {
     "_id": "agenda_new_coverage_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "{{ item.headline }}",
+        "default": "{{ item.headline | safe }}",
         "translations": {
-            "fr_ca": "{{ item.headline }}"
+            "fr_ca": "{{ item.headline | safe }}"
         }
     }
 }, {
     "_id": "share_items",
-    "init_version": 2,
+    "init_version": 3,
     "subject": {
-        "default": "{% if items | length is gt 1 %} {{ items | length }} items shared with you{% else %}{{ subject_name }}{% endif %}",
+        "default": "{% if items | length is gt 1 %} {{ items | length }} items shared with you{% else %}{{ subject_name | safe }}{% endif %}",
         "translations": {
-            "fr_ca": "{% if items | length is gt 1 %} {{ items | length }} éléments partagés avec vous{% else %}{{ subject_name }}{% endif %}"
+            "fr_ca": "{% if items | length is gt 1 %} {{ items | length }} éléments partagés avec vous{% else %}{{ subject_name | safe }}{% endif %}"
         }
     }
 }, {
     "_id": "share_agenda",
-    "init_version": 2,
+    "init_version": 3,
     "subject": {
-        "default": "{% if items | length is gt 1 %} {{ items | length }} items shared with you{% else %}{{ subject_name }}{% endif %}",
+        "default": "{% if items | length is gt 1 %} {{ items | length }} items shared with you{% else %}{{ subject_name | safe }}{% endif %}",
         "translations": {
-            "fr_ca": "{% if items | length is gt 1 %} {{ items | length }} éléments partagés avec vous{% else %}{{ subject_name }}{% endif %}"
+            "fr_ca": "{% if items | length is gt 1 %} {{ items | length }} éléments partagés avec vous{% else %}{{ subject_name | safe }}{% endif %}"
         }
     }
 }, {
     "_id": "share_topic",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "Shared topic: {{ topic.label }}",
+        "default": "Shared topic: {{ topic.label | safe }}",
         "translations": {
-            "fr_ca": "Sujet partagé: {{ topic.label }}"
+            "fr_ca": "Sujet partagé: {{ topic.label | safe }}"
         }
     }
 }, {
     "_id": "agenda_updated_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "{{ agenda.name or agenda.headline or agenda.slugline }} -{{ ' Coverage' if coverage_modified else '' }} updated",
+        "default": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} -{{ ' Coverage' if coverage_modified else '' }} updated",
         "translations": {
-            "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline }} -{{ ' Couverture' if coverage_modified else '' }} mise à jour"
+            "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} -{{ ' Couverture' if coverage_modified else '' }} mise à jour"
         }
     }
 }, {
     "_id": "coverage_request_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
-        "default": "Coverage inquiry: {{ item.name or item.slugline }}",
+        "default": "Coverage inquiry: {{ item.name or item.slugline | safe }}",
         "translations": {
-            "fr_ca": "Requête de couverture: {{ item.name or item.slugline }}"
+            "fr_ca": "Requête de couverture: {{ item.name or item.slugline | safe }}"
         }
     }
 }, {
