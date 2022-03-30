@@ -6,7 +6,7 @@ Publié: {{ item.versioncreated | datetime_long }}
 
 {% if item.body_txt %}{{ item.body_txt }}{% elif item.body_html %}{{ item.body_html | plain_text }}{% endif %}
 
-Nombre de mots: {{ item.word_count }}
+Nombre de mots: {{ item.wordcount }}
 {% if item.service %}Catégorie: {{ item.service[0].name }}{% endif %}
 {% if topic_name %}Nouvel élément pour votre sujet suivi: {{ topic_name }}{% endif %}
 Voir cet élément dans votre compte: {{ url_for_wire(item, True, section) }}

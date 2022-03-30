@@ -6,7 +6,7 @@ Published: {{ item.versioncreated | datetime_long }}
 
 {% if item.body_txt %}{{ item.body_txt }}{% elif item.body_html %}{{ item.body_html | plain_text }}{% endif %}
 
-Word count: {{ item.word_count }}
+Word count: {{ item.wordcount }}
 {% if item.service %}Category: {{ item.service[0].name }}{% endif %}
 {% if topic_name %}New item for followed topic: {{ topic_name }}{% endif %}
 View this item in your account: {{ url_for_wire(item, True, section) }}
