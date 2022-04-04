@@ -1,7 +1,7 @@
 [
     {
         "_id": "wire",
-        "init_version": 3,
+        "init_version": 4,
         "preview": {
             "slugline": {
                 "displayed": true
@@ -43,7 +43,8 @@
             ]
         },
         "advanced_search_tabs": {},
-        "multi_select_topics": false
+        "multi_select_topics": false,
+        "enable_global_topics": true
     },
     {
         "_id": "home",
@@ -66,7 +67,7 @@
               "//",
               "versioncreated"
             ]
-            
+
         },
         "preview": {
             "slugline": {
@@ -102,8 +103,9 @@
     },
     {
         "_id": "agenda",
-        "init_version": 1,
+        "init_version": 2,
         "multi_select_topics": false,
-        "open_coverage_content_in_same_page": true
+        "open_coverage_content_in_same_page": true,
+        "enable_global_topics": true
     }
 ]
