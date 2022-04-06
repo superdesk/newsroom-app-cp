@@ -538,51 +538,6 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
-  /users/{id}/topics:
-    parameters:
-      - $ref: '#/components/parameters/idParam'
-    get:
-      summary: Returns list of topics belonging to a user.
-      tags:
-        - User Topics
-      parameters:
-        - $ref: '#/components/parameters/qParam'
-        - $ref: '#/components/parameters/whereParam'
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/maxResultsParam'
-        - $ref: '#/components/parameters/sortParam'
-      responses:
-        '200':
-          description: A JSON array of topics
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  _items:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Topic'
-                  _meta:
-                    $ref: '#/components/schemas/Meta'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-    post:
-      summary: Post topics on behalf of users.
-      tags:
-        - User Topics
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-                $ref: '#/components/schemas/Topic'
-      responses:
-        '201':
-          $ref: '#/components/responses/Created'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-
 components:
 
   securitySchemes:
