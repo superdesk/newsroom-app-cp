@@ -279,7 +279,6 @@ Feature: Management API
             "company": "#companies._id#",
             "topic_type": "wire",
             "query": "topic1",
-            "subscribers": [],
             "is_global": true
         }
         """
@@ -317,7 +316,6 @@ Feature: Management API
             "company": "#companies._id#",
             "topic_type": "wire",
             "query": "topic1",
-            "subscribers": [],
             "is_global": true
         }]
         """
@@ -340,7 +338,6 @@ Feature: Management API
             "company": "#companies._id#",
             "topic_type": "wire",
             "query": "topic1",
-            "subscribers": [],
             "is_global": true
         }]
         """
