@@ -23,4 +23,4 @@ class GlobalTopicsService(TopicsService):
                 doc['version_creator'] = user
             elif not doc.get('is_global'):
                 message = ("Please set is_global True, or provide user in the body.")
-                raise SuperdeskApiError.forbiddenError(message=message, payload=message)
+                raise SuperdeskApiError.badRequestError(message=message, payload=message)
