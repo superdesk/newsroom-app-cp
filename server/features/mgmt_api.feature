@@ -34,6 +34,7 @@ Feature: Management API
         }
         """
 
+
     Scenario: Delete a company
        Given empty "companies"
         When we post to "/companies"
@@ -196,56 +197,6 @@ Feature: Management API
         When we delete "/products/#products._id#"
         Then we get response code 204
 
-    Scenario: manage user topics
-        Given empty "users"
-        When we post to "/users"
-        """
-        {
-            "first_name": "John",
-            "last_name": "Cena",
-            "email": "johncena@wwe.com"
-        }
-        """
-        Then we get response code 201
-        Given empty "companies"
-        When we post to "/companies"
-        """
-        [
-            {
-                "name": "zzz company"
-            }
-        ]
-        """
-        Then we get response code 201
-        When we post to "users/#users._id#/topics"
-        """
-        {
-            "label": "new topic",
-            "company": "#companies._id#"
-        }
-        """
-        Then we get response code 201
-        When we get "users/#users._id#/topics"
-        Then we get existing resource
-        """
-        {
-            "_items": [
-                {
-                    "label": "new topic",
-                    "company": "#companies._id#"
-                }
-            ]
-        }
-        """
-        When we delete "users/#users._id#/topics"
-        Then we get ok response
-        When we get "users/#users._id#/topics"
-        Then we get existing resource
-        """
-        {
-            "_items": []
-        }
-        """
 
     Scenario: test auth without token
         Given empty auth token
@@ -254,6 +205,7 @@ Feature: Management API
 
         When we get "/users"
         Then we get response code 401
+
 
     Scenario: Create a navigation
         Given empty "navigations"
@@ -281,6 +233,7 @@ Feature: Management API
         }
         """
 
+
     Scenario: Delete a navigation
        Given empty "navigations"
         When we post to "/navigations"
@@ -293,6 +246,7 @@ Feature: Management API
         """
         When we delete latest
         Then we get response code 204
+
 
     Scenario: Update a navigation
         Given empty "navigations"
@@ -308,6 +262,7 @@ Feature: Management API
         """
         {"name": "navigation2"}
         """
+
 
     Scenario: Create a topic
         Given empty "companies"
@@ -345,6 +300,7 @@ Feature: Management API
         }
         """
 
+
     Scenario: Delete a topic
         Given empty "companies"
         When we post to "/companies"
@@ -365,6 +321,7 @@ Feature: Management API
         """
         When we delete latest
         Then we get response code 204
+
 
     Scenario: Update a topic
         Given empty "companies"
