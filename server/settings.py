@@ -77,16 +77,20 @@ CLIENT_CONFIG.update(
                 "DATE_FORMAT": "MMM Do, YYYY",
                 "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
                 "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
-                "DATE_FORMAT_HEADER": "EEEE, MMMM d, yyyy",
+                "DATE_FORMAT_HEADER": "long",  # babel
             },
             "fr_CA": {
                 "TIME_FORMAT": "HH:mm",
-                "DATE_FORMAT": "MMM Do, YYYY",
-                "DATE_FORMAT_HEADER": "EEEE, 'le' d MMMM yyyy",
+                "DATE_FORMAT": "LL",
+                "COVERAGE_DATE_FORMAT": "LL",
+                "COVERAGE_DATE_TIME_FORMAT": "HH:mm LL",
+                "DATE_FORMAT_HEADER": "EEEE d. MMMM yyyy",  # babel
             },
         },
     }
 )
+
+CLIENT_LOCALE_FORMATS = CLIENT_CONFIG["locale_formats"]
 
 WIRE_GROUPS = [
     {
