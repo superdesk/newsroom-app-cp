@@ -50,6 +50,7 @@ CONTENTAPI_ELASTICSEARCH_INDEX = env('CONTENTAPI_ELASTICSEARCH_INDEX', MONGO_DBN
 
 FILTER_AGGREGATIONS = False
 ELASTIC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+
 CACHE_TYPE = os.environ.get('CACHE_TYPE', 'simple')  # in-memory cache
 # The default timeout that is used if no timeout is specified in sec
 CACHE_DEFAULT_TIMEOUT = 3600

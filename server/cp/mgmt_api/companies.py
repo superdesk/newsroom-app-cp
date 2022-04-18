@@ -1,16 +1,38 @@
 from bson.objectid import ObjectId
-from flask import request
+from flask import request, current_app as app
+
 import newsroom
 from newsroom.companies import CompaniesResource, CompaniesService
+from newsroom.companies.views import get_errors_company
 from newsroom.products.products import ProductsResource
 from newsroom.utils import find_one
 import superdesk
+from superdesk.errors import SuperdeskApiError
 
 
 def init_app(app):
     CompaniesResource.internal_resource = False
-    superdesk.register_resource('companies', CompaniesResource, CompaniesService, _app=app)
+    superdesk.register_resource('companies', CompaniesResource, CPCompaniesService, _app=app)
     superdesk.register_resource('company_products', CompanyProductsResource, CompanyProductsService, _app=app)
+
+
+class CPCompaniesService(CompaniesService):
+    def on_create(self, docs):
+        super().on_create(docs)
+        for doc in docs:
+            errors = get_errors_company(doc)
+            if errors:
+                message = ("invalid ip address")
+                raise SuperdeskApiError.badRequestError(message=message, payload=message)
+            app.cache.set('{}{}'.format("COMPANY", doc.get('name')), doc)
+
+    def on_update(self, updates, original):
+        super().on_update(updates, original)
+        app.cache.delete('{}{}'.format("COMPANY", original.get('name')))
+
+    def on_delete(self, doc):
+        super().on_delete(doc)
+        app.cache.delete('{}{}'.format("COMPANY", doc.get('name')))
 
 
 class CompanyProductsResource(newsroom.Resource):
