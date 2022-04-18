@@ -34,4 +34,5 @@ class GlobalTopicsService(TopicsService):
 
     def on_update(self, updates, original):
         super().on_update(updates, original)
-        app.cache.delete('{}{}'.format(original['company'], original['label'] or ''), original)
+        cache_key = '{}{}'.format(original['company'], original['label'] or '')
+        app.cache.delete(cache_key)
