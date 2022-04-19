@@ -83,7 +83,8 @@ CLIENT_CONFIG.update(
                 "TIME_FORMAT": "HH:mm",
                 "DATE_FORMAT": "LL",
                 "COVERAGE_DATE_FORMAT": "LL",
-                "COVERAGE_DATE_TIME_FORMAT": "HH:mm LL",
+                "DATETIME_FORMAT": "LT [le] LL",
+                "COVERAGE_DATE_TIME_FORMAT": "LT [le] LL",
                 "DATE_FORMAT_HEADER": "EEEE d. MMMM yyyy",  # babel
             },
         },
