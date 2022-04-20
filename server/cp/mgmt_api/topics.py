@@ -28,7 +28,7 @@ class GlobalTopicsService(TopicsService):
                 message = ("Please set is_global True, or provide user in the body.")
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
             if doc.get('subscribers'):
-                doc['subscribers'] = ObjectId(doc['subscribers'])
+                doc['subscribers'] = [ObjectId(sub) for sub in doc['subscribers']]
             cache_key = '{}{}'.format(doc['company'], doc['label'] or '')
             app.cache.set(cache_key, doc)
 
