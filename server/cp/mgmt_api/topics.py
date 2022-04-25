@@ -1,3 +1,6 @@
+from bson import ObjectId
+from flask import current_app as app
+
 from newsroom.topics import TopicsResource, TopicsService
 import superdesk
 from superdesk.errors import SuperdeskApiError
@@ -24,3 +27,14 @@ class GlobalTopicsService(TopicsService):
             elif not doc.get('is_global'):
                 message = ("Please set is_global True, or provide user in the body.")
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
+            if doc.get('subscribers'):
+                doc['subscribers'] = [ObjectId(sub) for sub in doc['subscribers']]
+
+    def on_created(self, docs):
+        super().on_created(docs)
+        for doc in docs:
+            app.cache.set(doc['_id'], doc)
+
+    def on_update(self, updates, original):
+        super().on_update(updates, original)
+        app.cache.delete(original['_id'])

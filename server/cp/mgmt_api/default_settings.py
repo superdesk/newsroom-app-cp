@@ -18,6 +18,7 @@ from newsroom.web.default_settings import ( # noqa
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
     AUTH_SERVER_SHARED_SECRET,
 )
+import os
 
 MGMTAPI_URL = env('MGMTAPI_URL', 'http://localhost:5500/api')
 server_url = urlparse(MGMTAPI_URL)
@@ -35,6 +36,9 @@ CORE_APPS = [
 
 INSTALLED_APPS = []
 
+LANGUAGES = ['en', 'fi', 'cs', 'fr_CA']
+DEFAULT_LANGUAGE = 'en'
+
 # newsroom default db and index names
 MONGO_DBNAME = env('MONGO_DBNAME', 'newsroom')
 # mongo
@@ -46,3 +50,9 @@ CONTENTAPI_ELASTICSEARCH_INDEX = env('CONTENTAPI_ELASTICSEARCH_INDEX', MONGO_DBN
 
 FILTER_AGGREGATIONS = False
 ELASTIC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+
+CACHE_TYPE = os.environ.get('CACHE_TYPE', 'simple')  # in-memory cache
+# The default timeout that is used if no timeout is specified in sec
+CACHE_DEFAULT_TIMEOUT = 3600
+# Redis host (used only if CACHE_TYPE is redis)
+CACHE_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
