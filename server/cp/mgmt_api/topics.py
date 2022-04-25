@@ -29,10 +29,12 @@ class GlobalTopicsService(TopicsService):
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
             if doc.get('subscribers'):
                 doc['subscribers'] = [ObjectId(sub) for sub in doc['subscribers']]
-            cache_key = '{}{}'.format(doc['company'], doc['label'] or '')
-            app.cache.set(cache_key, doc)
+
+    def on_created(self, docs):
+        super().on_created(docs)
+        for doc in docs:
+            app.cache.set(doc['_id'], doc)
 
     def on_update(self, updates, original):
         super().on_update(updates, original)
-        cache_key = '{}{}'.format(original['company'], original['label'] or '')
-        app.cache.delete(cache_key)
+        app.cache.delete(original['_id'])

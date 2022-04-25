@@ -24,15 +24,19 @@ class CPCompaniesService(CompaniesService):
             if errors:
                 message = ("invalid ip address")
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
-            app.cache.set('{}{}'.format("COMPANY", doc.get('name')), doc)
+
+    def on_created(self, docs):
+        super().on_created(docs)
+        for doc in docs:
+            app.cache.set(doc['_id'], doc)
 
     def on_update(self, updates, original):
         super().on_update(updates, original)
-        app.cache.delete('{}{}'.format("COMPANY", original.get('name')))
+        app.cache.delete(original['_id'])
 
     def on_delete(self, doc):
         super().on_delete(doc)
-        app.cache.delete('{}{}'.format("COMPANY", doc.get('name')))
+        app.cache.delete(doc['_id'])
 
 
 class CompanyProductsResource(newsroom.Resource):
