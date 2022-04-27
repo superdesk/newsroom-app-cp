@@ -81,10 +81,10 @@ CLIENT_CONFIG.update(
             },
             "fr_CA": {
                 "TIME_FORMAT": "HH:mm",
-                "DATE_FORMAT": "LL",
+                "DATE_FORMAT": "Do MMMM YYYY",
                 "COVERAGE_DATE_FORMAT": "LL",
-                "DATETIME_FORMAT": "LT [le] LL",
-                "COVERAGE_DATE_TIME_FORMAT": "LT [le] LL",
+                "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+                "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
                 "DATE_FORMAT_HEADER": "EEEE d. MMMM yyyy",  # babel
             },
         },
