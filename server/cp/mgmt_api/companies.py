@@ -28,15 +28,15 @@ class CPCompaniesService(CompaniesService):
     def on_created(self, docs):
         super().on_created(docs)
         for doc in docs:
-            app.cache.set(doc['_id'], doc)
+            app.cache.set(str(doc['_id']), doc)
 
     def on_update(self, updates, original):
         super().on_update(updates, original)
-        app.cache.delete(original['_id'])
+        app.cache.delete(str(original['_id']))
 
     def on_delete(self, doc):
         super().on_delete(doc)
-        app.cache.delete(doc['_id'])
+        app.cache.delete(str(doc['_id']))
 
 
 class CompanyProductsResource(newsroom.Resource):
