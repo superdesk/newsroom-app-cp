@@ -33,8 +33,8 @@ class GlobalTopicsService(TopicsService):
     def on_created(self, docs):
         super().on_created(docs)
         for doc in docs:
-            app.cache.set(doc['_id'], doc)
+            app.cache.set(str(doc['_id']), doc)
 
     def on_update(self, updates, original):
         super().on_update(updates, original)
-        app.cache.delete(original['_id'])
+        app.cache.delete(str(original['_id']))
