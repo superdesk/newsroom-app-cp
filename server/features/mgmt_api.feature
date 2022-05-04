@@ -71,6 +71,31 @@ Feature: Management API
             "email": "johncena@wwe.com"
         }
         """
+        Then we get error 400
+        When we post to "/companies"
+        """
+        [{"name": "zzz company"}]
+        """
+        Then we get response code 201
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#"
+        }
+        """
+        Then we get response code 201
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena1@wwe.com",
+            "user_type": "administrator"
+        }
+        """
         Then we get response code 201
         When we get "/users"
         Then we get existing resource
@@ -81,7 +106,14 @@ Feature: Management API
                 {
                     "first_name": "John",
                     "last_name": "Cena",
-                    "email": "johncena@wwe.com"
+                    "email": "johncena@wwe.com",
+                    "company": "#companies._id#"
+                },
+                {
+                    "first_name": "John",
+                    "last_name": "Cena",
+                    "email": "johncena1@wwe.com",
+                    "user_type": "administrator"
                 }
             ]
         }
@@ -95,7 +127,8 @@ Feature: Management API
         {
             "first_name": "John",
             "last_name": "Cena",
-            "email": "johncena@wwe.com"
+            "email": "johncena@wwe.com",
+            "user_type": "administrator"
         }
         """
         When we patch latest
@@ -115,7 +148,8 @@ Feature: Management API
         {
             "first_name": "John",
             "last_name": "Cena",
-            "email": "johncena@wwe.com"
+            "email": "johncena@wwe.com",
+            "user_type": "administrator"
         }
         """
         When we delete latest

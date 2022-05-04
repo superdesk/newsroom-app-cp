@@ -15,8 +15,8 @@ class CPUsersService(UsersService):
     def on_create(self, docs):
         super().on_create(docs)
         for doc in docs:
-            if doc.get('user_type') == 'administrator' and not doc.get('company'):
-                message = ("Company is required for user type administrator.")
+            if doc.get('user_type') != 'administrator' and not doc.get('company'):
+                message = ("Company is required if user type is not administrator.")
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
             locale = doc.get('locale')
             if locale and locale not in app.config['LANGUAGES']:
