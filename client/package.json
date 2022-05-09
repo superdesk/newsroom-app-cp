@@ -4,7 +4,7 @@
     "build": "export NODE_ENV=production && webpack --progress --profile --colors"
   },
   "dependencies": {
-    "firebase": "^9.6.7",
+    "firebase": "9.6.11",
     "newsroom-core": "github:superdesk/newsroom-core#develop"
   },
   "devDependencies": {
