@@ -17,6 +17,7 @@ from newsroom.web.default_settings import ( # noqa
     CONTENTAPI_ELASTICSEARCH_URL,
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
     AUTH_SERVER_SHARED_SECRET,
+    CLIENT_URL,
 )
 import os
 
