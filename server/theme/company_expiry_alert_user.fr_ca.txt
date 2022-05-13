@@ -1,2 +1,2 @@
-Le compte de votre entreprise expirera le {{expiry_date.strftime('%d-%m-%Y')}}
+Le compte de votre entreprise expirera le {{expiry_date | datetime_short}}
 Veuillez contacter La Presse Canadienne pour obtenir plus de détails.
