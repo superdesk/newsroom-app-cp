@@ -1,5 +1,12 @@
 /* CP theme custom css */
 
+/* Theme variables */
+:root {
+    --body-text: #333;
+    --background-color: white;
+    --badge-bg-highlight1: #CC212C;
+}
+
 /* Fonts */
 body,
 .wire-articles__item__text,
