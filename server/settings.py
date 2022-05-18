@@ -124,7 +124,16 @@ WIRE_AGGS = {
     "urgency": {"terms": {"field": "urgency"}},
 }
 
-AGENDA_GROUPS = WIRE_GROUPS
+AGENDA_GROUPS = [
+    {
+        "field": "service",
+        "label": lazy_gettext("Wire Category"),
+    },
+    {
+        "field": "subject",
+        "label": lazy_gettext("Index/Subject"),
+    }
+]
 
 BLUEPRINTS = [
     blueprint
