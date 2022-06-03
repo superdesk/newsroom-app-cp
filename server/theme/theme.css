@@ -76,11 +76,13 @@ a:hover {
 .btn-outline-primary:hover [class^="icon-small--"] {
     color: white;
 }
-.btn-outline-secondary {
+.btn-outline-secondary, 
+.profile-side-navigation .btn-outline-secondary {
     color: #333;
     border-color: #333;
 }
-.btn-outline-secondary:hover {
+.btn-outline-secondary:hover,
+.profile-side-navigation .btn-outline-secondary:hover {
     background-color: #000;
     border-color: #000;
     color: white;
@@ -106,14 +108,17 @@ a:hover {
 .show > .btn-outline-primary.dropdown-toggle {
     box-shadow: 0 0 0 0.2rem rgba(236, 0, 0, 0.4);
 }
-.wire-column__nav .tab-pane .btn-outline-primary {
+.wire-column__nav .tab-pane .btn-outline-primary,
+.profile-side-navigation .btn-outline-primary {
     color: white;
     border-color: #CC212C;
     background-color: #CC212C;
 }
-.wire-column__nav .tab-pane .btn-outline-primary:hover {
+.wire-column__nav .tab-pane .btn-outline-primary:hover,
+.profile-side-navigation .btn-outline-primary:hover {
     color: white;
-    border-color: #CC212C;
+    border-color: #a50606;
+    background-color: #a50606;
 }
 .wire-column__nav .tab-pane .btn-outline-secondary {
     color: white;
@@ -130,7 +135,16 @@ a:hover {
     border-color: #CC212C;
     box-shadow: 0 0 0 0.2rem rgba(236, 0, 0, 0.4);
 }
-
+.btn-outline-secondary:not([disabled]):not(.disabled):active {
+    color: white;
+    background-color: #000;
+    border-color: #000;
+    box-shadow: 0 0 0 0.2rem rgba(0 0 0 0.6);
+}
+.simple-card--selected {
+    border: 3px solid rgba(236, 0, 0, 0.3) !important;
+    outline: 1px solid #CC212C !important;
+}
 .card.card--home h4.card-title {
     font-weight: 700;
 }
