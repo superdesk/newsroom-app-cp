@@ -85,7 +85,7 @@ CLIENT_CONFIG.update(
                 "COVERAGE_DATE_FORMAT": "LL",
                 "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
                 "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-                "DATE_FORMAT_HEADER": "d. MMMM yyyy à H:mm",  # babel
+                "DATE_FORMAT_HEADER": "d. MMMM yyyy à H:mm zzz",  # babel
                 "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
                 "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
             },
@@ -188,3 +188,5 @@ MAXIMUM_FAILED_LOGIN_ATTEMPTS = 50
 APM_SERVICE_NAME = "CP NewsPro"
 
 CONTENT_API_EXPIRY_DAYS = 730
+
+BABEL_DEFAULT_TIMEZONE = 'America/Toronto'
