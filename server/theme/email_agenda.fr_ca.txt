@@ -1,4 +1,3 @@
-
 {{ item.headline or item.name }}
 {{ url_for_agenda(item) }}
 {%  if item.event %}{{ dateString }}{% endif %}
@@ -11,11 +10,14 @@
 {% if item.definition_long or item.definition_short %}{{ item.definition_long or item.definition_short }}
 {% endif %}
 {%  for planning_item in item.get('planning_items', []) or [] %}
+Élément de couverture:
+{%- if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
 {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+{% endif -%}
 {% if planning_item.get('ednote') %}Note de la rédaction: {{ planning_item.get('ednote') }}{% endif %}
 {% if planning_item.get('coverages', []) | length is gt 0 %}
 Couverture:
-{% for cov in planning_item.get('coverages', []) or [] %}
+{% for cov in get_planning_coverages(item, planning_item._id) %}
 Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}
 {%- if cov.get('planning', {}).get('ednote') %}
 Note de la rédaction: {{ cov['planning']['ednote'] }} {% endif %}
