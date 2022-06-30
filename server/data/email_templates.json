@@ -1,19 +1,19 @@
 [{
     "_id": "reset_password_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
         "default": "{{ app_name }} - password reset",
         "translations": {
-            "fr_ca": "{{ app_name }} - Réinitialisation de mot de passe"
+            "fr_ca": "PC NouvellesPro - Réinitialisation de mot de passe"
         }
     }
 }, {
     "_id": "account_created_email",
-    "init_version": 1,
+    "init_version": 2,
     "subject": {
         "default": "{{ app_name }} account created",
         "translations": {
-            "fr_ca": "Compte {{ app_name }} créé"
+            "fr_ca": "Compte PC NouvellesPro créé"
         }
     }
 }, {
