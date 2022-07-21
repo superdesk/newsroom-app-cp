@@ -1,11 +1,10 @@
 import flask
 import logging
-import superdesk
 import google.oauth2.id_token
 
 from flask_babel import gettext
-from superdesk.utc import utcnow
 from google.auth.transport import requests
+from newsroom.auth.utils import sign_user_by_email
 
 TIMEOUT = 5
 
@@ -31,22 +30,7 @@ def token():
             return flask.redirect(flask.url_for("auth.login", token_error=1))
 
         email = claims["email"]
-        users = superdesk.get_resource_service("users")
-        user = users.find_one(req=None, email=email)
-        if user is None:
-            flask.flash("User not found", "danger")
-            return flask.redirect(flask.url_for("auth.login", user_error=1))
-
-        users.system_update(user["_id"], {
-            "is_validated": True,  # in case user was not validated before set it now
-            "last_active": utcnow(),
-        }, user)
-
-        # Set flask session information
-        flask.session["user"] = str(user["_id"])
-        flask.session["name"] = "{} {}".format(user.get("first_name"), user.get("last_name"))
-        flask.session["user_type"] = user["user_type"]
-        return flask.redirect(flask.url_for("wire.index"))
+        return sign_user_by_email(email)
 
     return flask.redirect(flask.url_for("auth.index"))
 
@@ -59,7 +43,3 @@ def logout():
     resp = flask.redirect(flask.url_for("auth.login", logout=1))
     resp.delete_cookie("token")
     return resp
-
-
-def init_app(_app):
-    _app.view_functions['auth.logout'] = logout

@@ -1,7 +1,12 @@
 import pathlib
 from flask_babel import lazy_gettext
-from newsroom.web.default_settings import CLIENT_CONFIG, CORE_APPS as DEFAULT_CORE_APPS, \
-    BLUEPRINTS as DEFAULT_BLUEPRINTS, CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE
+from newsroom.web.default_settings import (
+    env,
+    CLIENT_CONFIG, CORE_APPS as DEFAULT_CORE_APPS,
+    BLUEPRINTS as DEFAULT_BLUEPRINTS,
+    CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
+    CLIENT_URL,
+)
 
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
@@ -166,6 +171,7 @@ INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
     "cp.auth",
+    "newsroom.auth.saml",
 ]
 
 WIRE_SUBJECT_SCHEME_WHITELIST = [
@@ -190,3 +196,23 @@ APM_SERVICE_NAME = "CP NewsPro"
 CONTENT_API_EXPIRY_DAYS = 730
 
 BABEL_DEFAULT_TIMEZONE = 'America/Toronto'
+
+# saml auth
+SAML_LABEL = env("SAML_LABEL", "SSO")
+SAML_COMPANY = env("SAML_COMPANY")
+SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
+SAML_PATH_MAP = {
+    "localhost": "localhost",
+    "ncp-develop": "ncp-dev",
+    "cp-dev": "cp-dev",
+}
+
+for url, path in SAML_PATH_MAP.items():
+    if url in CLIENT_URL:
+        SAML_PATH = SAML_BASE_PATH.joinpath(path)
+        break
+else:
+    SAML_PATH = SAML_BASE_PATH.joinpath("prod")
+
+if SAML_PATH.joinpath("certs").exists():
+    SAML_AUTH_ENABLED = True
