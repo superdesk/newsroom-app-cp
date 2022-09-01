@@ -85,7 +85,7 @@ CLIENT_CONFIG.update(
                 "COVERAGE_DATE_FORMAT": "LL",
                 "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
                 "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-                "DATE_FORMAT_HEADER": "d. MMMM yyyy à H:mm zzz",  # babel
+                "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
                 "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
                 "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
             },
