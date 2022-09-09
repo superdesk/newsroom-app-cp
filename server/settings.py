@@ -110,8 +110,22 @@ WIRE_GROUPS = [
         "label": lazy_gettext("Wire Category"),
     },
     {
-        "field": "subject",
-        "label": lazy_gettext("Index/Subject"),
+        "field": "subject_custom",
+        "label": lazy_gettext("Index"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "subject_custom",
+        },
+    },
+    {
+        "field": "distribution",
+        "label": lazy_gettext("Services"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "distribution",
+        },
     },
     {
         "field": "genre",
@@ -137,8 +151,22 @@ AGENDA_GROUPS = [
         "label": lazy_gettext("Wire Category"),
     },
     {
-        "field": "subject",
-        "label": lazy_gettext("Index/Subject"),
+        "field": "subject_custom",
+        "label": lazy_gettext("Index"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "subject_custom"
+        },
+    },
+    {
+        "field": "distribution",
+        "label": lazy_gettext("Services"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "distribution"
+        },
     }
 ]
 
