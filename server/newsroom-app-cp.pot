@@ -1,28 +1,18 @@
-# French (Canada) translations for Newsroom App CP.
+# Translations template for Newsroom App CP.
 # Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the Newsroom App CP
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-# Translators:
-# Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2022
-# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>,
-# 2022
-# Simon Peacock <simon.peacock@gmail.com>, 2022
-# Marie-Eve Ouellette <marie-eve.ouellette@lapressecanadienne.com>, 2022
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-09-23 10:50+0200\n"
-"PO-Revision-Date: 2022-03-15 12:58+0000\n"
-"Last-Translator: Marie-Eve Ouellette <marie-"
-"eve.ouellette@lapressecanadienne.com>, 2022\n"
-"Language: fr_CA\n"
-"Language-Team: French (Canada) "
-"(https://www.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,27 +20,27 @@ msgstr ""
 
 #: theme/base_layout.html:44 theme/login.html:16
 msgid "Login"
-msgstr "Ouvrir une session"
+msgstr ""
 
 #: theme/base_layout.html:56
 msgid "Settings"
-msgstr "Réglages"
+msgstr ""
 
 #: theme/base_layout.html:63
 msgid "Reports"
-msgstr "Rapports"
+msgstr ""
 
 #: theme/login.html:24 theme/login.html:26
 msgid "Sign up"
-msgstr "S'inscrire"
+msgstr ""
 
 #: theme/login.html:29
 msgid "Forgot your password?"
-msgstr "Mot de passe oublié?"
+msgstr ""
 
 #: theme/login.html:30
 msgid "Please reset my password for NewsPro"
-msgstr "Veuillez réinitialiser mon mot de passe pour NouvellesPro"
+msgstr ""
 
 #: theme/login.html:30
 msgid "Contact Us"
@@ -58,12 +48,12 @@ msgstr ""
 
 #: theme/login.html:38
 msgid "Language"
-msgstr "Langue"
+msgstr ""
 
 #: theme/page-contact.html:3 theme/page-copyright.html:3
 #: theme/page-privacy.html:3 theme/page-terms.html:3
 msgid "Copyright"
-msgstr "Droits d'auteur"
+msgstr ""
 
 #: cp/auth.py:30
 msgid "User token is not valid"
@@ -71,24 +61,21 @@ msgstr ""
 
 #: settings.py:101
 msgid "Source"
-msgstr "Source"
+msgstr ""
 
 #: settings.py:105 settings.py:132
 msgid "Wire Category"
-msgstr "Fil de presse"
+msgstr ""
 
 #: settings.py:109 settings.py:136
 msgid "Subject"
-msgstr "Sujet"
+msgstr ""
 
 #: settings.py:113
 msgid "Version"
-msgstr "Version"
+msgstr ""
 
 #: settings.py:117
 msgid "Ranking"
-msgstr "Priorité"
-
-#~ msgid "Click here to reset."
-#~ msgstr "Cliquez ici pour réinitialiser."
+msgstr ""
 
