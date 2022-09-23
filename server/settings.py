@@ -106,7 +106,7 @@ WIRE_GROUPS = [
     },
     {
         "field": "subject",
-        "label": lazy_gettext("Index/Subject"),
+        "label": lazy_gettext("Subject"),
     },
     {
         "field": "genre",
@@ -133,7 +133,7 @@ AGENDA_GROUPS = [
     },
     {
         "field": "subject",
-        "label": lazy_gettext("Index/Subject"),
+        "label": lazy_gettext("Subject"),
     }
 ]
 

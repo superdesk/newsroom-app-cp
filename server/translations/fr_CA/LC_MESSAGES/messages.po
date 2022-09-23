@@ -68,8 +68,8 @@ msgid "Wire Category"
 msgstr "Fil de presse"
 
 #: settings.py:101
-msgid "Index/Subject"
-msgstr "Index/Sujet"
+msgid "Subject"
+msgstr "Sujet"
 
 #: settings.py:105
 msgid "Version"
