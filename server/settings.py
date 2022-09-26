@@ -69,6 +69,7 @@ CLIENT_CONFIG.update(
         "coverage_types": COVERAGE_TYPES,
         "display_news_only": True,  # Displays news only switch in wire
         "display_all_versions_toggle": False,
+        "display_agenda_featured_stories_only": False,
         "time_format": "HH:mm",
         "date_format": "MMM Do, YYYY",
         "locale_formats": {
