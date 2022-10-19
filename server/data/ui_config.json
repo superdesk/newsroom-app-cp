@@ -103,9 +103,18 @@
     },
     {
         "_id": "agenda",
-        "init_version": 2,
+        "init_version": 3,
         "multi_select_topics": false,
         "open_coverage_content_in_same_page": true,
-        "enable_global_topics": true
+        "enable_global_topics": true,
+        "subnav": {
+            "filters": [
+                "item_type",
+                "calendar",
+                "location",
+                "coverage_type",
+                "coverage_status"
+            ]
+        }
     }
 ]
