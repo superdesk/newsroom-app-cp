@@ -1,4 +1,3 @@
 [submodule "server/cp/mgmt_api"]
 	path = server/cp/mgmt_api
-    # url = git@github.com:superdesk/newsroom-management-api.git
-    url = https://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@github.com:superdesk/newsroom-management-api.git
+    url = https://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@github.com/superdesk/newsroom-management-api.git
