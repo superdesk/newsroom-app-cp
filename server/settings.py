@@ -96,6 +96,16 @@ CLIENT_CONFIG.update(
                 "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
             },
         },
+        "filter_panel_defaults": {
+            "tab": {
+                "wire": "filters",
+                "agenda": "nav",
+            },
+            "open": {
+                "wire": True,
+                "agenda": False,
+            },
+        },
     }
 )
 
