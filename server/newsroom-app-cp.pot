@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-23 10:50+0200\n"
+"POT-Creation-Date: 2022-12-07 11:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,23 +30,27 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: theme/login.html:24 theme/login.html:26
+#: theme/login.html:24
+msgid "Login using Single Sign On"
+msgstr ""
+
+#: theme/login.html:30 theme/login.html:32
 msgid "Sign up"
 msgstr ""
 
-#: theme/login.html:29
+#: theme/login.html:35
 msgid "Forgot your password?"
 msgstr ""
 
-#: theme/login.html:30
+#: theme/login.html:36
 msgid "Please reset my password for NewsPro"
 msgstr ""
 
-#: theme/login.html:30
+#: theme/login.html:36
 msgid "Contact Us"
 msgstr ""
 
-#: theme/login.html:38
+#: theme/login.html:44
 msgid "Language"
 msgstr ""
 
@@ -55,27 +59,31 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: cp/auth.py:30
+#: cp/auth.py:29
 msgid "User token is not valid"
 msgstr ""
 
-#: settings.py:101
+#: settings.py:117
 msgid "Source"
 msgstr ""
 
-#: settings.py:105 settings.py:132
+#: settings.py:121 settings.py:162
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:109 settings.py:136
-msgid "Subject"
+#: settings.py:125 settings.py:166
+msgid "Index"
 msgstr ""
 
-#: settings.py:113
+#: settings.py:134 settings.py:175
+msgid "Services"
+msgstr ""
+
+#: settings.py:143
 msgid "Version"
 msgstr ""
 
-#: settings.py:117
+#: settings.py:147
 msgid "Ranking"
 msgstr ""
 
