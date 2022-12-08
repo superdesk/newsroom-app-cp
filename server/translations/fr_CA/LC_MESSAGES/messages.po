@@ -1,32 +1,31 @@
-# French (Canada) translations for Newsroom App CP.
+# Translations template for Newsroom App CP.
 # Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the Newsroom App CP
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
-#
+# 
 # Translators:
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2022
-# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>,
-# 2022
 # Simon Peacock <simon.peacock@gmail.com>, 2022
 # Marie-Eve Ouellette <marie-eve.ouellette@lapressecanadienne.com>, 2022
+# Srdjan Karalic <srdjan.karalic@sourcefabric.org>, 2022
+# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-23 10:50+0200\n"
+"POT-Creation-Date: 2022-12-07 11:17+0100\n"
 "PO-Revision-Date: 2022-03-15 12:58+0000\n"
-"Last-Translator: Marie-Eve Ouellette <marie-"
-"eve.ouellette@lapressecanadienne.com>, 2022\n"
-"Language: fr_CA\n"
-"Language-Team: French (Canada) "
-"(https://www.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2022\n"
+"Language-Team: French (Canada) (https://www.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.3\n"
+"Language: fr_CA\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: theme/base_layout.html:44 theme/login.html:16
 msgid "Login"
@@ -40,23 +39,27 @@ msgstr "Réglages"
 msgid "Reports"
 msgstr "Rapports"
 
-#: theme/login.html:24 theme/login.html:26
+#: theme/login.html:24
+msgid "Login using Single Sign On"
+msgstr "Connexion avec l'authentification unique"
+
+#: theme/login.html:30 theme/login.html:32
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: theme/login.html:29
+#: theme/login.html:35
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: theme/login.html:30
+#: theme/login.html:36
 msgid "Please reset my password for NewsPro"
 msgstr "Veuillez réinitialiser mon mot de passe pour NouvellesPro"
 
-#: theme/login.html:30
+#: theme/login.html:36
 msgid "Contact Us"
-msgstr ""
+msgstr "Contactez-nous"
 
-#: theme/login.html:38
+#: theme/login.html:44
 msgid "Language"
 msgstr "Langue"
 
@@ -65,30 +68,30 @@ msgstr "Langue"
 msgid "Copyright"
 msgstr "Droits d'auteur"
 
-#: cp/auth.py:30
+#: cp/auth.py:29
 msgid "User token is not valid"
-msgstr ""
+msgstr "Le jeton d'utilisateur n'est pas valide"
 
-#: settings.py:101
+#: settings.py:117
 msgid "Source"
 msgstr "Source"
 
-#: settings.py:105 settings.py:132
+#: settings.py:121 settings.py:162
 msgid "Wire Category"
 msgstr "Fil de presse"
 
-#: settings.py:109 settings.py:136
-msgid "Subject"
-msgstr "Sujet"
+#: settings.py:125 settings.py:166
+msgid "Index"
+msgstr "Index"
 
-#: settings.py:113
+#: settings.py:134 settings.py:175
+msgid "Services"
+msgstr "Services"
+
+#: settings.py:143
 msgid "Version"
 msgstr "Version"
 
-#: settings.py:117
+#: settings.py:147
 msgid "Ranking"
 msgstr "Priorité"
-
-#~ msgid "Click here to reset."
-#~ msgstr "Cliquez ici pour réinitialiser."
-
