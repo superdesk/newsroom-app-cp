@@ -72,11 +72,11 @@
     }
 }, {
     "_id": "agenda_updated_email",
-    "init_version": 3,
+    "init_version": 4,
     "subject": {
         "default": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} -{{ ' Coverage' if coverage_modified else '' }} updated",
         "translations": {
-            "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} -{{ ' Couverture' if coverage_modified else ' Événement' }} mis à jour"
+            "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} - {% if coverage_modified %}Couverture mise à jour{% else %}Événement mis à jour{% endif %}"
         }
     }
 }, {
