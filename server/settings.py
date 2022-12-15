@@ -158,28 +158,17 @@ WIRE_AGGS = {
 
 AGENDA_GROUPS = [
     {
-        "field": "service",
-        "label": lazy_gettext("Wire Category"),
-    },
-    {
-        "field": "subject_custom",
-        "label": lazy_gettext("Index"),
+        "field": "event_types",
+        "label": lazy_gettext("Event Type"),
         "nested": {
             "parent": "subject",
             "field": "scheme",
-            "value": "subject_custom"
+            "value": "event_types",
+            "include_planning": True,
         },
     },
-    {
-        "field": "distribution",
-        "label": lazy_gettext("Services"),
-        "nested": {
-            "parent": "subject",
-            "field": "scheme",
-            "value": "distribution"
-        },
-    }
 ]
+
 
 BLUEPRINTS = [
     blueprint
