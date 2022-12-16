@@ -2,7 +2,8 @@ import pathlib
 from flask_babel import lazy_gettext
 from newsroom.web.default_settings import (
     env,
-    CLIENT_CONFIG, CORE_APPS as DEFAULT_CORE_APPS,
+    CLIENT_CONFIG,
+    CORE_APPS as DEFAULT_CORE_APPS,
     BLUEPRINTS as DEFAULT_BLUEPRINTS,
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
     CLIENT_URL,
@@ -113,6 +114,10 @@ CLIENT_LOCALE_FORMATS = CLIENT_CONFIG["locale_formats"]
 
 WIRE_GROUPS = [
     {
+        "field": "language",
+        "label": lazy_gettext("Language"),
+    },
+    {
         "field": "source",
         "label": lazy_gettext("Source"),
     },
@@ -122,7 +127,7 @@ WIRE_GROUPS = [
     },
     {
         "field": "subject_custom",
-        "label": lazy_gettext("Index"),
+        "label": lazy_gettext("Subject"),
         "nested": {
             "parent": "subject",
             "field": "scheme",
@@ -131,7 +136,7 @@ WIRE_GROUPS = [
     },
     {
         "field": "distribution",
-        "label": lazy_gettext("Services"),
+        "label": lazy_gettext("Service"),
         "nested": {
             "parent": "subject",
             "field": "scheme",
@@ -149,6 +154,7 @@ WIRE_GROUPS = [
 ]
 
 WIRE_AGGS = {
+    "language": {"terms": {"field": "language", "size": 50}},
     "source": {"terms": {"field": "source", "size": 50}},
     "service": {"terms": {"field": "service.name", "size": 50}},
     "subject": {"terms": {"field": "subject.name", "size": 50}},
@@ -157,6 +163,14 @@ WIRE_AGGS = {
 }
 
 AGENDA_GROUPS = [
+    {
+        "field": "language",
+        "label": lazy_gettext("Language"),
+    },
+    {
+        "field": "service",
+        "label": lazy_gettext("Wire Category"),
+    },
     {
         "field": "event_types",
         "label": lazy_gettext("Event Type"),
@@ -167,27 +181,45 @@ AGENDA_GROUPS = [
             "include_planning": True,
         },
     },
+    {
+        "field": "subject_custom",
+        "label": lazy_gettext("Subject"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "subject_custom",
+        },
+    },
+    {
+        "field": "distribution",
+        "label": lazy_gettext("Service"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "distribution",
+        },
+    },
 ]
 
 
 BLUEPRINTS = [
     blueprint
     for blueprint in DEFAULT_BLUEPRINTS
-    if blueprint not in [
-        "newsroom.design",
-        "newsroom.monitoring",
-        "newsroom.news_api.api_tokens"
-    ]
+    if blueprint
+    not in ["newsroom.design", "newsroom.monitoring", "newsroom.news_api.api_tokens"]
 ]
-BLUEPRINTS.extend([
-    "cp.mgmt_api_docs",
-    "cp.auth",
-])
+BLUEPRINTS.extend(
+    [
+        "cp.mgmt_api_docs",
+        "cp.auth",
+    ]
+)
 
 CORE_APPS = [
     app
     for app in DEFAULT_CORE_APPS
-    if app not in [
+    if app
+    not in [
         "newsroom.monitoring",
         "newsroom.news_api",
         "newsroom.news_api.api_tokens",
@@ -210,7 +242,8 @@ WIRE_SUBJECT_SCHEME_WHITELIST = [
 CELERY_BEAT_SCHEDULE = {
     key: val
     for key, val in DEFAULT_CELERY_BEAT_SCHEDULE.items()
-    if key not in [
+    if key
+    not in [
         "newsroom:monitoring_schedule_alerts",
         "newsroom:monitoring_immediate_alerts",
     ]
@@ -223,7 +256,7 @@ APM_SERVICE_NAME = "CP NewsPro"
 
 CONTENT_API_EXPIRY_DAYS = 730
 
-BABEL_DEFAULT_TIMEZONE = 'America/Toronto'
+BABEL_DEFAULT_TIMEZONE = "America/Toronto"
 
 # saml auth
 SAML_LABEL = env("SAML_LABEL", "SSO")
