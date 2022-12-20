@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "firebase": "9.6.11",
-    "newsroom-core": "github:superdesk/newsroom-core#release/2.3"
+    "newsroom-core": "github:superdesk/newsroom-core#v2.3.0-rc2"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
