@@ -190,15 +190,6 @@ AGENDA_GROUPS = [
             "value": "subject_custom",
         },
     },
-    {
-        "field": "distribution",
-        "label": lazy_gettext("Service"),
-        "nested": {
-            "parent": "subject",
-            "field": "scheme",
-            "value": "distribution",
-        },
-    },
 ]
 
 
