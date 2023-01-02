@@ -10,3 +10,4 @@
 # at https://www.sourcefabric.org/superdesk/license
 
 HEADLINE2 = "headline_extended"
+CORRECTION = "correction"
