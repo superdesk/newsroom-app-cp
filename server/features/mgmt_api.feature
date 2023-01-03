@@ -60,9 +60,14 @@ Feature: Management API
         {"name": "xyz company"}
         """
 
-
     Scenario: Create a user
         Given empty "users"
+        And "products"
+        """
+        [
+            {"name": "test", "query": "test"}
+        ]
+        """
         When we post to "/users"
         """
         {
@@ -83,7 +88,14 @@ Feature: Management API
             "first_name": "John",
             "last_name": "Cena",
             "email": "johncena@wwe.com",
-            "company": "#companies._id#"
+            "company": "#companies._id#",
+            "user_type": "company_admin",
+            "sections": {
+                "wire": true
+            },
+            "products": [
+                {"section": "wire", "_id": "#products._id#"}
+            ]
         }
         """
         Then we get response code 201
@@ -107,7 +119,14 @@ Feature: Management API
                     "first_name": "John",
                     "last_name": "Cena",
                     "email": "johncena@wwe.com",
-                    "company": "#companies._id#"
+                    "company": "#companies._id#",
+                    "user_type": "company_admin",
+                    "sections": {
+                        "wire": true
+                    },
+                    "products": [
+                        {"section": "wire", "_id": "__objectid__"}
+                    ]
                 },
                 {
                     "first_name": "John",
