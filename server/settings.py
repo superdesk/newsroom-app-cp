@@ -100,11 +100,11 @@ CLIENT_CONFIG.update(
         "filter_panel_defaults": {
             "tab": {
                 "wire": "filters",
-                "agenda": "nav",
+                "agenda": "filters",
             },
             "open": {
                 "wire": True,
-                "agenda": False,
+                "agenda": True,
             },
         },
     }
