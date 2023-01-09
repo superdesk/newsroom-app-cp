@@ -251,7 +251,7 @@ BABEL_DEFAULT_TIMEZONE = "America/Toronto"
 
 # saml auth
 SAML_LABEL = env("SAML_LABEL", "SSO")
-SAML_COMPANY = env("SAML_COMPANY")
+SAML_COMPANY = env("SAML_COMPANY", "CP")
 SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
     "localhost": "localhost",
