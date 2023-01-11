@@ -744,6 +744,7 @@ components:
             - internal
             - public
             - account_manager
+            - company_admin
         is_validated:
           type: boolean
           default: false
@@ -772,6 +773,24 @@ components:
           type: string
           description: User ID.
           $ref: '#/components/schemas/ObjectId'
+        sections:
+          type: object
+          properties:
+            wire:
+              type: boolean
+            agenda:
+              type: boolean
+            monitoring:
+              type: boolean
+        products:
+          type: array
+          items:
+            properties:
+              section:
+                $ref: '#/components/schemas/ProductType'
+              _id:
+                $ref: '#/components/schemas/ObjectId'
+
       required:
         - first_name
         - last_name
