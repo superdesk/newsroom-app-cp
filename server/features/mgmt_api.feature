@@ -302,7 +302,17 @@ Feature: Management API
         Given empty "companies"
         When we post to "/companies"
         """
-        [{"name": "zzz company"}]
+        {"name": "zzz company"}
+        """
+        Then we get response code 201
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#"
+        }
         """
         Then we get response code 201
         Given empty "topics"
@@ -313,7 +323,8 @@ Feature: Management API
             "company": "#companies._id#",
             "topic_type": "wire",
             "query": "topic1",
-            "is_global": true
+            "is_global": true,
+            "user": "#users._id#"
         }
         """
         Then we get response code 201
@@ -328,7 +339,8 @@ Feature: Management API
                     "company": "#companies._id#",
                     "topic_type": "wire",
                     "query": "topic1",
-                    "is_global": true
+                    "is_global": true,
+                    "user": "#users._id#"
                 }
             ]
         }
@@ -342,6 +354,16 @@ Feature: Management API
         [{"name": "zzz company"}]
         """
         Then we get response code 201
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#"
+        }
+        """
+        Then we get response code 201
         Given empty "topics"
         When we post to "/topics"
         """
@@ -350,7 +372,8 @@ Feature: Management API
             "company": "#companies._id#",
             "topic_type": "wire",
             "query": "topic1",
-            "is_global": true
+            "is_global": true,
+            "user": "#users._id#"
         }]
         """
         When we delete latest
@@ -364,6 +387,16 @@ Feature: Management API
         [{"name": "zzz company"}]
         """
         Then we get response code 201
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#"
+        }
+        """
+        Then we get response code 201
         Given empty "topics"
         When we post to "/topics"
         """
@@ -372,7 +405,8 @@ Feature: Management API
             "company": "#companies._id#",
             "topic_type": "wire",
             "query": "topic1",
-            "is_global": true
+            "is_global": true,
+            "user": "#users._id#"
         }]
         """
         When we patch latest
