@@ -5,6 +5,7 @@ import newsroom
 from newsroom.companies import CompaniesResource, CompaniesService
 from newsroom.companies.views import get_errors_company
 from newsroom.products.products import ProductsResource
+from newsroom.products.views import get_product_ref
 from newsroom.utils import find_one
 import superdesk
 from superdesk.errors import SuperdeskApiError
@@ -46,7 +47,10 @@ class CompanyProductsResource(newsroom.Resource):
     schema = {
         'product': {
             'type': 'objectid',
-            'nullable': True,
+            'required': True,
+        },
+        'seats': {
+            'type': 'number',
         },
         'link': {
             'type': 'boolean',
@@ -62,10 +66,22 @@ class CompanyProductsResource(newsroom.Resource):
     }
 
 
+def get_company():
+    company = find_one("companies", _id=ObjectId(request.view_args["companies"]))
+    assert company
+    return company
+
+
+def get_company_products(company):
+    return company.get("products") or []
+
+
 class CompanyProductsService(newsroom.Service):
     def get(self, req, lookup):
-        company_id = lookup.pop("companies")
-        lookup["companies"] = {"$in": [ObjectId(company_id)]}
+        company = get_company()
+        company_products = get_company_products(company)
+        lookup["_id"] = {"$in": [p["_id"] for p in company_products]}
+        lookup.pop("companies", None)
         return super().get(req, lookup)
 
     def find_one(self, req, **lookup):
@@ -78,16 +94,14 @@ class CompanyProductsService(newsroom.Service):
             id = doc.pop('product')
             link = doc.pop('link')
             product = find_one('products', _id=ObjectId(id))
+            company = get_company()
+            assert company
             assert product
-            product_companies = product.get('companies') or []
-            company_id = ObjectId(request.view_args['companies'])
-            if link and company_id not in product_companies:
-                product_companies.append(company_id)
-            elif not link and company_id in product_companies:
-                product_companies.remove(company_id)
-            doc['companies'] = product_companies
-            superdesk.get_resource_service('products').system_update(
-                id, doc, product
+            company_products = [p for p in get_company_products(company) if p["_id"] != product["_id"]]
+            if link:
+                company_products.append(get_product_ref(product, doc.get("seats")))
+            superdesk.get_resource_service('companies').system_update(
+                company["_id"], {"products": company_products}, company
             )
             ids.append(id)
         return ids

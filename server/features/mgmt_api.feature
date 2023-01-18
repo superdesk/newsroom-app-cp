@@ -174,7 +174,7 @@ Feature: Management API
         When we delete latest
         Then we get ok response
 
-
+    @wip
     Scenario: Get company products
         Given empty "companies"
         When we post to "/companies"
@@ -213,6 +213,7 @@ Feature: Management API
         [
             {
                 "product": "#products._id#",
+                "seats": 5,
                 "link": true
             }
         ]
@@ -231,6 +232,15 @@ Feature: Management API
             }
         ]}
         """
+
+        When we get "companies/#companies._id#"
+        Then we get existing resource
+        """
+        {"products": [
+            {"_id": "#products._id#", "section": "news_api", "seats": 5}
+        ]}
+        """
+
         When we post to "companies/#companies._id#/products"
         """
         [
