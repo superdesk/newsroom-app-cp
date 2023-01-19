@@ -174,7 +174,6 @@ Feature: Management API
         When we delete latest
         Then we get ok response
 
-    @wip
     Scenario: Get company products
         Given empty "companies"
         When we post to "/companies"

@@ -95,7 +95,6 @@ class CompanyProductsService(newsroom.Service):
             link = doc.pop('link')
             product = find_one('products', _id=ObjectId(id))
             company = get_company()
-            assert company
             assert product
             company_products = [p for p in get_company_products(company) if p["_id"] != product["_id"]]
             if link:
