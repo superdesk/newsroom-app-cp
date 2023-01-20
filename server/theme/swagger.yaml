@@ -531,7 +531,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Product_ids'
+                $ref: '#/components/schemas/ProductLinks'
       responses:
         '201':
           $ref: '#/components/responses/Created'
@@ -884,13 +884,15 @@ components:
         - name
         - product_type
 
-    Product_ids:
+    ProductLinks:
       type: object
       properties:
         product:
           type: string
         link:
           type: boolean
+        seats:
+          type: number
 
     Topic:
       type: object
