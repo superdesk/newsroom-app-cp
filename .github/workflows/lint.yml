@@ -27,5 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: pip install mypy
-      - run: mypy .
+        with:
+          python-version: 3.8
+      - run: pip install -U mypy-requirements.txt
+      - run: mypy cp
