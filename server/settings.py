@@ -1,3 +1,4 @@
+import os
 import pathlib
 from flask_babel import lazy_gettext
 from newsroom.web.default_settings import (
@@ -268,3 +269,6 @@ else:
 
 if SAML_PATH.joinpath("certs").exists():
     SAML_AUTH_ENABLED = True
+
+CEM_URL = os.environ.get("CEM_URL", "")
+CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "NewsPro")
