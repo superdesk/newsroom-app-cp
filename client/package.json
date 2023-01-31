@@ -1,11 +1,11 @@
 {
   "scripts": {
     "start": "webpack-dev-server --progress --colors --content-base dist --host 0.0.0.0",
-    "build": "export NODE_ENV=production && webpack --progress --profile --colors"
+    "build": "export NODE_ENV=production && webpack --progress --profile --colors --watch"
   },
   "dependencies": {
     "firebase": "9.6.11",
-    "newsroom-core": "github:superdesk/newsroom-core#v2.3.0-rc6"
+    "newsroom-core": "github:superdesk/newsroom-core#hotfix/2.3.1"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
