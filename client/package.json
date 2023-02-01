@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "webpack-dev-server --progress --colors --content-base dist --host 0.0.0.0",
-    "build": "export NODE_ENV=production && webpack --progress --profile --colors --watch"
+    "build": "export NODE_ENV=production && webpack --progress --profile --colors"
   },
   "dependencies": {
     "firebase": "9.6.11",
