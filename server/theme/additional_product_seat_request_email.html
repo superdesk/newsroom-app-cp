@@ -1,0 +1,58 @@
+{% extends "email_layout.html" %}
+
+{% block content %}
+<p>-Start of Request Received-</p>
+<p>Dear Client Services/Sales team,</p>
+<p>A customer with the following details has requested more seats for {{ app_name }} on {{ now.strftime('%d-%m-%Y, %H:%M (%Z)') }}</p>
+<p>
+    <ul>
+        <li><bold>Name of requester: </bold> {{ user.first_name }} {{ user.last_name }}</li>
+        <li><bold>Email address: </bold> {{ user.email }}</li>
+        <li><bold>Phone number: </bold> {{ user.phone or 'N/A' }}</li>
+        <li><bold>Mobile phone number: </bold> {{ user.mobile or 'N/A' }}</li>
+        <li><bold>Company: </bold> {{ company.name }}</li>
+        <li><bold>Products: </bold>
+            {%- if all_products -%}
+                All
+            {%- else -%}
+                {%- for product in products -%}
+                    {{ 'Wire' if product.product_type == 'wire' else 'Agenda' }}: {{ product.name }}{% if not loop.last %}, {% endif %}
+                {%- endfor -%}
+            {%- endif -%}
+        </li>
+        <li><bold>Number of requested seats: </bold>{{ number_of_seats }}</li>
+        <li><bold>Language of customer's account: </bold>{{ 'French' if (user.locale or '').lower() == 'fr_ca' else 'English' }}</li>
+    </ul>
+</p>
+<p>Note from customer:</p>
+<p>{{ note or 'N/A' }}</p>
+
+<p>-End of Request Received-</p>
+<p>-Fin de la demande-</p>
+<p>Cher service à la clientèle/Équipe de ventes,</p>
+<p>Voici les informations soumises par notre client pour avoir des accès supplémentaires à {{ app_name }} depuis {{ now.strftime('%d-%m-%Y, %H:%M (%Z)') }}</p>
+<p>
+    <ul>
+        <li><bold>Nom du demandeur: </bold> {{ user.first_name }} {{ user.last_name }}</li>
+        <li><bold>Courriel: </bold> {{ user.email }}</li>
+        <li><bold>Téléphone: </bold> {{ user.phone or 'N/A' }}</li>
+        <li><bold>Cellulaire: </bold> {{ user.mobile or 'N/A' }}</li>
+        <li><bold>Nom de l’entreprise: </bold> {{ company.name }}</li>
+        <li><bold>Produits: </bold>
+            {%- if all_products -%}
+            Toute
+            {%- else -%}
+                {%- for product in products -%}
+                    {{ 'Fil de presse' if product.product_type == 'wire' else 'Calendrier' }}: {{ product.name }}{% if not loop.last %}, {% endif %}
+                {%- endfor -%}
+            {%- endif -%}
+        </li>
+        <li><bold>Le nombre d’utilisateurs demandé: </bold>{{ number_of_seats }}</li>
+        <li><bold>Langue de correspondence: </bold>{{ 'Français' if (user.locale or '').lower() == 'fr_ca' else 'Anglaise' }}</li>
+    </ul>
+</p>
+<p>Notes du client:</p>
+<p>{{ note or 'N/A' }}</p>
+
+<p>--Accusé de réception--</p>
+{% endblock %}
