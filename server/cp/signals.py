@@ -29,18 +29,18 @@ def copy_correction_to_body_html(item):
 
 
 def on_user_created(sender, user, **kwargs):
-    send_notification("new user", user["_id"])
+    send_notification("new user", user)
 
 
 def on_user_updated(sender, user, updates=None, **kwargs):
     if updates and updates.get("password"):
-        send_notification("password change", user["_id"])
+        send_notification("password change", user)
     else:
-        send_notification("update user", user["_id"])
+        send_notification("update user", user)
 
 
 def on_user_deleted(sender, user, **kwargs):
-    send_notification("delete user", user["_id"])
+    send_notification("delete user", user)
 
 
 def init_app(app):

@@ -271,4 +271,5 @@ if SAML_PATH.joinpath("certs").exists():
     SAML_AUTH_ENABLED = True
 
 CEM_URL = os.environ.get("CEM_URL", "")
+CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
 CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "NewsPro")

@@ -1,4 +1,3 @@
-
 import requests
 from flask import current_app as app
 
@@ -6,16 +5,22 @@ from flask import current_app as app
 session = requests.Session()
 
 
-def send_notification(_type, _id):
-    url = app.config.get("CEM_URL")
-    if not url:
+def send_notification(_type, user):
+    url = app.config.get("CEM_URL", "")
+    apikey = app.config.get("CEM_APIKEY", "")
+    if not url or not apikey:
         return
-    session.post(
+    headers = {"x-api-key": apikey}
+    payload = {
+        "type": _type,
+        "object_id": str(user["_id"]),
+        "platform": app.config.get("CEM_PLATFORM"),
+    }
+    if user.get("company"):
+        payload["company"] = str(user["company"])
+    session.patch(
         url,
-        json={
-            "type": _type,
-            "object_id": str(_id),
-            "platform": app.config.get("CEM_PLATFORM"),
-        },
         timeout=5,
+        json=payload,
+        headers=headers,
     )

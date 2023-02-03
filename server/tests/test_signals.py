@@ -40,6 +40,7 @@ def test_cem_notification_on_user_changes(app):
     app.config.update(
         {
             "CEM_URL": "https://example.com",
+            "CEM_APIKEY": "somekey",
             "CEM_PLATFORM": "Test",
         }
     )
@@ -47,9 +48,14 @@ def test_cem_notification_on_user_changes(app):
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
-            responses.POST,
+            responses.PATCH,
             "https://example.com",
             match=[
+                matchers.header_matcher(
+                    {
+                        "x-api-key": "somekey",
+                    }
+                ),
                 matchers.json_params_matcher(
                     {
                         "object_id": str(user["_id"]),
@@ -64,7 +70,7 @@ def test_cem_notification_on_user_changes(app):
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
-            responses.POST,
+            responses.PATCH,
             "https://example.com",
             match=[
                 matchers.json_params_matcher(
@@ -81,7 +87,7 @@ def test_cem_notification_on_user_changes(app):
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
-            responses.POST,
+            responses.PATCH,
             "https://example.com",
             match=[
                 matchers.json_params_matcher(
@@ -98,7 +104,7 @@ def test_cem_notification_on_user_changes(app):
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
-            responses.POST,
+            responses.PATCH,
             "https://example.com",
             match=[
                 matchers.json_params_matcher(
