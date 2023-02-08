@@ -43,3 +43,8 @@ def logout():
     resp = flask.redirect(flask.url_for("auth.login", logout=1))
     resp.delete_cookie("token")
     return resp
+
+
+@blueprint.route("/reset_password")
+def reset_password():
+    return flask.render_template("reset_password.html")
