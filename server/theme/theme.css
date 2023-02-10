@@ -170,7 +170,8 @@ a:hover {
 .form-control:focus {
     border-color: #CC212C;
 }
-.form-check-input:checked {
+.form-check-input:checked,
+.form-check.ui-dark .form-check-input:checked {
     background-color: #CC212C;
     border-color: #CC212C;
 }
