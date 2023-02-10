@@ -1,6 +1,8 @@
 import cp
 
-from newsroom.signals import publish_item
+from newsroom.signals import publish_item, user_created, user_updated, user_deleted
+
+from cp.cem import send_notification
 
 
 def on_publish_item(sender, item, **kwargs):
@@ -26,5 +28,23 @@ def copy_correction_to_body_html(item):
         )
 
 
+def on_user_created(sender, user, **kwargs):
+    send_notification("new user", user)
+
+
+def on_user_updated(sender, user, updates=None, **kwargs):
+    if updates and updates.get("password"):
+        send_notification("password change", user)
+    else:
+        send_notification("update user", user)
+
+
+def on_user_deleted(sender, user, **kwargs):
+    send_notification("delete user", user)
+
+
 def init_app(app):
     publish_item.connect(on_publish_item)
+    user_created.connect(on_user_created)
+    user_updated.connect(on_user_updated)
+    user_deleted.connect(on_user_deleted)

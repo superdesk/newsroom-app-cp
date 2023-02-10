@@ -531,7 +531,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Product_ids'
+                $ref: '#/components/schemas/ProductLinks'
       responses:
         '201':
           $ref: '#/components/responses/Created'
@@ -744,6 +744,7 @@ components:
             - internal
             - public
             - account_manager
+            - company_admin
         is_validated:
           type: boolean
           default: false
@@ -772,6 +773,24 @@ components:
           type: string
           description: User ID.
           $ref: '#/components/schemas/ObjectId'
+        sections:
+          type: object
+          properties:
+            wire:
+              type: boolean
+            agenda:
+              type: boolean
+            monitoring:
+              type: boolean
+        products:
+          type: array
+          items:
+            properties:
+              section:
+                $ref: '#/components/schemas/ProductType'
+              _id:
+                $ref: '#/components/schemas/ObjectId'
+
       required:
         - first_name
         - last_name
@@ -865,13 +884,15 @@ components:
         - name
         - product_type
 
-    Product_ids:
+    ProductLinks:
       type: object
       properties:
         product:
           type: string
         link:
           type: boolean
+        seats:
+          type: number
 
     Topic:
       type: object

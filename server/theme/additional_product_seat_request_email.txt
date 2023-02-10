@@ -1,0 +1,51 @@
+{% extends "email_layout.txt" %}
+
+{% block content %}
+-Start of Request Received-
+Dear Client Services/Sales team,
+A customer with the following details has requested more seats for {{ app_name }} on {{ now.strftime('%d-%m-%Y, %H:%M (%Z)') }}
+* Name of requester: {{ user.first_name }} {{ user.last_name }}
+* Email address: {{ user.email }}
+* Phone number: {{ user.phone or 'N/A' }}
+* Mobile phone number: {{ user.mobile or 'N/A' }}
+* Company: {{ company.name }}
+* Products:
+    {%- if all_products -%}
+        All
+    {%- else -%}
+        {%- for product in products -%}
+            {{ 'Wire' if product.product_type == 'wire' else 'Agenda' }}: {{ product.name }}{% if not loop.last %}, {% endif %}
+        {%- endfor -%}
+    {%- endif -%}
+* Number of requested seats: {{ number_of_seats }}
+* Language of customer's account: {{ 'French' if (user.locale or '').lower() == 'fr_ca' else 'English' }}
+
+Note from customer:
+{{ note or 'N/A' }}
+
+-End of Request Received-
+
+-Fin de la demande-
+Cher service à la clientèle/Équipe de ventes,
+Voici les informations soumises par notre client pour avoir des accès supplémentaires à {{ app_name }} depuis {{ now.strftime('%d-%m-%Y, %H:%M (%Z)') }}
+* Nom du demandeur: </bold> {{ user.first_name }} {{ user.last_name }}</li>
+* Courriel: {{ user.email }}
+* Téléphone: {{ user.phone or 'N/A' }}
+* Cellulaire: {{ user.mobile or 'N/A' }}
+* Nom de l’entreprise: {{ company.name }}
+* Produits:
+    {%- if all_products -%}
+    Toute
+    {%- else -%}
+        {%- for product in products -%}
+            {{ 'Fil de presse' if product.product_type == 'wire' else 'Calendrier' }}: {{ product.name }}{% if not loop.last %}, {% endif %}
+        {%- endfor -%}
+    {%- endif -%}
+* Le nombre d’utilisateurs demandé: {{ number_of_seats }}
+* Langue de correspondence: {{ 'Français' if (user.locale or '').lower() == 'fr_ca' else 'Anglaise' }}
+
+Notes du client:
+{{ note or 'N/A' }}
+
+-Accusé de réception-
+{% endblock %}

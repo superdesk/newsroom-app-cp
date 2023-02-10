@@ -24,3 +24,7 @@ class CPUsersService(UsersService):
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
             if doc.get('company'):
                 doc['company'] = ObjectId(doc.get('company'))
+
+    def check_permissions(self, doc, updates=None):
+        """Avoid testing if user has permissions."""
+        pass

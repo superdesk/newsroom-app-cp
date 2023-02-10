@@ -33,13 +33,13 @@
                     {% block breadcrumb %}{% endblock %}
                 </nav>
             </div>
-            <div class="form-inline my-lg-0 ml-auto flex-shrink-0 flex-grow-0">
+            <div class="d-flex align-items-center my-lg-0 ms-auto flex-shrink-0 flex-grow-0">
                 <div class="navbar__date d-none d-md-block">{{ get_date() | date_header }}</div>
                 <div class="notif" id="header-notification"></div>
                 <div id="header-profile-toggle"></div>
             </div>
             {% else %}
-            <div class="form-inline my-lg-0 ml-auto pr-2 pr-sm-3">
+            <div class="d-flex align-items-center my-lg-0 ms-auto pe-2 pe-sm-3">
                 <div class="navbar__date d-none d-md-block">{{ get_date() | date_header }}</div>
                 <a class="nav-link mt-2" href="{{ url_for('auth.login') }}">{{ gettext('Login') }}</a>
             </div>

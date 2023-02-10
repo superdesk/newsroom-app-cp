@@ -106,4 +106,10 @@
             "fr_ca": "Le compte de votre entreprise expirera le {{ expires_on }}"
         }
     }
+}, {
+    "_id": "additional_product_seat_request_email",
+    "init_version": 1,
+    "subject": {
+        "default": "A customer {{ company.name }} has requested more seats for {{ app_name }}"
+    }
 }]
