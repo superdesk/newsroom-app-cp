@@ -19,18 +19,16 @@ form.onsubmit = (event) => {
   params.append("email", email);
   url.search = params;
 
-  sendPasswordResetEmail(auth, email, {url: url.toString()}).then(() => {
-    sendButton.disabled = true;
-  }, (reason) => {
+  sendButton.disabled = true;
+  sendPasswordResetEmail(auth, email, {url: url.toString()})
+  .then(() => {
+    form.submit();
+    return true;
+  })
+  .catch((reason) => {
     console.error(reason);
+    sendButton.disabled = false; // allow another request if there was an error
   });
 
   return false;
 };
-
-
-document.getElementById('reset-password').onclick = (event) => {
-
-  sendPasswordResetEmail(auth, "petr.jasek@sourcefabric.org", {url: window.location.href});
-  console.info("IN");
-}
