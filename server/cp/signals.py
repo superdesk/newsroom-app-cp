@@ -1,8 +1,12 @@
 import cp
 
-from newsroom.signals import publish_item, user_created, user_updated, user_deleted
+from newsroom.signals import publish_item, user_created, user_updated, user_deleted, push
 
 from cp.cem import send_notification
+
+
+def fix_language(lang) -> str:
+    return lang.split('-')[0].split('_')[0].lower()
 
 
 def on_publish_item(sender, item, **kwargs):
@@ -43,8 +47,14 @@ def on_user_deleted(sender, user, **kwargs):
     send_notification("delete user", user)
 
 
+def on_push(sender, item, **kwargs):
+    if item.get("language"):
+        item["language"] = fix_language(item["language"])
+
+
 def init_app(app):
     publish_item.connect(on_publish_item)
     user_created.connect(on_user_created)
     user_updated.connect(on_user_updated)
     user_deleted.connect(on_user_deleted)
+    push.connect(on_push)
