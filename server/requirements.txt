@@ -5,156 +5,105 @@
 #    pip-compile requirements.in
 #
 amqp==2.6.1
-    # via
-    #   kombu
-    #   newsroom-core
+    # via kombu
 arabic-reshaper==3.0.0
-    # via
-    #   newsroom-core
-    #   xhtml2pdf
+    # via xhtml2pdf
 arrow==0.13.0
     # via
     #   eve-elastic
-    #   newsroom-core
     #   superdesk-core
 asn1crypto==1.5.1
     # via
-    #   newsroom-core
     #   oscrypto
     #   pyhanko
     #   pyhanko-certvalidator
 authlib==0.14.3
-    # via
-    #   newsroom-core
-    #   superdesk-core
-babel==2.11.0
-    # via
-    #   flask-babel
-    #   newsroom-core
+    # via superdesk-core
+babel==2.12.1
+    # via flask-babel
 bcrypt==3.1.7
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 billiard==3.6.4.0
-    # via
-    #   celery
-    #   newsroom-core
+    # via celery
 blinker==1.4
     # via
     #   elastic-apm
     #   flask-mail
-    #   newsroom-core
     #   raven
     #   sentry-sdk
     #   superdesk-core
-boto3==1.26.79
-    # via
-    #   newsroom-core
-    #   superdesk-core
-botocore==1.29.79
+boto3==1.26.83
+    # via superdesk-core
+botocore==1.29.83
     # via
     #   boto3
-    #   newsroom-core
     #   s3transfer
 cachelib==0.9.0
-    # via
-    #   flask-caching
-    #   newsroom-core
+    # via flask-caching
 cachetools==5.3.0
     # via
     #   flask-oidc-ex
     #   google-auth
-    #   newsroom-core
 celery[redis]==4.4.7
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 cerberus==1.3.4
     # via
     #   eve
-    #   newsroom-core
     #   superdesk-core
 certifi==2022.12.7
     # via
     #   elastic-apm
     #   elasticsearch
-    #   newsroom-core
     #   requests
     #   sentry-sdk
 cffi==1.15.1
     # via
     #   bcrypt
     #   cryptography
-    #   newsroom-core
 chardet==3.0.4
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 charset-normalizer==3.0.1
-    # via
-    #   newsroom-core
-    #   requests
+    # via requests
 ciso8601==1.0.8
-    # via
-    #   eve-elastic
-    #   newsroom-core
+    # via eve-elastic
 click==7.1.2
     # via
     #   flask
-    #   newsroom-core
     #   pyhanko
 croniter==0.3.37
-    # via
-    #   newsroom-core
-    #   superdesk-core
-cryptography==39.0.1
+    # via superdesk-core
+cryptography==39.0.2
     # via
     #   authlib
     #   jwcrypto
-    #   newsroom-core
     #   pyhanko
     #   pyhanko-certvalidator
 cssselect2==0.7.0
-    # via
-    #   newsroom-core
-    #   svglib
+    # via svglib
 deepdiff==6.2.3
-    # via
-    #   newsroom-core
-    #   superdesk-planning
+    # via superdesk-planning
 deprecated==1.2.13
     # via
     #   jwcrypto
     #   limits
-    #   newsroom-core
 draftjs-exporter[lxml]==2.1.7
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 elastic-apm[flask]==6.7.2
     # via
     #   newsroom-core
     #   superdesk-core
 elasticsearch==7.13.4
-    # via
-    #   eve-elastic
-    #   newsroom-core
+    # via eve-elastic
 eve==1.1.2
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 eve-elastic==7.3.1
     # via
     #   newsroom-core
     #   superdesk-core
 events==0.3
-    # via
-    #   eve
-    #   newsroom-core
+    # via eve
 feedparser==6.0.10
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 flask==1.1.4
     # via
     #   eve
@@ -172,65 +121,43 @@ flask==1.1.4
     #   sentry-sdk
     #   superdesk-core
 flask-babel==1.0.0
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 flask-caching==2.0.2
     # via newsroom-core
 flask-limiter==0.9.5.1
     # via newsroom-core
 flask-mail==0.9.1
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 flask-oidc-ex==0.5.5
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 flask-pymongo==0.5.2
     # via newsroom-core
 flask-script==2.0.6
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 flask-webpack==0.1.0
     # via newsroom-core
 flask-wtf==0.14.3
     # via newsroom-core
 future==0.18.3
-    # via
-    #   newsroom-core
-    #   python-twitter
+    # via python-twitter
 google-auth==2.6.0
     # via -r requirements.in
 gunicorn==20.0.4
     # via newsroom-core
 hachoir==3.0a3
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 hermescache==0.10.0
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 honcho==1.1.0
     # via newsroom-core
 html5lib==1.1
-    # via
-    #   newsroom-core
-    #   xhtml2pdf
+    # via xhtml2pdf
 httplib2==0.21.0
-    # via
-    #   newsroom-core
-    #   oauth2client
+    # via oauth2client
 icalendar==4.0.9
-    # via
-    #   newsroom-core
-    #   superdesk-planning
+    # via superdesk-planning
 idna==3.4
-    # via
-    #   newsroom-core
-    #   requests
+    # via requests
 isodate==0.6.1
     # via python3-saml
 itsdangerous==1.1.0
@@ -238,39 +165,29 @@ itsdangerous==1.1.0
     #   flask
     #   flask-oidc-ex
     #   flask-wtf
-    #   newsroom-core
 jinja2==2.11.3
     # via
     #   flask
     #   flask-babel
-    #   newsroom-core
 jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-    #   newsroom-core
 jwcrypto==1.4.2
     # via
     #   flask-oidc-ex
-    #   newsroom-core
     #   python-jwt
 kombu==4.6.11
     # via
     #   celery
-    #   newsroom-core
     #   superdesk-core
 ldap3==2.5.2
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 limits==3.2.0
-    # via
-    #   flask-limiter
-    #   newsroom-core
+    # via flask-limiter
 lxml==4.6.5
     # via
     #   draftjs-exporter
-    #   newsroom-core
     #   python3-saml
     #   superdesk-core
     #   svglib
@@ -281,68 +198,44 @@ markupsafe==2.0.1
     #   newsroom-core
     #   superdesk-core
 mongolock==1.3.4
-    # via
-    #   newsroom-core
-    #   superdesk-core
-natsort==8.2.0
-    # via
-    #   croniter
-    #   newsroom-core
+    # via superdesk-core
+natsort==8.3.1
+    # via croniter
 newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@develop
     # via -r requirements.in
 oauth2client==4.1.3
-    # via
-    #   flask-oidc-ex
-    #   newsroom-core
+    # via flask-oidc-ex
 oauthlib==3.2.2
-    # via
-    #   newsroom-core
-    #   requests-oauthlib
+    # via requests-oauthlib
 ordered-set==4.1.0
-    # via
-    #   deepdiff
-    #   newsroom-core
-orjson==3.8.6
-    # via
-    #   deepdiff
-    #   newsroom-core
+    # via deepdiff
+orjson==3.8.7
+    # via deepdiff
 oscrypto==1.3.0
-    # via
-    #   newsroom-core
-    #   pyhanko-certvalidator
+    # via pyhanko-certvalidator
 packaging==23.0
-    # via
-    #   limits
-    #   newsroom-core
+    # via limits
 pillow==9.2.0
     # via
-    #   newsroom-core
     #   reportlab
     #   superdesk-core
     #   xhtml2pdf
 pyasn1==0.4.8
     # via
     #   ldap3
-    #   newsroom-core
     #   oauth2client
     #   pyasn1-modules
     #   rsa
 pyasn1-modules==0.2.8
     # via
     #   google-auth
-    #   newsroom-core
     #   oauth2client
 pycparser==2.21
-    # via
-    #   cffi
-    #   newsroom-core
+    # via cffi
 pyhanko==0.17.0
-    # via
-    #   newsroom-core
-    #   xhtml2pdf
+    # via xhtml2pdf
 pyhanko-certvalidator==0.20.1
     # via
-    #   newsroom-core
     #   pyhanko
     #   xhtml2pdf
 pymongo==3.11.4
@@ -350,82 +243,57 @@ pymongo==3.11.4
     #   eve
     #   flask-pymongo
     #   mongolock
-    #   newsroom-core
     #   superdesk-core
 pyparsing==3.0.9
     # via
     #   httplib2
-    #   newsroom-core
     #   pyrtf3
 pypdf==3.5.0
-    # via
-    #   newsroom-core
-    #   xhtml2pdf
+    # via xhtml2pdf
 pypng==0.20220715.0
-    # via
-    #   newsroom-core
-    #   qrcode
+    # via qrcode
 pyrtf3==0.47.5
     # via newsroom-core
 python-bidi==0.4.2
-    # via
-    #   newsroom-core
-    #   xhtml2pdf
+    # via xhtml2pdf
 python-dateutil==2.7.5
     # via
     #   arrow
     #   botocore
     #   croniter
     #   icalendar
-    #   newsroom-core
     #   superdesk-core
 python-jwt==4.0.0
-    # via
-    #   flask-oidc-ex
-    #   newsroom-core
+    # via flask-oidc-ex
 python-magic==0.4.27
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 python-twitter==3.5
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 python3-saml==1.14.0
     # via -r requirements.in
 pytz==2022.7.1
     # via
-    #   babel
     #   celery
     #   eve-elastic
     #   flask-babel
     #   icalendar
-    #   newsroom-core
     #   pyhanko
     #   superdesk-core
     #   tzlocal
 pyyaml==5.4.1
     # via
-    #   newsroom-core
     #   pyhanko
     #   superdesk-core
 qrcode==7.4.2
-    # via
-    #   newsroom-core
-    #   pyhanko
+    # via pyhanko
 raven[flask]==6.10.0
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 redis==3.2.1
     # via
     #   celery
-    #   newsroom-core
     #   superdesk-core
 regex==2020.7.14
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 reportlab==3.6.6
     # via
     #   newsroom-core
@@ -433,35 +301,25 @@ reportlab==3.6.6
     #   xhtml2pdf
 requests==2.28.2
     # via
-    #   newsroom-core
     #   pyhanko
     #   pyhanko-certvalidator
     #   python-twitter
     #   requests-oauthlib
     #   superdesk-core
 requests-oauthlib==1.3.1
-    # via
-    #   newsroom-core
-    #   python-twitter
+    # via python-twitter
 rsa==4.9
     # via
     #   google-auth
-    #   newsroom-core
     #   oauth2client
 s3transfer==0.6.0
-    # via
-    #   boto3
-    #   newsroom-core
+    # via boto3
 sentry-sdk[flask]==1.5.12
     # via newsroom-core
 sgmllib3k==1.0.0
-    # via
-    #   feedparser
-    #   newsroom-core
+    # via feedparser
 simplejson==3.18.3
-    # via
-    #   eve
-    #   newsroom-core
+    # via eve
 six==1.16.0
     # via
     #   bcrypt
@@ -470,7 +328,6 @@ six==1.16.0
     #   google-auth
     #   html5lib
     #   isodate
-    #   newsroom-core
     #   oauth2client
     #   python-bidi
     #   python-dateutil
@@ -479,39 +336,29 @@ superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@develop
 superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@develop
     # via newsroom-core
 svglib==1.5.1
-    # via
-    #   newsroom-core
-    #   xhtml2pdf
+    # via xhtml2pdf
 tinycss2==1.2.1
     # via
     #   cssselect2
-    #   newsroom-core
     #   svglib
 typing-extensions==4.5.0
     # via
     #   limits
-    #   newsroom-core
     #   qrcode
     #   superdesk-core
 tzlocal==2.1
     # via
-    #   newsroom-core
     #   pyhanko
     #   superdesk-core
 unidecode==0.04.21
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 uritools==4.0.1
-    # via
-    #   newsroom-core
-    #   pyhanko-certvalidator
+    # via pyhanko-certvalidator
 urllib3==1.25.11
     # via
     #   botocore
     #   elastic-apm
     #   elasticsearch
-    #   newsroom-core
     #   requests
     #   sentry-sdk
     #   superdesk-core
@@ -519,26 +366,19 @@ vine==1.3.0
     # via
     #   amqp
     #   celery
-    #   newsroom-core
 webencodings==0.5.1
     # via
     #   cssselect2
     #   html5lib
-    #   newsroom-core
     #   tinycss2
 websockets==10.3
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    # via superdesk-core
 werkzeug==1.0.1
     # via
     #   flask
-    #   newsroom-core
     #   superdesk-core
 wrapt==1.15.0
-    # via
-    #   deprecated
-    #   newsroom-core
+    # via deprecated
 wtforms==2.2.1
     # via
     #   flask-wtf
