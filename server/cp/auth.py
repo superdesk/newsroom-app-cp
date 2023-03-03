@@ -45,13 +45,13 @@ def logout():
     return resp
 
 
-@blueprint.route("/reset_password_done")
+@blueprint.route("/cp_reset_password_done")
 def reset_password_confirmation():
-    return flask.render_template("reset_password_confirmation.html")
+    return flask.render_template("cp_reset_password_confirmation.html")
 
 
-@blueprint.route("/reset_password", methods=["GET", "POST"])
+@blueprint.route("/cp_reset_password", methods=["GET", "POST"])
 def reset_password():
     if flask.request.method == "POST":
         return flask.redirect(flask.url_for("cp.auth.reset_password_confirmation"))
-    return flask.render_template("reset_password.html")
+    return flask.render_template("cp_reset_password.html")
