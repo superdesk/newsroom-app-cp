@@ -52,7 +52,8 @@ Feature: Management API - Products
                 "name": "A fishy Product",
                 "description": "new description",
                 "query": "fish",
-                "product_type": "news_api"
+                "product_type": "news_api",
+                "seats": 5
             }
         ]}
         """
