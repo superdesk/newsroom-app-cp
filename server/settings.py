@@ -195,17 +195,15 @@ AGENDA_GROUPS = [
 
 
 BLUEPRINTS = [
+    "cp.auth",  # we need this one loaded before newsroom.auth to make it override logout
+    "cp.mgmt_api_docs",
+] + [
     blueprint
     for blueprint in DEFAULT_BLUEPRINTS
     if blueprint
     not in ["newsroom.design", "newsroom.monitoring", "newsroom.news_api.api_tokens"]
 ]
-BLUEPRINTS.extend(
-    [
-        "cp.mgmt_api_docs",
-        "cp.auth",
-    ]
-)
+
 
 CORE_APPS = [
     app

@@ -9,8 +9,7 @@ if (params.get("email")) {
 }
 
 const sendTokenToServer = (token) => {
-  document.cookie = `token=${token}`;
-  window.location.replace('/auth_token');
+  window.location.replace(`/auth_token?token=${token}`);
 }
 
 // get firebase auth status
@@ -22,7 +21,6 @@ auth.onAuthStateChanged((user) => {
     }
 
     if (params.get('logout') === '1') { // force logout from firebase
-      document.cookie = 'token=';
       signOut(auth);
       return;
     }
