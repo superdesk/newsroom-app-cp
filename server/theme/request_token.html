@@ -1,0 +1,51 @@
+{% extends "layout_wire.html" %}
+
+{% block contentMain %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card bg-white">
+                        <div class="card-header">
+                            <h3 class="mb-0">{{ gettext("Password Reset") }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" role="form" id="formToken" method="post">
+
+                                {{ form.csrf_token }}
+
+                                {% include "form_alerts.html" %}
+
+                                <div class="form-group">
+                                    <label for="email">{{ form.email.label.text }}</label>
+                                    {{ form.email(class="form-control", id="email", required="true") }}
+                                </div>
+
+                                {% if token_type=='validate' %}
+                                    <button type="submit" id="reset-btn" class="btn btn-outline-primary ms-3 float-end">{{ gettext("Validate") }}</button>
+                                {% else %}
+                                    <button type="submit" id="reset-btn" class="btn btn-outline-primary ms-3 float-end">{{ gettext("Reset Password") }}</button>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "login_messages.html" %}
+
+    <script>
+        {% if request.args.get("url") %}
+        window.nextUrl = "{{ request.args.get("url") }}";
+        {% else %}
+        window.nextUrl = "{{ url_for("auth.login", _external=True) }}";
+        {% endif %}
+        window.externalSuccessUrl = "{{ url_for("cp.auth.reset_password_confirmation", _external=True) }}";
+    </script>
+
+    {{ javascript_tag('reset_password') | safe }}
+</div>
+{% endblock %}
