@@ -4,7 +4,8 @@
 :root {
     --body-text: #333;
     --background-color: white;
-    --badge-bg-highlight1: #CC212C;
+    --primary-color: #CC212C;
+    --badge-bg-highlight1: var(--primary-color);
 }
 
 /* Fonts */
@@ -103,7 +104,8 @@ a:hover {
 
 .btn-outline-primary:not([disabled]):not(.disabled):active,
 .btn-outline-primary:not([disabled]):not(.disabled).active,
-.show > .btn-outline-primary.dropdown-toggle {
+.show > .btn-outline-primary.dropdown-toggle,
+.show.btn-outline-primary.dropdown-toggle {
     color: #fff;
     background-color: #CC212C;
     border-color: #CC212C;
@@ -114,7 +116,8 @@ a:hover {
 .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-primary.dropdown-toggle:focus,
 .btn-outline-primary:not([disabled]):not(.disabled):active,
-.show > .btn-outline-primary.dropdown-toggle {
+.show > .btn-outline-primary.dropdown-toggle,
+.show.btn-outline-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(236, 0, 0, 0.4);
 }
 .wire-column__nav .tab-pane .btn-outline-primary,
@@ -246,11 +249,6 @@ a:hover {
 .sidenav-icons__item.active {
     display: flex !important;
     justify-content: center;
-}
-.sidenav-icons__item.active a {
-    background-color: white;
-    border-radius: 50%;
-    width: 40px;
 }
 .sidenav-icons__item.active .bg-info {
     color: #CC212C;
