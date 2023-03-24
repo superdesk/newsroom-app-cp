@@ -3,6 +3,7 @@
         data-toggle="tooltip"
         data-placement="right"
         aria-label="{{  gettext(nav.name) }}"
+        role="button"
         {% if nav.url %}target="_blank"{% endif %}
     >
         {% if nav.badge %}
@@ -16,5 +17,6 @@
         {% endif %}
         {% endblock %}
         <i class="icon--{{ nav.icon }} icon--red"></i>
+        <div class="sidenav-icons__item-title">{{  gettext(nav.name) }}</div>
     </a>
 </li>
