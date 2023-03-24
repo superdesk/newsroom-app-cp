@@ -1,21 +1,15 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from './auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyCy261Dj82etz9-AwMgKG0o6HCbv3HNzbc',
-  authDomain: 'cp-identity.firebaseapp.com',
-  projectId: 'cp-identity',
-  messagingSenderId: '462735301864',
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
 const form = document.getElementById('formLogin');
 const params = new URLSearchParams(window.location.search);
 
+if (params.get("email")) {
+  form['email'].value = params.get("email");
+}
+
 const sendTokenToServer = (token) => {
-  document.cookie = `token=${token}`;
-  window.location.replace('/auth_token');
+  window.location.replace(`/auth_token?token=${token}`);
 }
 
 // get firebase auth status
@@ -27,7 +21,6 @@ auth.onAuthStateChanged((user) => {
     }
 
     if (params.get('logout') === '1') { // force logout from firebase
-      document.cookie = 'token=';
       signOut(auth);
       return;
     }

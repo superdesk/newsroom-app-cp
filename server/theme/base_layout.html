@@ -60,6 +60,20 @@
                   </a>
                 </li>
                 {% endif %}{% endfor %}
+                {% if is_company_admin() %}
+                <li class="sidenav-icons__item sidenav-icons__item--admin d-none d-md-p-block d-lg-l-block {% if request.endpoint == 'company_admin.index' %}active{% endif %}">
+                    <a
+                        href="{{ url_for('company_admin.index') }}"
+                        title="{{ gettext('Company Admin') }}"
+                        aria-label="{{ gettext('Company Admin') }}"
+                        role="button"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                    >
+                        <i class="icon--cog icon--gray"></i>
+                    </a>
+                </li>
+                {% endif %}
                 {% if is_admin_or_account_manager() %}
                 <li class="sidenav-icons__item sidenav-icons__item--report {% if request.endpoint == 'reports.company_reports' %}active{% endif %}">
                   <a href="{{ url_for('reports.company_reports') }}" title="{{ gettext('Reports') }}" data-toggle="tooltip" data-placement="right">

@@ -78,8 +78,8 @@ def get_company_products(company):
 
 class CompanyProductsService(newsroom.Service):
     def get(self, req, lookup):
-        company = get_company()
-        company_products = get_company_products(company)
+        self.company = get_company()
+        company_products = get_company_products(self.company)
         lookup["_id"] = {"$in": [p["_id"] for p in company_products]}
         lookup.pop("companies", None)
         return super().get(req, lookup)
@@ -108,6 +108,11 @@ class CompanyProductsService(newsroom.Service):
     def on_fetched(self, doc):
         for item in doc["_items"]:
             self._fix_link(item)
+            if hasattr(self, "company") and self.company and self.company.get("products"):
+                for product_ref in self.company["products"]:
+                    if product_ref["_id"] == item["_id"]:
+                        item["seats"] = product_ref["seats"]
+                        break
         return super().on_fetched(doc)
 
     def on_fetched_item(self, doc):

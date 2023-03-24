@@ -497,7 +497,7 @@ paths:
     get:
       summary: Returns list of products a company is permissioned for.
       tags:
-        - Company Products (TBD)
+        - Company Products
       parameters:
         - $ref: '#/components/parameters/qParam'
         - $ref: '#/components/parameters/whereParam'
@@ -515,7 +515,7 @@ paths:
                   _items:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Product'
+                      $ref: '#/components/schemas/CompanyProduct'
                   _meta:
                     $ref: '#/components/schemas/Meta'
         '401':
@@ -523,7 +523,7 @@ paths:
     post:
       summary: Set the list of products a company is permissioned for.
       tags:
-        - Company Products (TBD)
+        - Company Products
       requestBody:
         required: true
         content:
@@ -839,6 +839,27 @@ components:
         version_creator:
           type: string
           description: User Id.
+        sections:
+          type: object
+          properties:
+            wire:
+              type: boolean
+            agenda:
+              type: boolean
+            monitoring:
+              type: boolean
+        products:
+          type: array
+          items:
+            properties:
+              section:
+                $ref: '#/components/schemas/ProductType'
+              _id:
+                $ref: '#/components/schemas/ObjectId'
+              seats:
+                type: number
+                example: 5
+
       required:
         - name
 
@@ -874,15 +895,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ObjectId'
-        companies:
-          description: List of Company Ids associated with the Product.
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectId'
 
       required:
         - name
         - product_type
+    
+    CompanyProduct:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            seats:
+              type: number
 
     ProductLinks:
       type: object
@@ -893,6 +917,7 @@ components:
           type: boolean
         seats:
           type: number
+          example: 5
 
     Topic:
       type: object

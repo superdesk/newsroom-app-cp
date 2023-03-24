@@ -35,6 +35,7 @@
                         {{ gettext('Forgot your password?') }}
                         <a href="mailto:help-aide@cpnewspro.com?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
                     </p>
+                    <a class="btn btn-outline-primary mb-4 mt-2" href="{{ url_for("cp.auth.reset_password", url=request.url) }}">{{ gettext('Reset password') }}</a>
                 </div>
 
                 {% if get_client_locales()|length is gt 1 %}

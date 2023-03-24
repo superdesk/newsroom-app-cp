@@ -5,6 +5,7 @@ import google.oauth2.id_token
 from flask_babel import gettext
 from google.auth.transport import requests
 from newsroom.auth.utils import sign_user_by_email
+from newsroom.auth.views import logout as _logout
 
 TIMEOUT = 5
 
@@ -16,7 +17,7 @@ blueprint = flask.Blueprint("cp.auth", __name__)
 @blueprint.route("/auth_token")
 def token():
     claims = None
-    token = flask.request.cookies.get('token')
+    token = flask.request.args.get('token')
     if token:
         try:
             claims = google.oauth2.id_token.verify_firebase_token(
@@ -32,14 +33,22 @@ def token():
         email = claims["email"]
         return sign_user_by_email(email)
 
-    return flask.redirect(flask.url_for("auth.index"))
+    return flask.redirect(flask.url_for("auth.login"))
 
 
 @blueprint.route("/logout")
 def logout():
-    flask.session.pop("user", None)
-    flask.session.pop("name", None)
-    flask.session.pop("user_type", None)
-    resp = flask.redirect(flask.url_for("auth.login", logout=1))
-    resp.delete_cookie("token")
-    return resp
+    _logout()
+    return flask.redirect(flask.url_for("auth.login", logout=1))
+
+
+@blueprint.route("/cp_reset_password_done")
+def reset_password_confirmation():
+    return flask.render_template("cp_reset_password_confirmation.html")
+
+
+@blueprint.route("/cp_reset_password", methods=["GET", "POST"])
+def reset_password():
+    if flask.request.method == "POST":
+        return flask.redirect(flask.url_for("cp.auth.reset_password_confirmation"))
+    return flask.render_template("cp_reset_password.html")

@@ -118,3 +118,16 @@ def test_cem_notification_on_user_changes(app):
         )
 
         signals.on_user_deleted(None, user=user)
+
+
+def test_language_agenda():
+    item = {"language": "en-CA"}
+    signals.init_app(None)
+    signals.push.send(None, item=item)
+    assert "en" == item["language"]
+    item["language"] = "en_CA"
+    signals.push.send(None, item=item)
+    assert "en" == item["language"]
+    item["language"] = "fr-ca"
+    signals.push.send(None, item=item)
+    assert "fr" == item["language"]
