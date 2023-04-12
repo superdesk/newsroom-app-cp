@@ -1,5 +1,5 @@
 import { auth } from './auth'
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { sendPasswordResetEmail, signOut } from 'firebase/auth';
 
 const form = document.getElementById('formToken');
 const sendButton = document.getElementById('reset-btn');
@@ -20,6 +20,10 @@ form.onsubmit = (event) => {
   url.search = params;
 
   sendButton.disabled = true;
+
+  // sign out current user to avoid conflicts later
+  signOut(auth);
+
   sendPasswordResetEmail(auth, email, { url: url.toString() })
     .then(() => {
       location.replace(window.externalSuccessUrl);
