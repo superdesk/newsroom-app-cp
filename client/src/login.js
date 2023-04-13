@@ -25,7 +25,13 @@ auth.onAuthStateChanged((user) => {
       return;
     }
 
-    user.getIdToken(params.get('token_error') === '1').then(sendTokenToServer);
+    user.getIdToken(params.get('token_error') === '1')
+      .then(
+        sendTokenToServer,
+        () => { // on error we sign out the user and let him login again
+          signOut(auth);
+        },
+      );
   }
 });
 
