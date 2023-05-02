@@ -7,6 +7,7 @@ from flask import current_app as app
 
 def init_app(app):
     UsersResource.internal_resource = False
+    UsersResource.url = "users"
     UsersResource.item_methods = ['GET', 'PATCH', 'PUT', 'DELETE']
     superdesk.register_resource('users', UsersResource, CPUsersService, _app=app)
 
