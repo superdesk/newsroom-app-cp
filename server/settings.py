@@ -94,8 +94,8 @@ CLIENT_CONFIG.update(
                 "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
                 "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
                 "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
-                "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
-                "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
+                "AGENDA_DATE_FORMAT_SHORT": "dddd, d MMMM",
+                "AGENDA_DATE_FORMAT_LONG": "dddd, d MMMM YYYY",
             },
         },
         "filter_panel_defaults": {
