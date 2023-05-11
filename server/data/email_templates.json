@@ -72,20 +72,20 @@
     }
 }, {
     "_id": "agenda_updated_email",
-    "init_version": 4,
+    "init_version": 5,
     "subject": {
-        "default": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} -{{ ' Coverage' if coverage_modified else '' }} updated",
+        "default": "{{ (agenda.name or agenda.headline or agenda.slugline) | safe }} -{{ ' Coverage' if coverage_modified else '' }} updated",
         "translations": {
-            "fr_ca": "{{ agenda.name or agenda.headline or agenda.slugline | safe }} - {% if coverage_modified %}Couverture mise à jour{% else %}Événement mis à jour{% endif %}"
+            "fr_ca": "{{ (agenda.name or agenda.headline or agenda.slugline) | safe }} - {% if coverage_modified %}Couverture mise à jour{% else %}Événement mis à jour{% endif %}"
         }
     }
 }, {
     "_id": "coverage_request_email",
-    "init_version": 2,
+    "init_version": 3,
     "subject": {
-        "default": "Coverage inquiry: {{ item.name or item.slugline | safe }}",
+        "default": "Coverage inquiry: {{ (item.name or item.slugline) | safe }}",
         "translations": {
-            "fr_ca": "Requête de couverture: {{ item.name or item.slugline | safe }}"
+            "fr_ca": "Requête de couverture: {{ (item.name or item.slugline) | safe }}"
         }
     }
 }, {
