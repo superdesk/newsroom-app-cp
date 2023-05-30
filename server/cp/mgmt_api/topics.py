@@ -1,7 +1,7 @@
 from bson import ObjectId
 from flask import current_app as app
 
-from newsroom.topics import TopicsResource, TopicsService
+from newsroom.topics.topics import TopicsResource, TopicsService
 import superdesk
 from superdesk.errors import SuperdeskApiError
 
