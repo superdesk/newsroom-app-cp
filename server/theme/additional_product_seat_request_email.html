@@ -16,7 +16,7 @@
                 All
             {%- else -%}
                 {%- for product in products -%}
-                    {{ 'Wire' if product.product_type == 'wire' else 'Agenda' }}: {{ product.name }}{% if not loop.last %}, {% endif %}
+                    {{ config.WIRE_SECTION if product.product_type == 'wire' else config.AGENDA_SECTION }}: {{ product.name }}{% if not loop.last %}, {% endif %}
                 {%- endfor -%}
             {%- endif -%}
         </li>

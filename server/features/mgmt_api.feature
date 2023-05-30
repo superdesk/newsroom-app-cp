@@ -1,7 +1,18 @@
 Feature: Management API
     Scenario: API is up and running
         When we get "/"
-        Then we get OK response
+        Then we get existing resource
+        """
+        {"_links": {
+            "child": [
+                {"href": "users"},
+                {"href": "companies"},
+                {"href": "products"},
+                {"href": "topics"},
+                {"href": "navigations"}
+            ]
+        }}
+        """
 
     Scenario: test auth without token
         Given empty auth token
