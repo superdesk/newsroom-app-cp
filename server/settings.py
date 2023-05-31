@@ -275,4 +275,4 @@ CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "NewsPro")
 DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 
 AGENDA_SECTION = lazy_gettext("Calendar")
-SAVED_SECTION = lazy_gettext("Saved")
+SAVED_SECTION = lazy_gettext("Bookmarks")
