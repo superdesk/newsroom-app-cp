@@ -1,33 +1,57 @@
 # Translations template for Newsroom App CP.
-# Copyright (C) 2022 ORGANIZATION
+# Copyright (C) 2023 ORGANIZATION
 # This file is distributed under the same license as the Newsroom App CP
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-12-07 11:17+0100\n"
+"POT-Creation-Date: 2023-05-31 10:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.12.1\n"
 
 #: theme/base_layout.html:44 theme/login.html:16
 msgid "Login"
 msgstr ""
 
-#: theme/base_layout.html:56
+#: theme/base_layout.html:53
+msgid "Side Navigation"
+msgstr ""
+
+#: theme/base_layout.html:57 theme/base_layout.html:59
 msgid "Settings"
 msgstr ""
 
-#: theme/base_layout.html:63
+#: theme/base_layout.html:67 theme/base_layout.html:68
+msgid "Company Admin"
+msgstr ""
+
+#: theme/base_layout.html:79 theme/base_layout.html:81
 msgid "Reports"
+msgstr ""
+
+#: theme/cp_reset_password.html:14 theme/cp_reset_password_confirmation.html:14
+msgid "Reset Password"
+msgstr ""
+
+#: theme/cp_reset_password.html:19
+msgid "Email"
+msgstr ""
+
+#: theme/cp_reset_password.html:22
+msgid "Send Password Reset Email"
+msgstr ""
+
+#: theme/cp_reset_password_confirmation.html:18
+msgid "An email was sent to your inbox. Please follow the instructions there."
 msgstr ""
 
 #: theme/login.html:24
@@ -50,7 +74,11 @@ msgstr ""
 msgid "Contact Us"
 msgstr ""
 
-#: theme/login.html:44
+#: theme/login.html:38
+msgid "Reset password"
+msgstr ""
+
+#: settings.py:119 settings.py:169 theme/login.html:45
 msgid "Language"
 msgstr ""
 
@@ -59,31 +87,43 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: cp/auth.py:29
+#: cp/auth.py:30
 msgid "User token is not valid"
 msgstr ""
 
-#: settings.py:117
+#: settings.py:123
 msgid "Source"
 msgstr ""
 
-#: settings.py:121 settings.py:162
+#: settings.py:127 settings.py:173
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:125 settings.py:166
-msgid "Index"
+#: settings.py:131 settings.py:187
+msgid "Subject"
 msgstr ""
 
-#: settings.py:134 settings.py:175
-msgid "Services"
+#: settings.py:140
+msgid "Service"
 msgstr ""
 
-#: settings.py:143
+#: settings.py:149
 msgid "Version"
 msgstr ""
 
-#: settings.py:147
+#: settings.py:153
 msgid "Ranking"
+msgstr ""
+
+#: settings.py:177
+msgid "Event Type"
+msgstr ""
+
+#: settings.py:277
+msgid "Calendar"
+msgstr ""
+
+#: settings.py:278
+msgid "Bookmarks"
 msgstr ""
 
