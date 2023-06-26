@@ -21,21 +21,21 @@
 
                 {% if config.SAML_AUTH_ENABLED %}
                 <div class="card-body pt-1 pb-2">
-                    <a href="{{ url_for('auth.saml') }}" title="{{ gettext('Login using Single Sign On') }}" class="btn btn-primary w-100">{{ config.SAML_LABEL }}</a>
+                    <a href="{{ url_for('auth.saml') }}" title="{{ gettext('Login using Single Sign On') }}" class="nh-button nh-button--primary w-100">{{ config.SAML_LABEL }}</a>
                 </div>
                 {% endif %}
 
                 <div class="card-footer bg-white border-0 small">
                     {% if get_locale() == "en"  %}
-                        <a href="https://www.thecanadianpress.com/contact/news-pro/" class="btn btn-outline-primary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
+                        <a href="https://www.thecanadianpress.com/contact/news-pro/" class="nh-button nh-button--secondary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
                     {% elif get_locale() == "fr_CA" %}
-                        <a href="https://www.thecanadianpress.com/contact/nouvelles-pro/?lang=fr" class="btn btn-outline-primary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
+                        <a href="https://www.thecanadianpress.com/contact/nouvelles-pro/?lang=fr" class="nh-button nh-button--secondary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
                     {% endif %}
                     <p>
                         {{ gettext('Forgot your password?') }}
                         <a href="mailto:help-aide@cpnewspro.com?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
                     </p>
-                    <a class="btn btn-outline-primary mb-4 mt-2" href="{{ url_for("cp.auth.reset_password", url=request.url) }}">{{ gettext('Reset password') }}</a>
+                    <a class="nh-button nh-button--secondary mb-4 mt-2" href="{{ url_for("cp.auth.reset_password", url=request.url) }}">{{ gettext('Reset password') }}</a>
                 </div>
 
                 {% if get_client_locales()|length is gt 1 %}
