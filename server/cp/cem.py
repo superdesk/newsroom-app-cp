@@ -25,4 +25,5 @@ def send_notification(_type, user, id_key: Literal["_id", "email"] = "_id"):
         timeout=5,
         json=payload,
         headers=headers,
+        verify=bool(app.config.get("CEM_VERIFY_TLS", True)),
     )

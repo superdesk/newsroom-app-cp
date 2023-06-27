@@ -1,6 +1,7 @@
 import os
 import pathlib
 from flask_babel import lazy_gettext
+from superdesk.default_settings import strtobool
 from newsroom.web.default_settings import (
     env,
     CLIENT_CONFIG,
@@ -274,6 +275,7 @@ if SAML_PATH.joinpath("certs").exists():
 CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
 CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "MyNP")
+CEM_VERIFY_TLS = strtobool(os.environ.get("CEM_VERIFY_TLS", "off"))
 
 DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 
