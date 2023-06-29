@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>CP NewsPro</title>
+    {% if get_locale() == "fr_CA" %}
+    <title>PC NouvellesPro pour RP</title>
+    {% else %}
+    <title>CP NewsPro for PR</title>
+    {% endif %}
 
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900&display=swap" rel="stylesheet">
