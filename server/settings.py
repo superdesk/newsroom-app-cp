@@ -273,5 +273,6 @@ CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
 CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "NewsPro")
 CEM_VERIFY_TLS = strtobool(os.environ.get("CEM_VERIFY_TLS", "off"))
+CEM_TIMEOUT = int(os.environ.get("CEM_TIMEOUT") or 10)
 
 DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
