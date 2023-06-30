@@ -9,5 +9,9 @@
 # AUTHORS and LICENSE files distributed with this source code, or
 # at https://www.sourcefabric.org/superdesk/license
 
+import logging
+
 HEADLINE2 = "headline_extended"
 CORRECTION = "correction"
+
+logging.basicConfig(level=logging.INFO)
