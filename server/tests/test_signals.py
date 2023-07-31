@@ -58,8 +58,8 @@ def test_cem_notification_on_user_changes(app):
                 ),
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user["_id"]),
-                        "type": "new user",
+                        "object_id": str(user["email"]),
+                        "type": "new",
                         "platform": "Test",
                     }
                 ),

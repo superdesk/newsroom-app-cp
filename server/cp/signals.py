@@ -33,7 +33,7 @@ def copy_correction_to_body_html(item):
 
 
 def on_user_created(sender, user, **kwargs):
-    send_notification("new user", user)
+    send_notification("new", user, id_key="email")
 
 
 def on_user_updated(sender, user, updates=None, **kwargs):
