@@ -1,0 +1,19 @@
+{% extends "base_layout.html" %}
+
+{% block fonts %}
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block title_wrapper %}
+    {% if get_locale() == "fr_CA" %}
+    <title>PC NouvellesPro pour RP</title>
+    {% else %}
+    <title>CP NewsPro for PR</title>
+    {% endif %}
+{% endblock %}
+
+{% block logo %}
+{% include 'logo.html' %}
+{% include 'logo-additional.html' %}
+{% endblock %}
