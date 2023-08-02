@@ -7,16 +7,16 @@
         {% if nav.url %}target="_blank"{% endif %}
     >
         {% if nav.badge %}
-        <div id="{{ nav.badge }}" class="badge rounded-pill bg-info"></div>
+        <div id="{{ nav.badge }}" class="sidenav-icons__badge"></div>
         {% endif %}
         {% block navurl %}
         {% if nav.url %}
-        <div class="badge rounded-pill bg-info badge--icon">
-            <i class="icon-small--external icon--red"></i>
+        <div class="sidenav-icons__helper-icon">
+            <i class="icon-small--external"></i>
         </div>
         {% endif %}
         {% endblock %}
-        <i class="icon--{{ nav.icon }} icon--red"></i>
+        <i class="icon--{{ nav.icon }}"></i>
         <div class="sidenav-icons__item-title">{{  gettext(nav.name) }}</div>
     </a>
 </li>
