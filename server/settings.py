@@ -254,8 +254,7 @@ SAML_COMPANY = env("SAML_COMPANY", "CP")
 SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
     "localhost": "localhost",
-    "ncp-develop": "ncp-dev",
-    "cp-dev": "cp-dev",
+    "uat": "uat",
 }
 
 for url, path in SAML_PATH_MAP.items():
