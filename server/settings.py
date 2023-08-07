@@ -170,7 +170,7 @@ AGENDA_GROUPS = [
     },
     {
         "field": "service",
-        "label": lazy_gettext("Wire Category"),
+        "label": lazy_gettext("Category"),
     },
     {
         "field": "event_types",
