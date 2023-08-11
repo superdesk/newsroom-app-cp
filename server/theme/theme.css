@@ -24,6 +24,7 @@
     --top-bar-color-bg-avatar--hover: hsla(216, 45%, 4%, 0.5);
     --top-bar-color-bg-badge: hsl(0, 0%, 100%);
     --top-bar-color-fg-badge: hsl(0, 3%, 15%);
+    --color-text-link--navbar: hsl(0, 0%, 100%);
     /* Logo main */
     --top-bar-logo-main-max-width: 224px;
     --top-bar-logo-main-max-width--mobile: 200px;
@@ -82,9 +83,13 @@
     margin-block-start: 0;
 }
 
-.navbar__additional-logo  {
-    max-width: 120px;
+.navbar__additional-logo img.navbar__additional-logo-img {
+    width: var(--top-bar-logo-additional-max-width);
 }
+.navbar__additional-logo img.navbar__additional-logo-img.navbar__logo-img--fr {
+    width: 120px;
+}
+
 
 @media only screen and (max-width: 575px) {
     .navbar__logo img.navbar__logo-img--fr {
