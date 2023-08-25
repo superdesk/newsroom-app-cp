@@ -280,3 +280,13 @@ DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 
 AGENDA_SECTION = lazy_gettext("Calendar")
 SAVED_SECTION = lazy_gettext("Bookmarks")
+
+WIRE_SEARCH_FIELDS = [
+    "slugline",
+    "headline",
+    "byline",
+    "body_html",
+    "body_text",
+    "description_html",
+    "description_text",
+]
