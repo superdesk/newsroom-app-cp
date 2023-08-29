@@ -290,3 +290,5 @@ WIRE_SEARCH_FIELDS = [
     "description_html",
     "description_text",
 ]
+
+AGENDA_SHOW_MULTIDAY_ON_START_ONLY = False
