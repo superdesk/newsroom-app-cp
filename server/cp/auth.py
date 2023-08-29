@@ -64,7 +64,7 @@ def reset_password():
         return flask.render_template("cp_reset_password.html", form=form)
 
     if form.validate_on_submit():
-        if form.email_sent.data is False:
+        if form.email_sent.data is True:
             # Password reset was handled by firebase from the front-end
             return flask.redirect(flask.url_for("cp.auth.reset_password_confirmation"))
 
