@@ -811,6 +811,12 @@ components:
           type: string
         is_enabled:
           type: boolean
+        auth_domain:
+          type: string
+          description: Authentication domain (for SSO)
+        auth_provider:
+          type: string
+          description: Authentication provider for this companies users
         contact_name:
           type: string
         contact_email:
