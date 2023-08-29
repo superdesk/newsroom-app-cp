@@ -1,5 +1,8 @@
+from typing import Optional
+from newsroom.types import User, Company
 import cp
 
+from superdesk import get_resource_service
 from newsroom.signals import publish_item, user_created, user_updated, user_deleted, push
 
 from cp.cem import send_notification
@@ -33,23 +36,37 @@ def copy_correction_to_body_html(item):
 
 
 def on_user_created(sender, user, **kwargs):
-    send_notification("new user", user)
+    if user_auth_is_gip(user):
+        send_notification("new user", user)
 
 
 def on_user_updated(sender, user, updates=None, **kwargs):
-    if updates and updates.get("password"):
-        send_notification("password change", user)
-    else:
-        send_notification("update user", user)
+    if user_auth_is_gip(user):
+        if updates and updates.get("password"):
+            send_notification("password change", user)
+        else:
+            send_notification("update user", user)
 
 
 def on_user_deleted(sender, user, **kwargs):
-    send_notification("delete user", user)
+    if user_auth_is_gip(user):
+        send_notification("delete user", user)
 
 
 def on_push(sender, item, **kwargs):
     if item.get("language"):
         item["language"] = fix_language(item["language"])
+
+
+def user_auth_is_gip(user: User) -> bool:
+    if not user.get("company"):
+        return False
+
+    company: Optional[Company] = get_resource_service("companies").find_one(req=None, _id=user["company"])
+    if not company:
+        return False
+
+    return company.get("auth_provider") == "gip"
 
 
 def init_app(app):
