@@ -115,6 +115,12 @@ CLIENT_CONFIG.update(
                 "agenda": True,
             },
         },
+        "advanced_search": {
+            "fields": {
+                "wire": ["headline", "slugline", "body_html"],
+                "agenda": ["name", "description"],
+            },
+        },
     }
 )
 
