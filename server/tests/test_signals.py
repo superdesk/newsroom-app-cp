@@ -44,7 +44,14 @@ def test_cem_notification_on_user_changes(app):
             "CEM_PLATFORM": "Test",
         }
     )
-    user = {"_id": bson.ObjectId(), "email": "foo@example.com"}
+    company_id = bson.ObjectId()
+    app.data.insert("companies", [{
+        "_id": company_id,
+        "name": "Example Company",
+        "is_enabled": True,
+        "auth_provider": "gip",
+    }])
+    user = {"_id": bson.ObjectId(), "email": "foo@example.com", "company": company_id}
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
@@ -59,6 +66,7 @@ def test_cem_notification_on_user_changes(app):
                 matchers.json_params_matcher(
                     {
                         "object_id": str(user["_id"]),
+                        "company": str(company_id),
                         "type": "new user",
                         "platform": "Test",
                     }
@@ -76,6 +84,7 @@ def test_cem_notification_on_user_changes(app):
                 matchers.json_params_matcher(
                     {
                         "object_id": str(user["_id"]),
+                        "company": str(company_id),
                         "type": "update user",
                         "platform": "Test",
                     }
@@ -93,6 +102,7 @@ def test_cem_notification_on_user_changes(app):
                 matchers.json_params_matcher(
                     {
                         "object_id": str(user["_id"]),
+                        "company": str(company_id),
                         "type": "password change",
                         "platform": "Test",
                     }
@@ -110,6 +120,7 @@ def test_cem_notification_on_user_changes(app):
                 matchers.json_params_matcher(
                     {
                         "object_id": str(user["_id"]),
+                        "company": str(company_id),
                         "type": "delete user",
                         "platform": "Test",
                     }
@@ -118,6 +129,37 @@ def test_cem_notification_on_user_changes(app):
         )
 
         signals.on_user_deleted(None, user=user)
+
+
+def test_cem_notification_for_non_google_auth(app, mocker):
+    sub = mocker.patch("cp.signals.send_notification")
+    app.config.update(
+        {
+            "CEM_URL": "https://example.com",
+            "CEM_APIKEY": "somekey",
+            "CEM_PLATFORM": "Test",
+        }
+    )
+    company_id = bson.ObjectId()
+    app.data.insert("companies", [{
+        "_id": company_id,
+        "name": "Example Company",
+        "is_enabled": True,
+        "auth_provider": "azure",
+    }])
+    user = {"_id": bson.ObjectId(), "email": "foo@example.com", "company": company_id}
+
+    signals.on_user_created(None, user=user, foo=1)
+    assert len(sub.mock_calls) == 0
+
+    signals.on_user_updated(None, user=user, foo=1)
+    assert len(sub.mock_calls) == 0
+
+    signals.on_user_updated(None, user=user, updates={"password": "bar"})
+    assert len(sub.mock_calls) == 0
+
+    signals.on_user_deleted(None, user=user)
+    assert len(sub.mock_calls) == 0
 
 
 def test_language_agenda():
