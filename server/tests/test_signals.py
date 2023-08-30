@@ -1,5 +1,3 @@
-from unittest import mock
-
 import cp
 import bson
 import responses
