@@ -8,9 +8,8 @@ from newsroom.web.default_settings import (
     BLUEPRINTS as DEFAULT_BLUEPRINTS,
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
     CLIENT_URL,
-    AUTH_PROVIDERS,
 )
-from newsroom.types import AuthProviderType
+from cp.common_settings import AUTH_PROVIDERS  # noqa
 
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
@@ -278,13 +277,3 @@ DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 
 AGENDA_SECTION = lazy_gettext("Calendar")
 SAVED_SECTION = lazy_gettext("Bookmarks")
-
-AUTH_PROVIDERS.extend([{
-    "_id": "gip",
-    "name": lazy_gettext("Google"),
-    "auth_type": AuthProviderType.GOOGLE_OAUTH.value,
-}, {
-    "_id": "azure",
-    "name": lazy_gettext("Azure"),
-    "auth_type": AuthProviderType.SAML.value,
-}])
