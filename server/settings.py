@@ -9,7 +9,7 @@ from newsroom.web.default_settings import (
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
     CLIENT_URL,
 )
-from cp.common_settings import AUTH_PROVIDERS
+from cp.common_settings import AUTH_PROVIDERS  # noqa
 
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
