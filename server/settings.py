@@ -11,7 +11,7 @@ from newsroom.web.default_settings import (
     CLIENT_LOCALE_FORMATS,
     AUTH_PROVIDERS,
 )
-from newsroom.types import AuthProviderType
+from cp.common_settings import AUTH_PROVIDERS  # noqa
 
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
@@ -300,13 +300,3 @@ WIRE_SEARCH_FIELDS = [
 ]
 
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = False
-
-AUTH_PROVIDERS.extend([{
-    "_id": "gip",
-    "name": lazy_gettext("Google"),
-    "auth_type": AuthProviderType.GOOGLE_OAUTH.value,
-}, {
-    "_id": "azure",
-    "name": lazy_gettext("Azure"),
-    "auth_type": AuthProviderType.SAML.value,
-}])
