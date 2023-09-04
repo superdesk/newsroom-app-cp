@@ -1,9 +1,7 @@
 :root {
     /* CORE: TYPOGRAPHY */
     --font-family-core--sans: "Lato", sans-serif;
-    --font-family-core--serif: "Titilium Web", sans-serif;
-
-    --color-background:     hsl(0, 0%, 97%);
+    --font-family-core--serif: "Titillium Web", sans-serif;
     --badge-bg-highlight1:  hsl(356, 72%, 46%);
     --color-primary:        hsl(356, 72%, 46%);
 
@@ -86,7 +84,7 @@
 .navbar__additional-logo img.navbar__additional-logo-img {
     width: var(--top-bar-logo-additional-max-width);
 }
-.navbar__additional-logo img.navbar__additional-logo-img.navbar__logo-img--fr {
+.navbar__additional-logo img.navbar__additional-logo-img.navbar__additional-logo-img--fr {
     width: 120px;
 }
 
