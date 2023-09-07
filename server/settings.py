@@ -79,23 +79,27 @@ COVERAGE_TYPES = {
 # ``CLIENT_CONFIG`` references ``CLIENT_LOCALE_FORMATS`` by reference
 # So we can safely update these dicts without needing to specify all formats
 # And they will be all reflected in the ``CLIENT_CONFIG.locale_formats`` config
-CLIENT_LOCALE_FORMATS["en"].update({
-    "TIME_FORMAT": "HH:mm",
-    "DATE_FORMAT": "MMM Do, YYYY",
-    "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
-    "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
-    "DATE_FORMAT_HEADER": "long",  # babel
-})
-CLIENT_LOCALE_FORMATS["fr_CA"].update({
-    "TIME_FORMAT": "HH:mm",
-    "DATE_FORMAT": "Do MMMM YYYY",
-    "COVERAGE_DATE_FORMAT": "LL",
-    "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-    "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-    "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
-    "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
-    "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
-})
+CLIENT_LOCALE_FORMATS["en"].update(
+    {
+        "TIME_FORMAT": "HH:mm",
+        "DATE_FORMAT": "MMM Do, YYYY",
+        "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
+        "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
+        "DATE_FORMAT_HEADER": "long",  # babel
+    }
+)
+CLIENT_LOCALE_FORMATS["fr_CA"].update(
+    {
+        "TIME_FORMAT": "HH:mm",
+        "DATE_FORMAT": "Do MMMM YYYY",
+        "COVERAGE_DATE_FORMAT": "LL",
+        "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+        "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+        "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
+        "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
+        "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
+    }
+)
 
 CLIENT_CONFIG.update(
     {
