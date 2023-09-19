@@ -1,14 +1,17 @@
+import superdesk
+
 from bson import ObjectId
 from flask import current_app as app
 
 from newsroom.topics.topics import TopicsResource, TopicsService
-import superdesk
+from newsroom.topics.folders import FoldersResource, FoldersService
 from superdesk.errors import SuperdeskApiError
 
 
 def init_app(app):
     TopicsResource.internal_resource = False
     superdesk.register_resource('topics', GlobalTopicsResource, GlobalTopicsService, _app=app)
+    superdesk.register_resource('topic_folders', FoldersResource, FoldersService, _app=app)
 
 
 class GlobalTopicsResource(TopicsResource):
