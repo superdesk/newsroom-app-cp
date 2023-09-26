@@ -10,7 +10,7 @@ let firebaseConfig = {
   messagingSenderId: '462735301864',
 };
 
-if (hostname.includes("cp-dev")) {
+if (hostname.includes("cp-dev.") || hostname.includes("cpcn-uat.") || hostname.includes("test.superdesk.org")) {
   firebaseConfig = {
     apiKey: 'AIzaSyCWlQ7VjJZemeGjhs8DsRavoeEbX3Sa13A',
     authDomain: 'cp-identity-dev.firebaseapp.com',
