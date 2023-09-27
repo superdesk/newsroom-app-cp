@@ -1,4 +1,4 @@
-from newsroom.products import ProductsResource, ProductsService
+from newsroom.products.products import ProductsResource, ProductsService
 import superdesk
 
 
