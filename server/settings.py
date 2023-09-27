@@ -287,7 +287,7 @@ if SAML_PATH.joinpath("certs").exists():
 
 CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
-CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "CN")
+CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "MyNP")
 
 DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 
