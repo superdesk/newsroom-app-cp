@@ -5,4 +5,3 @@ push_worker: celery -A newsroom.web.worker.celery worker -Q "${SUPERDESK_CELERY_
 beat: celery -A newsroom.web.worker.celery beat
 newsapi: gunicorn -b "0.0.0.0:${APIPORT:-$PORT}" -w 3 newsroom.news_api.app:app
 mgmtapi: gunicorn -b "0.0.0.0:${MGMTPORT:-$PORT}" -w 3 cp.mgmt_api.app:app
-push: PUSH=1 gunicorn -b "0.0.0.0:${PUSHPORT:-$PORT}" -w 3 newsroom.web.app:app
