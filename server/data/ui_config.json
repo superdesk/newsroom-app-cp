@@ -1,7 +1,7 @@
 [
     {
         "_id": "wire",
-        "init_version": 5,
+        "init_version": 6,
         "preview": {
             "slugline": {
                 "displayed": true
@@ -10,6 +10,9 @@
                 "displayed": true
             },
             "located": {
+                "displayed": false
+            },
+            "distribution": {
                 "displayed": false
             },
             "metadata_fields": [
@@ -31,6 +34,9 @@
                 "displayed": true
             },
             "located": {
+                "displayed": false
+            },
+            "distribution": {
                 "displayed": false
             },
             "metadata_fields": [
@@ -115,14 +121,13 @@
     },
     {
         "_id": "agenda",
-        "init_version": 5,
+        "init_version": 7,
         "multi_select_topics": false,
         "open_coverage_content_in_same_page": true,
         "enable_global_topics": true,
         "subnav": {
             "filters": [
                 "item_type",
-                "location",
                 "coverage_type",
                 "coverage_status"
             ]
@@ -134,6 +139,11 @@
         },
         "details": {
             "subjects": {
+                "displayed": false
+            }
+        },
+        "list": {
+            "contacts": {
                 "displayed": false
             }
         }

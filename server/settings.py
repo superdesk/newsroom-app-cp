@@ -154,21 +154,8 @@ WIRE_GROUPS = [
         },
     },
     {
-        "field": "distribution",
-        "label": lazy_gettext("Service"),
-        "nested": {
-            "parent": "subject",
-            "field": "scheme",
-            "value": "distribution",
-        },
-    },
-    {
         "field": "genre",
         "label": lazy_gettext("Version"),
-    },
-    {
-        "field": "urgency",
-        "label": lazy_gettext("Ranking"),
     },
 ]
 
@@ -178,7 +165,6 @@ WIRE_AGGS = {
     "service": {"terms": {"field": "service.name", "size": 50}},
     "subject": {"terms": {"field": "subject.name", "size": 50}},
     "genre": {"terms": {"field": "genre.name", "size": 50}},
-    "urgency": {"terms": {"field": "urgency"}},
 }
 
 AGENDA_GROUPS = [
@@ -287,7 +273,7 @@ if SAML_PATH.joinpath("certs").exists():
 
 CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
-CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "CN")
+CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "MyNP")
 
 DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 

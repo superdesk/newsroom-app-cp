@@ -84,3 +84,30 @@ Feature: Management API - Topics
         """
         {"label": "topic2"}
         """
+
+    Scenario: Topic with folder
+        Given "topic_folders"
+        """
+        [
+            {
+                "name": "test",
+                "section": "wire"
+            }
+        ]
+        """
+        Given "topics"
+        """
+        [
+            {
+                "label": "topic1",
+                "company": "#companies._id#",
+                "topic_type": "wire",
+                "query": "topic1",
+                "is_global": true,
+                "user": "#users._id#",
+                "folder": "#topic_folders._id#"
+            }
+        ]
+        """
+        When we get "/topics"
+        Then we get list with 1 items
