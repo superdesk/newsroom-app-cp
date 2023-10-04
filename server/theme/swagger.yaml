@@ -950,9 +950,22 @@ components:
           default: false
         subscribers:
           type: array
-          description: List of User IDs that will receive email notifications for new items
+          description: Notification subscriptions.
           items:
-            $ref: '#/components/schemas/ObjectId'
+            type: object
+            properties:
+              user_id:
+                type: string
+                $ref: '#/components/schemas/ObjectId'
+              notification_type:
+                type: string
+                default: "real-time"
+                enum:
+                  - "real-time"
+                  - "scheduled"
+            required:
+              - user_id
+              - notification_type
         timezone_offset:
           type: integer
         topic_type:
