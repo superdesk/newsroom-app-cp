@@ -198,3 +198,8 @@ Feature: Management API
         {"label": "topic2"}
         """
 
+        When we patch latest
+        """
+        {"subscribers": [{"user_id" :"#users._id#", "notification_type": "real-time"}]}
+        """
+        Then we get updated response
