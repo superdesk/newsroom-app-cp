@@ -1,6 +1,7 @@
 import os
 import pathlib
 from flask_babel import lazy_gettext
+from superdesk.default_settings import strtobool
 from newsroom.web.default_settings import (
     env,
     CLIENT_CONFIG,
@@ -251,7 +252,7 @@ BABEL_DEFAULT_TIMEZONE = "America/Toronto"
 
 # saml auth
 SAML_LABEL = env("SAML_LABEL", "SSO")
-SAML_COMPANY = env("SAML_COMPANY", "CP")
+SAML_COMPANY = env("SAML_COMPANY", "The Canadian Press")
 SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
     "localhost": "localhost",
@@ -272,8 +273,10 @@ if SAML_PATH.joinpath("certs").exists():
 CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
 CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "NewsPro")
-
-DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
+CEM_VERIFY_TLS = strtobool(os.environ.get("CEM_VERIFY_TLS", "off"))
+CEM_TIMEOUT = int(os.environ.get("CEM_TIMEOUT") or 10)
 
 AGENDA_SECTION = lazy_gettext("Calendar")
 SAVED_SECTION = lazy_gettext("Bookmarks")
+
+DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True

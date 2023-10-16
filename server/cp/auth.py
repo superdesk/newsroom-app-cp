@@ -28,7 +28,7 @@ def token():
         try:
             claims = google.oauth2.id_token.verify_firebase_token(
                 token,
-                audience="cp-identity",
+                audience="cp-identity-dev" if "cp-dev" in flask.request.base_url else "cp-identity",
                 request=firebase_request_adapter,
             )
         except ValueError as err:
@@ -50,7 +50,11 @@ def logout():
 
 @blueprint.route("/cp_reset_password_done")
 def reset_password_confirmation():
-    return flask.render_template("cp_reset_password_confirmation.html")
+    flask.flash(
+        gettext("A reset password token has been sent to your email address."),
+        "success",
+    )
+    return flask.redirect(flask.url_for("auth.login"))
 
 
 @blueprint.route("/cp_reset_password", methods=["GET", "POST"])

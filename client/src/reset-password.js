@@ -1,9 +1,7 @@
 import { auth } from './auth'
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { sendPasswordResetEmail, signOut } from 'firebase/auth';
 
 const form = document.getElementById('reset-password-form');
-const url = new URL(window.nextUrl);
-const params = new URLSearchParams(url.search);
 const sendButton = document.getElementById('send-email');
 const emailSentCheckbox = document.getElementById('email_sent_checkbox');
 
@@ -16,6 +14,8 @@ form.onsubmit = (event) => {
 
   const data = new FormData(form);
   const email = data.get("email");
+  const url = new URL(window.nextUrl);
+  const params = new URLSearchParams();
 
   params.append("email", email);
   url.search = params;

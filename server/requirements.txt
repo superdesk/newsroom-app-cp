@@ -130,7 +130,6 @@ flask==1.1.2
     #   flask-script
     #   flask-webpack
     #   flask-wtf
-    #   newsroom-core
     #   raven
     #   sentry-sdk
     #   superdesk-core
