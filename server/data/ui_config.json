@@ -1,10 +1,13 @@
 [
     {
         "_id": "wire",
-        "init_version": 4,
+        "init_version": 5,
         "preview": {
             "slugline": {
                 "displayed": true
+            },
+            "located": {
+                "displayed": false
             },
             "metadata_fields": [
               "urgency",
@@ -17,6 +20,9 @@
         "details": {
             "slugline": {
                 "displayed": true
+            },
+            "located": {
+                "displayed": false
             },
             "abstract": {
                 "displayed": false
