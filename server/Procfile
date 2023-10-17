@@ -1,7 +1,7 @@
 web: gunicorn -c gunicorn_config.py newsroom.web.app:app
 websocket: python -m newsroom.web.ws
 worker: celery -A newsroom.web.worker.celery worker -X "${SUPERDESK_CELERY_PREFIX}newsroom.push"
-push_worker: celery -A newsroom.web.worker.celery worker -Q "${SUPERDESK_CELERY_PREFIX}newsroom.push"
 beat: celery -A newsroom.web.worker.celery beat
 newsapi: gunicorn -b "0.0.0.0:${APIPORT:-$PORT}" -w 3 newsroom.news_api.app:app
 mgmtapi: gunicorn -b "0.0.0.0:${MGMTPORT:-$PORT}" -w 3 cp.mgmt_api.app:app
+push_worker: celery -A newsroom.web.worker.celery worker -Q "${SUPERDESK_CELERY_PREFIX}newsroom.push"
