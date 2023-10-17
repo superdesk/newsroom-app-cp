@@ -20,7 +20,7 @@ def send_notification(_type, user, id_key: Literal["_id", "email"] = "_id"):
         "object_id": str(user[id_key]),
         "platform": app.config.get("CEM_PLATFORM"),
     }
-    if user.get("company"):
+    if user.get("company") and id_key == "_id":
         payload["company"] = str(user["company"])
     try:
         session.patch(
