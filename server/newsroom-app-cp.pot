@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-31 10:10+0200\n"
+"POT-Creation-Date: 2023-10-19 11:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: theme/base_layout.html:44 theme/login.html:16
-msgid "Login"
-msgstr ""
-
-#: theme/base_layout.html:53
-msgid "Side Navigation"
-msgstr ""
-
-#: theme/base_layout.html:57 theme/base_layout.html:59
-msgid "Settings"
-msgstr ""
-
-#: theme/base_layout.html:67 theme/base_layout.html:68
-msgid "Company Admin"
-msgstr ""
-
-#: theme/base_layout.html:79 theme/base_layout.html:81
-msgid "Reports"
-msgstr ""
-
 #: theme/cp_reset_password.html:14 theme/cp_reset_password_confirmation.html:14
 msgid "Reset Password"
 msgstr ""
 
-#: theme/cp_reset_password.html:19
-msgid "Email"
-msgstr ""
-
-#: theme/cp_reset_password.html:22
+#: theme/cp_reset_password.html:24
 msgid "Send Password Reset Email"
 msgstr ""
 
@@ -54,31 +30,35 @@ msgstr ""
 msgid "An email was sent to your inbox. Please follow the instructions there."
 msgstr ""
 
-#: theme/login.html:24
+#: theme/login.html:16
+msgid "Login"
+msgstr ""
+
+#: theme/login.html:25
 msgid "Login using Single Sign On"
 msgstr ""
 
-#: theme/login.html:30 theme/login.html:32
+#: theme/login.html:31
 msgid "Sign up"
 msgstr ""
 
-#: theme/login.html:35
+#: theme/login.html:33
 msgid "Forgot your password?"
 msgstr ""
 
-#: theme/login.html:36
+#: theme/login.html:34
 msgid "Please reset my password for NewsPro"
 msgstr ""
 
-#: theme/login.html:36
+#: theme/login.html:34
 msgid "Contact Us"
 msgstr ""
 
-#: theme/login.html:38
+#: theme/login.html:36
 msgid "Reset password"
 msgstr ""
 
-#: settings.py:119 settings.py:169 theme/login.html:45
+#: settings.py:137 settings.py:173 theme/login.html:43
 msgid "Language"
 msgstr ""
 
@@ -87,43 +67,67 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: cp/auth.py:30
+#: cp/auth.py:40
 msgid "User token is not valid"
 msgstr ""
 
-#: settings.py:123
+#: cp/auth.py:80
+msgid "User not found"
+msgstr ""
+
+#: cp/auth.py:82
+msgid "User not enabled"
+msgstr ""
+
+#: cp/auth.py:89
+msgid "Password reset for your account is not supported through Newshub"
+msgstr ""
+
+#: cp/auth.py:97
+msgid "An error occurred while sending reset password email"
+msgstr ""
+
+#: cp/common_settings.py:8
+msgid "Google"
+msgstr ""
+
+#: cp/common_settings.py:12
+msgid "Azure"
+msgstr ""
+
+#: cp/password_reset_form.py:8
+msgid "Email"
+msgstr ""
+
+#: settings.py:141
 msgid "Source"
 msgstr ""
 
-#: settings.py:127 settings.py:173
+#: settings.py:145
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:131 settings.py:187
+#: settings.py:149 settings.py:191
 msgid "Subject"
 msgstr ""
 
-#: settings.py:140
-msgid "Service"
-msgstr ""
-
-#: settings.py:149
+#: settings.py:158
 msgid "Version"
 msgstr ""
 
-#: settings.py:153
-msgid "Ranking"
+#: settings.py:177
+msgid "Category"
 msgstr ""
 
-#: settings.py:177
+#: settings.py:181
 msgid "Event Type"
 msgstr ""
 
-#: settings.py:277
+#: settings.py:280
 msgid "Calendar"
 msgstr ""
 
-#: settings.py:278
+#: settings.py:281
 msgid "Bookmarks"
 msgstr ""
 
