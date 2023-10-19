@@ -21,6 +21,7 @@ def before_all(context):
         'INSTALLED_APPS': [],
         'ELASTICSEARCH_FORCE_REFRESH': True,
         'MGMT_API_ENABLED': True,
+        'CACHE_TYPE': "null",
     }
     setup_before_all(context, config, app_factory=get_app)
 
@@ -33,6 +34,7 @@ def before_scenario(context, scenario):
         'ELASTICSEARCH_FORCE_REFRESH': True,
         'MGMT_API_ENABLED': True,
         'AUTH_SERVER_SHARED_SECRET': 'test-secret',
+        'CACHE_TYPE': "null",
     }
 
     setup_before_scenario(context, scenario, config, app_factory=get_app)

@@ -8,7 +8,11 @@ from google.auth.transport import requests
 
 from newsroom.types import AuthProviderType
 from newsroom.auth import get_company, get_user_by_email
-from newsroom.auth.utils import sign_user_by_email, get_company_auth_provider, send_token
+from newsroom.auth.utils import (
+    sign_user_by_email,
+    get_company_auth_provider,
+    send_token,
+)
 from newsroom.auth.views import logout as _logout
 
 from .password_reset_form import PasswordResetForm
@@ -23,7 +27,7 @@ blueprint = flask.Blueprint("cp.auth", __name__)
 @blueprint.route("/auth_token")
 def token():
     claims = None
-    token = flask.request.args.get('token')
+    token = flask.request.args.get("token")
     if token:
         try:
             claims = google.oauth2.id_token.verify_firebase_token(
@@ -37,7 +41,9 @@ def token():
             return flask.redirect(flask.url_for("auth.login", token_error=1))
 
         email = claims["email"]
-        return sign_user_by_email(email, validate_login_attempt=True)
+        return sign_user_by_email(
+            email, auth_type=AuthProviderType.GOOGLE_OAUTH, validate_login_attempt=True
+        )
 
     return flask.redirect(flask.url_for("auth.login"))
 
@@ -83,11 +89,17 @@ def reset_password():
         auth_provider = get_company_auth_provider(company)
 
         if auth_provider["auth_type"] != AuthProviderType.PASSWORD.value:
-            return render_reset_page(gettext("Password reset for your account is not supported through Newshub"))
+            return render_reset_page(
+                gettext(
+                    "Password reset for your account is not supported through Newshub"
+                )
+            )
 
         # Send standard Newshub reset password email
         if not send_token(user, "reset_password"):
-            return render_reset_page(gettext("An error occurred while sending reset password email"))
+            return render_reset_page(
+                gettext("An error occurred while sending reset password email")
+            )
 
         return flask.redirect(flask.url_for("cp.auth.reset_password_confirmation"))
 

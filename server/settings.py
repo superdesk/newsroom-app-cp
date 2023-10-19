@@ -9,6 +9,8 @@ from newsroom.web.default_settings import (
     BLUEPRINTS as DEFAULT_BLUEPRINTS,
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
     CLIENT_URL,
+    CLIENT_LOCALE_FORMATS,
+    AUTH_PROVIDERS,
 )
 from cp.common_settings import AUTH_PROVIDERS  # noqa
 
@@ -19,6 +21,7 @@ TRANSLATIONS_PATH = SERVER_PATH.joinpath("translations")
 
 SITE_NAME = "CP NewsPro"
 COPYRIGHT_HOLDER = "CP"
+CONTACT_ADDRESS = None
 
 SERVICES = [
     {"name": "Domestic Sport", "code": "t"},
@@ -33,6 +36,7 @@ NEWS_ONLY_FILTERS = []
 
 LANGUAGES = ["en", "fr_CA"]
 DEFAULT_LANGUAGE = "en"
+DEFAULT_TIMEZONE = "America/Toronto"
 
 # Copied from Superdesk CV
 COVERAGE_TYPES = {
@@ -73,6 +77,31 @@ COVERAGE_TYPES = {
     },
 }
 
+# ``CLIENT_CONFIG`` references ``CLIENT_LOCALE_FORMATS`` by reference
+# So we can safely update these dicts without needing to specify all formats
+# And they will be all reflected in the ``CLIENT_CONFIG.locale_formats`` config
+CLIENT_LOCALE_FORMATS["en"].update(
+    {
+        "TIME_FORMAT": "HH:mm",
+        "DATE_FORMAT": "MMM Do, YYYY",
+        "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
+        "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
+        "DATE_FORMAT_HEADER": "long",  # babel
+    }
+)
+CLIENT_LOCALE_FORMATS["fr_CA"].update(
+    {
+        "TIME_FORMAT": "HH:mm",
+        "DATE_FORMAT": "Do MMMM YYYY",
+        "COVERAGE_DATE_FORMAT": "LL",
+        "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+        "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+        "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
+        "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
+        "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
+    }
+)
+
 CLIENT_CONFIG.update(
     {
         "coverage_types": COVERAGE_TYPES,
@@ -81,25 +110,7 @@ CLIENT_CONFIG.update(
         "display_agenda_featured_stories_only": False,
         "time_format": "HH:mm",
         "date_format": "MMM Do, YYYY",
-        "locale_formats": {
-            "en": {
-                "TIME_FORMAT": "HH:mm",
-                "DATE_FORMAT": "MMM Do, YYYY",
-                "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
-                "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
-                "DATE_FORMAT_HEADER": "long",  # babel
-            },
-            "fr_CA": {
-                "TIME_FORMAT": "HH:mm",
-                "DATE_FORMAT": "Do MMMM YYYY",
-                "COVERAGE_DATE_FORMAT": "LL",
-                "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-                "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-                "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
-                "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
-                "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
-            },
-        },
+        "default_timezone": DEFAULT_TIMEZONE,
         "filter_panel_defaults": {
             "tab": {
                 "wire": "filters",
@@ -108,6 +119,12 @@ CLIENT_CONFIG.update(
             "open": {
                 "wire": True,
                 "agenda": True,
+            },
+        },
+        "advanced_search": {
+            "fields": {
+                "wire": ["headline", "slugline", "body_html"],
+                "agenda": ["name", "description"],
             },
         },
     }
@@ -138,21 +155,8 @@ WIRE_GROUPS = [
         },
     },
     {
-        "field": "distribution",
-        "label": lazy_gettext("Service"),
-        "nested": {
-            "parent": "subject",
-            "field": "scheme",
-            "value": "distribution",
-        },
-    },
-    {
         "field": "genre",
         "label": lazy_gettext("Version"),
-    },
-    {
-        "field": "urgency",
-        "label": lazy_gettext("Ranking"),
     },
 ]
 
@@ -162,7 +166,6 @@ WIRE_AGGS = {
     "service": {"terms": {"field": "service.name", "size": 50}},
     "subject": {"terms": {"field": "subject.name", "size": 50}},
     "genre": {"terms": {"field": "genre.name", "size": 50}},
-    "urgency": {"terms": {"field": "urgency"}},
 }
 
 AGENDA_GROUPS = [
@@ -172,7 +175,7 @@ AGENDA_GROUPS = [
     },
     {
         "field": "service",
-        "label": lazy_gettext("Wire Category"),
+        "label": lazy_gettext("Category"),
     },
     {
         "field": "event_types",
@@ -256,8 +259,7 @@ SAML_COMPANY = env("SAML_COMPANY", "The Canadian Press")
 SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
     "localhost": "localhost",
-    "ncp-develop": "ncp-dev",
-    "cp-dev": "cp-dev",
+    "uat": "uat",
 }
 
 for url, path in SAML_PATH_MAP.items():
@@ -279,4 +281,14 @@ CEM_TIMEOUT = int(os.environ.get("CEM_TIMEOUT") or 10)
 AGENDA_SECTION = lazy_gettext("Calendar")
 SAVED_SECTION = lazy_gettext("Bookmarks")
 
-DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
+WIRE_SEARCH_FIELDS = [
+    "slugline",
+    "headline",
+    "byline",
+    "body_html",
+    "body_text",
+    "description_html",
+    "description_text",
+]
+
+AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True

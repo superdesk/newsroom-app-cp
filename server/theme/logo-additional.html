@@ -1,9 +1,9 @@
 <div class="navbar__additional-logo d-none d-lg-flex">
     {% if get_locale() == "en"  %}
     <h2 class="a11y-only">NewsPro</h2>
-    <img src="{{ theme_url('logo-newspro.svg') }}" alt="NewsPro" aria-hidden="true" />
+    <img src="{{ theme_url('logo-newspro.svg') }}" class="navbar__additional-logo-img navbar__additional-logo-img--en" alt="NewsPro" aria-hidden="true" />
     {% else %}
     <h2 class="a11y-only">NouvellesPro</h2>
-    <img src="{{ theme_url('logo-newspro-fr.svg') }}" alt="NouvellesPro" aria-hidden="true" />
+    <img src="{{ theme_url('logo-newspro-fr.svg') }}" class="navbar__additional-logo-img navbar__additional-logo-img--fr" alt="NouvellesPro" aria-hidden="true" />
     {% endif %}
 </div>
