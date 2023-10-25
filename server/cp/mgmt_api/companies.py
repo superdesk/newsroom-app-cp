@@ -13,15 +13,24 @@ from superdesk.errors import SuperdeskApiError
 
 def init_app(app):
     CompaniesResource.internal_resource = False
-    superdesk.register_resource('companies', CPCompaniesResource, CPCompaniesService, _app=app)
-    superdesk.register_resource('company_products', CompanyProductsResource, CompanyProductsService, _app=app)
+    superdesk.register_resource(
+        "companies", CPCompaniesResource, CPCompaniesService, _app=app
+    )
+    superdesk.register_resource(
+        "company_products", CompanyProductsResource, CompanyProductsService, _app=app
+    )
 
 
 class CPCompaniesResource(CompaniesResource):
     """
     CP Companies Schema
     """
-    schema = {**CompaniesResource.schema, "country":{"type": "string", "default" : "CAN"}}
+
+    schema = {
+        **CompaniesResource.schema,
+        "country": {"type": "string", "default": "CAN"},
+    }
+
 
 class CPCompaniesService(CompaniesService):
     def on_create(self, docs):
@@ -29,21 +38,23 @@ class CPCompaniesService(CompaniesService):
         for doc in docs:
             errors = get_errors_company(doc)
             if errors:
-                message = ("invalid ip address")
-                raise SuperdeskApiError.badRequestError(message=message, payload=message)
+                message = "invalid ip address"
+                raise SuperdeskApiError.badRequestError(
+                    message=message, payload=message
+                )
 
     def on_created(self, docs):
         super().on_created(docs)
         for doc in docs:
-            app.cache.set(str(doc['_id']), doc)
+            app.cache.set(str(doc["_id"]), doc)
 
     def on_update(self, updates, original):
         super().on_update(updates, original)
-        app.cache.delete(str(original['_id']))
+        app.cache.delete(str(original["_id"]))
 
     def on_delete(self, doc):
         super().on_delete(doc)
-        app.cache.delete(str(doc['_id']))
+        app.cache.delete(str(doc["_id"]))
 
 
 class CompanyProductsResource(newsroom.Resource):
@@ -51,24 +62,20 @@ class CompanyProductsResource(newsroom.Resource):
     url = 'companies/<regex("[a-f0-9]{24}"):companies>/products'
     resource_methods = ["GET", "POST"]
     schema = {
-        'product': {
-            'type': 'objectid',
-            'required': True,
+        "product": {
+            "type": "objectid",
+            "required": True,
         },
-        'seats': {
-            'type': 'number',
+        "seats": {
+            "type": "number",
         },
-        'link': {
-            'type': 'boolean',
-            'nullable': False
-        }
+        "link": {"type": "boolean", "nullable": False},
     }
     datasource = {
         "source": "products",
         "projection": {
-            name: 1
-            for name in ProductsResource.schema.keys() if name != "companies"
-        }
+            name: 1 for name in ProductsResource.schema.keys() if name != "companies"
+        },
     }
 
 
@@ -97,15 +104,17 @@ class CompanyProductsService(newsroom.Service):
     def create(self, docs, **kwargs):
         ids = []
         for doc in docs:
-            id = doc.pop('product')
-            link = doc.pop('link')
-            product = find_one('products', _id=ObjectId(id))
+            id = doc.pop("product")
+            link = doc.pop("link")
+            product = find_one("products", _id=ObjectId(id))
             company = get_company()
             assert product
-            company_products = [p for p in get_company_products(company) if p["_id"] != product["_id"]]
+            company_products = [
+                p for p in get_company_products(company) if p["_id"] != product["_id"]
+            ]
             if link:
                 company_products.append(get_product_ref(product, doc.get("seats")))
-            superdesk.get_resource_service('companies').system_update(
+            superdesk.get_resource_service("companies").system_update(
                 company["_id"], {"products": company_products}, company
             )
             ids.append(id)
@@ -114,7 +123,11 @@ class CompanyProductsService(newsroom.Service):
     def on_fetched(self, doc):
         for item in doc["_items"]:
             self._fix_link(item)
-            if hasattr(self, "company") and self.company and self.company.get("products"):
+            if (
+                hasattr(self, "company")
+                and self.company
+                and self.company.get("products")
+            ):
                 for product_ref in self.company["products"]:
                     if product_ref["_id"] == item["_id"]:
                         item["seats"] = product_ref["seats"]
@@ -126,5 +139,7 @@ class CompanyProductsService(newsroom.Service):
         return super().on_fetched_item(doc)
 
     def _fix_link(self, item):
-        company_id = request.view_args['companies']
-        item["_links"]["self"]["href"] = f"companies/{company_id}/products/{item['_id']}"
+        company_id = request.view_args["companies"]
+        item["_links"]["self"][
+            "href"
+        ] = f"companies/{company_id}/products/{item['_id']}"
