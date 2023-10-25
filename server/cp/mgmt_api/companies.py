@@ -13,9 +13,15 @@ from superdesk.errors import SuperdeskApiError
 
 def init_app(app):
     CompaniesResource.internal_resource = False
-    superdesk.register_resource('companies', CompaniesResource, CPCompaniesService, _app=app)
+    superdesk.register_resource('companies', CPCompaniesResource, CPCompaniesService, _app=app)
     superdesk.register_resource('company_products', CompanyProductsResource, CompanyProductsService, _app=app)
 
+
+class CPCompaniesResource(CompaniesResource):
+    """
+    CP Companies Schema
+    """
+    schema = {**CompaniesResource.schema, "country":{"type": "string", "default" : "CAN"}}
 
 class CPCompaniesService(CompaniesService):
     def on_create(self, docs):
