@@ -27,7 +27,10 @@ Feature: Management API - Topics
             "topic_type": "wire",
             "query": "topic1",
             "is_global": true,
-            "user": "#users._id#"
+            "user": "#users._id#",
+            "subscribers": [
+                {"user_id": "#users._id#"}
+            ]
         }
         """
         Then we get response code 201
@@ -43,7 +46,10 @@ Feature: Management API - Topics
                     "topic_type": "wire",
                     "query": "topic1",
                     "is_global": true,
-                    "user": "#users._id#"
+                    "user": "#users._id#",
+                    "subscribers": [
+                        {"user_id": "#users._id#", "notification_type": "real-time"}
+                    ]
                 }
             ]
         }
