@@ -13,8 +13,10 @@ def send_notification(_type, user, id_key: Literal["_id", "email"] = "_id"):
     url = app.config.get("CEM_URL", "")
     apikey = app.config.get("CEM_APIKEY", "")
     if not url or not apikey:
+        logger.warning("CEM is not configured")
         return
-    headers = {"x-api-key": apikey}
+    logger.info("Sending notification to CEM for %s", _type)
+    headers = {"x-api-key": apikey, "Content-Type": "application/json"}
     payload = {
         "type": _type,
         "object_id": str(user[id_key]),
@@ -23,14 +25,15 @@ def send_notification(_type, user, id_key: Literal["_id", "email"] = "_id"):
     if user.get("company") and id_key == "_id":
         payload["company"] = str(user["company"])
     try:
-        session.patch(
+        resp = session.patch(
             url,
             json=payload,
             headers=headers,
             timeout=int(app.config.get("CEM_TIMEOUT", 10)),
             verify=bool(app.config.get("CEM_VERIFY_TLS", True)),
         )
+        resp.raise_for_status()
     except requests.exceptions.RequestException as err:
         logger.error(err)
-        return
-    logger.info("Notification sent to CEM")
+    else:
+        logger.info("Notification sent to CEM for %s", _type)
