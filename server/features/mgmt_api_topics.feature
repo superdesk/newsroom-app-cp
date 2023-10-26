@@ -117,3 +117,42 @@ Feature: Management API - Topics
         """
         When we get "/topics"
         Then we get list with 1 items
+
+    Scenario: Validate if navigation exists
+        When we post to "/topics"
+        """
+        {
+            "label": "topic1",
+            "company": "#companies._id#",
+            "topic_type": "wire",
+            "query": "topic1",
+            "is_global": true,
+            "user": "#users._id#",
+            "navigation": ["619277ef8bbbbfac6034aab7"]
+        }
+        """
+        Then we get response code 400
+
+        When we post to "navigations"
+        """
+        {
+            "name": "navigation1",
+            "description": "navigation1",
+            "order": 1
+        }
+        """
+        Then we get response code 201
+
+        When we post to "/topics"
+        """
+        {
+            "label": "topic1",
+            "company": "#companies._id#",
+            "topic_type": "wire",
+            "query": "topic1",
+            "is_global": true,
+            "user": "#users._id#",
+            "navigation": ["#navigations._id#"]
+        }
+        """
+        Then we get response code 201
