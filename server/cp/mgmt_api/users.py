@@ -1,3 +1,4 @@
+import newsroom
 import superdesk
 
 from bson.objectid import ObjectId
@@ -6,11 +7,12 @@ from superdesk.errors import SuperdeskApiError
 from flask import current_app as app
 
 
-class CPUsersResource(UsersResource):
+class CPUsersResource(newsroom.Resource):
     url = "users"
+    schema = UsersResource.schema.copy()
+    datasource = UsersResource.datasource.copy()
     item_methods = ["GET", "PATCH", "PUT", "DELETE"]
     resource_methods = ["GET", "POST"]
-    internal_resource = False
 
 
 def init_app(app):

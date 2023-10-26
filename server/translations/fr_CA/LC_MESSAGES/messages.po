@@ -7,9 +7,8 @@
 # Translators:
 # Sabina <sabina.gergel@thecanadianpress.com>, 2022
 # Srdjan Karalic <srdjan.karalic@sourcefabric.org>, 2022
-# Petr Jašek <petr.jasek@sourcefabric.org>, 2023
-# Simon Peacock <simon.peacock@gmail.com>, 2023
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2023
+# Simon Peacock <simon.peacock@gmail.com>, 2023
 # Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2023
 # 
 #, fuzzy
@@ -17,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-31 10:10+0200\n"
+"POT-Creation-Date: 2023-10-19 11:33+0200\n"
 "PO-Revision-Date: 2022-03-15 12:58+0000\n"
 "Last-Translator: Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2023\n"
 "Language-Team: French (Canada) (https://app.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
@@ -28,36 +27,12 @@ msgstr ""
 "Language: fr_CA\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: theme/base_layout.html:44 theme/login.html:16
-msgid "Login"
-msgstr "Ouvrir une session"
-
-#: theme/base_layout.html:53
-msgid "Side Navigation"
-msgstr "Navigation latérale"
-
-#: theme/base_layout.html:57 theme/base_layout.html:59
-msgid "Settings"
-msgstr "Réglages"
-
-#: theme/base_layout.html:67 theme/base_layout.html:68
-msgid "Company Admin"
-msgstr "Administrateur client"
-
-#: theme/base_layout.html:79 theme/base_layout.html:81
-msgid "Reports"
-msgstr "Rapports"
-
 #: theme/cp_reset_password.html:14
 #: theme/cp_reset_password_confirmation.html:14
 msgid "Reset Password"
 msgstr "Réinitialiser le mot de passe"
 
-#: theme/cp_reset_password.html:19
-msgid "Email"
-msgstr "Courriel"
-
-#: theme/cp_reset_password.html:22
+#: theme/cp_reset_password.html:24
 msgid "Send Password Reset Email"
 msgstr "Envoyer un courriel de réinitialisation de mot de passe"
 
@@ -67,31 +42,35 @@ msgstr ""
 "Un courriel vous a été transmis. Veuillez suivre les instructions qui s'y "
 "trouvent. "
 
-#: theme/login.html:24
+#: theme/login.html:16
+msgid "Login"
+msgstr "Ouvrir une session"
+
+#: theme/login.html:25
 msgid "Login using Single Sign On"
 msgstr "Connexion avec l'authentification unique"
 
-#: theme/login.html:30 theme/login.html:32
+#: theme/login.html:31
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: theme/login.html:35
+#: theme/login.html:33
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: theme/login.html:36
+#: theme/login.html:34
 msgid "Please reset my password for NewsPro"
 msgstr "Veuillez réinitialiser mon mot de passe pour NouvellesPro"
 
-#: theme/login.html:36
+#: theme/login.html:34
 msgid "Contact Us"
 msgstr "Contactez-nous"
 
-#: theme/login.html:38
+#: theme/login.html:36
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
-#: settings.py:119 settings.py:169 theme/login.html:45
+#: settings.py:137 settings.py:173 theme/login.html:43
 msgid "Language"
 msgstr "Langue"
 
@@ -100,42 +79,62 @@ msgstr "Langue"
 msgid "Copyright"
 msgstr "Droits d'auteur"
 
-#: cp/auth.py:30
+#: cp/auth.py:40
 msgid "User token is not valid"
 msgstr "Le jeton d'utilisateur n'est pas valide"
 
-#: settings.py:123
+#: cp/auth.py:80
+msgid "User not found"
+msgstr "Utilisateur non trouvé"
+
+#: cp/auth.py:82
+msgid "User not enabled"
+msgstr "Utilisateur non activé"
+
+#: cp/auth.py:89
+msgid "Password reset for your account is not supported through Newshub"
+msgstr ""
+"La réinitialisation du mot de passe de votre compte n'est pas prise en "
+"charge par NouvellesPro"
+
+#: cp/auth.py:97
+msgid "An error occurred while sending reset password email"
+msgstr ""
+"Une erreur est survenue lors de l'envoi du courriel de réinitialisation du "
+"mot de passe "
+
+#: cp/password_reset_form.py:8
+msgid "Email"
+msgstr "Courriel"
+
+#: settings.py:141
 msgid "Source"
 msgstr "Source"
 
-#: settings.py:127 settings.py:173
+#: settings.py:145
 msgid "Wire Category"
 msgstr "Fil de presse"
 
-#: settings.py:131 settings.py:187
+#: settings.py:149 settings.py:191
 msgid "Subject"
 msgstr "Sujet"
 
-#: settings.py:140
-msgid "Service"
-msgstr "Service"
-
-#: settings.py:149
+#: settings.py:158
 msgid "Version"
 msgstr "Version"
 
-#: settings.py:153
-msgid "Ranking"
-msgstr "Priorité"
-
 #: settings.py:177
-msgid "Event Type"
-msgstr "Genre d'événement"
+msgid "Category"
+msgstr "Fil"
 
-#: settings.py:277
+#: settings.py:181
+msgid "Event Type"
+msgstr "Type d'événement"
+
+#: settings.py:280
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: settings.py:278
+#: settings.py:281
 msgid "Bookmarks"
 msgstr "Favoris"

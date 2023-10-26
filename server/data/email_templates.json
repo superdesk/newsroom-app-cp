@@ -112,4 +112,22 @@
     "subject": {
         "default": "A customer {{ company.name }} has requested more seats for {{ app_name }}"
     }
+}, {
+    "_id": "scheduled_notification_topic_matches_email",
+    "init_version": 1,
+    "subject": {
+        "default": "Your {{ app_name }} daily digest at {{ date | notification_time }}",
+        "translations": {
+            "fr_ca": "Votre résumé quotidien de {{ app_name }} à {{ date | notification_time }}"
+        }
+    }
+}, {
+    "_id": "scheduled_notification_no_matches_email",
+    "init_version": 1,
+    "subject": {
+        "default": "Your {{ app_name }} daily digest at {{ date | notification_time }}",
+        "translations": {
+            "fr_ca": "Votre résumé quotidien de {{ app_name }} à {{ date | notification_time }}"
+        }
+    }
 }]
