@@ -2,6 +2,8 @@
     /* CORE: TYPOGRAPHY */
     --font-family-core--sans: "Lato", sans-serif;
     --font-family-core--serif: "Titillium Web", sans-serif;
+
+    --color-background:     hsl(0, 0%, 97%);
     --badge-bg-highlight1:  hsl(356, 72%, 46%);
     --color-primary:        hsl(356, 72%, 46%);
 
@@ -43,11 +45,13 @@
 
 
     /* COMPONENT: SIDENAV */
-    --sidenav-color-bg:                 hsl(0, 3%, 15%);
-    --sidenav-color-item-bg--active:    hsl(356, 72%, 46%);
-    --sidenav-color-item-fg--active:    hsla(0, 0%, 100%, 1);
-    --sidenav-color-badge-bg:           hsla(0, 0%, 98%, 1);
-    --sidenav-color-badge-fg:           hsl(356, 72%, 46%);
+    --sidenav-color-bg:                     hsl(0, 3%, 15%);
+    --sidenav-color-item-bg--active:        hsl(356, 72%, 46%);
+    --sidenav-color-item-fg--active:        hsla(0, 0%, 100%, 1);
+    --sidenav-color-badge-bg:               hsla(0, 0%, 98%, 1);
+    --sidenav-color-badge-bg--active:       hsla(0, 0%, 98%, 1);
+    --sidenav-color-badge-fg:               hsl(356, 72%, 46%);
+    --sidenav-color-badge-fg--active:       hsl(356, 72%, 46%);
 
     /* COMPONENT: BUTTONS */
     /* // Primary */
@@ -74,6 +78,12 @@
 
     /* COMPONENT: MAIN FOOTER */
     --footer-size--height: 48px;
+
+    /* COMPONENT: ALERTIFY NOTIFIER */
+    --ajs-message-color-bg--success: hsl(0, 3%, 15%);
+
+    /* COMPONENT: SEARCH RESULT PANEL (Tags list) */
+    --search-result-tags-list-color-bg: var(--main-header-color-bg);
 }
 
 .navbar__logo img.navbar__logo-img--fr {
