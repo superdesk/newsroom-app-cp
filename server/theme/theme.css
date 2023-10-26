@@ -2,6 +2,8 @@
     /* CORE: TYPOGRAPHY */
     --font-family-core--sans: "Lato", sans-serif;
     --font-family-core--serif: "Titillium Web", sans-serif;
+
+    --color-background:     hsl(0, 0%, 97%);
     --badge-bg-highlight1:  hsl(356, 72%, 46%);
     --color-primary:        hsl(356, 72%, 46%);
 
@@ -48,6 +50,7 @@
     --sidenav-color-item-fg--active:    hsla(0, 0%, 100%, 1);
     --sidenav-color-badge-bg:           hsla(0, 0%, 98%, 1);
     --sidenav-color-badge-fg:           hsl(356, 72%, 46%);
+    --sidenav-color-badge-active-outline:   hsl(356, 72%, 46%);
 
     /* COMPONENT: BUTTONS */
     /* // Primary */
