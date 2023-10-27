@@ -21,7 +21,7 @@ async-timeout==4.0.3
     # via redis
 authlib==0.14.3
     # via superdesk-core
-babel==2.13.0
+babel==2.13.1
     # via flask-babel
 bcrypt==3.1.7
     # via superdesk-core
@@ -34,15 +34,15 @@ blinker==1.4
     #   raven
     #   sentry-sdk
     #   superdesk-core
-boto3==1.28.66
+boto3==1.28.72
     # via superdesk-core
-botocore==1.31.66
+botocore==1.31.72
     # via
     #   boto3
     #   s3transfer
 cachelib==0.9.0
     # via flask-caching
-cachetools==5.3.1
+cachetools==5.3.2
     # via
     #   flask-oidc-ex
     #   google-auth
@@ -66,7 +66,7 @@ cffi==1.16.0
     #   cryptography
 chardet==3.0.4
     # via superdesk-core
-charset-normalizer==3.3.0
+charset-normalizer==3.3.1
     # via requests
 ciso8601==1.0.8
     # via eve-elastic
@@ -88,7 +88,7 @@ click-repl==0.3.0
     # via celery
 croniter==0.3.37
     # via superdesk-core
-cryptography==41.0.4
+cryptography==41.0.5
     # via
     #   authlib
     #   jwcrypto
@@ -262,6 +262,8 @@ pyhanko-certvalidator==0.22.0
     # via
     #   pyhanko
     #   xhtml2pdf
+pyjwt==2.4.0
+    # via superdesk-core
 pymemcache==4.0.0
     # via superdesk-core
 pymongo==3.11.4
@@ -322,9 +324,10 @@ redis==4.5.5
     #   superdesk-core
 regex==2020.7.14
     # via superdesk-core
-reportlab==3.6.6
+reportlab==3.6.13
     # via
     #   newsroom-core
+    #   superdesk-core
     #   svglib
     #   xhtml2pdf
 requests==2.31.0
@@ -361,9 +364,9 @@ six==1.16.0
     #   oauth2client
     #   python-bidi
     #   python-dateutil
-superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@develop
+superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@v2.7.0-rc1
     # via newsroom-core
-superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@develop
+superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@v2.7.0-rc1
     # via newsroom-core
 svglib==1.5.1
     # via xhtml2pdf
