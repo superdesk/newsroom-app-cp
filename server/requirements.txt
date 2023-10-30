@@ -34,9 +34,9 @@ blinker==1.4
     #   raven
     #   sentry-sdk
     #   superdesk-core
-boto3==1.28.71
+boto3==1.28.73
     # via superdesk-core
-botocore==1.31.71
+botocore==1.31.73
     # via
     #   boto3
     #   s3transfer
@@ -262,6 +262,8 @@ pyhanko-certvalidator==0.22.0
     # via
     #   pyhanko
     #   xhtml2pdf
+pyjwt==2.4.0
+    # via superdesk-core
 pymemcache==4.0.0
     # via superdesk-core
 pymongo==3.11.4
@@ -274,7 +276,7 @@ pyparsing==3.1.1
     # via
     #   httplib2
     #   pyrtf3
-pypdf==3.16.4
+pypdf==3.17.0
     # via xhtml2pdf
 pypng==0.20220715.0
     # via qrcode
@@ -323,9 +325,10 @@ redis==4.5.5
     #   superdesk-core
 regex==2020.7.14
     # via superdesk-core
-reportlab==3.6.6
+reportlab==3.6.13
     # via
     #   newsroom-core
+    #   superdesk-core
     #   svglib
     #   xhtml2pdf
 requests==2.31.0
@@ -362,9 +365,9 @@ six==1.16.0
     #   oauth2client
     #   python-bidi
     #   python-dateutil
-superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@develop
+superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@v2.7.0-rc1
     # via newsroom-core
-superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@develop
+superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@v2.7.0-rc1
     # via newsroom-core
 svglib==1.5.1
     # via xhtml2pdf
