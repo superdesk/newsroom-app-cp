@@ -1,0 +1,4 @@
+{
+    "extends": "newsroom-core/tsconfig.json",
+    "include": ["src"]
+}
