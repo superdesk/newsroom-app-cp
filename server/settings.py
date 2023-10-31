@@ -86,19 +86,26 @@ CLIENT_LOCALE_FORMATS["en"].update(
         "DATE_FORMAT": "MMM Do, YYYY",
         "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
         "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
-        "DATE_FORMAT_HEADER": "long",  # babel
+
+        # server formats
+        "DATE_FORMAT_HEADER": "long",
     }
 )
 CLIENT_LOCALE_FORMATS["fr_CA"].update(
     {
         "TIME_FORMAT": "HH:mm",
         "DATE_FORMAT": "Do MMMM YYYY",
-        "COVERAGE_DATE_FORMAT": "LL",
         "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+        "COVERAGE_DATE_FORMAT": "LL",
         "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-        "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
         "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
         "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
+
+        # server formats
+        "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",
+        "NOTIFICATION_EMAIL_TIME_FORMAT": "HH:mm",
+        "NOTIFICATION_EMAIL_DATE_FORMAT": "d MMMM yyyy",
+        "NOTIFICATION_EMAIL_DATETIME_FORMAT": "d MMMM yyyy à H:mm",
     }
 )
 
