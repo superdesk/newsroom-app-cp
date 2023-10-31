@@ -4,6 +4,7 @@ import logging
 import google.oauth2.id_token
 
 from flask_babel import gettext
+from flask import current_app as app
 from google.auth.transport import requests
 
 from newsroom.types import AuthProviderType
@@ -32,7 +33,7 @@ def token():
         try:
             claims = google.oauth2.id_token.verify_firebase_token(
                 token,
-                audience="cp-identity",
+                audience=app.config["AUTH_FIREBASE_AUDIENCE"],
                 request=firebase_request_adapter,
             )
         except ValueError as err:

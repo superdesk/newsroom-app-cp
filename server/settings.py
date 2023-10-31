@@ -272,6 +272,9 @@ else:
 if SAML_PATH.joinpath("certs").exists():
     SAML_AUTH_ENABLED = True
 
+is_test_instance = any([url in CLIENT_URL for url in ["cp-dev.", "cpcn-uat.", "test."]])
+AUTH_FIREBASE_AUDIENCE = "cp-identity-dev" if is_test_instance else "cp-identity"
+
 CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
 CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "MyNP")
