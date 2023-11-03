@@ -2,9 +2,11 @@ import newsroom
 import superdesk
 
 from bson.objectid import ObjectId
+from flask import current_app as app
 from newsroom.users import UsersResource, UsersService
 from superdesk.errors import SuperdeskApiError
-from flask import current_app as app
+
+from cp.mgmt_api.utils import validate_product_refs
 
 
 class CPUsersResource(newsroom.Resource):
@@ -20,6 +22,10 @@ def init_app(app):
 
 
 class CPUsersService(UsersService):
+    def check_permissions(self, doc, updates=None):
+        """Avoid testing if user has permissions."""
+        pass
+
     def on_create(self, docs):
         super().on_create(docs)
         for doc in docs:
@@ -32,7 +38,9 @@ class CPUsersService(UsersService):
                 raise SuperdeskApiError.badRequestError(message=message, payload=message)
             if doc.get('company'):
                 doc['company'] = ObjectId(doc.get('company'))
+            if doc.get("products"):
+                validate_product_refs(doc["products"])
 
-    def check_permissions(self, doc, updates=None):
-        """Avoid testing if user has permissions."""
-        pass
+    def on_update(self, updates, original):
+        if updates.get("products"):
+            validate_product_refs(updates["products"])

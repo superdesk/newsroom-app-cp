@@ -663,7 +663,7 @@ components:
 
     ProductType:
       type: string
-      default: 'wire'
+      example: wire
       enum:
         - wire
         - agenda
@@ -790,6 +790,9 @@ components:
                 $ref: '#/components/schemas/ProductType'
               _id:
                 $ref: '#/components/schemas/ObjectId'
+            required:
+              - _id
+              - section
 
       required:
         - first_name
@@ -865,6 +868,9 @@ components:
               seats:
                 type: number
                 example: 5
+            required:
+              - _id
+              - section
 
       required:
         - name
