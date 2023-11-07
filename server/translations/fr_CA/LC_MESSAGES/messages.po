@@ -34,7 +34,7 @@ msgstr "Réinitialiser le mot de passe"
 
 #: theme/cp_reset_password.html:24
 msgid "Send Password Reset Email"
-msgstr "Envoyer un courriel de réinitialisation de mot de passe"
+msgstr "Envoyer un courriel de réinitialisation"
 
 #: theme/cp_reset_password_confirmation.html:18
 msgid "An email was sent to your inbox. Please follow the instructions there."
