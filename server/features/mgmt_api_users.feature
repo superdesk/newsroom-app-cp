@@ -110,3 +110,74 @@ Feature: Management API - Users
         """
         When we delete latest
         Then we get ok response
+
+    Scenario: Validate product type
+        Scenario: Create a user
+        Given empty "users"
+        And "products"
+        """
+        [
+            {"name": "test", "query": "test", "product_type": "agenda"}
+        ]
+        """
+        And "companies"
+        """
+        [{"name": "zzz company"}]
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "sections": {
+                "agenda": true
+            },
+            "products": [
+                {"_id": "#products._id#", "section": "wire"}
+            ]
+        }
+        """
+        Then we get error 400
+        """
+        {"code": 400, "message": "invalid product type for product #products._id#, should be agenda"}
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "sections": {
+                "agenda": true
+            },
+            "products": [
+                {"section": "agenda", "_id": "#products._id#"}
+            ]
+        }
+        """
+        Then we get response code 201
+
+        When we patch "/users/#users._id#"
+        """
+        {
+            "products": [
+                {"section": "wire", "_id": "#products._id#"}
+            ]
+        }
+        """
+        Then we get error 400
+
+        When we patch "/users/#users._id#"
+        """
+        {
+            "products": [
+                {"section": "agenda", "_id": "#products._id#"}
+            ]
+        }
+        """
+        Then we get response code 200

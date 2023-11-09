@@ -1,13 +1,14 @@
 from bson.objectid import ObjectId
 from flask import request, current_app as app
+from cp.mgmt_api.utils import validate_product_refs
 
 import newsroom
+import superdesk
 from newsroom.companies import CompaniesResource, CompaniesService
 from newsroom.companies.views import get_errors_company
 from newsroom.products.products import ProductsResource
 from newsroom.products.views import get_product_ref
 from newsroom.utils import find_one
-import superdesk
 from superdesk.errors import SuperdeskApiError
 
 
@@ -42,6 +43,8 @@ class CPCompaniesService(CompaniesService):
                 raise SuperdeskApiError.badRequestError(
                     message=message, payload=message
                 )
+            if doc.get("products"):
+                validate_product_refs(doc["products"])
 
     def on_created(self, docs):
         super().on_created(docs)
@@ -49,6 +52,8 @@ class CPCompaniesService(CompaniesService):
             app.cache.set(str(doc["_id"]), doc)
 
     def on_update(self, updates, original):
+        if updates.get("products"):
+            validate_product_refs(updates["products"])
         super().on_update(updates, original)
         app.cache.delete(str(original["_id"]))
 

@@ -28,7 +28,11 @@
                 {% endif %}
 
                 <div class="card-footer bg-white border-0 small">
+                    {% if get_locale() == "fr_CA" %}
+                    <a href="https://www.thecanadianpress.com/comment-vous-aider/sinscrire-a-nouvellespro/?lang=fr" class="nh-button nh-button--secondary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
+                    {% else %}
                     <a href="https://www.thecanadianpress.com/contact/pr-signup" class="nh-button nh-button--secondary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
+                    {% endif %}
                     <p>
                         {{ gettext('Forgot your password?') }}
                         <a href="mailto:help-aide@cpnewspro.com?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
