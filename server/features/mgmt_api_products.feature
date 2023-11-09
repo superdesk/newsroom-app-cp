@@ -14,7 +14,7 @@ Feature: Management API - Products
             "name": "A fishy Product",
             "description": "a product for those interested in fish",
             "query": "fish",
-            "product_type": "news_api"
+            "product_type": "agenda"
         }]
         """
         Then we get response code 201
@@ -52,7 +52,7 @@ Feature: Management API - Products
                 "name": "A fishy Product",
                 "description": "new description",
                 "query": "fish",
-                "product_type": "news_api",
+                "product_type": "agenda",
                 "seats": 5
             }
         ]}
@@ -62,7 +62,7 @@ Feature: Management API - Products
         Then we get existing resource
         """
         {"products": [
-            {"_id": "#products._id#", "section": "news_api", "seats": 5}
+            {"_id": "#products._id#", "section": "agenda", "seats": 5}
         ]}
         """
 

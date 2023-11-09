@@ -86,19 +86,26 @@ CLIENT_LOCALE_FORMATS["en"].update(
         "DATE_FORMAT": "MMM Do, YYYY",
         "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
         "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
-        "DATE_FORMAT_HEADER": "long",  # babel
+
+        # server formats
+        "DATE_FORMAT_HEADER": "long",
     }
 )
 CLIENT_LOCALE_FORMATS["fr_CA"].update(
     {
         "TIME_FORMAT": "HH:mm",
         "DATE_FORMAT": "Do MMMM YYYY",
-        "COVERAGE_DATE_FORMAT": "LL",
         "DATETIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
+        "COVERAGE_DATE_FORMAT": "LL",
         "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
-        "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",  # babel
         "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
         "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
+
+        # server formats
+        "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",
+        "NOTIFICATION_EMAIL_TIME_FORMAT": "HH:mm",
+        "NOTIFICATION_EMAIL_DATE_FORMAT": "d MMMM yyyy",
+        "NOTIFICATION_EMAIL_DATETIME_FORMAT": "d MMMM yyyy à H:mm",
     }
 )
 
@@ -272,11 +279,16 @@ else:
 if SAML_PATH.joinpath("certs").exists():
     SAML_AUTH_ENABLED = True
 
+is_test_instance = any([url in CLIENT_URL for url in ["cp-dev.", "cpcn-uat.", "test."]])
+AUTH_FIREBASE_AUDIENCE = "cp-identity-dev" if is_test_instance else "cp-identity"
+
 CEM_URL = os.environ.get("CEM_URL", "")
 CEM_APIKEY = os.environ.get("CEM_APIKEY", "")
 CEM_PLATFORM = os.environ.get("CEM_PLATFORM", "NP")
 CEM_VERIFY_TLS = strtobool(os.environ.get("CEM_VERIFY_TLS", "off"))
 CEM_TIMEOUT = int(os.environ.get("CEM_TIMEOUT") or 10)
+
+DEFAULT_ALLOW_COMPANIES_TO_MANAGE_PRODUCTS = True
 
 AGENDA_SECTION = lazy_gettext("Calendar")
 SAVED_SECTION = lazy_gettext("Bookmarks")
