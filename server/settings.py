@@ -11,6 +11,7 @@ from newsroom.web.default_settings import (
     CLIENT_URL,
     CLIENT_LOCALE_FORMATS,
     AUTH_PROVIDERS,
+    CONTENTAPI_ELASTICSEARCH_SETTINGS,
 )
 from cp.common_settings import AUTH_PROVIDERS  # noqa
 
@@ -304,3 +305,13 @@ WIRE_SEARCH_FIELDS = [
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
 
 WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
+
+CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_field_analyzer"]["filter"] = [
+    "lowercase",
+    "elision",
+    "asciifolding",
+]
+
+# bump core versions to reindex inclusing elision
+WIRE_SCHEMA_VERSION = 4
+AGENDA_SCHEMA_VERSION = 6
