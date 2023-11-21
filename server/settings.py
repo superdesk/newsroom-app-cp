@@ -208,7 +208,6 @@ AGENDA_GROUPS = [
 
 
 BLUEPRINTS = [
-    "cp.auth",  # we need this one loaded before newsroom.auth to make it override logout
     "cp.mgmt_api_docs",
 ] + [
     blueprint
@@ -233,7 +232,6 @@ CORE_APPS = [
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
-    "cp.auth",
     "newsroom.auth.saml",
 ]
 
