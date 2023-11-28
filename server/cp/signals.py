@@ -43,14 +43,14 @@ def on_user_created(sender, user, **kwargs):
 def on_user_updated(sender, user, updates=None, **kwargs):
     if user_auth_is_gip(user):
         if updates and updates.get("password"):
-            send_notification("password change", user)
+            send_notification("password", user)
         else:
-            send_notification("update user", user)
+            send_notification("update", user)
 
 
 def on_user_deleted(sender, user, **kwargs):
     if user_auth_is_gip(user):
-        send_notification("delete user", user)
+        send_notification("delete", user)
 
 
 def on_push(sender, item, **kwargs):
