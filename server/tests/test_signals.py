@@ -84,7 +84,7 @@ def test_cem_notification_on_user_changes(app):
                     {
                         "object_id": str(user["_id"]),
                         "company": str(company_id),
-                        "type": "update user",
+                        "type": "update",
                         "platform": "Test",
                     }
                 ),
@@ -102,7 +102,7 @@ def test_cem_notification_on_user_changes(app):
                     {
                         "object_id": str(user["_id"]),
                         "company": str(company_id),
-                        "type": "password change",
+                        "type": "password",
                         "platform": "Test",
                     }
                 ),
@@ -120,7 +120,7 @@ def test_cem_notification_on_user_changes(app):
                     {
                         "object_id": str(user["_id"]),
                         "company": str(company_id),
-                        "type": "delete user",
+                        "type": "delete",
                         "platform": "Test",
                     }
                 ),

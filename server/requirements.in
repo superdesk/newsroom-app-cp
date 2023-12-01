@@ -1,2 +1,1 @@
-google-auth==2.6.0
 git+https://github.com/superdesk/newsroom-core.git@develop#egg=Newsroom-Core

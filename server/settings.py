@@ -87,7 +87,6 @@ CLIENT_LOCALE_FORMATS["en"].update(
         "DATE_FORMAT": "MMM Do, YYYY",
         "COVERAGE_DATE_FORMAT": "MMM Do, YYYY",
         "COVERAGE_DATE_TIME_FORMAT": "HH:mm MMM Do, YYYY",
-
         # server formats
         "DATE_FORMAT_HEADER": "long",
     }
@@ -101,7 +100,6 @@ CLIENT_LOCALE_FORMATS["fr_CA"].update(
         "COVERAGE_DATE_TIME_FORMAT": "HH:mm [le] Do MMMM YYYY",
         "AGENDA_DATE_FORMAT_SHORT": "dddd, D MMMM",
         "AGENDA_DATE_FORMAT_LONG": "dddd, D MMMM YYYY",
-
         # server formats
         "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",
         "NOTIFICATION_EMAIL_TIME_FORMAT": "HH:mm",
@@ -208,7 +206,6 @@ AGENDA_GROUPS = [
 
 
 BLUEPRINTS = [
-    "cp.auth",  # we need this one loaded before newsroom.auth to make it override logout
     "cp.mgmt_api_docs",
 ] + [
     blueprint
@@ -233,7 +230,6 @@ CORE_APPS = [
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
-    "cp.auth",
     "newsroom.auth.saml",
 ]
 
@@ -305,6 +301,8 @@ WIRE_SEARCH_FIELDS = [
 ]
 
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
+
+WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
 
 CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_field_analyzer"]["filter"] = [
     "lowercase",
