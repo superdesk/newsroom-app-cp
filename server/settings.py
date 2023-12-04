@@ -104,7 +104,7 @@ CLIENT_LOCALE_FORMATS["fr_CA"].update(
         "DATE_FORMAT_HEADER": "d MMMM yyyy à H:mm zzz",
         "NOTIFICATION_EMAIL_TIME_FORMAT": "HH:mm",
         "NOTIFICATION_EMAIL_DATE_FORMAT": "d MMMM yyyy",
-        "NOTIFICATION_EMAIL_DATETIME_FORMAT": "d MMMM yyyy à H:mm",
+        "NOTIFICATION_EMAIL_DATETIME_FORMAT": "d MMMM yyyy à H 'h' mm",
     }
 )
 
