@@ -13,7 +13,7 @@
     --color-interactive-focus-l: 46%;
 
     /* LOGIN PAGE */
-    --login-page-color-bg: hsl(0, 3%, 15%);
+    --login-page-color-bg: var(--color-background--muted);
 
     /* COMPONENT: NAVBAR MAIN */
     --top-bar-color-bg: hsl(0, 0%, 18%);
