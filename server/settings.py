@@ -313,3 +313,7 @@ CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_fiel
 # bump core versions to reindex inclusing elision
 WIRE_SCHEMA_VERSION = 4
 AGENDA_SCHEMA_VERSION = 6
+
+SOURCE_EXPIRY_DAYS = {
+    "test": 1,
+}
