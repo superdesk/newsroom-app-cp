@@ -1,7 +1,7 @@
 [
     {
         "_id": "wire",
-        "init_version": 6,
+        "init_version": 7,
         "preview": {
             "slugline": {
                 "displayed": true
@@ -18,6 +18,8 @@
             "metadata_fields": [
               "urgency",
               "source",
+              "expiry",
+              "duration",
               "wordcount",
               "previous_versions",
               "embargo"
@@ -42,6 +44,8 @@
             "metadata_fields": [
               "urgency",
               "source",
+              "expiry",
+              "duration",
               "wordcount",
               "previous_versions",
               "embargo"
@@ -66,7 +70,7 @@
     },
     {
         "_id": "home",
-        "init_version": 4,
+        "init_version": 5,
         "list": {
             "wordcount": {
                 "displayed": true
@@ -94,6 +98,8 @@
             "metadata_fields": [
               "urgency",
               "source",
+              "expiry",
+              "duration",
               "wordcount",
               "previous_versions",
               "embargo"
@@ -112,6 +118,8 @@
             "metadata_fields": [
               "urgency",
               "source",
+              "expiry",
+              "duration",
               "wordcount",
               "previous_versions",
               "embargo"
