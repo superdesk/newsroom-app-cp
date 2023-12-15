@@ -266,6 +266,7 @@ SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
     "localhost": "localhost",
     "uat": "uat",
+    "dev": "uat",
 }
 
 for url, path in SAML_PATH_MAP.items():
