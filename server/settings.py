@@ -315,3 +315,13 @@ WIRE_SCHEMA_VERSION = 4
 AGENDA_SCHEMA_VERSION = 6
 
 WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
+
+CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_field_analyzer"]["filter"] = [
+    "lowercase",
+    "elision",
+    "asciifolding",
+]
+
+# bump core versions to reindex inclusing elision
+WIRE_SCHEMA_VERSION = 4
+AGENDA_SCHEMA_VERSION = 6
