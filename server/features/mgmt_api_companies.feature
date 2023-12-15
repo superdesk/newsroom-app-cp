@@ -97,30 +97,53 @@ Feature: Management API - Companies
             "contact_name": "zzz company",
             "contact_email": "contact@zzz.com",
             "phone": "99999999",
+            "sections": {"wire": true, "agenda": true},
             "products": [
                 {"_id": "#products._id#", "section": "wire"}
-            ]
-        }
-        """
-        Then we get error 400
-        """
-        {"code": 400, "message": "invalid product type for product #products._id#, should be agenda"}
-        """
-
-        When we post to "/companies"
-        """
-        {
-            "name": "zzz company",
-            "contact_name": "zzz company",
-            "contact_email": "contact@zzz.com",
-            "phone": "99999999",
-            "products": [
-                {"_id": "#products._id#", "section": "agenda"}
             ]
         }
         """
         Then we get response code 201
 
+        When we get "/companies/#companies._id#"
+        Then we get existing resource
+        """
+        {
+            "products": [
+                {"_id": "#products._id#", "section": "agenda"}
+            ]
+        }
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "sections": {
+                "wire": true,
+                "agenda": true
+            },
+            "products": [
+                {"_id": "#products._id#", "section": "wire"}
+            ]
+        }
+        """
+        Then we get response code 201
+
+        When we get "/users/#users._id#"
+        Then we get existing resource
+        """
+        {
+            "products": [
+                {"_id": "#products._id#", "section": "agenda"}
+            ]
+        }
+        """
+
+
         When we patch "/companies/#companies._id#"
         """
         {
@@ -129,9 +152,20 @@ Feature: Management API - Companies
             ]
         }
         """
-        Then we get error 400
+        Then we get response code 200
 
-        When we patch "/companies/#companies._id#"
+        When we get "/companies/#companies._id#"
+        Then we get existing resource
+        """
+        {
+            "products": [
+                {"_id": "#products._id#", "section": "agenda", "seats": 0}
+            ]
+        }
+        """
+
+        When we get "/users/#users._id#"
+        Then we get existing resource
         """
         {
             "products": [
@@ -139,4 +173,3 @@ Feature: Management API - Companies
             ]
         }
         """
-        Then we get response code 200
