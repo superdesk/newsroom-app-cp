@@ -140,27 +140,17 @@ Feature: Management API - Users
             ]
         }
         """
-        Then we get error 400
-        """
-        {"code": 400, "message": "invalid product type for product #products._id#, should be agenda"}
-        """
+        Then we get response code 201
 
-        When we post to "/users"
+        When we get "/users/#users._id#"
+        Then we get existing resource
         """
         {
-            "first_name": "John",
-            "last_name": "Cena",
-            "email": "johncena@wwe.com",
-            "company": "#companies._id#",
-            "sections": {
-                "agenda": true
-            },
             "products": [
-                {"section": "agenda", "_id": "#products._id#"}
+                {"_id": "#products._id#", "section": "agenda"}
             ]
         }
         """
-        Then we get response code 201
 
         When we patch "/users/#users._id#"
         """
@@ -170,9 +160,10 @@ Feature: Management API - Users
             ]
         }
         """
-        Then we get error 400
+        Then we get response code 200
 
-        When we patch "/users/#users._id#"
+        When we get "/users/#users._id#"
+        Then we get existing resource
         """
         {
             "products": [
@@ -180,4 +171,3 @@ Feature: Management API - Users
             ]
         }
         """
-        Then we get response code 200
