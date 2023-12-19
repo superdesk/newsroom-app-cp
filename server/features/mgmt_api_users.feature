@@ -171,3 +171,38 @@ Feature: Management API - Users
             ]
         }
         """
+
+    Scenario: Validate locale
+
+        Given "companies"
+        """
+        [{"name": "zzz company"}]
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "locale": "fr"
+        }
+        """
+
+        Then we get error 400
+        """
+        {"code": 400, "message": "Locale is not in configured list of locales."}
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "locale": "fr_CA"
+        }
+        """
+        Then we get response code 201
