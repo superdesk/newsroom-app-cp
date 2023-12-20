@@ -110,7 +110,7 @@ Feature: Management API - Companies
         """
         {
             "products": [
-                {"_id": "#products._id#", "section": "agenda"}
+                {"_id": "#products._id#", "section": "agenda", "seats": 0}
             ]
         }
         """
