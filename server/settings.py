@@ -161,8 +161,21 @@ WIRE_GROUPS = [
         },
     },
     {
+        "field": "distribution",
+        "label": lazy_gettext("Service"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "distribution",
+        },
+    },
+    {
         "field": "genre",
         "label": lazy_gettext("Version"),
+    },
+    {
+        "field": "urgency",
+        "label": lazy_gettext("Ranking"),
     },
 ]
 
@@ -172,6 +185,7 @@ WIRE_AGGS = {
     "service": {"terms": {"field": "service.name", "size": 50}},
     "subject": {"terms": {"field": "subject.name", "size": 100}},
     "genre": {"terms": {"field": "genre.name", "size": 50}},
+    "urgency": {"terms": {"field": "urgency"}},
 }
 
 AGENDA_GROUPS = [
