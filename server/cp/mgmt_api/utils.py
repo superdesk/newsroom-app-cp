@@ -1,14 +1,16 @@
+import bson
 import superdesk
 
 
-def validate_product_refs(products):
+def validate_product_refs(product_refs):
     products_service = superdesk.get_resource_service("products")
-    for product_spec in products:
-        product = products_service.find_one(req=None, _id=product_spec["_id"])
-        assert product is not None and product["product_type"] == product_spec.get(
-            "section"
-        ), (
-            f"invalid product type for product {product_spec['_id']}, should be {product['product_type']}"
-            if product
-            else f"unknown product {product_spec['_id']}"
-        )
+    product_ids = [bson.ObjectId(ref["_id"]) for ref in product_refs]
+    products = list(
+        products_service.get_from_mongo(req=None, lookup={"_id": {"$in": product_ids}})
+    )
+    products_by_id = {str(product["_id"]): product for product in products}
+
+    for ref in product_refs:
+        product = products_by_id.get(str(ref["_id"]))
+        assert product is not None
+        ref["section"] = product["product_type"]
