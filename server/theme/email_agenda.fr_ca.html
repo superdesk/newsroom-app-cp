@@ -1,7 +1,7 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
-<a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a>
+<a href="{{ url_for_agenda(item) }}"><b>Voir cet élément dans votre compte: </b>{{ url_for_agenda(item) }}</a>
 
-{%  if item.event %}<p class="h3">{{ dateString }}</p>{% endif %}
+{%  if item.event %}<p class="h3"><b>Quand: </b>{{ dateString }}</p>{% endif %}
 
 {% if location and location != '' %}
     <p class="h3"><b>Où:</b> {{ location }}</p>
@@ -32,6 +32,7 @@
 {% endif %}
 
 {% if item.definition_long or item.definition_short %}
+    <b>Description de l’événement: </b>
     <p>
         {{ get_highlighted_field(item, ["definition_long", "definition_short"]) | safe }}
     </p>
@@ -43,7 +44,7 @@
             <h3>Élément de couverture:</h3>
             {% if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
                 <p>
-                    {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+                <b>Description de l’élément de planification: </b>{{ planning_item.get('description_text') or planning_item.get('name') or '' }}
                 </p>
             {% endif %}
         </div>
@@ -62,14 +63,17 @@
                 </div>
 
                 {% for cov in get_planning_coverages(item, planning_item._id) %}
-                    <div>Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}</div>
-                    {% if cov.get('planning', {}).get('ednote') %}
-                        <div><i> Note de la rédaction: {{ cov['planning']['ednote'] }}</i></div>
-                    {% endif %}
-                    {% if is_admin and cov.get('planning', {}).get('internal_note') %}
-                        <div><i>Note interne: {{ cov['planning']['internal_note'] }}</i></div>
-                    {% endif %}
-                    <br><br>
+                    <div>
+                        <p><b>Type de couverture: </b>{{get_coverage_content_type_name(cov,recipient_language)}}</p>
+                        <p><b>Statut de couverture: </b>{{get_coverage_status_text(cov)}}</p>
+                        <p><b>Date et heure d’échéance de la couverture: </b>{{ cov['scheduled'] | notification_datetime }}</p>
+                        <p><b>Affecté à: </b>
+                            {{cov['assigned_desk_name']}}
+                            {{cov['assigned_desk_email']}}
+                            {{cov['assigned_user_name']}}
+                            {{cov['assigned_user_email']}} 
+                        </p>
+                    </div>
                 {% endfor %}
             </p>
         {% endif %}

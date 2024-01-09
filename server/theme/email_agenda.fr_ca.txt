@@ -1,29 +1,27 @@
 {{ item.headline or item.name }}
-{{ url_for_agenda(item) }}
-{%  if item.event %}{{ dateString }}{% endif %}
+Voir cet élément dans votre compte: {{ url_for_agenda(item) }}
+{%  if item.event %}Quand: {{ dateString }}{% endif %}
 {% if location and location != '' %}Où: {{ location }}
 {% endif %}{% if contacts | length is gt 1 %}Contact: {% for contact in contacts %}{{ contact.name or contact.organisation }} {{ contact.phone }} {{ contact.mobile }} {{ contact.email }}
 {% endfor %}
 {% endif %}{% if links | length is gt 1 %}Web: {% for link in links %}{{ link }}
 {% endfor %}
 {% endif %}
-{% if item.definition_long or item.definition_short %}{{ item.definition_long or item.definition_short }}
+{% if item.definition_long or item.definition_short %}Description de l’événement: {{ item.definition_long or item.definition_short }}
 {% endif %}
 {%  for planning_item in item.get('planning_items', []) or [] %}
 Élément de couverture:
 {%- if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
-{{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+Description de l’élément de planification: {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
 {% endif -%}
 {% if planning_item.get('ednote') %}Note de la rédaction: {{ planning_item.get('ednote') }}{% endif %}
 {% if planning_item.get('coverages', []) | length is gt 0 %}
 Couverture:
 {% for cov in get_planning_coverages(item, planning_item._id) %}
-Couverture {{ get_coverage_content_type(cov, 'fr_ca') }} '{{ cov.slugline or cov.planning.slugline }}' {% include 'coverage_status_text.fr_ca.txt' %}
-{%- if cov.get('planning', {}).get('ednote') %}
-Note de la rédaction: {{ cov['planning']['ednote'] }} {% endif %}
-{%- if is_admin and cov.get('planning', {}).get('internal_note') %}
-Note interne: {{ cov['planning']['internal_note'] }}
-{% endif %}
+Type de couverture: {get_coverage_content_type_name(cov,recipient_language)}
+Statut de couverture: {get_coverage_status_text(cov)}
+Date et heure d’échéance de la couverture: { cov['scheduled'] | notification_datetime }
+Affecté à: {{cov['assigned_desk_name']}} {{cov['assigned_desk_email']}} {{cov['assigned_user_name']}} {{cov['assigned_user_email']}} 
 {% endfor %}
 {% endif %}
 {% endfor %}
