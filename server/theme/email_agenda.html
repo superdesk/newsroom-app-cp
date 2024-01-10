@@ -1,10 +1,9 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
-<a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a>
-
-{%  if item.event %}<p class="h3">{{ dateString }}</p>{% endif %}
+<a href="{{ url_for_agenda(item) }}"><b>View this item in your account: </b>{{ url_for_agenda(item) }}</a>
+{%  if item.event %}<p class="h3"><b>When:</b>{{ dateString }}</p>{% endif %}
 
 {% if location and location != '' %}
-    <p class="h3"><b>Où:</b> {{ location }}</p>
+    <p class="h3"><b>Where:</b> {{ location }}</p>
 {% endif %}
 
 {% if map and map != '' %}
@@ -32,6 +31,7 @@
 {% endif %}
 
 {% if item.definition_long or item.definition_short %}
+    <b>Event description: </b>
     <p>
         {{ get_highlighted_field(item, ["definition_long", "definition_short"]) | safe }}
     </p>
@@ -40,17 +40,17 @@
 {%  for planning_item in item.get('planning_items', []) or [] %}
     <div>
         <div>
-            <h3>Élément de couverture:</h3>
+            <h3>Planning item:</h3>
             {% if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
                 <p>
-                    {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+                <b>Planning item description:</b> {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
                 </p>
-            {% endif %}
+            {%  endif %}
         </div>
 
         {% if planning_item.get('ednote') %}
             <div>
-                <strong>Note de la rédaction:</strong>
+                <strong>Editorial Note:</strong>
                 {{ planning_item.get('ednote') }}
             </div>
         {% endif %}
@@ -58,15 +58,15 @@
         {% if planning_item.get('coverages', []) %}
             <p>
                 <div>
-                    <p><strong>Couverture:</strong></p>
+                    <p><strong>Coverage:</strong></p>
                 </div>
 
                 {% for cov in get_planning_coverages(item, planning_item._id) %}
                     <div>
-                        <p><b>Type de couverture: </b>{{get_coverage_content_type(cov,recipient_language)}}</p>
-                        <p><b>Statut de couverture: </b>{{get_coverage_status(cov)}}</p>
-                        <p><b>Date et heure d’échéance de la couverture: </b>{{get_coverage_date(cov)}}</p>
-                        <p><b>Affecté à: </b>
+                        <p><b>Type of coverage: </b>{{get_coverage_content_type(cov,recipient_language)}}</p>
+                        <p><b>Coverage status: </b>{{get_coverage_status(cov)}}</p>
+                        <p><b>Coverage due date & time: </b>{{get_coverage_date(cov)}}</p>
+                        <p><b>Assigned to: </b>
                             {{cov['assigned_desk_name']}}
                             {{cov['assigned_desk_email']}}
                             {{cov['assigned_user_name']}}
