@@ -1,7 +1,7 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
-<a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a>
+<a href="{{ url_for_agenda(item) }}"><b>Voir cet élément dans votre compte: </b>{{ url_for_agenda(item) }}</a>
 
-{%  if item.event %}<p class="h3">{{ dateString }}</p>{% endif %}
+{%  if item.event %}<p class="h3"><b>Quand: </b>{{ dateString }}</p>{% endif %}
 
 {% if location and location != '' %}
     <p class="h3"><b>Où:</b> {{ location }}</p>
@@ -32,6 +32,7 @@
 {% endif %}
 
 {% if item.definition_long or item.definition_short %}
+    <b>Description de l’événement: </b>
     <p>
         {{ get_highlighted_field(item, ["definition_long", "definition_short"]) | safe }}
     </p>
@@ -43,7 +44,7 @@
             <h3>Élément de couverture:</h3>
             {% if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
                 <p>
-                    {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+                <b>Description de l’élément de planification: </b>{{ planning_item.get('description_text') or planning_item.get('name') or '' }}
                 </p>
             {% endif %}
         </div>
