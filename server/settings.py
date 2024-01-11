@@ -144,6 +144,15 @@ WIRE_GROUPS = [
         "label": lazy_gettext("Language"),
     },
     {
+        "field": "mediaformat",
+        "label": lazy_gettext("Media type"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "mediaformat",
+        },
+    },
+    {
         "field": "source",
         "label": lazy_gettext("Source"),
     },
