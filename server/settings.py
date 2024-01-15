@@ -134,7 +134,39 @@ CLIENT_CONFIG.update(
                 "agenda": ["name", "description"],
             },
         },
-    }
+        "coverage_status_filter": {
+            "not planned": {
+                "enabled": True,
+                "index": 1,
+                "option_label": lazy_gettext("No coverage"),
+                "button_label": lazy_gettext("No coverage"),
+            },
+            "not intended": {
+                "enabled": True,
+                "index": 2,
+                "option_label": lazy_gettext("Cancelled / not planned"),
+                "button_label": lazy_gettext("Cancelled / not planned"),
+            },
+            "may be": {
+                "enabled": True,
+                "index": 3,
+                "option_label": lazy_gettext("Not decided / on merit"),
+                "button_label": lazy_gettext("Not decided / on merit"),
+            },
+            "planned": {
+                "enabled": True,
+                "index": 4,
+                "option_label": lazy_gettext("Planned"),
+                "button_label": lazy_gettext("Planned"),
+            },
+            "completed": {
+                "enabled": True,
+                "index": 5,
+                "option_label": lazy_gettext("Completed"),
+                "button_label": lazy_gettext("Completed"),
+            },
+        },
+    },
 )
 
 CLIENT_LOCALE_FORMATS = CLIENT_CONFIG["locale_formats"]
@@ -332,7 +364,9 @@ AGENDA_SCHEMA_VERSION = 6
 
 WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
 
-CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_field_analyzer"]["filter"] = [
+CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"][
+    "html_field_analyzer"
+]["filter"] = [
     "lowercase",
     "elision",
     "asciifolding",
