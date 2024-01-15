@@ -792,7 +792,6 @@ components:
                 $ref: '#/components/schemas/ObjectId'
             required:
               - _id
-              - section
 
       required:
         - first_name
