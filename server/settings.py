@@ -245,6 +245,8 @@ INSTALLED_APPS = [
 WIRE_SUBJECT_SCHEME_WHITELIST = [
     "distribution",
     "subject_custom",
+    "mediaformat",
+    "station",
 ]
 
 CELERY_BEAT_SCHEDULE = {
