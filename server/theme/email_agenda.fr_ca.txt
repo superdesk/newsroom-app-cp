@@ -21,7 +21,11 @@ Couverture:
 Type de couverture: {{get_coverage_content_type(cov,recipient_language)}}
 Statut de couverture: {{get_coverage_status(cov)}}
 Date et heure d’échéance de la couverture: {{get_coverage_date(cov)}}
-Affecté à: {{cov['assigned_desk_name']}} {{cov['assigned_desk_email']}} {{cov['assigned_user_name']}} {{cov['assigned_user_email']}} 
+Affecté à:
+{% if cov.get('assigned_desk_name')%}{{cov['assigned_desk_name']}}{% endif %}
+{% if cov.get('assigned_desk_email') %}{{cov['assigned_desk_email']}}{% endif %}
+{% if cov.get('assigned_user_name') %}{{cov['assigned_user_name']}}{% endif %}
+{% if cov.get('assigned_user_email') %}{{cov['assigned_user_email']}}{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}
