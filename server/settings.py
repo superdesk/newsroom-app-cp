@@ -23,6 +23,7 @@ TRANSLATIONS_PATH = SERVER_PATH.joinpath("translations")
 SITE_NAME = "CP NewsPro"
 COPYRIGHT_HOLDER = "CP"
 CONTACT_ADDRESS = None
+DOWNLOAD_RENDITION = "original"
 
 SERVICES = [
     {"name": "Domestic Sport", "code": "t"},
