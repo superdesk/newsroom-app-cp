@@ -23,6 +23,7 @@ TRANSLATIONS_PATH = SERVER_PATH.joinpath("translations")
 SITE_NAME = "CP NewsPro"
 COPYRIGHT_HOLDER = "CP"
 CONTACT_ADDRESS = None
+DOWNLOAD_RENDITION = "original"
 
 SERVICES = [
     {"name": "Domestic Sport", "code": "t"},
@@ -359,6 +360,4 @@ CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"][
 WIRE_SCHEMA_VERSION = 4
 AGENDA_SCHEMA_VERSION = 6
 
-SOURCE_EXPIRY_DAYS = {
-    "test": 1,
-}
+SOURCE_EXPIRY_DAYS = {}
