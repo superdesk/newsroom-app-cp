@@ -1,7 +1,7 @@
 [
     {
         "_id": "wire",
-        "init_version": 7,
+        "init_version": 8,
         "preview": {
             "slugline": {
                 "displayed": true
@@ -41,6 +41,9 @@
             "distribution": {
                 "displayed": false
             },
+            "gallery": {
+                "displayed": false
+            },
             "metadata_fields": [
               "urgency",
               "source",
@@ -70,7 +73,7 @@
     },
     {
         "_id": "home",
-        "init_version": 5,
+        "init_version": 6,
         "list": {
             "wordcount": {
                 "displayed": true
@@ -114,6 +117,9 @@
             },
             "slugline": {
                 "displayed": true
+            },
+            "gallery": {
+                "displayed": false
             },
             "metadata_fields": [
               "urgency",
