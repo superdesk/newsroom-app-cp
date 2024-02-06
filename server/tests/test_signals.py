@@ -217,4 +217,5 @@ def test_handle_transcripts(app):
 
     transcript_item["language"] = "fr-CA"
     signals.on_publish_item(None, transcript_item)
+    assert 1 == len(transcript_item["subject"])
     assert "Station de télé" == transcript_item["subject"][0]["name"]
