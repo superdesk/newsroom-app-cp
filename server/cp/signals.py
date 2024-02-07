@@ -106,7 +106,8 @@ def handle_transcripts(item):
         media_type["name"] = get_media_type_name(media_type["code"], item["language"])
 
     if media_source:
-        item["source"] = media_source["name"]
+        item["source"] = media_source.get("name") or media_source.get("code")
+        item["subject"] = [s for s in item["subject"] if s.get("scheme") != media_source_scheme]
 
     if media_type and media_type["code"] in ("tvstation", "radionstation"):
         # it might be already populated based on previous segment
