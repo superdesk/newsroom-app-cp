@@ -375,3 +375,9 @@ CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"][
 # bump core versions to reindex inclusing elision
 WIRE_SCHEMA_VERSION = 4
 AGENDA_SCHEMA_VERSION = 6
+
+EMAIL_DEFAULT_SENDER_NAME = "CP NewsPro"
+EMAIL_SENDER_NAME_LANGUAGE_MAP = {
+    "en": "CP NewsPro",
+    "fr_CA": "PC NouvellesPro",
+}
