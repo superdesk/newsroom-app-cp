@@ -367,5 +367,5 @@ AGENDA_CSV_SUBJECT_SCHEMES = ["subject_custom"]
 EMAIL_DEFAULT_SENDER_NAME = "CP NewsPro"
 EMAIL_SENDER_NAME_LANGUAGE_MAP = {
     "en": "CP NewsPro",
-    "fr_CA": "PC NouvellesPro",
+    "fr_ca": "PC NouvellesPro",
 }
