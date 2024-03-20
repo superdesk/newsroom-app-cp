@@ -34,9 +34,9 @@ blinker==1.7.0
     #   raven
     #   sentry-sdk
     #   superdesk-core
-boto3==1.34.65
+boto3==1.34.66
     # via superdesk-core
-botocore==1.34.65
+botocore==1.34.66
     # via
     #   boto3
     #   s3transfer
@@ -102,7 +102,7 @@ draftjs-exporter[lxml]==2.1.7
     # via superdesk-core
 ecs-logging==2.1.0
     # via elastic-apm
-elastic-apm[flask]==6.21.3
+elastic-apm[flask]==6.21.4.post8347027212
     # via superdesk-core
 elasticsearch==7.13.4
     # via
@@ -110,7 +110,7 @@ elasticsearch==7.13.4
     #   superdesk-core
 eve==1.1.2
     # via superdesk-core
-eve-elastic==7.4.0
+eve-elastic==7.4.1
     # via superdesk-core
 events==0.3
     # via eve
@@ -170,7 +170,7 @@ icalendar==4.0.9
     # via superdesk-planning
 idna==3.6
     # via requests
-importlib-resources==6.3.1
+importlib-resources==6.3.2
     # via limits
 isodate==0.6.1
     # via python3-saml
