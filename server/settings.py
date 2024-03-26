@@ -370,3 +370,5 @@ EMAIL_SENDER_NAME_LANGUAGE_MAP = {
     "en": "CP NewsPro",
     "fr_ca": "PC NouvellesPro",
 }
+
+PRODUCTFRUITS_WORKSPACE_CODE = os.environ.get("PRODUCTFRUITS_WORKSPACE_CODE")
