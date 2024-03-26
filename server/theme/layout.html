@@ -9,11 +9,24 @@
     {% if get_locale() == "fr_CA" %}
     <title>PC NouvellesPro pour RP</title>
     {% else %}
-    <title>CP NewsPro for PR</title>
+    <title>CP NewsPro for PR v2</title>
     {% endif %}
 {% endblock %}
 
 {% block logo %}
 {% include 'logo.html' %}
 {% include 'logo-additional.html' %}
+{% endblock %}
+
+{% block layout_script %}
+{% if config.PRODUCTFRUITS_WORKSPACE_CODE and auth_user %}
+<script type="text/javascript">
+    (function(w,d,u){
+        w.$productFruits=w.$productFruits||[];
+        w.productFruits=w.productFruits||{};w.productFruits.scrV='2';
+        let a=d.getElementsByTagName('head')[0];let r=d.createElement('script');r.async=1;r.src=u;a.appendChild(r);
+    })(window,document,'https://app.productfruits.com/static/script.js');
+	$productFruits.push(['init', '{{ config.PRODUCTFRUITS_WORKSPACE_CODE }}', '{{ get_locale()[:2] }}', { username: '{{ hash(auth_user._id) }}' }]);
+</script>
+{% endif %}
 {% endblock %}
