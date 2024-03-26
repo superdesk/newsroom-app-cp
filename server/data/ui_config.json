@@ -73,7 +73,7 @@
     },
     {
         "_id": "home",
-        "init_version": 6,
+        "init_version": 7,
         "list": {
             "wordcount": {
                 "displayed": true
@@ -131,7 +131,8 @@
               "embargo"
             ]
         },
-        "search": true
+        "search": true,
+        "personal_home_card_type": "6-text-only"
     },
     {
         "_id": "agenda",
