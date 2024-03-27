@@ -1,20 +1,22 @@
 <h1 style="font-size: 1.5rem; font-weight: 700; line-height: 1.4; font-family: 'Titilium Web', sans-serif; color: #333;">
     {{ get_highlighted_field(item, ["headline"]) | safe }}
 </h1>
+<p style="font-size: 0.875rem; font-weight: 400; line-height: 1.3; font-family: 'Lato', sans-serif; color: #444;">
+    <span style="font-weight: 600;">View this item in your account: </span><a href="{{ url_for_wire(item, True, section) }}">{{ url_for_wire(item, True, section) }}</a>
+    {% if topic_name %}<span style="font-weight: 600;">New item for followed topic: </span>{{ topic_name }}<br />{% endif %}
+    {% if item.service %}<span style="font-weight: 600;">Category: </span>{{ item.service[0].name }}<br />{% endif %}
+    <span style="font-weight: 600;">Word count: </span>{{ item.wordcount }}<br />
+    <br />
+</p>
 
 <p style="font-size: 0.875rem; font-weight: 400; line-height: 1.3; font-family: 'Lato', sans-serif; color: #444;">
     {% if item.slugline %}<span style="font-weight: 600;">Slugline: </span>{{ get_highlighted_field(item, ["slugline"]) | safe }}<br />{% endif %}
     {% if item.source %}<span style="font-weight: 600;">Source: </span>{{ item.source }}<br />{% endif %}
     <span style="font-weight: 600;">Published: </span>{{ item.versioncreated | datetime_long }}<br />
+    {% if item.byline %}<span style="font-weight: 600;">{{ item.byline }}</span>{% endif %}
 </p>
 
 <div style="font-size: 0.9375rem; font-weight: 400; line-height: 1.55; font-family: 'Lato', sans-serif; color: #333">
 {% if item.body_html %}{{ get_highlighted_field(item, ["body_html"]) | safe }}{% elif item.body_txt %}<pre>{{ item.body_txt }}</pre>{% endif %}
 </div>
 
-<p style="font-size: 0.875rem; font-weight: 400; line-height: 1.3; font-family: 'Lato', sans-serif; color: #444;">
-    <span style="font-weight: 600;">Word count: </span>{{ item.wordcount }}<br />
-    {% if item.service %}<span style="font-weight: 600;">Category: </span>{{ item.service[0].name }}<br />{% endif %}
-    {% if topic_name %}<span style="font-weight: 600;">New item for followed topic: </span>{{ topic_name }}<br />{% endif %}
-    <span style="font-weight: 600;">View this item in your account: </span><a href="{{ url_for_wire(item, True, section) }}">{{ url_for_wire(item, True, section) }}</a><br />
-</p>
