@@ -131,8 +131,7 @@
               "embargo"
             ]
         },
-        "search": true,
-        "personal_home_card_type": "6-text-only"
+        "search": true
     },
     {
         "_id": "agenda",
