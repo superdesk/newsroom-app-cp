@@ -1,8 +1,9 @@
 {{ item.headline or item.name }}
+Nouvel élément pour votre sujet suivi: {{ topic_name }}
 Voir cet élément dans votre compte: {{ url_for_agenda(item) }}
-{%  if item.event %}Quand: {{ dateString }}{% endif %}
+{%  if item.event %}Quand: {{ dateString }}  {{get_event_state(item)}}{% endif %}
 {% if location and location != '' %}Où: {{ location }}
-{% endif %}{% if contacts | length is gt 1 %}Contact: {% for contact in contacts %}{{ contact.name or contact.organisation }} {{ contact.phone }} {{ contact.mobile }} {{ contact.email }}
+{% endif %}{% if contacts | length is gt 0 %}Contact: {% for contact in contacts %}{{ contact.name or contact.organisation }} {{ contact.phone }} {{ contact.mobile }} {{ contact.email }}
 {% endfor %}
 {% endif %}{% if links | length is gt 1 %}Web: {% for link in links %}{{ link }}
 {% endfor %}

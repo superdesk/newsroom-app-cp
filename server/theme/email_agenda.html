@@ -1,6 +1,7 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
+<div><b>New item for saved topic: {{ topic_name }}</b></div>
 <a href="{{ url_for_agenda(item) }}"><b>View this item in your account: </b>{{ url_for_agenda(item) }}</a>
-{%  if item.event %}<p class="h3"><b>When:</b>{{ dateString }}</p>{% endif %}
+{%  if item.event %}<p class="h3"><b>When:</b>{{ dateString }}  {{get_event_state(item)}}</p>{% endif %}
 
 {% if location and location != '' %}
     <p class="h3"><b>Where:</b> {{ location }}</p>
@@ -11,7 +12,7 @@
               src={{ map | safe }} ></div>
 {% endif %}
 
-{% if contacts | length is gt 1 %}
+{% if contacts | length is gt 0 %}
     <p><b>Contact: </b>
     {% for contact in contacts %}
         <div>{{ contact.name or contact.organisation }}
