@@ -211,7 +211,7 @@ WIRE_GROUPS = [
 
 WIRE_AGGS = {
     "language": {"terms": {"field": "language", "size": 50}},
-    "source": {"terms": {"field": "source", "size": 50}},
+    "source": {"terms": {"field": "source", "size": 30}},
     "service": {"terms": {"field": "service.name", "size": 50}},
     "subject": {"terms": {"field": "subject.name", "size": 100}},
     "genre": {"terms": {"field": "genre.name", "size": 50}},
