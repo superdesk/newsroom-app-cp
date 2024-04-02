@@ -119,6 +119,7 @@ CLIENT_CONFIG.update(
         "date_format": "MMM Do, YYYY",
         "default_timezone": DEFAULT_TIMEZONE,
         "view_content_tooltip_email": "help-aide@thecanadianpress.com",
+        "searchbar_threshold_value": 30,
         "filter_panel_defaults": {
             "tab": {
                 "wire": "filters",
