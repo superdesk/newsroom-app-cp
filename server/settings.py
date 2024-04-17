@@ -168,6 +168,7 @@ CLIENT_CONFIG.update(
                 "button_label": lazy_gettext("Completed"),
             },
         },
+        "agenda_top_story_scheme": "topstory",
     },
 )
 
