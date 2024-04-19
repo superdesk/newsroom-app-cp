@@ -5,10 +5,10 @@ from newsroom.types import AuthProviderType
 
 AUTH_PROVIDERS.extend([{
     "_id": "gip",
-    "name": lazy_gettext("Google"),
-    "auth_type": AuthProviderType.GOOGLE_OAUTH.value,
+    "name": lazy_gettext("Firebase"),
+    "auth_type": AuthProviderType.FIREBASE,
 }, {
     "_id": "azure",
     "name": lazy_gettext("Azure"),
-    "auth_type": AuthProviderType.SAML.value,
+    "auth_type": AuthProviderType.SAML,
 }])

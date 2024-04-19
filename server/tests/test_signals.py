@@ -3,28 +3,29 @@ import bson
 import responses
 import cp.signals as signals
 
+from datetime import datetime, timedelta
 from responses import matchers
 
 
-def test_on_publish_no_extended_headline():
+def test_on_publish_no_extended_headline(app):
     item = {"headline": "foo"}
     signals.on_publish_item(None, item)
     assert item["headline"] == "foo"
 
 
-def test_on_publish_empty_extended_headline():
+def test_on_publish_empty_extended_headline(app):
     item = {"headline": "foo", "extra": {cp.HEADLINE2: ""}}
     signals.on_publish_item(None, item)
     assert item["headline"] == "foo"
 
 
-def test_on_publish_copy_extended_headline():
+def test_on_publish_copy_extended_headline(app):
     item = {"headline": "foo", "extra": {cp.HEADLINE2: "bar"}}
     signals.on_publish_item(None, item)
     assert item["headline"] == "bar"
 
 
-def test_on_publish_add_correction_to_body_html():
+def test_on_publish_add_correction_to_body_html(app):
     item = {
         "body_html": "<p>some text</p><p>another one</p>",
         "extra": {"correction": "correction info"},
@@ -45,12 +46,17 @@ def test_cem_notification_on_user_changes(app):
         }
     )
     company_id = bson.ObjectId()
-    app.data.insert("companies", [{
-        "_id": company_id,
-        "name": "Example Company",
-        "is_enabled": True,
-        "auth_provider": "gip",
-    }])
+    app.data.insert(
+        "companies",
+        [
+            {
+                "_id": company_id,
+                "name": "Example Company",
+                "is_enabled": True,
+                "auth_provider": "gip",
+            }
+        ],
+    )
     user = {"_id": bson.ObjectId(), "email": "foo@example.com", "company": company_id}
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
@@ -140,12 +146,17 @@ def test_cem_notification_for_non_google_auth(app, mocker):
         }
     )
     company_id = bson.ObjectId()
-    app.data.insert("companies", [{
-        "_id": company_id,
-        "name": "Example Company",
-        "is_enabled": True,
-        "auth_provider": "azure",
-    }])
+    app.data.insert(
+        "companies",
+        [
+            {
+                "_id": company_id,
+                "name": "Example Company",
+                "is_enabled": True,
+                "auth_provider": "azure",
+            }
+        ],
+    )
     user = {"_id": bson.ObjectId(), "email": "foo@example.com", "company": company_id}
 
     signals.on_user_created(None, user=user, foo=1)
@@ -172,3 +183,39 @@ def test_language_agenda():
     item["language"] = "fr-ca"
     signals.push.send(None, item=item)
     assert "fr" == item["language"]
+
+
+def test_handle_transcripts(app):
+    text_item = {"source": "CP", "subject": []}
+    signals.on_publish_item(None, text_item)
+    assert 1 == len(text_item["subject"])
+    assert "mediaformat" == text_item["subject"][0]["scheme"]
+    assert "wiretext" == text_item["subject"][0]["code"]
+    assert "Wire text" == text_item["subject"][0]["name"]
+
+    text_item = {"source": "CP", "subject": [], "language": "fr_CA"}
+    signals.on_publish_item(None, text_item)
+    assert "Texte fil de presse" == text_item["subject"][0]["name"]
+
+    transcript_item = {
+        "source": "TVEyes",
+        "subject": [
+            {"code": "tvstation", "name": "TV Station", "scheme": "mediaformat"},
+            {"code": "CITY24", "name": "CP24 (CITY24)", "scheme": "station"},
+        ],
+    }
+
+    signals.on_publish_item(None, transcript_item)
+    assert "CP24 (CITY24)" == transcript_item["source"]
+    assert "TV Station" == transcript_item["subject"][0]["name"]
+    assert "expiry" in transcript_item
+    assert (
+        datetime.now()
+        < transcript_item["expiry"]
+        < datetime.now() + timedelta(days=100)
+    )
+
+    transcript_item["language"] = "fr-CA"
+    signals.on_publish_item(None, transcript_item)
+    assert 1 == len(transcript_item["subject"])
+    assert "Station de télé" == transcript_item["subject"][0]["name"]

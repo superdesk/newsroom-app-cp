@@ -57,5 +57,7 @@ CACHE_TYPE = os.environ.get('CACHE_TYPE', 'simple')  # in-memory cache
 CACHE_DEFAULT_TIMEOUT = 3600
 # Redis host (used only if CACHE_TYPE is redis)
 CACHE_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+# fix superdesk cache config
+CACHE_URL = CACHE_REDIS_URL
 
 APM_SERVICE_NAME = "CP NewsPro Management API"

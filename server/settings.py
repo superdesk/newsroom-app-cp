@@ -118,6 +118,7 @@ CLIENT_CONFIG.update(
         "time_format": "HH:mm",
         "date_format": "MMM Do, YYYY",
         "default_timezone": DEFAULT_TIMEZONE,
+        "view_content_tooltip_email": "help-aide@thecanadianpress.com",
         "filter_panel_defaults": {
             "tab": {
                 "wire": "filters",
@@ -175,6 +176,15 @@ WIRE_GROUPS = [
     {
         "field": "language",
         "label": lazy_gettext("Language"),
+    },
+    {
+        "field": "mediaformat",
+        "label": lazy_gettext("Media type"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "mediaformat",
+        },
     },
     {
         "field": "source",
@@ -253,7 +263,6 @@ AGENDA_GROUPS = [
 
 
 BLUEPRINTS = [
-    "cp.auth",  # we need this one loaded before newsroom.auth to make it override logout
     "cp.mgmt_api_docs",
 ] + [
     blueprint
@@ -278,13 +287,14 @@ CORE_APPS = [
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
-    "cp.auth",
     "newsroom.auth.saml",
 ]
 
 WIRE_SUBJECT_SCHEME_WHITELIST = [
     "distribution",
     "subject_custom",
+    "mediaformat",
+    "station",
 ]
 
 CELERY_BEAT_SCHEDULE = {
@@ -352,16 +362,6 @@ WIRE_SEARCH_FIELDS = [
 
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
 
-CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_field_analyzer"]["filter"] = [
-    "lowercase",
-    "elision",
-    "asciifolding",
-]
-
-# bump core versions to reindex inclusing elision
-WIRE_SCHEMA_VERSION = 4
-AGENDA_SCHEMA_VERSION = 6
-
 WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
 
 CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"][
@@ -375,6 +375,10 @@ CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"][
 # bump core versions to reindex inclusing elision
 WIRE_SCHEMA_VERSION = 4
 AGENDA_SCHEMA_VERSION = 6
+
+SOURCE_EXPIRY_DAYS = {}
+
+AGENDA_CSV_SUBJECT_SCHEMES = ["subject_custom"]
 
 EMAIL_DEFAULT_SENDER_NAME = "CP NewsPro"
 EMAIL_SENDER_NAME_LANGUAGE_MAP = {
