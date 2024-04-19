@@ -26,7 +26,17 @@
         w.productFruits=w.productFruits||{};w.productFruits.scrV='2';
         let a=d.getElementsByTagName('head')[0];let r=d.createElement('script');r.async=1;r.src=u;a.appendChild(r);
     })(window,document,'https://app.productfruits.com/static/script.js');
-	$productFruits.push(['init', '{{ config.PRODUCTFRUITS_WORKSPACE_CODE }}', '{{ get_locale()[:2] }}', { username: '{{ hash(auth_user._id) }}' }]);
+	$productFruits.push(['init', '{{ config.PRODUCTFRUITS_WORKSPACE_CODE }}', '{{ get_locale()[:2] }}', {
+        username: '{{ auth_user.email }}',
+        firstname: '{{ auth_user.first_name }}',
+        lastname: '{{ auth_user.last_name }}',
+        role: '{{ auth_user.user_type }}',
+        props: {
+            company: '{{ get_user_profile_data().companyName }}',
+            phone: '{{ auth_user.phone }}',
+            mobile: '{{ auth_user.mobile }}',
+        },
+    }]);
 </script>
 {% endif %}
 {% endblock %}
