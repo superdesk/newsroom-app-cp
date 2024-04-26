@@ -1,4 +1,5 @@
 import cp
+import flask
 
 from typing import Literal, Optional
 from flask import current_app as app
@@ -67,6 +68,11 @@ def on_push(sender, item, **kwargs):
     if item.get("language"):
         item["language"] = fix_language(item["language"])
 
+    if get_media_type(item) and item.get("evolvedfrom"):
+        parent_item = get_resource_service("items").find_one(req=None, _id=item["evolvedfrom"])
+        if parent_item is None:
+            flask.abort(503)  # must be 50x error to trigger retry later
+
 
 def user_auth_is_gip(user: User) -> bool:
     if not user.get("company"):
@@ -81,12 +87,17 @@ def user_auth_is_gip(user: User) -> bool:
     return company.get("auth_provider") == "gip"
 
 
+def get_media_type(item):
+    media_type_scheme = get_media_type_scheme()
+    return next(
+        (s for s in item.get("subject", []) if s.get("scheme") == media_type_scheme), None
+    )
+
+
 def handle_transcripts(item):
     item.setdefault("subject", [])
     media_type_scheme = get_media_type_scheme()
-    media_type = next(
-        (s for s in item["subject"] if s.get("scheme") == media_type_scheme), None
-    )
+    media_type = get_media_type(item)
     media_source_scheme = app.config.get("MEDIA_SOURCE_SCHEME", "station")
     media_source = next(
         (s for s in item["subject"] if s.get("scheme") == media_source_scheme), None
