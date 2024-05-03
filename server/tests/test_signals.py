@@ -1,10 +1,12 @@
 import cp
 import bson
+import pytest
 import responses
 import cp.signals as signals
 
 from datetime import datetime, timedelta
 from responses import matchers
+from werkzeug.exceptions import HTTPException
 
 
 def test_on_publish_no_extended_headline(app):
@@ -172,7 +174,7 @@ def test_cem_notification_for_non_google_auth(app, mocker):
     assert len(sub.mock_calls) == 0
 
 
-def test_language_agenda():
+def test_language_agenda(app):
     item = {"language": "en-CA"}
     signals.init_app(None)
     signals.push.send(None, item=item)
@@ -183,6 +185,15 @@ def test_language_agenda():
     item["language"] = "fr-ca"
     signals.push.send(None, item=item)
     assert "fr" == item["language"]
+
+
+def test_push_abort_missing_version(app):
+    item = {"evolvedfrom": "foo", "subject": [{"scheme": "mediaformat"}]}
+    with pytest.raises(HTTPException):
+        signals.on_push(None, item=item)
+
+    app.data.insert("items", [{"_id": "foo"}])
+    signals.on_push(None, item=item)
 
 
 def test_handle_transcripts(app):
