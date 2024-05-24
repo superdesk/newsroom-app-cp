@@ -1,12 +1,13 @@
 {{ item.headline }}
-Voir cet élément dans votre compte: {{ url_for_wire(item, True, section) }}
-{% if topic_name %}Nouvel élément pour votre sujet suivi: {{ topic_name }}{% endif %}
-{% if item.service %}Catégorie: {{ item.service[0].name }}{% endif %}
-Nombre de mots: {{ item.wordcount }}
 
 {% if item.slugline %}Titre de rappel: {{ item.slugline }}{% endif %}
 {% if item.source %}Source: {{ item.source }}{% endif %}
 Publié: {{ item.versioncreated | datetime_long }}
+{% if topic_name %}Nouvel élément pour votre sujet suivi: {{ topic_name }}{% endif %}
+{% if item.service %}Catégorie: {{ item.service[0].name }}{% endif %}
+Nombre de mots: {{ item.wordcount }}
+
+Voir cet élément dans votre compte: {{ url_for_wire(item, True, section) }}
 
 {% if item.byline %}{{ item.byline }}{% endif %}
 
