@@ -345,8 +345,6 @@ WIRE_SEARCH_FIELDS = [
     "byline",
     "body_html",
     "body_text",
-    "description_html",
-    "description_text",
 ]
 
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
