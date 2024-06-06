@@ -1,4 +1,5 @@
 import os
+import cp
 import pathlib
 from flask_babel import lazy_gettext
 from superdesk.default_settings import strtobool
@@ -169,6 +170,7 @@ CLIENT_CONFIG.update(
             },
         },
         "agenda_top_story_scheme": "topstory",
+        "wire_labels_scheme": cp.WIRE_LABELS_SCHEME,
     },
 )
 
