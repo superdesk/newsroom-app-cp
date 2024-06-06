@@ -5,6 +5,6 @@
 Regards,
 The Canadian Press Team
 
-Contact us (https://www.thecanadianpress.com/contact/), 1-800-268-8149 or support@thecanadianpress.com.
+Contact us (https://www.thecanadianpress.com/contact/), 1-800-268-8149 or {{ config.SUPPORT_EMAIL_EN }}.
 Visit https://www.thecanadianpress.com/for more services from Canada's trusted news leader.
 {% endblock %}
