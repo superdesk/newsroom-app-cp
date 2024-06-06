@@ -13,5 +13,6 @@ import logging
 
 HEADLINE2 = "headline_extended"
 CORRECTION = "correction"
+WIRE_LABELS_SCHEME = "wirelables"
 
 logging.basicConfig(level=logging.INFO)

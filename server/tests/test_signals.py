@@ -230,3 +230,42 @@ def test_handle_transcripts(app):
     signals.on_publish_item(None, transcript_item)
     assert 1 == len(transcript_item["subject"])
     assert "Station de télé" == transcript_item["subject"][0]["name"]
+
+
+def test_wire_labels(app):
+    def get_label(item):
+        return next(
+            (
+                s
+                for s in item.get("subject", [])
+                if s.get("scheme") == cp.WIRE_LABELS_SCHEME
+            ),
+            None,
+        )
+
+    def assert_label(item, code, name):
+        label = get_label(item)
+        assert label is not None
+        assert label["code"] == code
+        assert label["name"] == name
+
+    item = {}
+    signals.on_publish_item(None, item)
+    label = get_label(item)
+    assert label is None
+
+    item = {"slugline": "Something-The-Latest"}
+    signals.on_publish_item(None, item)
+    assert_label(item, "latest", "THE LATEST")
+
+    item = {"genre": [{"code": "NewsAlert", "name": "NewsAlert"}]}
+    signals.on_publish_item(None, item)
+    assert_label(item, "alert", "ALERT")
+
+    item = {"service": [{"code": "m", "name": "Advisory"}]}
+    signals.on_publish_item(None, item)
+    assert_label(item, "advisory", "ADVISORY")
+
+    item = {"service": [{"code": "p", "name": "Press Release"}]}
+    signals.on_publish_item(None, item)
+    assert_label(item, "press-release", "PRESS RELEASE")

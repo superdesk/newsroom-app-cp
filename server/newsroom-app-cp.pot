@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 10:05+0200\n"
+"POT-Creation-Date: 2024-06-06 13:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,63 +55,79 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: settings.py:143 settings.py:144
+#: cp/signals.py:169
+msgid "THE LATEST"
+msgstr ""
+
+#: cp/signals.py:172
+msgid "ALERT"
+msgstr ""
+
+#: cp/signals.py:175
+msgid "ADVISORY"
+msgstr ""
+
+#: cp/signals.py:178
+msgid "PRESS RELEASE"
+msgstr ""
+
+#: settings.py:144 settings.py:145
 msgid "No coverage"
 msgstr ""
 
-#: settings.py:149 settings.py:150
+#: settings.py:150 settings.py:151
 msgid "Cancelled / not planned"
 msgstr ""
 
-#: settings.py:155 settings.py:156
+#: settings.py:156 settings.py:157
 msgid "Not decided / on merit"
 msgstr ""
 
-#: settings.py:161 settings.py:162
+#: settings.py:162 settings.py:163
 msgid "Planned"
 msgstr ""
 
-#: settings.py:167 settings.py:168
+#: settings.py:168 settings.py:169
 msgid "Completed"
 msgstr ""
 
-#: settings.py:180 settings.py:225
+#: settings.py:182 settings.py:227
 msgid "Language"
 msgstr ""
 
-#: settings.py:184
+#: settings.py:186
 msgid "Media type"
 msgstr ""
 
-#: settings.py:193
+#: settings.py:195
 msgid "Source"
 msgstr ""
 
-#: settings.py:197
+#: settings.py:199
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:201 settings.py:243
+#: settings.py:203 settings.py:245
 msgid "Subject"
 msgstr ""
 
-#: settings.py:210
+#: settings.py:212
 msgid "Version"
 msgstr ""
 
-#: settings.py:229
+#: settings.py:231
 msgid "Category"
 msgstr ""
 
-#: settings.py:233
+#: settings.py:235
 msgid "Event Type"
 msgstr ""
 
-#: settings.py:337
+#: settings.py:339
 msgid "Calendar"
 msgstr ""
 
-#: settings.py:338
+#: settings.py:340
 msgid "Bookmarks"
 msgstr ""
 
