@@ -1,4 +1,5 @@
 import os
+import cp
 import pathlib
 from flask_babel import lazy_gettext
 from superdesk.default_settings import strtobool
@@ -169,6 +170,7 @@ CLIENT_CONFIG.update(
             },
         },
         "agenda_top_story_scheme": "topstory",
+        "wire_labels_scheme": cp.WIRE_LABELS_SCHEME,
     },
 )
 
@@ -343,8 +345,6 @@ WIRE_SEARCH_FIELDS = [
     "byline",
     "body_html",
     "body_text",
-    "description_html",
-    "description_text",
 ]
 
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
@@ -376,3 +376,10 @@ EMAIL_SENDER_NAME_LANGUAGE_MAP = {
 PRODUCTFRUITS_WORKSPACE_CODE = os.environ.get("PRODUCTFRUITS_WORKSPACE_CODE")
 
 PERSONAL_DASHBOARD_CARD_TYPE = "6-text-only"
+
+AGENDA_PAGE_SIZE = 500
+
+SUPPORT_EMAIL_EN = "help-aide@cpnewspro.com"
+SUPPORT_EMAIL_FR = SUPPORT_EMAIL_EN
+
+NOTIFY_MATCHING_USERS = "cancel"

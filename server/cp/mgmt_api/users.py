@@ -3,7 +3,7 @@ import superdesk
 
 from bson.objectid import ObjectId
 from flask import current_app as app
-from newsroom.users import UsersResource, UsersService
+from newsroom.users.users import UsersResource, UsersService
 from superdesk.errors import SuperdeskApiError
 
 from cp.mgmt_api.utils import validate_product_refs
