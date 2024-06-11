@@ -1,5 +1,4 @@
 {{ item.headline or item.name }}
-New item for saved topic: {{ topic_name }}
 View this item in your account: {{ url_for_agenda(item) }}
 {% if item.event %}When: {{ dateString }}  {{get_event_state(item)}}{% endif %}
 {% if location and location != '' %}Where: {{ location }}{% endif %}
@@ -31,3 +30,4 @@ Assigned to:
 {% endfor %}
 {% endif %}
 {% endfor %}
+Saved topic: {{ topic_name }}

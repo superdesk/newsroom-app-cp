@@ -1,5 +1,4 @@
 {{ item.headline or item.name }}
-Nouvel élément pour votre sujet suivi: {{ topic_name }}
 Voir cet élément dans votre compte: {{ url_for_agenda(item) }}
 {%  if item.event %}Quand: {{ dateString }}  {{get_event_state(item)}}{% endif %}
 {% if location and location != '' %}Où: {{ location }}
@@ -30,3 +29,4 @@ Affecté à:
 {% endfor %}
 {% endif %}
 {% endfor %}
+Sujet enregistré: {{ topic_name }}
