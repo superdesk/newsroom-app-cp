@@ -383,3 +383,15 @@ SUPPORT_EMAIL_EN = "help-aide@cpnewspro.com"
 SUPPORT_EMAIL_FR = SUPPORT_EMAIL_EN
 
 NOTIFY_MATCHING_USERS = "cancel"
+
+AGENDA_TIME_FILTERS = [
+    {"name": lazy_gettext("Last 24 hours"), "query": "now-24h/h"},
+    {
+        "name": lazy_gettext("Last 7 days"),
+        "query": "now-7d/d",
+    },
+    {
+        "name": lazy_gettext("Last 30 days"),
+        "query": "now-30d/d",
+    },
+]
