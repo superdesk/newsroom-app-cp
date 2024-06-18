@@ -277,6 +277,7 @@ CORE_APPS = [
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
+    "cp.images",
     "newsroom.auth.saml",
 ]
 
