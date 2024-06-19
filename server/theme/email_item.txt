@@ -9,6 +9,6 @@ Word count: {{ item.wordcount }}
 
 View this item in your account: {{ url_for_wire(item, True, section) }}
 
-{% if item.byline %}{{ item.byline }}{% endif %}
+{% if item.byline %} By {{ item.byline }}{% endif %}
 
 {% if item.body_txt %}{{ item.body_txt }}{% elif item.body_html %}{{ item.body_html | plain_text }}{% endif %}
