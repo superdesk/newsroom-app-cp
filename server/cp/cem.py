@@ -3,10 +3,14 @@ import requests
 
 from typing import Literal
 from flask import current_app as app
+from requests.adapters import HTTPAdapter
 
 
 logger = logging.getLogger(__name__)
 session = requests.Session()
+
+session.mount("http://", HTTPAdapter(max_retries=3))
+session.mount("https://", HTTPAdapter(max_retries=3))
 
 
 def send_notification(_type, user, id_key: Literal["_id", "email"] = "_id"):
@@ -29,7 +33,7 @@ def send_notification(_type, user, id_key: Literal["_id", "email"] = "_id"):
             url,
             json=payload,
             headers=headers,
-            timeout=int(app.config.get("CEM_TIMEOUT", 10)),
+            timeout=(1, int(app.config.get("CEM_TIMEOUT", 10))),
             verify=bool(app.config.get("CEM_VERIFY_TLS", True)),
         )
         resp.raise_for_status()
