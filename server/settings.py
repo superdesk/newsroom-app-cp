@@ -171,7 +171,7 @@ CLIENT_CONFIG.update(
         },
         "agenda_top_story_scheme": "topstory",
         "wire_labels_scheme": cp.WIRE_LABELS_SCHEME,
-        "display_user_role": False,
+        "display_author_role": False,
     },
 )
 
