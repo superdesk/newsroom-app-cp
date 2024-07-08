@@ -169,6 +169,7 @@ CLIENT_CONFIG.update(
             },
         },
         "agenda_top_story_scheme": "topstory",
+        "agenda_sort_events_with_coverage_on_top": True,
     },
 )
 
