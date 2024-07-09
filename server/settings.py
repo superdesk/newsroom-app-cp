@@ -172,6 +172,7 @@ CLIENT_CONFIG.update(
         "agenda_top_story_scheme": "topstory",
         "wire_labels_scheme": cp.WIRE_LABELS_SCHEME,
         "display_author_role": False,
+        "agenda_sort_events_with_coverage_on_top": True,
     },
 )
 
