@@ -350,6 +350,33 @@ WIRE_SEARCH_FIELDS = [
     "body_text",
 ]
 
+WIRE_TIME_FILTERS = [
+    {
+        "name": lazy_gettext("Last 24 hours"),
+        "filter": "last_24_hours",
+        "default": False,
+        "query": {"gte": "now-24h/m"},
+    },
+    {
+        "name": lazy_gettext("Last Week"),
+        "filter": "last_week",
+        "default": False,
+        "query": {"gte": "now-1w/h"},
+    },
+    {
+        "name": lazy_gettext("Last 30 days"),
+        "filter": "last_30_days",
+        "default": True,
+        "query": {"gte": "now-30d/h"},
+    },
+    {
+        "name": lazy_gettext("Last 2 years"),
+        "filter": "last_2_years",
+        "default": False,
+        "query": {"gte": "now-2y/d"},
+    },
+]
+
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
 
 WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
