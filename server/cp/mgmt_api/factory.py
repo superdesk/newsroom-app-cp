@@ -31,7 +31,7 @@ class NewsroomMGMTAPI(BaseNewsroomApp):
     AUTH_SERVICE = JWTAuth
 
     def __init__(self, import_name=__package__, config=None, **kwargs):
-        if not getattr(self, 'settings'):
+        if not hasattr(self, 'settings'):
             self.settings = flask.Config('.')
 
         if config and config.get('BEHAVE'):
