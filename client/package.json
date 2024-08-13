@@ -5,11 +5,5 @@
   },
   "dependencies": {
     "newsroom-core": "github:superdesk/newsroom-core#develop"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "webpack": "~4.47.0"
   }
 }
