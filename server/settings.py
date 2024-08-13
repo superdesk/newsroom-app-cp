@@ -424,12 +424,12 @@ AGENDA_TIME_FILTERS = [
     {
         "name": lazy_gettext("Next 3 months"),
         "filter": "next_3_months",
-        "query": "now+90d/d",
+        "query": "now+3M/d",
     },
     {
         "name": lazy_gettext("Next 12 months"),
         "filter": "next_12_months",
-        "query": "now+12M/M",
+        "query": "now+12M/d",
         "default": True,
     },
 ]
