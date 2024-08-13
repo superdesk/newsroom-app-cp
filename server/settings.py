@@ -415,8 +415,21 @@ SUPPORT_EMAIL_FR = SUPPORT_EMAIL_EN
 NOTIFY_MATCHING_USERS = "cancel"
 
 AGENDA_TIME_FILTERS = [
-    {"name": lazy_gettext("Next 7 days"), "query": "now7d/d"},
-    {"name": lazy_gettext("Next 30 days"), "query": "now30d/d"},
-    {"name": lazy_gettext("Next 3 months"), "query": "now3M/M"},
-    {"name": lazy_gettext("Next 12 months"), "query": "now12M/M", "default": True},
+    {"name": lazy_gettext("Next 7 days"), "filter": "next_7_days", "query": "now+7d/d"},
+    {
+        "name": lazy_gettext("Next 30 days"),
+        "filter": "next_30_days",
+        "query": "now+30d/d",
+    },
+    {
+        "name": lazy_gettext("Next 3 months"),
+        "filter": "next_3_months",
+        "query": "now+90d/d",
+    },
+    {
+        "name": lazy_gettext("Next 12 months"),
+        "filter": "next_12_months",
+        "query": "now+12M/M",
+        "default": True,
+    },
 ]
