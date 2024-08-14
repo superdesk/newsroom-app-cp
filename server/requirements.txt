@@ -21,7 +21,7 @@ async-timeout==4.0.3
     # via redis
 authlib==0.14.3
     # via superdesk-core
-babel==2.15.0
+babel==2.16.0
     # via flask-babel
 bcrypt==4.1.3
     # via superdesk-core
@@ -35,9 +35,9 @@ blinker==1.8.2
     #   raven
     #   sentry-sdk
     #   superdesk-core
-boto3==1.34.154
+boto3==1.34.160
     # via superdesk-core
-botocore==1.34.154
+botocore==1.34.160
     # via
     #   boto3
     #   s3transfer
@@ -231,7 +231,7 @@ markupsafe==2.0.1
     #   wtforms
 mongolock @ git+https://github.com/superdesk/mongolock.git@v1
     # via superdesk-core
-newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@develop
+newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@release/2.8
     # via -r requirements.in
 oauth2client==4.1.3
     # via flask-oidc-ex
@@ -319,7 +319,7 @@ pytz==2024.1
     #   pyhanko
     #   superdesk-core
     #   tzlocal
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via
     #   pyhanko
     #   superdesk-core

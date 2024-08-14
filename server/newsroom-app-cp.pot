@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-06 13:06+0200\n"
+"POT-Creation-Date: 2024-08-14 08:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,43 +91,75 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: settings.py:182 settings.py:227
+#: settings.py:184 settings.py:229
 msgid "Language"
 msgstr ""
 
-#: settings.py:186
+#: settings.py:188
 msgid "Media type"
 msgstr ""
 
-#: settings.py:195
+#: settings.py:197
 msgid "Source"
 msgstr ""
 
-#: settings.py:199
+#: settings.py:201
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:203 settings.py:245
+#: settings.py:205 settings.py:247
 msgid "Subject"
 msgstr ""
 
-#: settings.py:212
+#: settings.py:214
 msgid "Version"
 msgstr ""
 
-#: settings.py:231
+#: settings.py:233
 msgid "Category"
 msgstr ""
 
-#: settings.py:235
+#: settings.py:237
 msgid "Event Type"
 msgstr ""
 
-#: settings.py:339
+#: settings.py:342
 msgid "Calendar"
 msgstr ""
 
-#: settings.py:340
+#: settings.py:343
 msgid "Bookmarks"
+msgstr ""
+
+#: settings.py:355
+msgid "Last 24 hours"
+msgstr ""
+
+#: settings.py:361
+msgid "Last 14 days"
+msgstr ""
+
+#: settings.py:367
+msgid "Last 30 days"
+msgstr ""
+
+#: settings.py:373
+msgid "Last 2 years"
+msgstr ""
+
+#: settings.py:418
+msgid "Next 7 days"
+msgstr ""
+
+#: settings.py:420
+msgid "Next 30 days"
+msgstr ""
+
+#: settings.py:425
+msgid "Next 3 months"
+msgstr ""
+
+#: settings.py:430
+msgid "Next 12 months"
 msgstr ""
 
