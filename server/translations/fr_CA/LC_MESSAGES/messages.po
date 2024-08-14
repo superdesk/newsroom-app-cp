@@ -9,17 +9,17 @@
 # Simon Peacock <simon.peacock@gmail.com>, 2024
 # Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2024
-# Paemiga Sararithi, 2024
 # Nefertiti Patell, 2024
+# Paemiga Sararithi, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 10:05+0200\n"
+"POT-Creation-Date: 2024-08-14 08:21+0200\n"
 "PO-Revision-Date: 2024-01-15 14:08+0000\n"
-"Last-Translator: Nefertiti Patell, 2024\n"
+"Last-Translator: Paemiga Sararithi, 2024\n"
 "Language-Team: French (Canada) (https://app.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,62 +65,110 @@ msgstr "Azure"
 msgid "Email"
 msgstr "Courriel"
 
-#: settings.py:143 settings.py:144
+#: cp/signals.py:169
+msgid "THE LATEST"
+msgstr "DERNIÈRES INFOS"
+
+#: cp/signals.py:172
+msgid "ALERT"
+msgstr "ALERTE"
+
+#: cp/signals.py:175
+msgid "ADVISORY"
+msgstr "AVIS"
+
+#: cp/signals.py:178
+msgid "PRESS RELEASE"
+msgstr "COMMUNIQUÉ"
+
+#: settings.py:144 settings.py:145
 msgid "No coverage"
 msgstr "Pas de couverture"
 
-#: settings.py:149 settings.py:150
+#: settings.py:150 settings.py:151
 msgid "Cancelled / not planned"
 msgstr "Non prévue / annulée"
 
-#: settings.py:155 settings.py:156
+#: settings.py:156 settings.py:157
 msgid "Not decided / on merit"
 msgstr "Non décidée / au mérite"
 
-#: settings.py:161 settings.py:162
+#: settings.py:162 settings.py:163
 msgid "Planned"
 msgstr "Planifiée"
 
-#: settings.py:167 settings.py:168
+#: settings.py:168 settings.py:169
 msgid "Completed"
 msgstr "Terminée"
 
-#: settings.py:180 settings.py:225
+#: settings.py:184 settings.py:229
 msgid "Language"
 msgstr "Langue"
 
-#: settings.py:184
+#: settings.py:188
 msgid "Media type"
 msgstr "Type de support média"
 
-#: settings.py:193
+#: settings.py:197
 msgid "Source"
 msgstr "Source"
 
-#: settings.py:197
+#: settings.py:201
 msgid "Wire Category"
 msgstr "Catégorie du fil de presse"
 
-#: settings.py:201 settings.py:243
+#: settings.py:205 settings.py:247
 msgid "Subject"
 msgstr "Sujet"
 
-#: settings.py:210
+#: settings.py:214
 msgid "Version"
 msgstr "Version"
 
-#: settings.py:229
+#: settings.py:233
 msgid "Category"
 msgstr "Catégorie"
 
-#: settings.py:233
+#: settings.py:237
 msgid "Event Type"
 msgstr "Type d'événement"
 
-#: settings.py:337
+#: settings.py:342
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: settings.py:338
+#: settings.py:343
 msgid "Bookmarks"
 msgstr "Favoris"
+
+#: settings.py:355
+msgid "Last 24 hours"
+msgstr "Les dernières 24 heures"
+
+#: settings.py:361
+msgid "Last 14 days"
+msgstr "Les 14 derniers jours"
+
+#: settings.py:367
+msgid "Last 30 days"
+msgstr "Les 30 derniers jours"
+
+#: settings.py:373
+msgid "Last 2 years"
+msgstr "Les 2 dernières années"
+
+#: settings.py:418
+msgid "Next 7 days"
+msgstr "Les 7 prochains jours"
+
+#: settings.py:420
+msgid "Next 30 days"
+msgstr "Les 30 prochains jours"
+
+#: settings.py:425
+msgid "Next 3 months"
+msgstr "Les 3 prochains mois"
+
+#: settings.py:430
+msgid "Next 12 months"
+msgstr "Les 12 prochains mois"
