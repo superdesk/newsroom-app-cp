@@ -8,7 +8,7 @@
     {% endif %}
     <p>
         {{ gettext('Forgot your password?') }}
-        <a href="mailto:help-aide@cpnewspro.com?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
+        <a href="mailto:{{ config.SUPPORT_EMAIL_EN }}?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
     </p>
     <a class="nh-button nh-button--secondary mb-4 mt-2" href="{{ url_for("auth.token", token_type="reset_password") }}">{{ gettext('Reset password') }}</a>
 {% endblock %}

@@ -409,7 +409,7 @@ PERSONAL_DASHBOARD_CARD_TYPE = "6-text-only"
 
 AGENDA_PAGE_SIZE = 500
 
-SUPPORT_EMAIL_EN = "help-aide@cpnewspro.com"
+SUPPORT_EMAIL_EN = "help-aide@mycpnewspro.com"
 SUPPORT_EMAIL_FR = SUPPORT_EMAIL_EN
 
 NOTIFY_MATCHING_USERS = "cancel"
