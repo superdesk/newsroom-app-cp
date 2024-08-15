@@ -13,7 +13,7 @@
     --color-interactive-focus-l: 46%;
 
     /* LOGIN PAGE */
-    --login-page-color-bg: var(--color-background--muted);
+    --login-page-color-bg: hsl(0, 3%, 15%);
 
     /* COMPONENT: NAVBAR MAIN */
     --top-bar-color-bg: hsl(0, 0%, 18%);
@@ -28,7 +28,7 @@
     --color-text-link--navbar: hsl(0, 0%, 100%);
     /* Logo main */
     --top-bar-logo-main-max-width: 224px;
-    --top-bar-logo-main-max-width--mobile: 200px;
+    --top-bar-logo-main-max-width--mobile: 160px;
     --top-bar-logo-main-margin-top: -9px;
     --top-bar-logo-main-margin-top--mobile: -6px;
     /* Logo additional */
@@ -43,7 +43,6 @@
     --top-bar-nav-brand-padding-x: 16px;
     --top-bar-nav-brand-border-color: hsla(0, 0%, 100%, 0.4);
     --top-bar-nav-brand-border-type: solid;
-
 
     /* COMPONENT: SIDENAV */
     --sidenav-color-bg:                     var(--color-primary);
@@ -79,12 +78,21 @@
 
     /* COMPONENT: MAIN FOOTER */
     --footer-size--height: 48px;
-
+    
     /* COMPONENT: ALERTIFY NOTIFIER */
     --ajs-message-color-bg--success: hsl(0, 3%, 15%);
 
     /* COMPONENT: SEARCH RESULT PANEL (Tags list) */
     --search-result-tags-list-color-bg: var(--main-header-color-bg);
+
+    /* COMPONENT: WIRE ARTICLE (WireLabel) */
+    --label-color-bg-wire-latest: var(--color-warning);
+    --label-color-bg-wire-alert: var(--color-alert);
+    --label-color-bg-wire-advisory: var(--color-success);
+    --label-color-bg-wire-press-release: var(--color-info);
+
+    /* COMPONENT: MULTI-DAY LABEL */
+    --multiday-label-color-bg: var(--color-info);
 }
 
 .navbar__logo img.navbar__logo-img--fr {
