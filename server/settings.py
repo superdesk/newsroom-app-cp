@@ -21,7 +21,7 @@ SERVER_PATH = pathlib.Path(__file__).resolve().parent
 CLIENT_PATH = SERVER_PATH.parent.joinpath("client")
 TRANSLATIONS_PATH = SERVER_PATH.joinpath("translations")
 
-SITE_NAME = "CP NewsPro"
+SITE_NAME = lazy_gettext("CP NewsPro")
 COPYRIGHT_HOLDER = "CP"
 CONTACT_ADDRESS = None
 DOWNLOAD_RENDITION = "original"
