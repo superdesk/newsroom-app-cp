@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-14 08:21+0200\n"
+"POT-Creation-Date: 2024-08-23 10:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,10 @@ msgstr ""
 
 #: cp/signals.py:178
 msgid "PRESS RELEASE"
+msgstr ""
+
+#: settings.py:24
+msgid "CP NewsPro"
 msgstr ""
 
 #: settings.py:144 settings.py:145
@@ -148,18 +152,18 @@ msgid "Last 2 years"
 msgstr ""
 
 #: settings.py:418
-msgid "Next 7 days"
+msgid "Selected day"
 msgstr ""
 
-#: settings.py:420
-msgid "Next 30 days"
+#: settings.py:419
+msgid "Today"
+msgstr ""
+
+#: settings.py:421
+msgid "This Week"
 msgstr ""
 
 #: settings.py:425
-msgid "Next 3 months"
-msgstr ""
-
-#: settings.py:430
-msgid "Next 12 months"
+msgid "This Month"
 msgstr ""
 

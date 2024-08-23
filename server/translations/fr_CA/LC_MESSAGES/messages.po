@@ -6,20 +6,21 @@
 # 
 # Translators:
 # Srdjan Karalic <srdjan.karalic@sourcefabric.org>, 2024
-# Simon Peacock <simon.peacock@gmail.com>, 2024
-# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2024
 # Nefertiti Patell, 2024
 # Paemiga Sararithi, 2024
+# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
+# Simon Peacock <simon.peacock@gmail.com>, 2024
+# Petr Jašek <petr.jasek@sourcefabric.org>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-14 08:21+0200\n"
+"POT-Creation-Date: 2024-08-23 10:32+0200\n"
 "PO-Revision-Date: 2024-01-15 14:08+0000\n"
-"Last-Translator: Paemiga Sararithi, 2024\n"
+"Last-Translator: Petr Jašek <petr.jasek@sourcefabric.org>, 2024\n"
 "Language-Team: French (Canada) (https://app.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,6 +81,10 @@ msgstr "AVIS"
 #: cp/signals.py:178
 msgid "PRESS RELEASE"
 msgstr "COMMUNIQUÉ"
+
+#: settings.py:24
+msgid "CP NewsPro"
+msgstr "PC NouvellesPro"
 
 #: settings.py:144 settings.py:145
 msgid "No coverage"
@@ -158,17 +163,17 @@ msgid "Last 2 years"
 msgstr "Les 2 dernières années"
 
 #: settings.py:418
-msgid "Next 7 days"
-msgstr "Les 7 prochains jours"
+msgid "Selected day"
+msgstr ""
 
-#: settings.py:420
-msgid "Next 30 days"
-msgstr "Les 30 prochains jours"
+#: settings.py:419
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#: settings.py:421
+msgid "This Week"
+msgstr "Cette semaine"
 
 #: settings.py:425
-msgid "Next 3 months"
-msgstr "Les 3 prochains mois"
-
-#: settings.py:430
-msgid "Next 12 months"
-msgstr "Les 12 prochains mois"
+msgid "This Month"
+msgstr "Ce mois-ci"
