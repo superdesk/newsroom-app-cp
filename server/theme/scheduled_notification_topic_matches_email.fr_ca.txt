@@ -18,7 +18,7 @@ Nouveaux éléments du {{ "Calendrier" if section == "agenda" else "Fil de Press
 {{ entry.item.headline }}
 
 Titre de rappel: {{ entry.item.slugline }} | Source: {{ entry.item.source}}
-Publié le: {{ entry.item.versioncreated | notification_datetime }} | {{ entry.item.body_html | word_count }} mots{% if entry.item.service %} mots | Catégorie: {{ entry.item | category_names }}{% endif %}
+Publié le: {{ entry.item.versioncreated | notification_datetime }} | {{ entry.item.body_html | word_count }} mots {% if entry.item.service %} | Catégorie: {{ entry.item | category_names }}{% endif %}
 {{ short_highlighted_text(get_highlighted_field(entry.item, ["body_html"]), output_html=False) }}
 Consulter cet élément dans votre compte: {{ url_for_wire(entry.item, True, section) }}
 Consulter tous les éléments: {{ url_for('wire.wire', _external=True) }}?topic={{ entry.topic._id }}
