@@ -50,7 +50,7 @@
 {{ short_highlighted_text(get_highlighted_field(entry.item, ["definition_long", "description_text", "definition_short"])) | safe }}
 
 <p>Consulter cet élément dans votre compte: <a href="{{ url_for_wire(entry.item, True, section) }}">Lien</a></p>
-<p>Consulter tous les éléments: <a href="{{ url_for('agenda.index', _external=True) }}?topic={{ entry.topic._id }}">Link</a></p>
+<p>Consulter tous les éléments: <a href="{{ url_for('agenda.index', _external=True) }}?topic={{ entry.topic._id }}">Lien</a></p>
 
 {% endif %}
 
