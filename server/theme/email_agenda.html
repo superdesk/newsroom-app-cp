@@ -1,29 +1,36 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
-<a href="{{ url_for_agenda(item) }}"><b>View this item in your account: </b>{{ url_for_agenda(item) }} <br></a>
-{%  if item.event %}<p class="h3"><b>When:</b>{{ dateString }}  {{get_event_state(item)}}</p>{% endif %}
+
+<b>View this item in your account : <a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a></b><br>
+
+{% if item.event %}
+    <p class="h3"><b>When : </b>{{ dateString }} {{ get_event_state(item) }}</p>
+{% endif %}
 
 {% if location and location != '' %}
-    <p class="h3"><b>Where:</b> {{ location }}</p>
+    <p class="h3"><b>Where : </b>{{ location }}</p>
 {% endif %}
 
 {% if map and map != '' %}
-    <div><img style="height: auto!important; max-width: 700px!important; width: 100%!important"
-              src={{ map | safe }} ></div>
+    <div>
+        <img style="height: auto!important; max-width: 700px!important; width: 100%!important" src={{ map | safe }}>
+    </div>
 {% endif %}
 
 {% if contacts | length is gt 0 %}
-    <p><b>Contact: </b>
+    <p><b>Contact : </b>
     {% for contact in contacts %}
-        <div>{{ contact.name or contact.organisation }}
-        {{ contact.phone }}
-        {{ contact.mobile }}
-        {{ contact.email }}</div>
+        <div>
+            {{ contact.name or contact.organisation }}<br>
+            {{ contact.phone }}<br>
+            {{ contact.mobile }}<br>
+            {{ contact.email }}
+        </div>
     {% endfor %}
-    </p>
+    </p><br>
 {% endif %}
 
 {% if links | length is gt 1 %}
-    <p><b>Web: </b>
+    <p><b>Web : </b>
     {% for link in links %}
         <div><a href={{ link | safe }}>{{ link }}</a><br></div>
     {% endfor %}
@@ -31,47 +38,40 @@
 {% endif %}
 
 {% if item.definition_long or item.definition_short %}
-    <b>Event description: </b>
-    <p>
-        {{ get_highlighted_field(item, ["definition_long", "definition_short"]) | safe }}
-    </p>
+    <b>Event description : </b>
+    <p>{{ get_highlighted_field(item, ["definition_long", "definition_short"]) | safe }}</p>
 {% endif %}
 
-{%  for planning_item in item.get('planning_items', []) or [] %}
+{% for planning_item in item.get('planning_items', []) or [] %}
     <div>
-        <div>
-            <h3>Planning item:</h3>
-            {% if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
-                <p>
-                <b>Planning item description:</b> {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
-                </p>
-            {%  endif %}
-        </div>
+        <h3>Planning item : </h3>
+        {% if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
+            <p><b>Planning item description : </b>{{ planning_item.get('description_text') or planning_item.get('name') or '' }}</p>
+        {% endif %}
 
         {% if planning_item.get('ednote') %}
             <div>
-                <strong>Editorial Note:</strong>
-                {{ planning_item.get('ednote') }}
+                <strong>Editorial Note : </strong>{{ planning_item.get('ednote') }}
             </div>
         {% endif %}
 
         {% if planning_item.get('coverages', []) %}
             <p>
                 <div>
-                    <p><strong>Coverage:</strong></p>
+                    <p><strong>Coverage : </strong></p>
                 </div>
 
                 {% for cov in get_planning_coverages(item, planning_item._id) %}
                     <div>
-                        <p><b>Type of coverage: </b>{{get_coverage_content_type(cov,recipient_language)}}</p>
-                        <p><b>Coverage status: </b>{{get_coverage_status(cov)}}</p>
-                        <p><b>Coverage due date & time: </b>{{get_coverage_date(cov)}}</p>
+                        <p><b>Type of coverage : </b>{{ get_coverage_content_type(cov, recipient_language) }}</p>
+                        <p><b>Coverage status : </b>{{ get_coverage_status(cov) }}</p>
+                        <p><b>Coverage due date & time : </b>{{ get_coverage_date(cov) }}</p>
                         {% if cov.get('assigned_desk_name') or cov.get('assigned_desk_email') or cov.get('assigned_user_name') or cov.get('assigned_user_email') %}
-                        <p><b>Assigned to:</b>
-                            {% if cov.get('assigned_desk_name') %}{{cov['assigned_desk_name']}}{% endif %}
-                            {% if cov.get('assigned_desk_email') %}<a href="mailto:{{cov['assigned_desk_email']}}?subject=Coverage inquiry from CP NewsPro user: {{item.headline or item.name}}">{{cov['assigned_desk_email']}}</a>{% endif %}
-                            {% if cov.get('assigned_user_name') %}{{cov['assigned_user_name']}}{% endif %}
-                            {% if cov.get('assigned_user_email') %}<a href="mailto:{{cov['assigned_desk_email']}}?subject=Coverage inquiry from CP NewsPro user: {{item.headline or item.name}}">{{cov['assigned_user_email']}}</a>{% endif %}
+                        <p><b>Assigned to : </b>
+                            {% if cov.get('assigned_desk_name') %}{{ cov['assigned_desk_name'] }}{% endif %}
+                            {% if cov.get('assigned_desk_email') %}<a href="mailto:{{ cov['assigned_desk_email'] }}?subject=Coverage inquiry from CP NewsPro user: {{ item.headline or item.name }}">{{ cov['assigned_desk_email'] }}</a>{% endif %}
+                            {% if cov.get('assigned_user_name') %}{{ cov['assigned_user_name'] }}{% endif %}
+                            {% if cov.get('assigned_user_email') %}<a href="mailto:{{ cov['assigned_desk_email'] }}?subject=Coverage inquiry from CP NewsPro user: {{ item.headline or item.name }}">{{ cov['assigned_user_email'] }}</a>{% endif %}
                         </p>
                         {% endif %}
                     </div>
@@ -81,4 +81,4 @@
     </div>
 {% endfor %}
 
-<div><b>Saved topic: {{ topic_name }}</b></div>
+<div><b>Saved topic : {{ topic_name }}</b></div>

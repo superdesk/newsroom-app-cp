@@ -1,32 +1,54 @@
 {{ item.headline or item.name }}
-Voir cet élément dans votre compte: {{ url_for_agenda(item) }}
-{%  if item.event %}Quand: {{ dateString }}  {{get_event_state(item)}}{% endif %}
-{% if location and location != '' %}Où: {{ location }}
-{% endif %}{% if contacts | length is gt 0 %}Contact: {% for contact in contacts %}{{ contact.name or contact.organisation }} {{ contact.phone }} {{ contact.mobile }} {{ contact.email }}
-{% endfor %}
-{% endif %}{% if links | length is gt 1 %}Web: {% for link in links %}{{ link }}
-{% endfor %}
+Voir cet élément dans votre compte : {{ url_for_agenda(item) }}
+{% if item.event %}
+    Quand : {{ dateString }}  {{get_event_state(item)}}
 {% endif %}
-{% if item.definition_long or item.definition_short %}Description de l’événement: {{ item.definition_long or item.definition_short }}
+
+{% if location and location != '' %}
+    Où : {{ location }}
 {% endif %}
-{%  for planning_item in item.get('planning_items', []) or [] %}
-Élément de couverture:
-{%- if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
-Description de l’élément de planification: {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
-{% endif -%}
-{% if planning_item.get('ednote') %}Note de la rédaction: {{ planning_item.get('ednote') }}{% endif %}
-{% if planning_item.get('coverages', []) | length is gt 0 %}
-Couverture:
-{% for cov in get_planning_coverages(item, planning_item._id) %}
-Type de couverture: {{get_coverage_content_type(cov,recipient_language)}}
-Statut de couverture: {{get_coverage_status(cov)}}
-Date et heure d’échéance de la couverture: {{get_coverage_date(cov)}}
-Affecté à:
-{% if cov.get('assigned_desk_name')%}{{cov['assigned_desk_name']}}{% endif %}
-{% if cov.get('assigned_desk_email') %}{{cov['assigned_desk_email']}}{% endif %}
-{% if cov.get('assigned_user_name') %}{{cov['assigned_user_name']}}{% endif %}
-{% if cov.get('assigned_user_email') %}{{cov['assigned_user_email']}}{% endif %}
-{% endfor %}
+
+{% if contacts | length is gt 0 %}
+    Contact :
+    {% for contact in contacts %}
+        {{ contact.name or contact.organisation }} {{ contact.phone }} {{ contact.mobile }} {{ contact.email }}
+    {% endfor %}
 {% endif %}
+
+{% if links | length is gt 1 %}
+    Web :
+    {% for link in links %}
+        {{ link }}
+    {% endfor %}
+{% endif %}
+
+{% if item.definition_long or item.definition_short %}
+    Description de l’événement : {{ item.definition_long or item.definition_short }}
+{% endif %}
+
+{% for planning_item in item.get('planning_items', []) or [] %}
+    Élément de couverture :
+    {%- if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
+        Description de l’élément de planification : {{ planning_item.get('description_text') or planning_item.get('name') or '' }}
+    {% endif -%}
+
+    {% if planning_item.get('ednote') %}
+        Note de la rédaction : {{ planning_item.get('ednote') }}
+    {% endif %}
+
+    {% if planning_item.get('coverages', []) | length is gt 0 %}
+        Couverture :
+        {% for cov in get_planning_coverages(item, planning_item._id) %}
+            Type de couverture : {{ get_coverage_content_type(cov, recipient_language) }}
+            Statut de couverture : {{ get_coverage_status(cov) }}
+            Date et heure d’échéance de la couverture : {{ get_coverage_date(cov) }}
+            Affecté à :
+            {% if cov.get('assigned_desk_name') %}{{ cov['assigned_desk_name'] }}{% endif %}
+            {% if cov.get('assigned_desk_email') %}{{ cov['assigned_desk_email'] }}{% endif %}
+            {% if cov.get('assigned_user_name') %}{{ cov['assigned_user_name'] }}{% endif %}
+            {% if cov.get('assigned_user_email') %}{{ cov['assigned_user_email'] }}{% endif %}
+        {% endfor %}
+    {% endif %}
 {% endfor %}
-Sujet enregistré: {{ topic_name }}
+
+Sujet enregistré : {{ topic_name }}
