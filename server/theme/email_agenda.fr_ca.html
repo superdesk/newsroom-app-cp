@@ -70,7 +70,7 @@
                         <p><b>Type de couverture : </b>{{get_coverage_content_type(cov,recipient_language)}}</p>
                         <p><b>Statut de couverture : </b>{{get_coverage_status(cov)}}</p>
                         <p><b>Date et heure d’échéance de la couverture : </b>{{get_coverage_date(cov)}}</p>
-                        <p><b>Affecté à : </b>
+                        <p><b>Affectée à : </b>
                             {% if cov.get('assigned_desk_name') %}{{cov['assigned_desk_name']}}{% endif %}
                             {% if cov.get('assigned_desk_email') %}<a href="mailto:{{cov['assigned_desk_email']}}?subject=Demande de couverture d’une utilisatrice de PC NouvellesPro : {{item.headline or item.name}}">{{cov['assigned_desk_email']}}</a>{% endif %}
                             {% if cov.get('assigned_user_name') %}{{cov['assigned_user_name']}}{% endif %}
