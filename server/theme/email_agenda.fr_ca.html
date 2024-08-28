@@ -1,6 +1,6 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
 
-<b>Voir cet élément dans votre compte : <a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a></b><br>
+<b>Voir cet élément dans votre compte : </b><a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a><br>
 
 {% if item.event %}
     <p class="h3"><b>Quand : </b>{{ dateString }}  {{get_event_state(item)}}</p>
@@ -44,7 +44,7 @@
 {% for planning_item in item.get('planning_items', []) or [] %}
     <div>
         <div>
-            <h3>Élément de couverture :</h3>
+            <h3>Élément de couverture : </h3>
             {% if (planning_item.get('description_text') or planning_item.get('name') or '') != (item.definition_long or item.definition_short) %}
                 <p>
                 <b>Description de l’élément de planification : </b>{{ planning_item.get('description_text') or planning_item.get('name') or '' }}
@@ -54,7 +54,7 @@
 
         {% if planning_item.get('ednote') %}
             <div>
-                <strong>Note de la rédaction :</strong>
+                <strong>Note de la rédaction : </strong>
                 {{ planning_item.get('ednote') }}
             </div>
         {% endif %}
@@ -62,7 +62,7 @@
         {% if planning_item.get('coverages', []) %}
             <p>
                 <div>
-                    <p><strong>Couverture :</strong></p>
+                    <p><strong>Couverture : </strong></p>
                 </div>
 
                 {% for cov in get_planning_coverages(item, planning_item._id) %}

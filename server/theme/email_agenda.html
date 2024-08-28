@@ -1,6 +1,6 @@
 <h1>{{ get_highlighted_field(item, ["headline", "name"]) | safe }}</h1>
 
-<b>View this item in your account : <a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a></b><br>
+<b>View this item in your account : </b><a href="{{ url_for_agenda(item) }}">{{ url_for_agenda(item) }}</a><br>
 
 {% if item.event %}
     <p class="h3"><b>When : </b>{{ dateString }} {{ get_event_state(item) }}</p>
