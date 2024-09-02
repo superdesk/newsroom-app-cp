@@ -47,6 +47,7 @@ View this item in your account : {{ url_for_agenda(item) }}
             Assigned to :
             {% if cov.get('assigned_desk_name') %}{{ cov['assigned_desk_name'] }}{% endif %}
             {% if cov.get('assigned_desk_email') %}{{ cov['assigned_desk_email'] }}{% endif %}
+            /
             {% if cov.get('assigned_user_name') %}{{ cov['assigned_user_name'] }}{% endif %}
             {% if cov.get('assigned_user_email') %}{{ cov['assigned_user_email'] }}{% endif %}
         {% endfor %}

@@ -23,7 +23,7 @@
         {{ contact.mobile }}
         {{ contact.email }}</div>
     {% endfor %}
-    </p>
+    </p><br>
 {% endif %}
 
 {% if links | length is gt 1 %}
@@ -73,6 +73,7 @@
                         <p><b>Affectée à : </b>
                             {% if cov.get('assigned_desk_name') %}{{cov['assigned_desk_name']}}{% endif %}
                             {% if cov.get('assigned_desk_email') %}<a href="mailto:{{cov['assigned_desk_email']}}?subject=Demande de couverture d’une utilisatrice de PC NouvellesPro : {{item.headline or item.name}}">{{cov['assigned_desk_email']}}</a>{% endif %}
+                            /
                             {% if cov.get('assigned_user_name') %}{{cov['assigned_user_name']}}{% endif %}
                             {% if cov.get('assigned_user_email') %}<a href="mailto:{{cov['assigned_desk_email']}}?subject=Demande de couverture d’une utilisatrice de PC NouvellesPro : {{item.headline or item.name}}">{{cov['assigned_user_email']}}</a>{% endif %}
                         </p>
