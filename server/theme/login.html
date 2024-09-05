@@ -1,15 +1,37 @@
 {% extends "login_layout.html" %}
 
-{% block login_footer %}
-{% if get_locale() == "fr_CA" %}
-    <a href="https://www.thecanadianpress.com/comment-vous-aider/sinscrire-a-nouvellespro/?lang=fr" class="nh-button nh-button--secondary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
+{% block login_title %}{% endblock %}
+
+{% block login_logo %}
+<div class="d-flex align-items-center justify-content-center">
+    {% if get_locale() == "en"  %}
+    <img src="{{ theme_url('login-logo.svg') }}" style="width: 70%;" />
     {% else %}
-    <a href="https://www.thecanadianpress.com/contact/pr-signup" class="nh-button nh-button--secondary w-100 mb-4 mt-2">{{ gettext("Sign up") }}</a>
+    <img src="{{ theme_url('login-logo-fr.svg') }}" style="width: 70%; padding-top: 10px;" />
     {% endif %}
-    <p>
-        {{ gettext('Forgot your password?') }}
-        <a href="mailto:{{ config.SUPPORT_EMAIL_EN }}?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
-    </p>
-    <a class="nh-button nh-button--secondary mb-4 mt-2" href="{{ url_for("auth.token", token_type="reset_password") }}">{{ gettext('Reset password') }}</a>
+</div>
 {% endblock %}
 
+{% block login_footer %}
+<div class="mt-2 mb-3">
+    <div class="d-flex align-items-center">
+        <span class="d-flex gap-1 text-md">
+            <span>{{ gettext("Don't have an account?") }} </span>
+            {% if get_locale() == "fr_CA" %}
+            <a href="https://www.thecanadianpress.com/comment-vous-aider/sinscrire-a-nouvellespro/?lang=fr" class="link">{{ gettext("Sign up") }}</a>
+            {% else %}
+            <a href="https://www.thecanadianpress.com/contact/pr-signup" class="link">{{ gettext("Sign up") }}</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
+
+{% block saml_info %}{% endblock %}
+
+{% block reset_password %}
+<span>{{ gettext('Forgot your password?') }}</span>
+<a class="link" href="mailto:{{ config.SUPPORT_EMAIL_EN }}?subject={{ gettext('Please reset my password for NewsPro') }}">{{ gettext('Contact Us') }}</a>
+{{ gettext('or') }}
+<a class="link" href="{{ url_for('auth.token', token_type='reset_password') }}">{{ gettext('Reset password') }}</a>
+{% endblock %}

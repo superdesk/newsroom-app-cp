@@ -310,7 +310,7 @@ CONTENT_API_EXPIRY_DAYS = 730
 BABEL_DEFAULT_TIMEZONE = "America/Toronto"
 
 # saml auth
-SAML_LABEL = env("SAML_LABEL", "SSO")
+SAML_LABEL = env("SAML_LABEL", "Login with SSO")
 SAML_COMPANY = env("SAML_COMPANY", "CP")
 SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
