@@ -35,8 +35,8 @@
 {% if section == "wire" %}
 
 <p><strong>{{ get_highlighted_field(entry.item, ["headline"]) | safe }}</strong></p>
-<p>Titre de rappel: {{ entry.item.slugline }} | Source: {{ entry.item.source}}</p>
-<p>Publié le: {{ entry.item.versioncreated | notification_datetime }} | {{ entry.item.body_html | word_count }} mots {% if entry.item.service %} | Catégorie: {{ entry.item | category_names }}{% endif %}</p>
+<p>Titre de rappel: {{ entry.item.slugline }} | Source : {{ entry.item.source}}</p>
+<p>Publié le : {{ entry.item.versioncreated | notification_datetime }} | {{ entry.item.body_html | word_count }} mots {% if entry.item.service %} | Catégorie : {{ entry.item | category_names }}{% endif %}</p>
 {{ short_highlighted_text(get_highlighted_field(entry.item, ["body_html"])) | safe }}
 <p>Consulter cet élément dans votre compte: <a href="{{ url_for_wire(entry.item, True, section) }}">Lien</a></p>
 <p>Consulter tous les éléments: <a href="{{ url_for('wire.wire', _external=True) }}?topic={{ entry.topic._id }}">Lien</a></p>
@@ -45,7 +45,7 @@
 
 <p><strong>{{ get_highlighted_field(entry.item, ["headline", "name"]) | safe }}</strong></p>
 <p>Date et heure de l’événement: {{ entry.item | agenda_dates_string }}{% if entry.item.location %} | Endroit: {{ entry.item | location_string }}{% endif %}</p>
-<p>Publié le: {{ entry.item.versioncreated | notification_datetime }}{% if entry.item.service %} | Catégorie: {{ entry.item | category_names }}{% endif %}</p>
+<p>Publié le : {{ entry.item.versioncreated | notification_datetime }}{% if entry.item.service %} | Catégorie : {{ entry.item | category_names }}{% endif %}</p>
 
 {{ short_highlighted_text(get_highlighted_field(entry.item, ["definition_long", "description_text", "definition_short"])) | safe }}
 
