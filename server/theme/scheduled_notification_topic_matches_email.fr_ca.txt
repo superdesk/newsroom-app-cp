@@ -17,8 +17,8 @@ Nouveaux éléments du {{ "Calendrier" if section == "agenda" else "Fil de Press
 {% if section == "wire" %}
 {{ entry.item.headline }}
 
-Titre de rappel: {{ entry.item.slugline }} | Source: {{ entry.item.source}}
-Publié le: {{ entry.item.versioncreated | notification_datetime }} | {{ entry.item.body_html | word_count }} mots {% if entry.item.service %} | Catégorie: {{ entry.item | category_names }}{% endif %}
+Titre de rappel: {{ entry.item.slugline }} | Source : {{ entry.item.source}}
+Publié le : {{ entry.item.versioncreated | notification_datetime }} | {{ entry.item.body_html | word_count }} mots {% if entry.item.service %} | Catégorie : {{ entry.item | category_names }}{% endif %}
 {{ short_highlighted_text(get_highlighted_field(entry.item, ["body_html"]), output_html=False) }}
 Consulter cet élément dans votre compte: {{ url_for_wire(entry.item, True, section) }}
 Consulter tous les éléments: {{ url_for('wire.wire', _external=True) }}?topic={{ entry.topic._id }}
@@ -27,7 +27,7 @@ Consulter tous les éléments: {{ url_for('wire.wire', _external=True) }}?topic=
 
 {{ entry.item.headline or entry.item.name }}
 Date et heure de l’événement: {{ entry.item | agenda_dates_string }}{% if entry.item.location %} | Endroit: {{ entry.item | location_string }}{% endif %}
-Publié le: {{ entry.item.versioncreated | notification_datetime }}{% if entry.item.service %} | Catégorie: {{ entry.item | category_names }}{% endif %}
+Publié le : {{ entry.item.versioncreated | notification_datetime }}{% if entry.item.service %} | Catégorie : {{ entry.item | category_names }}{% endif %}
 
 {{ short_highlighted_text(get_highlighted_field(entry.item, ["definition_long", "description_text", "definition_short"]), output_html=False) }}
 
