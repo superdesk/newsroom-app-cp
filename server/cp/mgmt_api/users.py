@@ -2,9 +2,11 @@ import newsroom
 import superdesk
 
 from bson.objectid import ObjectId
+from pymongo.collation import Collation
 from flask import current_app as app
 from newsroom.users.users import UsersResource, UsersService
 from superdesk.errors import SuperdeskApiError
+from typing_extensions import override
 
 from cp.mgmt_api.utils import validate_product_refs
 
@@ -15,6 +17,7 @@ class CPUsersResource(newsroom.Resource):
     datasource = UsersResource.datasource.copy()
     item_methods = ["GET", "PATCH", "PUT", "DELETE"]
     resource_methods = ["GET", "POST"]
+    collation = False
 
 
 def init_app(app):
@@ -22,10 +25,12 @@ def init_app(app):
 
 
 class CPUsersService(UsersService):
+    @override
     def check_permissions(self, doc, updates=None):
         """Avoid testing if user has permissions."""
         pass
 
+    @override
     def on_create(self, docs):
         super().on_create(docs)
         for doc in docs:
@@ -41,6 +46,14 @@ class CPUsersService(UsersService):
             if doc.get("products"):
                 validate_product_refs(doc["products"])
 
+    @override
     def on_update(self, updates, original):
         if updates.get("products"):
             validate_product_refs(updates["products"])
+
+    @override
+    def get(self, req, lookup):
+        """"""
+        cursor = super().get(req, lookup)
+        cursor.collation(Collation(locale='en', strength=1))
+        return cursor
