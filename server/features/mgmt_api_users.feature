@@ -206,3 +206,22 @@ Feature: Management API - Users
         }
         """
         Then we get response code 201
+
+    Scenario: Search case insensitive
+        Given "users"
+        """
+        [
+            {
+                "first_name": "John",
+                "last_name": "Cena",
+                "email": "JohnCena@wwe.com",
+                "user_type": "administrator"
+            }
+        ]
+        """
+
+        When we get "/users?where={"email": "johncena@wwe.com"}"
+        Then we get list with 1 items
+
+        When we get "/users?where={"email": "JohnCena@wwe.com"}"
+        Then we get list with 1 items
