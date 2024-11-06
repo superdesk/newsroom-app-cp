@@ -30,7 +30,6 @@ billiard==4.2.1
 blinker==1.8.2
     # via
     #   elastic-apm
-    #   flask
     #   flask-mail
     #   raven
     #   sentry-sdk
