@@ -426,3 +426,5 @@ AGENDA_TIME_FILTERS = [
         "query": "now/M",
     },
 ]
+
+COVERAGE_REQUEST_EMAIL_CC_CURRENT_USER = True
