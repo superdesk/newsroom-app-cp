@@ -1,4 +1,3 @@
-
 import time
 
 from superdesk import get_resource_service
@@ -9,7 +8,10 @@ from newsroom.commands.manager import manager
 def fix_language(resource="items", limit=50, sleep_secs=2):
     service = get_resource_service(resource)
 
-    source = {"query": {"terms": {"language": ["en-CA", "en-US", "fr-CA"]}}, "size": 100}
+    source = {
+        "query": {"terms": {"language": ["en-CA", "en-US", "fr-CA"]}},
+        "size": 100,
+    }
 
     for i in range(int(limit)):
         items = service.search(source)

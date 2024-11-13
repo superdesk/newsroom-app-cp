@@ -1,4 +1,3 @@
-
 def init_app(app):
     app.sidenav(
         name="CP Images",
