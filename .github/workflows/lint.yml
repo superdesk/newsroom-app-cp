@@ -3,31 +3,6 @@ name: "Lint"
 on: [ push, pull_request ]
 
 jobs:
-
-  flake8:
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: server
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - run: pip install flake8
-      - run: flake8
-
-  mypy:
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: server
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - run: pip install -r mypy-requirements.txt
-      - run: mypy cp
+  lint:
+    name: "Lint"
+    uses: superdesk/newsroom-app/.github/workflows/lint.yml@develop
