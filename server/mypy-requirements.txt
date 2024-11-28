@@ -2,4 +2,4 @@ mypy==1.13.0
 
 types-flask==1.1.6
 types-requests==2.28.11.8
-types-docutils==0.21.0.20241005
+types-docutils==0.21.0.20241128
