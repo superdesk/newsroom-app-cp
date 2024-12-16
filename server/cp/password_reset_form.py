@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired, Length, Email
-from flask_babel import lazy_gettext
+from quart_babel import lazy_gettext
 
 
 class PasswordResetForm(FlaskForm):

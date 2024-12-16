@@ -1,4 +1,4 @@
-from flask_babel import lazy_gettext
+from quart_babel import lazy_gettext
 
 from newsroom.web.default_settings import AUTH_PROVIDERS
 from newsroom.types import AuthProviderType

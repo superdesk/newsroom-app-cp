@@ -1,7 +1,7 @@
 import os
 import cp
 import pathlib
-from flask_babel import lazy_gettext
+from quart_babel import lazy_gettext
 from superdesk.default_settings import strtobool
 from newsroom.web.default_settings import (
     env,

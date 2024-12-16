@@ -3,7 +3,7 @@ import flask
 
 from typing import Literal, Optional
 from flask import current_app as app
-from flask_babel import gettext
+from quart_babel import gettext
 
 from datetime import datetime, timedelta
 from superdesk import get_resource_service

@@ -4,39 +4,58 @@
 #
 #    pip-compile requirements.in
 #
+aiofiles==24.1.0
+    # via
+    #   quart
+    #   quart-uploads
+aiohappyeyeballs==2.4.4
+    # via aiohttp
+aiohttp==3.11.10
+    # via elasticsearch
+aiosignal==1.3.2
+    # via aiohttp
 amqp==5.3.1
     # via kombu
+annotated-types==0.7.0
+    # via pydantic
 arabic-reshaper==3.0.0
     # via xhtml2pdf
 arrow==1.3.0
     # via
     #   eve-elastic
     #   superdesk-core
+asgiref==3.8.1
+    # via superdesk-core
 asn1crypto==1.5.1
     # via
     #   oscrypto
     #   pyhanko
     #   pyhanko-certvalidator
 async-timeout==5.0.1
-    # via redis
-authlib==0.14.3
+    # via
+    #   aiohttp
+    #   redis
+attrs==24.2.0
+    # via aiohttp
+authlib==1.3.2
     # via superdesk-core
 babel==2.16.0
-    # via flask-babel
-bcrypt==4.1.3
+    # via quart-babel
+bcrypt==4.2.1
     # via superdesk-core
 billiard==4.2.1
     # via celery
 blinker==1.8.2
     # via
     #   elastic-apm
+    #   flask
     #   flask-mail
-    #   raven
+    #   quart
     #   sentry-sdk
     #   superdesk-core
-boto3==1.35.59
+boto3==1.35.81
     # via superdesk-core
-botocore==1.35.59
+botocore==1.35.81
     # via
     #   boto3
     #   s3transfer
@@ -56,7 +75,7 @@ cerberus==1.3.5
     # via
     #   eve
     #   superdesk-core
-certifi==2024.8.30
+certifi==2024.12.14
     # via
     #   elastic-apm
     #   elasticsearch
@@ -70,7 +89,7 @@ chardet==5.2.0
     #   superdesk-core
 charset-normalizer==3.4.0
     # via requests
-ciso8601==2.3.1
+ciso8601==2.3.2
     # via eve-elastic
 click==8.1.7
     # via
@@ -79,9 +98,8 @@ click==8.1.7
     #   click-plugins
     #   click-repl
     #   flask
-    #   newsroom-core
     #   pyhanko
-    #   superdesk-core
+    #   quart
 click-didyoumean==0.3.1
     # via celery
 click-plugins==1.1.1
@@ -90,7 +108,7 @@ click-repl==0.3.0
     # via celery
 croniter==3.0.4
     # via superdesk-core
-cryptography==43.0.3
+cryptography==44.0.0
     # via
     #   authlib
     #   jwcrypto
@@ -100,105 +118,99 @@ cssselect2==0.7.0
     # via svglib
 deepdiff==8.0.1
     # via superdesk-planning
-deprecated==1.2.14
-    # via limits
 dnspython==2.7.0
-    # via email-validator
+    # via
+    #   email-validator
+    #   pymongo
 draftjs-exporter[lxml]==2.1.0
     # via superdesk-core
 ecs-logging==2.2.0
     # via elastic-apm
 elastic-apm[flask]==6.23.0
     # via superdesk-core
-elasticsearch==7.13.4
+elasticsearch[async]==7.17.12
     # via
     #   eve-elastic
     #   superdesk-core
 email-validator==2.2.0
     # via wtforms
-eve==2.1.0
+eve @ git+https://github.com/MarkLark86/eve@use-quart
     # via superdesk-core
-eve-elastic==7.4.1
-    # via
-    #   newsroom-core
-    #   superdesk-core
+eve-elastic @ git+https://github.com/MarkLark86/eve-elastic@use-quart
+    # via superdesk-core
 events==0.3
     # via eve
+exceptiongroup==1.2.2
+    # via
+    #   hypercorn
+    #   taskgroup
 feedparser==6.0.11
     # via superdesk-core
-flask==1.1.2
+flask==3.0.3
     # via
-    #   eve
-    #   flask-babel
     #   flask-caching
-    #   flask-limiter
     #   flask-mail
     #   flask-oidc-ex
-    #   flask-pymongo
-    #   flask-script
     #   flask-webpack
-    #   flask-wtf
-    #   newsroom-core
-    #   raven
-    #   sentry-sdk
-    #   superdesk-core
-flask-babel==1.0.0
-    # via
-    #   newsroom-core
-    #   superdesk-core
+    #   quart
 flask-caching==2.3.0
-    # via newsroom-core
-flask-limiter==0.9.5.1
     # via newsroom-core
 flask-mail==0.10.0
     # via superdesk-core
 flask-oidc-ex==0.6.2
     # via superdesk-core
-flask-pymongo==2.3.0
-    # via newsroom-core
-flask-script==2.0.6
-    # via superdesk-core
 flask-webpack==0.1.0
     # via newsroom-core
-flask-wtf==1.2.2
-    # via newsroom-core
+frozenlist==1.5.0
+    # via
+    #   aiohttp
+    #   aiosignal
 future==1.0.0
     # via python-twitter
 google-auth==2.29.0
     # via newsroom-core
-gunicorn==22.0.0
-    # via newsroom-core
+h11==0.14.0
+    # via
+    #   hypercorn
+    #   wsproto
+h2==4.1.0
+    # via hypercorn
 hachoir==3.3.0
     # via superdesk-core
 hermescache==1.0.0
     # via superdesk-core
 honcho==2.0.0
     # via newsroom-core
+hpack==4.0.0
+    # via h2
 html5lib==1.1
     # via xhtml2pdf
 httplib2==0.22.0
     # via oauth2client
-icalendar==4.0.9
+hypercorn==0.17.3
+    # via
+    #   newsroom-core
+    #   quart
+hyperframe==6.0.1
+    # via h2
+icalendar==5.0.13
     # via superdesk-planning
 idna==3.10
     # via
     #   email-validator
     #   requests
-importlib-resources==6.4.5
-    # via limits
+    #   yarl
 isodate==0.7.2
     # via python3-saml
-itsdangerous==1.1.0
+itsdangerous==2.2.0
     # via
     #   flask
     #   flask-oidc-ex
-    #   flask-wtf
-    #   superdesk-core
-jinja2==2.11.3
+    #   quart
+jinja2==3.1.4
     # via
     #   flask
-    #   flask-babel
-    #   superdesk-core
+    #   quart
 jmespath==1.0.1
     # via
     #   boto3
@@ -213,8 +225,6 @@ kombu==5.4.2
     #   superdesk-core
 ldap3==2.9.1
     # via superdesk-core
-limits==3.13.0
-    # via flask-limiter
 lxml==5.2.2
     # via
     #   draftjs-exporter
@@ -223,18 +233,22 @@ lxml==5.2.2
     #   superdesk-core
     #   svglib
     #   xmlsec
-lxml-html-clean==0.2.2
+lxml-html-clean==0.3.1
     # via superdesk-core
-markupsafe==2.0.1
+markupsafe==3.0.2
     # via
     #   jinja2
-    #   newsroom-core
-    #   sentry-sdk
+    #   quart
     #   superdesk-core
+    #   werkzeug
     #   wtforms
-mongolock @ git+https://github.com/superdesk/mongolock.git@v1
+motor==3.6.0
     # via superdesk-core
-newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@develop
+multidict==6.1.0
+    # via
+    #   aiohttp
+    #   yarl
+newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@async
     # via -r requirements.in
 oauth2client==4.1.3
     # via flask-oidc-ex
@@ -244,17 +258,19 @@ orderly-set==5.2.2
     # via deepdiff
 oscrypto==1.3.0
     # via pyhanko-certvalidator
-packaging==24.2
-    # via
-    #   gunicorn
-    #   limits
 pillow==10.4.0
     # via
     #   reportlab
     #   superdesk-core
     #   xhtml2pdf
+priority==2.0.0
+    # via hypercorn
 prompt-toolkit==3.0.48
     # via click-repl
+propcache==0.2.1
+    # via
+    #   aiohttp
+    #   yarl
 pyasn1==0.6.1
     # via
     #   ldap3
@@ -267,9 +283,13 @@ pyasn1-modules==0.4.1
     #   oauth2client
 pycparser==2.22
     # via cffi
-pyhanko==0.18.0
+pydantic==2.10.3
+    # via superdesk-core
+pydantic-core==2.27.1
+    # via pydantic
+pyhanko==0.25.3
     # via xhtml2pdf
-pyhanko-certvalidator==0.22.0
+pyhanko-certvalidator==0.26.5
     # via
     #   pyhanko
     #   xhtml2pdf
@@ -277,11 +297,10 @@ pyjwt==2.8.0
     # via superdesk-core
 pymemcache==4.0.0
     # via superdesk-core
-pymongo==3.11.4
+pymongo==4.9.2
     # via
     #   eve
-    #   flask-pymongo
-    #   mongolock
+    #   motor
     #   superdesk-core
 pyparsing==3.2.0
     # via
@@ -316,29 +335,44 @@ pytz==2024.2
     # via
     #   croniter
     #   eve-elastic
-    #   flask-babel
     #   icalendar
-    #   pyhanko
+    #   quart-babel
     #   superdesk-core
-    #   tzlocal
 pyyaml==6.0.2
     # via
     #   pyhanko
     #   superdesk-core
 qrcode==8.0
     # via pyhanko
-raven[flask]==6.10.0
+quart @ git+https://github.com/MarkLark86/quart@fix-test-client-with-utf8-url
+    # via
+    #   eve
+    #   quart-babel
+    #   quart-flask-patch
+    #   quart-rate-limiter
+    #   quart-uploads
+    #   quart-wtforms
+    #   sentry-sdk
+    #   superdesk-core
+quart-babel==1.0.7
     # via superdesk-core
-redis==5.0.8
+quart-flask-patch==0.3.0
+    # via superdesk-core
+quart-rate-limiter==0.10.0
+    # via newsroom-core
+quart-uploads==0.0.4
+    # via quart-wtforms
+quart-wtforms==1.0.3
+    # via newsroom-core
+redis==5.1.1
     # via
     #   celery
     #   celery-redbeat
     #   superdesk-core
-regex==2024.7.24
+regex==2024.9.11
     # via superdesk-core
 reportlab==4.2.5
     # via
-    #   newsroom-core
     #   superdesk-core
     #   svglib
     #   xhtml2pdf
@@ -355,47 +389,61 @@ rsa==4.9
     # via
     #   google-auth
     #   oauth2client
-s3transfer==0.10.3
+s3transfer==0.10.4
     # via boto3
-sentry-sdk[flask]==2.18.0
-    # via newsroom-core
+sentry-sdk[quart]==1.45.1
+    # via
+    #   newsroom-core
+    #   superdesk-core
 sgmllib3k==1.0.0
     # via feedparser
 simplejson==3.19.3
     # via eve
-six==1.16.0
+six==1.17.0
     # via
-    #   flask-limiter
     #   flask-oidc-ex
     #   html5lib
     #   oauth2client
     #   python-bidi
     #   python-dateutil
-superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@v2.8.0rc2
+superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@async
     # via newsroom-core
-superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@v2.7.2
+superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@async
     # via newsroom-core
 svglib==1.5.1
     # via xhtml2pdf
+taskgroup==0.2.1
+    # via hypercorn
 tenacity==9.0.0
     # via celery-redbeat
 tinycss2==1.4.0
     # via
     #   cssselect2
     #   svglib
-types-python-dateutil==2.9.0.20241003
+tomli==2.2.1
+    # via hypercorn
+types-aiofiles==24.1.0.20240626
+    # via quart-uploads
+types-python-dateutil==2.9.0.20241206
     # via arrow
+types-pytz==2024.2.0.20241003
+    # via quart-babel
 typing-extensions==4.12.2
     # via
+    #   asgiref
+    #   hypercorn
     #   jwcrypto
-    #   limits
+    #   multidict
+    #   pydantic
+    #   pydantic-core
     #   pypdf
     #   superdesk-core
+    #   taskgroup
 tzdata==2024.2
     # via
     #   celery
     #   kombu
-tzlocal==2.1
+tzlocal==5.2
     # via
     #   pyhanko
     #   superdesk-core
@@ -408,7 +456,6 @@ urllib3==1.26.20
     #   botocore
     #   elastic-apm
     #   elasticsearch
-    #   newsroom-core
     #   requests
     #   sentry-sdk
     #   superdesk-core
@@ -424,20 +471,20 @@ webencodings==0.5.1
     #   cssselect2
     #   html5lib
     #   tinycss2
-websockets==10.3
+websockets==13.1
     # via superdesk-core
-werkzeug==1.0.1
+werkzeug==3.1.3
     # via
     #   flask
-    #   superdesk-core
-wrapt==1.16.0
+    #   quart
+wrapt==1.17.0
+    # via elastic-apm
+wsproto==1.2.0
+    # via hypercorn
+wtforms[email]==3.1.2
     # via
-    #   deprecated
-    #   elastic-apm
-wtforms[email]==3.2.1
-    # via
-    #   flask-wtf
     #   newsroom-core
+    #   quart-wtforms
     #   wtforms
 xhtml2pdf==0.2.16
     # via newsroom-core
@@ -445,6 +492,8 @@ xmlsec==1.3.14
     # via
     #   python3-saml
     #   superdesk-core
+yarl==1.18.3
+    # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
