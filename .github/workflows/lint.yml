@@ -1,8 +1,0 @@
-name: "Lint"
-
-on: [ push, pull_request ]
-
-jobs:
-  lint:
-    name: "Lint"
-    uses: superdesk/newsroom-app/.github/workflows/lint.yml@develop
