@@ -4,9 +4,9 @@
 #
 #    pip-compile mypy-requirements.in
 #
-mypy==0.991
+mypy==1.13.0
     # via -r mypy-requirements.in
-mypy-extensions==0.4.3
+mypy-extensions==1.0.0
     # via mypy
 tomli==2.0.1
     # via mypy
@@ -24,5 +24,5 @@ types-urllib3==1.26.25.4
     # via types-requests
 types-werkzeug==1.0.9
     # via types-flask
-typing-extensions==4.4.0
+typing-extensions==4.12.2
     # via mypy
