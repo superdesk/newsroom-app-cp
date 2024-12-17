@@ -1,4 +1,5 @@
 import os
+import cp
 import pathlib
 from flask_babel import lazy_gettext
 from superdesk.default_settings import strtobool
@@ -20,9 +21,10 @@ SERVER_PATH = pathlib.Path(__file__).resolve().parent
 CLIENT_PATH = SERVER_PATH.parent.joinpath("client")
 TRANSLATIONS_PATH = SERVER_PATH.joinpath("translations")
 
-SITE_NAME = "CP NewsPro"
+SITE_NAME = lazy_gettext("CP NewsPro")
 COPYRIGHT_HOLDER = "CP"
 CONTACT_ADDRESS = None
+DOWNLOAD_RENDITION = "original"
 
 SERVICES = [
     {"name": "Domestic Sport", "code": "t"},
@@ -117,6 +119,8 @@ CLIENT_CONFIG.update(
         "time_format": "HH:mm",
         "date_format": "MMM Do, YYYY",
         "default_timezone": DEFAULT_TIMEZONE,
+        "view_content_tooltip_email": "help-aide@thecanadianpress.com",
+        "searchbar_threshold_value": 30,
         "filter_panel_defaults": {
             "tab": {
                 "wire": "filters",
@@ -133,7 +137,43 @@ CLIENT_CONFIG.update(
                 "agenda": ["name", "description"],
             },
         },
-    }
+        "coverage_status_filter": {
+            "not planned": {
+                "enabled": True,
+                "index": 1,
+                "option_label": lazy_gettext("No coverage"),
+                "button_label": lazy_gettext("No coverage"),
+            },
+            "not intended": {
+                "enabled": True,
+                "index": 2,
+                "option_label": lazy_gettext("Cancelled / not planned"),
+                "button_label": lazy_gettext("Cancelled / not planned"),
+            },
+            "may be": {
+                "enabled": True,
+                "index": 3,
+                "option_label": lazy_gettext("Not decided / on merit"),
+                "button_label": lazy_gettext("Not decided / on merit"),
+            },
+            "planned": {
+                "enabled": True,
+                "index": 4,
+                "option_label": lazy_gettext("Planned"),
+                "button_label": lazy_gettext("Planned"),
+            },
+            "completed": {
+                "enabled": True,
+                "index": 5,
+                "option_label": lazy_gettext("Completed"),
+                "button_label": lazy_gettext("Completed"),
+            },
+        },
+        "agenda_top_story_scheme": "topstory",
+        "wire_labels_scheme": cp.WIRE_LABELS_SCHEME,
+        "display_author_role": False,
+        "agenda_sort_events_with_coverage_on_top": True,
+    },
 )
 
 CLIENT_LOCALE_FORMATS = CLIENT_CONFIG["locale_formats"]
@@ -142,6 +182,15 @@ WIRE_GROUPS = [
     {
         "field": "language",
         "label": lazy_gettext("Language"),
+    },
+    {
+        "field": "mediaformat",
+        "label": lazy_gettext("Media type"),
+        "nested": {
+            "parent": "subject",
+            "field": "scheme",
+            "value": "mediaformat",
+        },
     },
     {
         "field": "source",
@@ -230,12 +279,15 @@ CORE_APPS = [
 INSTALLED_APPS = [
     "cp.sidenav",
     "cp.signals",
+    "cp.images",
     "newsroom.auth.saml",
 ]
 
 WIRE_SUBJECT_SCHEME_WHITELIST = [
     "distribution",
     "subject_custom",
+    "mediaformat",
+    "station",
 ]
 
 CELERY_BEAT_SCHEDULE = {
@@ -258,7 +310,7 @@ CONTENT_API_EXPIRY_DAYS = 730
 BABEL_DEFAULT_TIMEZONE = "America/Toronto"
 
 # saml auth
-SAML_LABEL = env("SAML_LABEL", "SSO")
+SAML_LABEL = env("SAML_LABEL", "Login with SSO")
 SAML_COMPANY = env("SAML_COMPANY", "The Canadian Press")
 SAML_BASE_PATH = pathlib.Path(env("SAML_PATH", SERVER_PATH.joinpath("saml")))
 SAML_PATH_MAP = {
@@ -296,15 +348,42 @@ WIRE_SEARCH_FIELDS = [
     "byline",
     "body_html",
     "body_text",
-    "description_html",
-    "description_text",
+]
+
+WIRE_TIME_FILTERS = [
+    {
+        "name": lazy_gettext("Last 24 hours"),
+        "filter": "last_24_hours",
+        "default": False,
+        "query": {"gte": "now-24h/m"},
+    },
+    {
+        "name": lazy_gettext("Last 14 days"),
+        "filter": "last_14_days",
+        "default": False,
+        "query": {"gte": "now-14d/h"},
+    },
+    {
+        "name": lazy_gettext("Last 30 days"),
+        "filter": "last_30_days",
+        "default": True,
+        "query": {"gte": "now-30d/h"},
+    },
+    {
+        "name": lazy_gettext("Last 2 years"),
+        "filter": "last_2_years",
+        "default": False,
+        "query": {"gte": "now-2y/d"},
+    },
 ]
 
 AGENDA_SHOW_MULTIDAY_ON_START_ONLY = True
 
 WIRE_NOTIFICATIONS_ON_CORRECTIONS = True
 
-CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_field_analyzer"]["filter"] = [
+CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"][
+    "html_field_analyzer"
+]["filter"] = [
     "lowercase",
     "elision",
     "asciifolding",
@@ -313,3 +392,39 @@ CONTENTAPI_ELASTICSEARCH_SETTINGS["settings"]["analysis"]["analyzer"]["html_fiel
 # bump core versions to reindex inclusing elision
 WIRE_SCHEMA_VERSION = 4
 AGENDA_SCHEMA_VERSION = 6
+
+SOURCE_EXPIRY_DAYS = {}
+
+AGENDA_CSV_SUBJECT_SCHEMES = ["subject_custom"]
+
+EMAIL_DEFAULT_SENDER_NAME = "CP NewsPro"
+EMAIL_SENDER_NAME_LANGUAGE_MAP = {
+    "en": "CP NewsPro",
+    "fr_ca": "PC NouvellesPro",
+}
+
+PRODUCTFRUITS_WORKSPACE_CODE = os.environ.get("PRODUCTFRUITS_WORKSPACE_CODE")
+
+PERSONAL_DASHBOARD_CARD_TYPE = "6-text-only"
+
+AGENDA_PAGE_SIZE = 500
+
+SUPPORT_EMAIL_EN = "help-aide@mycpnewspro.com"
+SUPPORT_EMAIL_FR = SUPPORT_EMAIL_EN
+
+NOTIFY_MATCHING_USERS = "cancel"
+
+AGENDA_TIME_FILTERS = [
+    {"name": lazy_gettext("Selected day"), "query": ""},
+    {"name": lazy_gettext("Today"), "query": "now/d"},
+    {
+        "name": lazy_gettext("This Week"),
+        "query": "now/w",
+    },
+    {
+        "name": lazy_gettext("This Month"),
+        "query": "now/M",
+    },
+]
+
+COVERAGE_REQUEST_EMAIL_CC_CURRENT_USER = True

@@ -1,65 +1,41 @@
 # Translations template for Newsroom App CP.
-# Copyright (C) 2023 ORGANIZATION
+# Copyright (C) 2024 ORGANIZATION
 # This file is distributed under the same license as the Newsroom App CP
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-19 11:33+0200\n"
+"POT-Creation-Date: 2024-08-23 10:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.12.1\n"
+"Generated-By: Babel 2.15.0\n"
 
-#: theme/cp_reset_password.html:14 theme/cp_reset_password_confirmation.html:14
-msgid "Reset Password"
-msgstr ""
-
-#: theme/cp_reset_password.html:24
-msgid "Send Password Reset Email"
-msgstr ""
-
-#: theme/cp_reset_password_confirmation.html:18
-msgid "An email was sent to your inbox. Please follow the instructions there."
-msgstr ""
-
-#: theme/login.html:16
-msgid "Login"
-msgstr ""
-
-#: theme/login.html:25
-msgid "Login using Single Sign On"
-msgstr ""
-
-#: theme/login.html:31
+#: theme/login.html:5 theme/login.html:7
 msgid "Sign up"
 msgstr ""
 
-#: theme/login.html:33
+#: theme/login.html:10
 msgid "Forgot your password?"
 msgstr ""
 
-#: theme/login.html:34
+#: theme/login.html:11
 msgid "Please reset my password for NewsPro"
 msgstr ""
 
-#: theme/login.html:34
+#: theme/login.html:11
 msgid "Contact Us"
 msgstr ""
 
-#: theme/login.html:36
+#: theme/login.html:13
 msgid "Reset password"
-msgstr ""
-
-#: settings.py:137 settings.py:173 theme/login.html:43
-msgid "Language"
 msgstr ""
 
 #: theme/page-contact.html:3 theme/page-copyright.html:3
@@ -67,28 +43,8 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: cp/auth.py:40
-msgid "User token is not valid"
-msgstr ""
-
-#: cp/auth.py:80
-msgid "User not found"
-msgstr ""
-
-#: cp/auth.py:82
-msgid "User not enabled"
-msgstr ""
-
-#: cp/auth.py:89
-msgid "Password reset for your account is not supported through Newshub"
-msgstr ""
-
-#: cp/auth.py:97
-msgid "An error occurred while sending reset password email"
-msgstr ""
-
 #: cp/common_settings.py:8
-msgid "Google"
+msgid "Firebase"
 msgstr ""
 
 #: cp/common_settings.py:12
@@ -99,35 +55,115 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: settings.py:141
+#: cp/signals.py:169
+msgid "THE LATEST"
+msgstr ""
+
+#: cp/signals.py:172
+msgid "ALERT"
+msgstr ""
+
+#: cp/signals.py:175
+msgid "ADVISORY"
+msgstr ""
+
+#: cp/signals.py:178
+msgid "PRESS RELEASE"
+msgstr ""
+
+#: settings.py:24
+msgid "CP NewsPro"
+msgstr ""
+
+#: settings.py:144 settings.py:145
+msgid "No coverage"
+msgstr ""
+
+#: settings.py:150 settings.py:151
+msgid "Cancelled / not planned"
+msgstr ""
+
+#: settings.py:156 settings.py:157
+msgid "Not decided / on merit"
+msgstr ""
+
+#: settings.py:162 settings.py:163
+msgid "Planned"
+msgstr ""
+
+#: settings.py:168 settings.py:169
+msgid "Completed"
+msgstr ""
+
+#: settings.py:184 settings.py:229
+msgid "Language"
+msgstr ""
+
+#: settings.py:188
+msgid "Media type"
+msgstr ""
+
+#: settings.py:197
 msgid "Source"
 msgstr ""
 
-#: settings.py:145
+#: settings.py:201
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:149 settings.py:191
+#: settings.py:205 settings.py:247
 msgid "Subject"
 msgstr ""
 
-#: settings.py:158
+#: settings.py:214
 msgid "Version"
 msgstr ""
 
-#: settings.py:177
+#: settings.py:233
 msgid "Category"
 msgstr ""
 
-#: settings.py:181
+#: settings.py:237
 msgid "Event Type"
 msgstr ""
 
-#: settings.py:280
+#: settings.py:342
 msgid "Calendar"
 msgstr ""
 
-#: settings.py:281
+#: settings.py:343
 msgid "Bookmarks"
+msgstr ""
+
+#: settings.py:355
+msgid "Last 24 hours"
+msgstr ""
+
+#: settings.py:361
+msgid "Last 14 days"
+msgstr ""
+
+#: settings.py:367
+msgid "Last 30 days"
+msgstr ""
+
+#: settings.py:373
+msgid "Last 2 years"
+msgstr ""
+
+#: settings.py:418
+msgid "Selected day"
+msgstr ""
+
+#: settings.py:419
+msgid "Today"
+msgstr ""
+
+#: settings.py:421
+msgid "This Week"
+msgstr ""
+
+#: settings.py:425
+msgid "This Month"
 msgstr ""
 

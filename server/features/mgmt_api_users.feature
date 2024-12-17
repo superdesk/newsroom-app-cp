@@ -140,27 +140,17 @@ Feature: Management API - Users
             ]
         }
         """
-        Then we get error 400
-        """
-        {"code": 400, "message": "invalid product type for product #products._id#, should be agenda"}
-        """
+        Then we get response code 201
 
-        When we post to "/users"
+        When we get "/users/#users._id#"
+        Then we get existing resource
         """
         {
-            "first_name": "John",
-            "last_name": "Cena",
-            "email": "johncena@wwe.com",
-            "company": "#companies._id#",
-            "sections": {
-                "agenda": true
-            },
             "products": [
-                {"section": "agenda", "_id": "#products._id#"}
+                {"_id": "#products._id#", "section": "agenda"}
             ]
         }
         """
-        Then we get response code 201
 
         When we patch "/users/#users._id#"
         """
@@ -170,9 +160,10 @@ Feature: Management API - Users
             ]
         }
         """
-        Then we get error 400
+        Then we get response code 200
 
-        When we patch "/users/#users._id#"
+        When we get "/users/#users._id#"
+        Then we get existing resource
         """
         {
             "products": [
@@ -180,4 +171,57 @@ Feature: Management API - Users
             ]
         }
         """
-        Then we get response code 200
+
+    Scenario: Validate locale
+
+        Given "companies"
+        """
+        [{"name": "zzz company"}]
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "locale": "fr"
+        }
+        """
+
+        Then we get error 400
+        """
+        {"code": 400, "message": "Locale is not in configured list of locales."}
+        """
+
+        When we post to "/users"
+        """
+        {
+            "first_name": "John",
+            "last_name": "Cena",
+            "email": "johncena@wwe.com",
+            "company": "#companies._id#",
+            "locale": "fr_CA"
+        }
+        """
+        Then we get response code 201
+
+    Scenario: Search case insensitive
+        Given "users"
+        """
+        [
+            {
+                "first_name": "John",
+                "last_name": "Cena",
+                "email": "JohnCena@wwe.com",
+                "user_type": "administrator"
+            }
+        ]
+        """
+
+        When we get "/users?where={"email": "johncena@wwe.com"}"
+        Then we get list with 1 items
+
+        When we get "/users?where={"email": "JohnCena@wwe.com"}"
+        Then we get list with 1 items
