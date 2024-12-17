@@ -10,3 +10,5 @@ access_log_format = "%(m)s %(U)s status=%(s)s time=%(T)ss size=%(B)sb"
 
 reload = "SUPERDESK_RELOAD" in os.environ
 timeout = int(os.environ.get("WEB_TIMEOUT", 30))
+
+limit_request_line = int(os.environ.get("WEB_MAX_REQUEST_LINE", 8000))
