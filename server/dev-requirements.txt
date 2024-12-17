@@ -1,6 +1,6 @@
 -r requirements.txt
 
-black>=23,<24
+black>=23,<25
 flake8
 sphinx
 sphinx-autobuild
