@@ -379,10 +379,10 @@ WIRE_TIME_FILTERS = [
         "query": {"gte": "now-14d/h"},
     },
     {
-        "name": lazy_gettext("Last 30 days"),
-        "filter": "last_30_days",
+        "name": lazy_gettext("Last 90 days"),
+        "filter": "last_90_days",
         "default": True,
-        "query": {"gte": "now-30d/h"},
+        "query": {"gte": "now-90d/h"},
     },
     {
         "name": lazy_gettext("Last 2 years"),
