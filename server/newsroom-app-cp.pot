@@ -9,32 +9,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-23 10:32+0200\n"
+"POT-Creation-Date: 2024-12-19 15:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 
-#: theme/login.html:5 theme/login.html:7
+#: theme/login.html:19
+msgid "Don't have an account?"
+msgstr ""
+
+#: theme/login.html:21 theme/login.html:23
 msgid "Sign up"
 msgstr ""
 
-#: theme/login.html:10
+#: theme/login.html:33
 msgid "Forgot your password?"
 msgstr ""
 
-#: theme/login.html:11
+#: theme/login.html:34
 msgid "Please reset my password for NewsPro"
 msgstr ""
 
-#: theme/login.html:11
+#: theme/login.html:34
 msgid "Contact Us"
 msgstr ""
 
-#: theme/login.html:13
+#: theme/login.html:35
+msgid "or"
+msgstr ""
+
+#: theme/login.html:36
 msgid "Reset password"
 msgstr ""
 
@@ -95,7 +103,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: settings.py:184 settings.py:229
+#: settings.py:184 settings.py:243
 msgid "Language"
 msgstr ""
 
@@ -111,59 +119,67 @@ msgstr ""
 msgid "Wire Category"
 msgstr ""
 
-#: settings.py:205 settings.py:247
+#: settings.py:205 settings.py:261
 msgid "Subject"
 msgstr ""
 
 #: settings.py:214
+msgid "Service"
+msgstr ""
+
+#: settings.py:223
 msgid "Version"
 msgstr ""
 
-#: settings.py:233
+#: settings.py:227
+msgid "Ranking"
+msgstr ""
+
+#: settings.py:247
 msgid "Category"
 msgstr ""
 
-#: settings.py:237
+#: settings.py:251
 msgid "Event Type"
 msgstr ""
 
-#: settings.py:342
+#: settings.py:357
 msgid "Calendar"
 msgstr ""
 
-#: settings.py:343
+#: settings.py:358
 msgid "Bookmarks"
 msgstr ""
 
-#: settings.py:355
+#: settings.py:370
 msgid "Last 24 hours"
 msgstr ""
 
-#: settings.py:361
+#: settings.py:376
 msgid "Last 14 days"
 msgstr ""
 
-#: settings.py:367
+#: settings.py:382
 msgid "Last 30 days"
 msgstr ""
 
-#: settings.py:373
+#: settings.py:388
 msgid "Last 2 years"
 msgstr ""
 
-#: settings.py:418
+#: settings.py:433
 msgid "Selected day"
 msgstr ""
 
-#: settings.py:419
+#: settings.py:434
 msgid "Today"
 msgstr ""
 
-#: settings.py:421
+#: settings.py:436
 msgid "This Week"
 msgstr ""
 
-#: settings.py:425
+#: settings.py:440
 msgid "This Month"
 msgstr ""
 
