@@ -1,51 +1,60 @@
 # Translations template for Newsroom App CP.
-# Copyright (C) 2024 ORGANIZATION
+# Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the Newsroom App CP
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 # 
 # Translators:
 # Srdjan Karalic <srdjan.karalic@sourcefabric.org>, 2024
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2024
-# Nefertiti Patell, 2024
 # Paemiga Sararithi, 2024
 # Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
 # Simon Peacock <simon.peacock@gmail.com>, 2024
 # Petr Jašek <petr.jasek@sourcefabric.org>, 2024
+# Nefertiti Patell, 2025
+# Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-23 10:32+0200\n"
+"POT-Creation-Date: 2025-01-09 10:41+0100\n"
 "PO-Revision-Date: 2024-01-15 14:08+0000\n"
-"Last-Translator: Petr Jašek <petr.jasek@sourcefabric.org>, 2024\n"
+"Last-Translator: Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2025\n"
 "Language-Team: French (Canada) (https://app.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 "Language: fr_CA\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: theme/login.html:5 theme/login.html:7
+#: theme/login.html:19
+msgid "Don't have an account?"
+msgstr "Vous n'avez pas de compte ?"
+
+#: theme/login.html:21 theme/login.html:23
 msgid "Sign up"
 msgstr "Inscrivez-vous"
 
-#: theme/login.html:10
+#: theme/login.html:33
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié ?"
 
-#: theme/login.html:11
+#: theme/login.html:34
 msgid "Please reset my password for NewsPro"
 msgstr "Veuillez réinitialiser mon mot de passe pour NouvellesPro"
 
-#: theme/login.html:11
+#: theme/login.html:34
 msgid "Contact Us"
 msgstr "Contactez-nous"
 
-#: theme/login.html:13
+#: theme/login.html:35
+msgid "or"
+msgstr "ou"
+
+#: theme/login.html:36
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
@@ -54,15 +63,15 @@ msgstr "Réinitialiser le mot de passe"
 msgid "Copyright"
 msgstr "Droits d'auteur"
 
-#: cp/common_settings.py:8
+#: cp/common_settings.py:10
 msgid "Firebase"
 msgstr "Firebase"
 
-#: cp/common_settings.py:12
+#: cp/common_settings.py:15
 msgid "Azure"
 msgstr "Azure"
 
-#: cp/password_reset_form.py:8
+#: cp/password_reset_form.py:9
 msgid "Email"
 msgstr "Courriel"
 
@@ -164,7 +173,7 @@ msgstr "Les 2 dernières années"
 
 #: settings.py:418
 msgid "Selected day"
-msgstr ""
+msgstr "Jour sélectionné"
 
 #: settings.py:419
 msgid "Today"
