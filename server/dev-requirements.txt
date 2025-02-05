@@ -2,7 +2,7 @@
 -r mypy-requirements.txt
 
 behave==1.2.6
-black==24.10.0
+black==25.1.0
 flake8==7.1.1
 pytest==8.3.4
 pytest-cov==6.0.0
