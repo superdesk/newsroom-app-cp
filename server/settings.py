@@ -255,8 +255,6 @@ AGENDA_GROUPS = [
 
 
 BLUEPRINTS = [
-    "cp.mgmt_api_docs",
-] + [
     blueprint
     for blueprint in DEFAULT_BLUEPRINTS
     if blueprint

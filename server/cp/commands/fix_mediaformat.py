@@ -5,19 +5,19 @@ from superdesk.core import get_current_async_app
 
 
 @newsroom_cli.command("fix_media")
-async def fix_media(resource="items", limit=500, sleep_secs=2):
+async def fix_mediaformat(resource="items", limit=500, sleep_secs=2):
     """Fix MediaFormats in given resource"""
 
     service = get_current_async_app().resources.get_resource_service(resource)
     media_type_scheme = get_media_type_scheme()
-    source = {
+    lookup = {
         "query": {
             "bool": {"must_not": {"term": {"subject.scheme": media_type_scheme}}}
         },
         "size": 100,
     }
     for i in range(int(limit)):
-        items = await service.search(source)
+        items = await service.search(lookup)
         if not await items.count():
             break
         for item in await items.to_list_raw():

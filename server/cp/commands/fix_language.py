@@ -11,17 +11,16 @@ async def fix_language(resource, limit=50, sleep_secs=2):
 
     service = get_current_async_app().resources.get_resource_service(resource)
 
-    source = {
+    lookup = {
         "query": {"terms": {"language": ["en-CA", "en-US", "fr-CA"]}},
         "size": 100,
     }
 
     for i in range(int(limit)):
-        items = await service.search(source)
+        items = await service.search(lookup=lookup)
         if not await items.count():
             break
         for item in await items.to_list_raw():
-            print("itemhskdbfkbkfbs", item)
             new_language = item.language.split("-")[0]
             item.language = new_language
             updates = {"language": item.language}
