@@ -4,10 +4,13 @@ from newsroom.commands.cli import newsroom_cli
 from superdesk.core import get_current_async_app
 
 
-@newsroom_cli.command("fix_media")
+@newsroom_cli.command("fix_mediaformat")
 async def fix_mediaformat(resource="items", limit=500, sleep_secs=2):
     """Fix MediaFormats in given resource"""
+    await fix_media(resource, sleep_secs, limit)
 
+
+async def fix_media(resource, sleep_secs=2, limit=500):
     service = get_current_async_app().resources.get_resource_service(resource)
     media_type_scheme = get_media_type_scheme()
     lookup = {
@@ -29,7 +32,7 @@ async def fix_mediaformat(resource="items", limit=500, sleep_secs=2):
                     scheme=media_type_scheme,
                 )
             )
-            await service.system_update(item["_id"], updates, item)
+            await service.system_update(item["_id"], updates)
         print(".", end="", flush=True)
         time.sleep(int(sleep_secs))
     print("done.")

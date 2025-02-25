@@ -1,7 +1,7 @@
 from cp.images import set_photo_coverage_href
 
 
-def test_set_photo_coverage_href():
+async def test_set_photo_coverage_href():
     coverage = {
         "coverage_id": "b808c78c-6859-41df-aabd-bd54b3fb4db9",
         "workflow_status": "completed",
