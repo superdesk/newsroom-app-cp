@@ -1,5 +1,7 @@
 from cp.images import set_photo_coverage_href
 
+# TODO-ASYNC: upgrade when CPCN-1020 is merged
+
 
 async def test_set_photo_coverage_href():
     coverage = {
