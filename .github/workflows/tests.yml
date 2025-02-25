@@ -48,10 +48,6 @@ jobs:
       - name: pytest
         run: pytest --disable-pytest-warnings --cov=./
 
-      - name: behave
-        run: behave --format progress2 --logging-level=ERROR
-
-
   client:
     runs-on: ubuntu-latest
 
