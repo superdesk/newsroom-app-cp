@@ -1,7 +1,5 @@
 from cp.images import set_photo_coverage_href
 
-# TODO-ASYNC: upgrade when CPCN-1020 is merged
-
 
 async def test_set_photo_coverage_href():
     coverage = {
@@ -30,5 +28,5 @@ async def test_set_photo_coverage_href():
         "genre": [],
         "coverage_type": "picture",
     }
-    href = set_photo_coverage_href(coverage, {}, [])
+    href = await set_photo_coverage_href(coverage, {}, [])
     assert "https://www.cpimages.com/CS.aspx?VP3=DirectSearch&FT=picture%20slug" == href
