@@ -7,12 +7,12 @@ from newsroom.web.default_settings import (
     env,
     CLIENT_CONFIG,
     CORE_APPS as DEFAULT_CORE_APPS,
-    BLUEPRINTS as DEFAULT_BLUEPRINTS,
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
     CLIENT_URL,
     CLIENT_LOCALE_FORMATS,
     AUTH_PROVIDERS,
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
+    MODULES as DEFAULT_MODULES,
 )
 from cp.common_settings import AUTH_PROVIDERS  # noqa
 
@@ -254,12 +254,10 @@ AGENDA_GROUPS = [
 ]
 
 
-BLUEPRINTS = [
-    "cp.mgmt_api_docs",
-] + [
-    blueprint
-    for blueprint in DEFAULT_BLUEPRINTS
-    if blueprint
+MODULES = [
+    module
+    for module in DEFAULT_MODULES
+    if module
     not in ["newsroom.design", "newsroom.monitoring", "newsroom.news_api.api_tokens"]
 ]
 

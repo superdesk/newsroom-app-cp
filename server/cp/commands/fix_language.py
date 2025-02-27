@@ -1,25 +1,34 @@
 import time
+import click
+from newsroom.commands.cli import newsroom_cli
+from superdesk.core import get_current_async_app
 
-from superdesk import get_resource_service
-from newsroom.commands.manager import manager
 
+@newsroom_cli.command("fix_language")
+@click.option("--resource", default="items", help="The resource to update")
+@click.option("--limit", default=500, type=int, help="Max number of iterations.")
+@click.option(
+    "--sleep-secs", default=2, type=int, help="Sleep time between batches (seconds)."
+)
+async def fix_language(resource, limit, sleep_secs):
+    """Update Languages of items in given resource"""
 
-@manager.command
-def fix_language(resource="items", limit=50, sleep_secs=2):
-    service = get_resource_service(resource)
+    service = get_current_async_app().resources.get_resource_service(resource)
 
-    source = {
+    lookup = {
         "query": {"terms": {"language": ["en-CA", "en-US", "fr-CA"]}},
         "size": 100,
     }
 
     for i in range(int(limit)):
-        items = service.search(source)
-        if not items.count():
+        items = await service.search(lookup=lookup)
+        if not await items.count():
             break
-        for item in items:
-            updates = {"language": item["language"].split("-")[0]}
-            service.system_update(item["_id"], updates, item)
+        for item in await items.to_list_raw():
+            new_language = item.language.split("-")[0]
+            item.language = new_language
+            updates = {"language": item.language}
+            await service.system_update(item.id, updates)
         print(".", end="", flush=True)
         time.sleep(int(sleep_secs))
     print(".")

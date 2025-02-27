@@ -1,7 +1,7 @@
-from cp.commands.fix_mediaformat import fix_mediaformat
+from cp.commands.fix_mediaformat import fix_media
 
 
-def test_fix_mediaformat(app):
+async def test_fix_mediaformat(app):
     app.data.insert(
         "items",
         [
@@ -10,7 +10,7 @@ def test_fix_mediaformat(app):
         ],
     )
 
-    fix_mediaformat()
+    await fix_media("items")
 
     en_item = app.data.find_one("items", req=None, _id="en")
     assert "subject" in en_item
