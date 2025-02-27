@@ -6,7 +6,11 @@ from superdesk.core import get_current_async_app
 
 @newsroom_cli.command("fix_language")
 @click.option("--resource", default="items", help="The resource to update")
-async def fix_language(resource, limit=50, sleep_secs=2):
+@click.option("--limit", default=500, type=int, help="Max number of iterations.")
+@click.option(
+    "--sleep-secs", default=2, type=int, help="Sleep time between batches (seconds)."
+)
+async def fix_language(resource, limit, sleep_secs):
     """Update Languages of items in given resource"""
 
     service = get_current_async_app().resources.get_resource_service(resource)

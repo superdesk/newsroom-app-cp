@@ -23,7 +23,7 @@ def fix_language(lang: str) -> str:
     return lang.split("-")[0].split("_")[0].lower()
 
 
-async def on_publish_item(sender: Any, item: Dict[str, Any], **kwargs: Any) -> None:
+async def on_publish_item(item: Dict[str, Any], **kwargs: Any) -> None:
     copy_headline2_to_headline(item)
     copy_correction_to_body_html(item)
     handle_transcripts(item)
@@ -48,13 +48,13 @@ def copy_correction_to_body_html(item: Dict[str, Any]) -> None:
         )
 
 
-async def on_user_created(sender: Any, user: User, **kwargs: Any) -> None:
+async def on_user_created(user: User, **kwargs: Any) -> None:
     if user_auth_is_gip(user):
         send_notification("new", user, id_key="email")
 
 
 async def on_user_updated(
-    sender: Any, user: User, updates: Optional[Dict[str, Any]] = None, **kwargs: Any
+    user: User, updates: Optional[Dict[str, Any]] = None, **kwargs: Any
 ) -> None:
     if user_auth_is_gip(user):
         if updates and updates.get("password"):
@@ -63,12 +63,12 @@ async def on_user_updated(
             send_notification("update", user)
 
 
-async def on_user_deleted(sender: Any, user: User, **kwargs: Any) -> None:
+async def on_user_deleted(user: User, **kwargs: Any) -> None:
     if user_auth_is_gip(user):
         send_notification("delete", user)
 
 
-async def on_push(sender: Any, item: Dict[str, Any], **kwargs: Any) -> None:
+async def on_push(item: Dict[str, Any], **kwargs: Any) -> None:
     if item.get("language"):
         item["language"] = fix_language(item["language"])
 

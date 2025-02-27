@@ -1,11 +1,17 @@
 import time
+import click
 from cp.signals import get_media_type_name, get_media_type_scheme
 from newsroom.commands.cli import newsroom_cli
 from superdesk.core import get_current_async_app
 
 
 @newsroom_cli.command("fix_mediaformat")
-async def fix_mediaformat(resource="items", limit=500, sleep_secs=2):
+@click.option("--resource", default="items", help="Resource to fix media formats in.")
+@click.option("--limit", default=500, type=int, help="Max number of iterations.")
+@click.option(
+    "--sleep-secs", default=2, type=int, help="Sleep time between batches (seconds)."
+)
+async def fix_mediaformat(resource, limit, sleep_secs):
     """Fix MediaFormats in given resource"""
     await fix_media(resource, sleep_secs, limit)
 
