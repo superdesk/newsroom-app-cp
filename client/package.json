@@ -4,6 +4,6 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
-    "newsroom-core": "github:superdesk/newsroom-core#v3.0.0-beta.1"
+    "newsroom-core": "github:superdesk/newsroom-core#v3.0.0-beta.2"
   }
 }
