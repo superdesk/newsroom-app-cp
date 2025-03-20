@@ -183,7 +183,8 @@ def set_wire_labels(item: Dict[str, Any]) -> None:
 
 def init_app(app):
     publish_item.connect(on_publish_item)
-    user_created.connect(on_user_created)
-    user_updated.connect(on_user_updated)
-    user_deleted.connect(on_user_deleted)
+    # TODO(fix signals)
+    # user_created.connect(on_user_created)
+    # user_updated.connect(on_user_updated)
+    # user_deleted.connect(on_user_deleted)
     push.connect(on_push)
