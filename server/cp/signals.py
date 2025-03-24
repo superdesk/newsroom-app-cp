@@ -7,7 +7,7 @@ from quart_babel import gettext
 
 from datetime import datetime, timedelta
 from superdesk import get_resource_service
-from newsroom.types import User, Company, UserResourceModel, CompanyResource
+from newsroom.types import UserResourceModel
 from newsroom.signals import (
     publish_item,
     user_created,
@@ -53,7 +53,9 @@ async def on_user_created(user: UserResourceModel) -> None:
         send_notification("new", user.to_dict(), id_key="email")
 
 
-async def on_user_updated(user: UserResourceModel, updates: Optional[Dict[str, Any]] = None) -> None:
+async def on_user_updated(
+    user: UserResourceModel, updates: Optional[Dict[str, Any]] = None
+) -> None:
     if await user_auth_is_gip(user):
         if updates and updates.get("password"):
             send_notification("password", user.to_dict())
