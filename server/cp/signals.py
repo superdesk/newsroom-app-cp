@@ -7,7 +7,7 @@ from quart_babel import gettext
 
 from datetime import datetime, timedelta
 from superdesk import get_resource_service
-from newsroom.types import User, Company
+from newsroom.types import UserResourceModel
 from newsroom.signals import (
     publish_item,
     user_created,
@@ -23,7 +23,7 @@ def fix_language(lang: str) -> str:
     return lang.split("-")[0].split("_")[0].lower()
 
 
-async def on_publish_item(item: Dict[str, Any], **kwargs: Any) -> None:
+async def on_publish_item(item: Dict[str, Any], is_new: bool) -> None:
     copy_headline2_to_headline(item)
     copy_correction_to_body_html(item)
     handle_transcripts(item)
@@ -48,27 +48,27 @@ def copy_correction_to_body_html(item: Dict[str, Any]) -> None:
         )
 
 
-async def on_user_created(user: User, **kwargs: Any) -> None:
-    if user_auth_is_gip(user):
-        send_notification("new", user, id_key="email")
+async def on_user_created(user: UserResourceModel) -> None:
+    if await user_auth_is_gip(user):
+        send_notification("new", user.to_dict(), id_key="email")
 
 
 async def on_user_updated(
-    user: User, updates: Optional[Dict[str, Any]] = None, **kwargs: Any
+    user: UserResourceModel, updates: Optional[Dict[str, Any]] = None
 ) -> None:
-    if user_auth_is_gip(user):
+    if await user_auth_is_gip(user):
         if updates and updates.get("password"):
-            send_notification("password", user)
+            send_notification("password", user.to_dict())
         else:
-            send_notification("update", user)
+            send_notification("update", user.to_dict())
 
 
-async def on_user_deleted(user: User, **kwargs: Any) -> None:
-    if user_auth_is_gip(user):
-        send_notification("delete", user)
+async def on_user_deleted(user: UserResourceModel) -> None:
+    if await user_auth_is_gip(user):
+        send_notification("delete", user.to_dict())
 
 
-async def on_push(item: Dict[str, Any], **kwargs: Any) -> None:
+async def on_push(item: Dict[str, Any]) -> None:
     if item.get("language"):
         item["language"] = fix_language(item["language"])
 
@@ -80,17 +80,12 @@ async def on_push(item: Dict[str, Any], **kwargs: Any) -> None:
             flask.abort(503)  # must be 50x error to trigger retry later
 
 
-def user_auth_is_gip(user: User) -> bool:
-    if not user.get("company"):
-        return False
-
-    company: Optional[Company] = get_resource_service("companies").find_one(
-        req=None, _id=user["company"]
-    )
+async def user_auth_is_gip(user: UserResourceModel) -> bool:
+    company = await user.get_company()
     if not company:
         return False
 
-    return company.get("auth_provider") == "gip"
+    return company.auth_provider == "gip"
 
 
 def get_media_type(item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -183,8 +178,7 @@ def set_wire_labels(item: Dict[str, Any]) -> None:
 
 def init_app(app):
     publish_item.connect(on_publish_item)
-    # TODO(fix signals)
-    # user_created.connect(on_user_created)
-    # user_updated.connect(on_user_updated)
-    # user_deleted.connect(on_user_deleted)
+    user_created.connect(on_user_created)
+    user_updated.connect(on_user_updated)
+    user_deleted.connect(on_user_deleted)
     push.connect(on_push)
