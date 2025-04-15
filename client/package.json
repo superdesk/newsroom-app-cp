@@ -5,5 +5,15 @@
   },
   "dependencies": {
     "newsroom-core": "github:superdesk/newsroom-core#release/2.9"
+  },
+  "peerDependencies": {
+    "css-loader": "*",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "ts-loader": "*",
+    "webpack": "*",
+    "webpack-cli": "*",
+    "webpack-dev-server": "*",
+    "webpack-manifest-plugin": "*"
   }
 }
