@@ -924,6 +924,7 @@ components:
       properties:
         product:
           type: string
+          $ref: '#/components/schemas/ObjectId'
         link:
           type: boolean
         seats:
