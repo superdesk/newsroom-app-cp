@@ -521,7 +521,7 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
     post:
-      summary: Set the list of products a company is permissioned for.
+      summary: Set the lisdddt of products a company is permissioned for.
       tags:
         - Company Products
       requestBody:
@@ -924,6 +924,8 @@ components:
       properties:
         product:
           type: string
+          format: uuid
+          example: "d6f7fa72-4134-4af2-a9c7-5c7fa9393abc"
         link:
           type: boolean
         seats:
