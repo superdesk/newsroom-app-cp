@@ -924,8 +924,7 @@ components:
       properties:
         product:
           type: string
-          format: uuid
-          example: "d6f7fa72-4134-4af2-a9c7-5c7fa9393abc"
+          $ref: '#/components/schemas/ObjectId'
         link:
           type: boolean
         seats:
