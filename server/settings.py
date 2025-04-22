@@ -431,3 +431,5 @@ CALENDAR_LOCATIONS_FILTER_OPTIONS = {
     "city": False,
     "place": False,
 }
+
+QUART_RATE_LIMITER_ENABLED = False
