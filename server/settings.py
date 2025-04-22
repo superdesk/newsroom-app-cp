@@ -433,3 +433,5 @@ CALENDAR_LOCATIONS_FILTER_OPTIONS = {
     "city": False,
     "place": False,
 }
+
+RATELIMIT_ENABLED = False
