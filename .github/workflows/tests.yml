@@ -16,3 +16,5 @@ jobs:
 
   client:
     uses: superdesk/newsroom-app/.github/workflows/client.yml@develop
+    with:
+      node-version: '20'
