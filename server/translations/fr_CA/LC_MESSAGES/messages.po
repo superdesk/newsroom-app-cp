@@ -8,26 +8,26 @@
 # Srdjan Karalic <srdjan.karalic@sourcefabric.org>, 2022
 # Sabina <sabina.gergel@thecanadianpress.com>, 2024
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2024
-# Paemiga Sararithi, 2024
-# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
-# Simon Peacock <simon.peacock@gmail.com>, 2024
 # Petr Jašek <petr.jasek@sourcefabric.org>, 2024
+# Simon Peacock <simon.peacock@gmail.com>, 2024
+# Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2024
+# Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
 # Nefertiti Patell, 2025
-# Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2025
+# Paemiga Sararithi, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-09 10:41+0100\n"
-"PO-Revision-Date: 2024-01-15 14:08+0000\n"
-"Last-Translator: Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2025\n"
+"POT-Creation-Date: 2025-04-28 12:05+0200\n"
+"PO-Revision-Date: 2022-03-15 12:58+0000\n"
+"Last-Translator: Paemiga Sararithi, 2025\n"
 "Language-Team: French (Canada) (https://app.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 "Language: fr_CA\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
@@ -37,7 +37,7 @@ msgstr "Vous n'avez pas de compte ?"
 
 #: theme/login.html:21 theme/login.html:23
 msgid "Sign up"
-msgstr "Inscrivez-vous"
+msgstr "S'inscrire"
 
 #: theme/login.html:33
 msgid "Forgot your password?"
@@ -59,10 +59,6 @@ msgstr "ou"
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
-#: settings.py:177 settings.py:227 theme/login.html:47
-msgid "Language"
-msgstr "Langue"
-
 #: theme/page-contact.html:3 theme/page-copyright.html:3
 #: theme/page-privacy.html:3 theme/page-terms.html:3
 msgid "Copyright"
@@ -80,94 +76,122 @@ msgstr "Azure"
 msgid "Email"
 msgstr "Courriel"
 
-#: settings.py:141 settings.py:142
+#: cp/signals.py:169
+msgid "THE LATEST"
+msgstr "DERNIÈRES INFOS"
+
+#: cp/signals.py:172
+msgid "ALERT"
+msgstr "ALERTE"
+
+#: cp/signals.py:175
+msgid "ADVISORY"
+msgstr "AVIS"
+
+#: cp/signals.py:178
+msgid "PRESS RELEASE"
+msgstr "COMMUNIQUÉ"
+
+#: settings.py:24
+msgid "CP NewsPro"
+msgstr "PC NouvellesPro"
+
+#: settings.py:144 settings.py:145
 msgid "No coverage"
 msgstr "Pas de couverture"
 
-#: settings.py:147 settings.py:148
+#: settings.py:150 settings.py:151
 msgid "Cancelled / not planned"
 msgstr "Annulée / non prévue"
 
-#: settings.py:153 settings.py:154
+#: settings.py:156 settings.py:157
 msgid "Not decided / on merit"
 msgstr "Non décidée / au mérite"
 
-#: settings.py:159 settings.py:160
+#: settings.py:162 settings.py:163
 msgid "Planned"
 msgstr "Planifiée"
 
-#: settings.py:165 settings.py:166
+#: settings.py:168 settings.py:169
 msgid "Completed"
 msgstr "Terminée"
 
-#: settings.py:181
+#: settings.py:184 settings.py:243
+msgid "Language"
+msgstr "Langue"
+
+#: settings.py:188
+msgid "Media type"
+msgstr "Type de support média"
+
+#: settings.py:197
 msgid "Source"
 msgstr "Source"
 
-#: settings.py:185
+#: settings.py:201
 msgid "Wire Category"
-msgstr "Catégorie du fil de presse"
+msgstr "Fil de presse"
 
-#: settings.py:189 settings.py:245
+#: settings.py:205 settings.py:261
 msgid "Subject"
 msgstr "Sujet"
 
-#: settings.py:198
+#: settings.py:214
 msgid "Service"
 msgstr "Service"
 
-#: settings.py:207
+#: settings.py:223
 msgid "Version"
 msgstr "Version"
 
-#: settings.py:211
+#: settings.py:227
 msgid "Ranking"
 msgstr "Priorité"
 
-#: settings.py:231
+#: settings.py:247
 msgid "Category"
-msgstr "Catégorie"
+msgstr "Fil"
 
-#: settings.py:235
+#: settings.py:251
 msgid "Event Type"
 msgstr "Type d'événement"
 
-#: settings.py:340
+#: settings.py:357
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: settings.py:341
+#: settings.py:358
 msgid "Bookmarks"
 msgstr "Favoris"
 
-#: settings.py:355
+#: settings.py:370
 msgid "Last 24 hours"
 msgstr "Les dernières 24 heures"
 
-#: settings.py:361
+#: settings.py:376
 msgid "Last 14 days"
 msgstr "Les 14 derniers jours"
 
-#: settings.py:367
-msgid "Last 30 days"
-msgstr "Les 30 derniers jours"
+#: settings.py:382
+msgid "Last 90 days"
+msgstr "Les 90 derniers jours"
 
-#: settings.py:373
+#: settings.py:388
 msgid "Last 2 years"
 msgstr "Les 2 dernières années"
 
-#: settings.py:418
+#: settings.py:433
 msgid "Selected day"
 msgstr "Jour sélectionné"
 
-#: settings.py:419
+#: settings.py:434
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: settings.py:421
+#: settings.py:436
 msgid "This Week"
 msgstr "Cette semaine"
 
-#: settings.py:425
+#: settings.py:440
 msgid "This Month"
 msgstr "Ce mois-ci"
