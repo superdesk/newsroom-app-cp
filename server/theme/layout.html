@@ -19,6 +19,7 @@
 {% endblock %}
 
 {% block layout_script %}
+
 {% if config.PRODUCTFRUITS_WORKSPACE_CODE and auth_user %}
 <script type="text/javascript">
     (function(w,d,u){
@@ -38,5 +39,34 @@
         },
     }]);
 </script>
+{% elif config.PRODUCTFRUITS_WORKSPACE_CODE %}
+<script type="text/javascript">
+    function makeid(length) {
+        let result = '';
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    let generatedUserName = localStorage.getItem('user');
+    if (!generatedUserName) {
+        generatedUserName = makeid(8);
+        localStorage.setItem('user', generatedUserName);
+    }
+
+    (function(w,d,u){
+        w.$productFruits=w.$productFruits||[];
+        w.productFruits=w.productFruits||{};w.productFruits.scrV='2';
+        let a=d.getElementsByTagName('head')[0];let r=d.createElement('script');r.async=1;r.src=u;a.appendChild(r);
+    })(window,document,'https://app.productfruits.com/static/script.js');
+	$productFruits.push(['init', '{{ config.PRODUCTFRUITS_WORKSPACE_CODE }}', '{{ get_locale()[:2] }}', {
+        username: generatedUserName,
+        role: 'anonymous',
+    }]);
+</script>
 {% endif %}
+
 {% endblock %}

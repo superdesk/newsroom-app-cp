@@ -10,7 +10,7 @@
 # at https://www.sourcefabric.org/superdesk/license
 
 from superdesk.default_settings import urlparse
-from newsroom.web.default_settings import ( # noqa
+from newsroom.web.default_settings import (  # noqa
     env,
     ELASTICSEARCH_URL,
     ELASTICSEARCH_SETTINGS,
@@ -21,42 +21,44 @@ from newsroom.web.default_settings import ( # noqa
 )
 import os
 
-MGMTAPI_URL = env('MGMTAPI_URL', 'http://localhost:5500/api')
+MGMTAPI_URL = env("MGMTAPI_URL", "http://localhost:5500/api")
 server_url = urlparse(MGMTAPI_URL)
 URL_PREFIX = env("MGMTAPI_URL_PREFIX", server_url.path.strip("/")) or ""
 
 BLUEPRINTS = []
 
 CORE_APPS = [
-    'cp.mgmt_api.companies',
-    'cp.mgmt_api.users',
-    'cp.mgmt_api.products',
-    'cp.mgmt_api.navigations',
-    'cp.mgmt_api.topics',
+    "cp.mgmt_api.companies",
+    "cp.mgmt_api.users",
+    "cp.mgmt_api.products",
+    "cp.mgmt_api.navigations",
+    "cp.mgmt_api.topics",
 ]
 
 INSTALLED_APPS = []
 
-LANGUAGES = ['en', 'fi', 'cs', 'fr_CA']
-DEFAULT_LANGUAGE = 'en'
+LANGUAGES = ["en", "fi", "cs", "fr_CA"]
+DEFAULT_LANGUAGE = "en"
 
 # newsroom default db and index names
-MONGO_DBNAME = env('MONGO_DBNAME', 'newsroom')
+MONGO_DBNAME = env("MONGO_DBNAME", "newsroom")
 # mongo
-MONGO_URI = env('MONGO_URI', f'mongodb://localhost/{MONGO_DBNAME}')
-CONTENTAPI_MONGO_URI = env('CONTENTAPI_MONGO_URI', f'mongodb://localhost/{MONGO_DBNAME}')
+MONGO_URI = env("MONGO_URI", f"mongodb://localhost/{MONGO_DBNAME}")
+CONTENTAPI_MONGO_URI = env(
+    "CONTENTAPI_MONGO_URI", f"mongodb://localhost/{MONGO_DBNAME}"
+)
 # elastic
-ELASTICSEARCH_INDEX = env('ELASTICSEARCH_INDEX', MONGO_DBNAME)
-CONTENTAPI_ELASTICSEARCH_INDEX = env('CONTENTAPI_ELASTICSEARCH_INDEX', MONGO_DBNAME)
+ELASTICSEARCH_INDEX = env("ELASTICSEARCH_INDEX", MONGO_DBNAME)
+CONTENTAPI_ELASTICSEARCH_INDEX = env("CONTENTAPI_ELASTICSEARCH_INDEX", MONGO_DBNAME)
 
 FILTER_AGGREGATIONS = False
-ELASTIC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
+ELASTIC_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
-CACHE_TYPE = os.environ.get('CACHE_TYPE', 'simple')  # in-memory cache
+CACHE_TYPE = os.environ.get("CACHE_TYPE", "simple")  # in-memory cache
 # The default timeout that is used if no timeout is specified in sec
 CACHE_DEFAULT_TIMEOUT = 3600
 # Redis host (used only if CACHE_TYPE is redis)
-CACHE_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+CACHE_REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
 # fix superdesk cache config
 CACHE_URL = CACHE_REDIS_URL
 

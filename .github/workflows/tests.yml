@@ -6,70 +6,13 @@ on:
 jobs:
 
   server:
-    runs-on: ubuntu-latest
+    uses: superdesk/newsroom-app/.github/workflows/server.yml@develop
 
-    services:
-      redis:
-        image: redis:alpine
-        ports:
-            - "6379:6379"
+  pytest:
+    uses: superdesk/newsroom-app/.github/workflows/pytest.yml@develop
 
-      mongo:
-        image: mongo:3.6
-        ports:
-            - "27017:27017"
-
-      elastic:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
-        ports:
-            - "9200:9200"
-        env:
-            discovery.type: single-node
-
-    defaults:
-      run:
-        working-directory: server
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - run: sudo apt-get update && sudo apt-get -y install libxml2-dev libxmlsec1-dev libxmlsec1-openssl
-
-      - name: pip install
-        run: |
-          python -m pip install --upgrade pip wheel setuptools
-          pip install -r dev-requirements.txt
-
-      - name: pytest
-        run: pytest --disable-pytest-warnings --cov=./
-
-      - name: behave
-        run: behave --format progress2 --logging-level=ERROR
-
+  behave:
+    uses: superdesk/newsroom-app/.github/workflows/behave.yml@develop
 
   client:
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: client
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '14.x'
-
-      - run: git config --global url."https://git@".insteadOf git://
-
-      - name: install
-        run: npm ci || npm install
-
-      - name: build
-        run: npm run build
+    uses: superdesk/newsroom-app/.github/workflows/client.yml@develop

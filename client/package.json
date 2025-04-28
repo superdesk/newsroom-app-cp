@@ -4,6 +4,16 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
-    "newsroom-core": "github:superdesk/newsroom-core#v2.8.2"
+    "newsroom-core": "github:superdesk/newsroom-core#release/2.9"
+  },
+  "peerDependencies": {
+    "css-loader": "*",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "ts-loader": "*",
+    "webpack": "*",
+    "webpack-cli": "*",
+    "webpack-dev-server": "*",
+    "webpack-manifest-plugin": "*"
   }
 }
