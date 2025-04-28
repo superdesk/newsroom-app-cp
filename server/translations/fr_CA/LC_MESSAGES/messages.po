@@ -8,21 +8,21 @@
 # Srdjan Karalic <srdjan.karalic@sourcefabric.org>, 2022
 # Sabina <sabina.gergel@thecanadianpress.com>, 2024
 # Gideon Lehmann <gideon.lehmann@sourcefabric.org>, 2024
-# Petr Jašek <petr.jasek@sourcefabric.org>, 2024
-# Simon Peacock <simon.peacock@gmail.com>, 2024
-# Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2024
+# Paemiga Sararithi, 2024
 # Charles-Philippe Giroux <charles-philippe.giroux@lapressecanadienne.com>, 2024
+# Simon Peacock <simon.peacock@gmail.com>, 2024
+# Petr Jašek <petr.jasek@sourcefabric.org>, 2024
 # Nefertiti Patell, 2025
-# Paemiga Sararithi, 2025
+# Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Newsroom App CP 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-08 10:43+0100\n"
-"PO-Revision-Date: 2022-03-15 12:58+0000\n"
-"Last-Translator: Paemiga Sararithi, 2025\n"
+"POT-Creation-Date: 2025-01-09 10:41+0100\n"
+"PO-Revision-Date: 2024-01-15 14:08+0000\n"
+"Last-Translator: Evzen Deulin <evgeny.deulin@sourcefabric.org>, 2025\n"
 "Language-Team: French (Canada) (https://app.transifex.com/sourcefabric/teams/6584/fr_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Vous n'avez pas de compte ?"
 
 #: theme/login.html:21 theme/login.html:23
 msgid "Sign up"
-msgstr "S'inscrire"
+msgstr "Inscrivez-vous"
 
 #: theme/login.html:33
 msgid "Forgot your password?"
@@ -64,15 +64,15 @@ msgstr "Réinitialiser le mot de passe"
 msgid "Copyright"
 msgstr "Droits d'auteur"
 
-#: cp/common_settings.py:8
+#: cp/common_settings.py:10
 msgid "Firebase"
 msgstr "Firebase"
 
-#: cp/common_settings.py:12
+#: cp/common_settings.py:15
 msgid "Azure"
 msgstr "Azure"
 
-#: cp/password_reset_form.py:8
+#: cp/password_reset_form.py:9
 msgid "Email"
 msgstr "Courriel"
 

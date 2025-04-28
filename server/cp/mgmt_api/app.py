@@ -16,7 +16,7 @@ from .factory import get_app
 
 app = get_app()
 
-if __name__ == '__main__':
-    host = '0.0.0.0'
-    port = int(os.environ.get('MGMTAPI_PORT', '5500'))
+if __name__ == "__main__":
+    host = "0.0.0.0"
+    port = int(os.environ.get("MGMTAPI_PORT", "5500"))
     app.run(host=host, port=port, debug=True, use_reloader=True)
