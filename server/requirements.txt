@@ -30,14 +30,13 @@ billiard==4.2.1
 blinker==1.8.2
     # via
     #   elastic-apm
-    #   flask
     #   flask-mail
     #   raven
     #   sentry-sdk
     #   superdesk-core
-boto3==1.38.2
+boto3==1.38.22
     # via superdesk-core
-botocore==1.38.2
+botocore==1.38.22
     # via
     #   boto3
     #   s3transfer
@@ -57,7 +56,7 @@ cerberus==1.3.7
     # via
     #   eve
     #   superdesk-core
-certifi==2025.1.31
+certifi==2025.4.26
     # via
     #   elastic-apm
     #   elasticsearch
@@ -69,11 +68,11 @@ chardet==5.2.0
     # via
     #   reportlab
     #   superdesk-core
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
     # via requests
 ciso8601==2.3.2
     # via eve-elastic
-click==8.1.8
+click==8.2.1
     # via
     #   celery
     #   click-didyoumean
@@ -91,7 +90,7 @@ click-repl==0.3.0
     # via celery
 croniter==3.0.4
     # via superdesk-core
-cryptography==44.0.2
+cryptography==45.0.2
     # via
     #   authlib
     #   jwcrypto
@@ -99,7 +98,7 @@ cryptography==44.0.2
     #   pyhanko-certvalidator
 cssselect2==0.8.0
     # via svglib
-deepdiff==8.4.2
+deepdiff==8.5.0
     # via superdesk-planning
 deprecated==1.2.18
     # via limits
@@ -212,7 +211,7 @@ kombu==5.4.2
     #   superdesk-core
 ldap3==2.9.1
     # via superdesk-core
-limits==5.1.0
+limits==5.2.0
     # via flask-limiter
 lxml==5.2.2
     # via
@@ -233,13 +232,13 @@ markupsafe==2.0.1
     #   wtforms
 mongolock @ git+https://github.com/superdesk/mongolock.git@v1
     # via superdesk-core
-newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@v2.9.1
+newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@develop
     # via -r requirements.in
 oauth2client==4.1.3
     # via flask-oidc-ex
 oauthlib==3.2.2
     # via requests-oauthlib
-orderly-set==5.4.0
+orderly-set==5.4.1
     # via deepdiff
 oscrypto==1.3.0
     # via pyhanko-certvalidator
@@ -286,7 +285,7 @@ pyparsing==3.2.3
     # via
     #   httplib2
     #   pyrtf3
-pypdf==5.4.0
+pypdf==5.5.0
     # via xhtml2pdf
 pyrtf3==0.47.5
     # via newsroom-core
@@ -324,7 +323,7 @@ pyyaml==6.0.2
     # via
     #   pyhanko
     #   superdesk-core
-qrcode==8.1
+qrcode==8.2
     # via pyhanko
 raven[flask]==6.10.0
     # via superdesk-core
@@ -354,9 +353,9 @@ rsa==4.9.1
     # via
     #   google-auth
     #   oauth2client
-s3transfer==0.12.0
+s3transfer==0.13.0
     # via boto3
-sentry-sdk[flask]==2.19.2
+sentry-sdk[flask]==2.28.0
     # via newsroom-core
 sgmllib3k==1.0.0
     # via feedparser
@@ -382,7 +381,7 @@ tinycss2==1.4.0
     # via
     #   cssselect2
     #   svglib
-types-python-dateutil==2.9.0.20241206
+types-python-dateutil==2.9.0.20250516
     # via arrow
 typing-extensions==4.13.2
     # via
@@ -400,7 +399,7 @@ tzlocal==2.1
     #   superdesk-core
 unidecode==1.3.8
     # via superdesk-core
-uritools==4.0.3
+uritools==5.0.0
     # via pyhanko-certvalidator
 urllib3==1.26.20
     # via
