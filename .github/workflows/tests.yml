@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['14', '20']
+        node-version: ['14', '22']
     uses: superdesk/newsroom-app/.github/workflows/client.yml@develop
     with:
       node-version: ${{ matrix.node-version }}
