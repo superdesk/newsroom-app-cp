@@ -11,6 +11,6 @@ httmock==1.4.0
 wooper==0.4.4
 
 # mypy 
-mypy==1.16.0
+mypy==1.16.1
 types-flask==1.1.6
 types-requests==2.28.11.8
