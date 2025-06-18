@@ -433,3 +433,17 @@ CALENDAR_LOCATIONS_FILTER_OPTIONS = {
 }
 
 QUART_RATE_LIMITER_ENABLED = False
+
+# If ``True`` will add the PR-Manager sidenav in the front-end
+# Enabled by default on test instances, Disabled otherwise
+PR_MANAGER_SIDENAV_ENABLED = strtobool(
+    os.environ.get("PR_MANAGER_SIDENAV_ENABLED", is_test_instance)
+)
+
+# The URL to use for the PR-Manager (uses different URL in testing and production instances)
+PR_MANAGER_SIDENAV_URL = os.environ.get(
+    "PR_MANAGER_SIDENAV_URL",
+    "https://stgadmin.prgloo.com/cp"
+    if is_test_instance
+    else "https://admin.prgloo.com/cp",
+)
