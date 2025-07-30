@@ -1,13 +1,11 @@
 -r requirements.txt
 -r mypy-requirements.txt
 
-flake8
-sphinx
-sphinx-autobuild
-pytest
-pytest-cov
-pytest-mock
-pytest-asyncio
-responses
-httmock
-wooper
+flake8==7.3.0
+pytest==8.4.1
+pytest-cov==6.2.1
+pytest-mock==3.14.1
+pytest-asyncio==1.0.0
+responses==0.25.7
+httmock==1.4.0
+wooper==0.4.4
