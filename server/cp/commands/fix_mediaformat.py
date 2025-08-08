@@ -1,25 +1,35 @@
 import time
-
-from superdesk import get_resource_service
+import click
 from cp.signals import get_media_type_name, get_media_type_scheme
-from newsroom.commands.manager import manager
+from newsroom.commands.cli import newsroom_cli
+from superdesk.core import get_current_async_app
 
 
-@manager.command
-def fix_mediaformat(resource="items", limit=500, sleep_secs=2):
-    service = get_resource_service(resource)
+@newsroom_cli.command("fix_mediaformat")
+@click.option("--resource", default="items", help="Resource to fix media formats in.")
+@click.option("--limit", default=500, type=int, help="Max number of iterations.")
+@click.option(
+    "--sleep-secs", default=2, type=int, help="Sleep time between batches (seconds)."
+)
+async def fix_mediaformat(resource, limit, sleep_secs):
+    """Fix MediaFormats in given resource"""
+    await fix_media(resource, sleep_secs, limit)
+
+
+async def fix_media(resource, sleep_secs=2, limit=500):
+    service = get_current_async_app().resources.get_resource_service(resource)
     media_type_scheme = get_media_type_scheme()
-    source = {
+    lookup = {
         "query": {
             "bool": {"must_not": {"term": {"subject.scheme": media_type_scheme}}}
         },
         "size": 100,
     }
     for i in range(int(limit)):
-        items = service.search(source)
-        if not items.count():
+        items = await service.search(lookup)
+        if not await items.count():
             break
-        for item in items:
+        for item in await items.to_list_raw():
             updates = {"subject": item["subject"].copy() if item.get("subject") else []}
             updates["subject"].append(
                 dict(
@@ -28,8 +38,7 @@ def fix_mediaformat(resource="items", limit=500, sleep_secs=2):
                     scheme=media_type_scheme,
                 )
             )
-
-            service.system_update(item["_id"], updates, item)
+            await service.system_update(item["_id"], updates)
         print(".", end="", flush=True)
         time.sleep(int(sleep_secs))
     print("done.")

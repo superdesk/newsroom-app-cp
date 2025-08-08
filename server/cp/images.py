@@ -1,7 +1,7 @@
 from urllib.parse import quote
 
 
-def set_photo_coverage_href(coverage, planning_item, deliveries=[]) -> str:
+async def set_photo_coverage_href(coverage, planning_item, deliveries=[]) -> str:
     slugline = coverage.get("slugline")
     if not slugline:
         return ""

@@ -1,18 +1,18 @@
 import os
 import cp
 import pathlib
-from flask_babel import lazy_gettext
+from quart_babel import lazy_gettext
 from superdesk.default_settings import strtobool
 from newsroom.web.default_settings import (
     env,
     CLIENT_CONFIG,
     CORE_APPS as DEFAULT_CORE_APPS,
-    BLUEPRINTS as DEFAULT_BLUEPRINTS,
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
     CLIENT_URL,
     CLIENT_LOCALE_FORMATS,
     AUTH_PROVIDERS,
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
+    MODULES as DEFAULT_MODULES,
 )
 from cp.common_settings import AUTH_PROVIDERS  # noqa
 
@@ -254,12 +254,10 @@ AGENDA_GROUPS = [
 ]
 
 
-BLUEPRINTS = [
-    "cp.mgmt_api_docs",
-] + [
-    blueprint
-    for blueprint in DEFAULT_BLUEPRINTS
-    if blueprint
+MODULES = [
+    module
+    for module in DEFAULT_MODULES
+    if module
     not in ["newsroom.design", "newsroom.monitoring", "newsroom.news_api.api_tokens"]
 ]
 
@@ -433,3 +431,21 @@ CALENDAR_LOCATIONS_FILTER_OPTIONS = {
     "city": False,
     "place": False,
 }
+
+QUART_RATE_LIMITER_ENABLED = False
+
+# If ``True`` will add the PR-Manager sidenav in the front-end
+# Enabled by default on test instances, Disabled otherwise
+PR_MANAGER_SIDENAV_ENABLED = strtobool(
+    os.environ.get("PR_MANAGER_SIDENAV_ENABLED", is_test_instance)
+)
+
+# The URL to use for the PR-Manager (uses different URL in testing and production instances)
+PR_MANAGER_SIDENAV_URL = os.environ.get(
+    "PR_MANAGER_SIDENAV_URL",
+    (
+        "https://stgadmin.prgloo.com/cp"
+        if is_test_instance
+        else "https://admin.prgloo.com/cp"
+    ),
+)

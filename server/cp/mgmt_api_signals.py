@@ -1,8 +1,9 @@
 from newsroom.signals import company_create
 
 
-def on_company_create(sender, company, **kwargs):
-    company.setdefault("auth_provider", "gip")
+async def on_company_create(company, **kwargs):
+    if not getattr(company, "auth_provider", None):
+        company.auth_provider = "gip"
 
 
 def init_app(app):

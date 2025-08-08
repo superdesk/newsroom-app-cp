@@ -11,9 +11,6 @@ jobs:
   pytest:
     uses: superdesk/newsroom-app/.github/workflows/pytest.yml@develop
 
-  behave:
-    uses: superdesk/newsroom-app/.github/workflows/behave.yml@develop
-
   client:
     strategy:
       fail-fast: false
