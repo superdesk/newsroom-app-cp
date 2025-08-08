@@ -4,7 +4,7 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
-    "newsroom-core": "github:superdesk/newsroom-core#v3.0.0-rc.6"
+    "newsroom-core": "github:superdesk/newsroom-core#release/3.0"
   },
   "peerDependencies": {
     "css-loader": "*",
