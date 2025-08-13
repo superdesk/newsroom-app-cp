@@ -1,2 +1,2 @@
 celery-redbeat
-git+https://github.com/superdesk/newsroom-core.git@v3.0.0-rc.6#egg=Newsroom-Core
+git+https://github.com/superdesk/newsroom-core.git@v3.0.0-rc.7#egg=Newsroom-Core
