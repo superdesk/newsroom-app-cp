@@ -50,7 +50,7 @@ def copy_correction_to_body_html(item: Dict[str, Any]) -> None:
 
 async def on_user_created(user: UserResourceModel) -> None:
     if await user_auth_is_gip(user):
-        send_notification("new", user.to_dict(), id_key="email")
+        send_notification("new", user.to_dict())
 
 
 async def on_user_updated(
