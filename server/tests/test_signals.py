@@ -89,6 +89,7 @@ async def test_cem_notification_on_user_changes(app):
                 matchers.json_params_matcher(
                     {
                         "object_id": user.email,
+                        "company": str(company_id),
                         "type": "new",
                         "platform": "Test",
                     }
@@ -105,7 +106,7 @@ async def test_cem_notification_on_user_changes(app):
             match=[
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user.id),
+                        "object_id": user.email,
                         "company": str(company_id),
                         "type": "update",
                         "platform": "Test",
@@ -123,7 +124,7 @@ async def test_cem_notification_on_user_changes(app):
             match=[
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user.id),
+                        "object_id": user.email,
                         "company": str(company_id),
                         "type": "password",
                         "platform": "Test",
@@ -141,7 +142,7 @@ async def test_cem_notification_on_user_changes(app):
             match=[
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user.id),
+                        "object_id": user.email,
                         "company": str(company_id),
                         "type": "delete",
                         "platform": "Test",
