@@ -45,10 +45,7 @@ class DataUpdate(BaseDataUpdate):
 
         # fix state
         async for item in collection.find({"state": "draft"}):
-            updates = {
-                "state": "scheduled",
-            }
-            await service.system_update(item["_id"], updates)
+            await service.system_update(item["_id"], {"state": "scheduled"})
 
     async def backwards(
         self, collection: AsyncIOMotorCollection, database: AsyncIOMotorDatabase
