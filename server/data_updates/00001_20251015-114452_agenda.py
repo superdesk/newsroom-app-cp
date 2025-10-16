@@ -20,6 +20,8 @@ class DataUpdate(BaseDataUpdate):
         self, collection: AsyncIOMotorCollection, database: AsyncIOMotorDatabase
     ) -> None:
         service = AgendaItemService()
+
+        # fix service translations
         async for item in collection.find(
             {"service.translations.0": {"$exists": True}}
         ):
@@ -38,6 +40,13 @@ class DataUpdate(BaseDataUpdate):
                     }
                     for svc in item.get("service", [])
                 ]
+            }
+            await service.system_update(item["_id"], updates)
+
+        # fix state
+        async for item in collection.find({"state": "draft"}):
+            updates = {
+                "state": "scheduled",
             }
             await service.system_update(item["_id"], updates)
 

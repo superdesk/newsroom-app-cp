@@ -6,7 +6,7 @@ async def test_data_update(app, runner):
     event = {
         "_id": "event1",
         "item_type": "event",
-        "state": "ingested",
+        "state": "draft",
         "name": "Agenda 1",
         "dates": {
             "start": "2025-10-15",
