@@ -89,9 +89,9 @@ async def test_cem_notification_on_user_changes(app):
                 matchers.json_params_matcher(
                     {
                         "object_id": user.email,
+                        "company": str(company_id),
                         "type": "new",
                         "platform": "Test",
-                        "company": str(company_id),
                     }
                 ),
             ],
