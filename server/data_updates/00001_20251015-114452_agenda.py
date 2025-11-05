@@ -31,7 +31,7 @@ class DataUpdate(BaseDataUpdate):
                         "code": svc["code"],
                         "name": svc["name"],
                         "qcode": svc["qcode"],
-                        "scheme": svc["scheme"],
+                        "scheme": svc.get("scheme"),
                         "translations": (
                             {"name": svc["translations"].get("name", {})}
                             if "name" in svc.get("translations", {})
