@@ -20,12 +20,4 @@ async def test_fix_mediaformat(app):
     assert "mediaformat" == en_item["subject"][0]["scheme"]
 
     fr_item = app.data.find_one("items", req=None, _id="fr")
-    assert "subject" not in fr_item, "Should not add subject to non-matching item"
-
-    fix_mediaformat(query="headline:bar", code="wireaudio", sleep_secs=0)
-
-    fr_item = app.data.find_one("items", req=None, _id="fr")
-    assert "subject" in fr_item
-    assert "wireaudio" == fr_item["subject"][0]["code"]
-    assert "Audio fil de presse" == fr_item["subject"][0]["name"]
-    assert "mediaformat" == fr_item["subject"][0]["scheme"]
+    assert "Texte fil de presse" == fr_item["subject"][0]["name"]

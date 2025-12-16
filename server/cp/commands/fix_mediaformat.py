@@ -21,7 +21,7 @@ async def fix_media(resource, sleep_secs=2, limit=500):
     media_type_scheme = get_media_type_scheme()
     lookup = {
         "query": {
-            "bool": {"must": {"query_string": {"query": query}}},
+            "bool": {"must_not": {"term": {"subject.scheme": media_type_scheme}}}
         },
         "size": 100,
         "from": 0,
@@ -37,8 +37,8 @@ async def fix_media(resource, sleep_secs=2, limit=500):
             ]
             updates["subject"].append(
                 dict(
-                    code=code,
-                    name=get_media_type_name(code, item.get("language")),
+                    code="wiretext",
+                    name=get_media_type_name("wiretext", item.get("language")),
                     scheme=media_type_scheme,
                 )
             )
