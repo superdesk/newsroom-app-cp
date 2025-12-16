@@ -8,38 +8,40 @@ from datetime import datetime, timedelta
 from responses import matchers
 from werkzeug.exceptions import HTTPException
 
+from newsroom.types import UserResourceModel, AuthProviderType
 
-def test_on_publish_no_extended_headline(app):
+
+async def test_on_publish_no_extended_headline(app):
     item = {"headline": "foo"}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert item["headline"] == "foo"
 
 
-def test_on_publish_empty_extended_headline(app):
+async def test_on_publish_empty_extended_headline(app):
     item = {"headline": "foo", "extra": {cp.HEADLINE2: ""}}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert item["headline"] == "foo"
 
 
-def test_on_publish_copy_extended_headline(app):
+async def test_on_publish_copy_extended_headline(app):
     item = {"headline": "foo", "extra": {cp.HEADLINE2: "bar"}}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert item["headline"] == "bar"
 
 
-def test_on_publish_add_correction_to_body_html(app):
+async def test_on_publish_add_correction_to_body_html(app):
     item = {
         "body_html": "<p>some text</p><p>another one</p>",
         "extra": {"correction": "correction info"},
     }
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert (
         "<p>some text</p><p>another one</p>\n<p>correction info</p>"
         == item["body_html"]
     )
 
 
-def test_cem_notification_on_user_changes(app):
+async def test_cem_notification_on_user_changes(app):
     app.config.update(
         {
             "CEM_URL": "https://example.com",
@@ -47,6 +49,13 @@ def test_cem_notification_on_user_changes(app):
             "CEM_PLATFORM": "Test",
         }
     )
+    app.config["AUTH_PROVIDERS"].extend(
+        [
+            {"_id": "gip", "name": "Firebase", "auth_type": AuthProviderType.FIREBASE},
+            {"_id": "azure", "name": "Azure", "auth_type": AuthProviderType.SAML},
+        ]
+    )
+
     company_id = bson.ObjectId()
     app.data.insert(
         "companies",
@@ -59,7 +68,13 @@ def test_cem_notification_on_user_changes(app):
             }
         ],
     )
-    user = {"_id": bson.ObjectId(), "email": "foo@example.com", "company": company_id}
+    user = UserResourceModel(
+        id=bson.ObjectId(),
+        first_name="Foo",
+        last_name="Bar",
+        email="foo@example.com",
+        company=company_id,
+    )
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
@@ -73,16 +88,16 @@ def test_cem_notification_on_user_changes(app):
                 ),
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user["email"]),
+                        "object_id": user.email,
+                        "company": str(company_id),
                         "type": "new",
                         "platform": "Test",
-                        "company": str(company_id),
                     }
                 ),
             ],
         )
 
-        signals.on_user_created(None, user=user, foo=1)
+        await signals.on_user_created(user)
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
@@ -91,7 +106,7 @@ def test_cem_notification_on_user_changes(app):
             match=[
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user["email"]),
+                        "object_id": str(user.email),
                         "company": str(company_id),
                         "type": "update",
                         "platform": "Test",
@@ -100,7 +115,7 @@ def test_cem_notification_on_user_changes(app):
             ],
         )
 
-        signals.on_user_updated(None, user=user, foo=1)
+        await signals.on_user_updated(user)
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
@@ -109,7 +124,7 @@ def test_cem_notification_on_user_changes(app):
             match=[
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user["email"]),
+                        "object_id": str(user.email),
                         "company": str(company_id),
                         "type": "password",
                         "platform": "Test",
@@ -118,7 +133,7 @@ def test_cem_notification_on_user_changes(app):
             ],
         )
 
-        signals.on_user_updated(None, user=user, updates={"password": "bar"})
+        await signals.on_user_updated(user, {"password": "bar"})
 
     with responses.RequestsMock(assert_all_requests_are_fired=True) as rsps:
         rsps.add(
@@ -127,7 +142,7 @@ def test_cem_notification_on_user_changes(app):
             match=[
                 matchers.json_params_matcher(
                     {
-                        "object_id": str(user["email"]),
+                        "object_id": str(user.email),
                         "company": str(company_id),
                         "type": "delete",
                         "platform": "Test",
@@ -136,10 +151,10 @@ def test_cem_notification_on_user_changes(app):
             ],
         )
 
-        signals.on_user_deleted(None, user=user)
+        await signals.on_user_deleted(user)
 
 
-def test_cem_notification_for_non_google_auth(app, mocker):
+async def test_cem_notification_for_non_google_auth(app, mocker):
     sub = mocker.patch("cp.signals.send_notification")
     app.config.update(
         {
@@ -147,6 +162,12 @@ def test_cem_notification_for_non_google_auth(app, mocker):
             "CEM_APIKEY": "somekey",
             "CEM_PLATFORM": "Test",
         }
+    )
+    app.config["AUTH_PROVIDERS"].extend(
+        [
+            {"_id": "gip", "name": "Firebase", "auth_type": AuthProviderType.FIREBASE},
+            {"_id": "azure", "name": "Azure", "auth_type": AuthProviderType.SAML},
+        ]
     )
     company_id = bson.ObjectId()
     app.data.insert(
@@ -160,53 +181,59 @@ def test_cem_notification_for_non_google_auth(app, mocker):
             }
         ],
     )
-    user = {"_id": bson.ObjectId(), "email": "foo@example.com", "company": company_id}
+    user = UserResourceModel(
+        id=bson.ObjectId(),
+        first_name="Foo",
+        last_name="Bar",
+        email="foo@example.com",
+        company=company_id,
+    )
 
-    signals.on_user_created(None, user=user, foo=1)
+    await signals.on_user_created(user)
     assert len(sub.mock_calls) == 0
 
-    signals.on_user_updated(None, user=user, foo=1)
+    await signals.on_user_updated(user)
     assert len(sub.mock_calls) == 0
 
-    signals.on_user_updated(None, user=user, updates={"password": "bar"})
+    await signals.on_user_updated(user, {"password": "bar"})
     assert len(sub.mock_calls) == 0
 
-    signals.on_user_deleted(None, user=user)
+    await signals.on_user_deleted(user)
     assert len(sub.mock_calls) == 0
 
 
-def test_language_agenda(app):
+async def test_language_agenda(app):
     item = {"language": "en-CA"}
     signals.init_app(None)
-    signals.push.send(None, item=item)
+    await signals.push.send(item)
     assert "en" == item["language"]
     item["language"] = "en_CA"
-    signals.push.send(None, item=item)
+    await signals.push.send(item)
     assert "en" == item["language"]
     item["language"] = "fr-ca"
-    signals.push.send(None, item=item)
+    await signals.push.send(item)
     assert "fr" == item["language"]
 
 
-def test_push_abort_missing_version(app):
+async def test_push_abort_missing_version(app):
     item = {"evolvedfrom": "foo", "subject": [{"scheme": "mediaformat"}]}
     with pytest.raises(HTTPException):
-        signals.on_push(None, item=item)
+        await signals.on_push(item)
 
     app.data.insert("items", [{"_id": "foo"}])
-    signals.on_push(None, item=item)
+    await signals.on_push(item)
 
 
-def test_handle_transcripts(app):
+async def test_handle_transcripts(app):
     text_item = {"source": "CP", "subject": []}
-    signals.on_publish_item(None, text_item)
+    await signals.on_publish_item(text_item, True)
     assert 1 == len(text_item["subject"])
     assert "mediaformat" == text_item["subject"][0]["scheme"]
     assert "wiretext" == text_item["subject"][0]["code"]
     assert "Wire text" == text_item["subject"][0]["name"]
 
     text_item = {"source": "CP", "subject": [], "language": "fr_CA"}
-    signals.on_publish_item(None, text_item)
+    await signals.on_publish_item(text_item, True)
     assert "Texte fil de presse" == text_item["subject"][0]["name"]
 
     transcript_item = {
@@ -217,7 +244,7 @@ def test_handle_transcripts(app):
         ],
     }
 
-    signals.on_publish_item(None, transcript_item)
+    await signals.on_publish_item(transcript_item, True)
     assert "CP24 (CITY24)" == transcript_item["source"]
     assert "TV Station" == transcript_item["subject"][0]["name"]
     assert "expiry" in transcript_item
@@ -228,12 +255,12 @@ def test_handle_transcripts(app):
     )
 
     transcript_item["language"] = "fr-CA"
-    signals.on_publish_item(None, transcript_item)
+    await signals.on_publish_item(transcript_item, True)
     assert 1 == len(transcript_item["subject"])
     assert "Station de télé" == transcript_item["subject"][0]["name"]
 
 
-def test_wire_labels(app):
+async def test_wire_labels(app):
     def get_label(item):
         return next(
             (
@@ -251,22 +278,22 @@ def test_wire_labels(app):
         assert label["name"] == name
 
     item = {}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     label = get_label(item)
     assert label is None
 
     item = {"slugline": "Something-The-Latest"}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert_label(item, "latest", "THE LATEST")
 
     item = {"genre": [{"code": "NewsAlert", "name": "NewsAlert"}]}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert_label(item, "alert", "ALERT")
 
     item = {"service": [{"code": "m", "name": "Advisory"}]}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert_label(item, "advisory", "ADVISORY")
 
     item = {"service": [{"code": "p", "name": "Press Release"}]}
-    signals.on_publish_item(None, item)
+    await signals.on_publish_item(item, True)
     assert_label(item, "press-release", "PRESS RELEASE")

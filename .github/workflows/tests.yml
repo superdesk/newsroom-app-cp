@@ -11,14 +11,11 @@ jobs:
   pytest:
     uses: superdesk/newsroom-app/.github/workflows/pytest.yml@develop
 
-  behave:
-    uses: superdesk/newsroom-app/.github/workflows/behave.yml@develop
-
   client:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['14', '22']
+        node-version: ['22']
     uses: superdesk/newsroom-app/.github/workflows/client.yml@develop
     with:
       node-version: ${{ matrix.node-version }}

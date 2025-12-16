@@ -1,36 +1,36 @@
 import time
+import click
+from cp.signals import get_media_type_name, get_media_type_scheme
+from newsroom.commands.cli import newsroom_cli
+from superdesk.core import get_current_async_app
 
-from typing import get_args
-from superdesk import get_resource_service
-from cp.signals import get_media_type_name, get_media_type_scheme, MediaType
-from newsroom.commands.manager import manager
+
+@newsroom_cli.command("fix_mediaformat")
+@click.option("--resource", default="items", help="Resource to fix media formats in.")
+@click.option("--limit", default=500, type=int, help="Max number of iterations.")
+@click.option(
+    "--sleep-secs", default=2, type=int, help="Sleep time between batches (seconds)."
+)
+async def fix_mediaformat(resource, limit, sleep_secs):
+    """Fix MediaFormats in given resource"""
+    await fix_media(resource, sleep_secs, limit)
 
 
-@manager.command
-def fix_mediaformat(
-    resource="items", query="", code="wireaudio", limit=500, sleep_secs=2, dry_run=False
-):
-    if not query:
-        print("Please provide a query to filter the items.")
-        return
-    if code not in get_args(MediaType):
-        print("Invalid media type code.")
-        return
-    service = get_resource_service(resource)
+async def fix_media(resource, sleep_secs=2, limit=500):
+    service = get_current_async_app().resources.get_resource_service(resource)
     media_type_scheme = get_media_type_scheme()
-    source = {
+    lookup = {
         "query": {
             "bool": {"must": {"query_string": {"query": query}}},
         },
         "size": 100,
         "from": 0,
     }
-    for i in range(0, int(limit), source["size"]):
-        source["from"] = i
-        items = list(service.search(source))
-        if not len(items):
+    for i in range(int(limit)):
+        items = await service.search(lookup)
+        if not await items.count():
             break
-        for item in items:
+        for item in await items.to_list_raw():
             updates = {"subject": item["subject"].copy() if item.get("subject") else []}
             updates["subject"] = [
                 s for s in updates["subject"] if s.get("scheme") != media_type_scheme
@@ -42,12 +42,7 @@ def fix_mediaformat(
                     scheme=media_type_scheme,
                 )
             )
-
-            if dry_run:
-                print("Would update", item["_id"], "with", updates)
-            else:
-                print("Updating", item["_id"])
-                service.system_update(item["_id"], updates, item)
+            await service.system_update(item["_id"], updates)
         print(".", end="", flush=True)
         time.sleep(int(sleep_secs))
     print("done.")
