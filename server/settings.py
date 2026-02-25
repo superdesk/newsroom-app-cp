@@ -420,7 +420,9 @@ PRODUCTFRUITS_WORKSPACE_CODE = os.environ.get("PRODUCTFRUITS_WORKSPACE_CODE")
 
 PERSONAL_DASHBOARD_CARD_TYPE = "6-text-only"
 
-AGENDA_PAGE_SIZE = int(os.environ.get("AGENDA_PAGE_SIZE") or 1000)
+AGENDA_PAGE_SIZE = int(
+    os.environ.get("AGENDA_PAGE_SIZE") or 800
+)  # we have 1k limit in elasticsearch, keep below
 
 SUPPORT_EMAIL_EN = "help-aide@mycpnewspro.com"
 SUPPORT_EMAIL_FR = SUPPORT_EMAIL_EN
