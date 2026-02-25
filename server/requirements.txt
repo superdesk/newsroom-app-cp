@@ -263,7 +263,7 @@ multidict==6.6.4
     #   aiobotocore
     #   aiohttp
     #   yarl
-newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@release/3.0
+newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@release/3.1
     # via -r requirements.in
 oauth2client==4.1.3
     # via flask-oidc-ex
@@ -420,7 +420,7 @@ six==1.17.0
     #   oauth2client
     #   python-bidi
     #   python-dateutil
-superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@v3.0.0-alpha.5
+superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@release/3.0-alpha
     # via newsroom-core
 superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@v3.0.0-alpha.1
     # via newsroom-core
