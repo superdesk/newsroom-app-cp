@@ -4,7 +4,7 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
-    "newsroom-core": "github:superdesk/newsroom-core#release/3.1"
+    "newsroom-core": "github:superdesk/newsroom-core#release/3.0"
   },
   "peerDependencies": {
     "css-loader": "*",
@@ -19,5 +19,8 @@
   "overrides": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "volta": {
+    "node": "22.22.0"
   }
 }
