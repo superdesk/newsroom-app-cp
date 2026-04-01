@@ -1,7 +1,11 @@
 import os
+import multiprocessing
+
+DEFAULT_MAX_WORKERS = 8
 
 bind = "0.0.0.0:%s" % os.environ.get("PORT", "5000")
-workers = int(os.environ.get("WEB_CONCURRENCY", 3))
+default_workers = min(multiprocessing.cpu_count() + 1, DEFAULT_MAX_WORKERS)
+workers = int(os.environ.get("WEB_CONCURRENCY", default_workers))
 read_timeout = int(os.environ.get("WEB_TIMEOUT", 30))
 
 accesslog = "-"
