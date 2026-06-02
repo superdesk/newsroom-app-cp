@@ -4,6 +4,8 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "2.16.0",
+    "dotenv": "17.4.2",
     "newsroom-core": "github:superdesk/newsroom-core#release/3.0"
   },
   "peerDependencies": {

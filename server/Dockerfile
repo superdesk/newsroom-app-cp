@@ -1,20 +1,24 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-python3 python3-dev python3-pip python3-venv git gcc mongo-tools mongodb-clients curl \
-# lxml
-libxml2-dev libxslt-dev \
-# PIL
-libjpeg-dev zlib1g-dev \
-# magic
-libmagic-dev \
-# xmlsec
-pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl \
-# windows tweaks
-dos2unix \
-&& rm -rf /var/lib/apt/lists/* 
+    python3 python3-dev python3-pip python3-venv git gcc gnupg curl \
+    # lxml
+    libxml2-dev libxslt-dev \
+    # PIL
+    libjpeg-dev zlib1g-dev \
+    # magic
+    libmagic-dev \
+    # xmlsec
+    pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl \
+    # windows tweaks
+    dos2unix && \
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor && \
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-8.0.list && \ 
+    apt-get update && \
+    apt-get install -y mongodb-database-tools && \
+    rm -rf /var/lib/apt/lists/*
 
 # setup venv
 ENV VIRTUAL_ENV=/opt/venv

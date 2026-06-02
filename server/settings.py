@@ -279,6 +279,7 @@ INSTALLED_APPS = [
     "cp.signals",
     "cp.images",
     "newsroom.auth.saml",
+    "cp.auth"
 ]
 
 WIRE_SUBJECT_SCHEME_WHITELIST = [
@@ -454,4 +455,5 @@ MAX_CONTENT_LENGTH = int(
     os.environ.get("MAX_CONTENT_LENGTH", 1024 * 1024 * 1000 * 4)
 )  # 4GB
 
+CLIENT_CONFIG["prManagerSidenavEnabled"] = PR_MANAGER_SIDENAV_ENABLED
 SENTRY_LOADER_SRC = os.environ.get("SENTRY_LOADER_SRC", "")
