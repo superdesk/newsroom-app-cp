@@ -15,9 +15,14 @@ from firebase_admin.auth import verify_id_token
 from firebase_admin.credentials import Certificate as FirebaseCertificate
 from flask import Response
 from jwcrypto.jwk import JWK
-from newsroom.auth.utils import get_current_request, sign_user_by_email
+from newsroom.auth.utils import (
+    get_current_request,
+    get_user_or_none_from_request,
+    sign_user_by_email,
+)
 from newsroom.flask import flash
 from newsroom.types import AuthProviderType
+from newsroom.users.service import UsersService
 from quart_babel import gettext
 from redis import Redis
 from superdesk.core import get_current_async_app
@@ -80,7 +85,12 @@ async def firebase_auth_token(args, params, request: Request):
         validate_login_attempt=True,
     )
 
-    session_id = _get_cp_session_cookie(request) or str(uuid4())
+    user = await UsersService().get_by_email(email)
+    logged_in_user = get_user_or_none_from_request(request)
+    if user is None or logged_in_user is None or logged_in_user.id != user.id:
+        return response
+
+    session_id = str(uuid4())
 
     _update_cp_session(
         session_id,
@@ -124,7 +134,7 @@ def _set_cp_cookie(response: Response, request: Request, session_id: str) -> Non
         session_id,
         expires=datetime.now() + SESSION_EXPIRY,
         httponly=True,
-        secure=request.url.startswith("https"),
+        secure=_is_secure_request(request),
         samesite="Lax",
         path="/",
     )
@@ -152,6 +162,14 @@ def _get_valid_cp_session_data(session_id: str | None) -> dict[str, str] | None:
         return None
 
     return session_data
+
+
+def _is_secure_request(request: Request) -> bool:
+    forwarded_proto = request.get_header("X-Forwarded-Proto")
+    if forwarded_proto:
+        return forwarded_proto.split(",", 1)[0].strip().lower() == "https"
+
+    return request.url.startswith("https")
 
 
 @blueprint.endpoint("/oidc/.well-known/openid-configuration", auth=False)
@@ -194,6 +212,11 @@ def oidc_authorize(args, params, request: Request):
             "error": "invalid_request",
             "error_description": "redirect_uri is required",
         }, 400
+    if not _is_redirect_uri_allowed(redirect_uri):
+        return {
+            "error": "invalid_redirect_uri",
+            "error_description": "redirect uri is not allowed",
+        }, 400
     if response_type != "code":
         return _oidc_redirect_error(
             redirect_uri, "unsupported_response_type", state=state
@@ -204,14 +227,6 @@ def oidc_authorize(args, params, request: Request):
         )
     if not _is_oidc_client_allowed(client_id):
         return _oidc_redirect_error(redirect_uri, "unauthorized_client", state=state)
-
-    if not _is_redirect_uri_allowed(redirect_uri):
-        return _oidc_redirect_error(
-            redirect_uri,
-            "invalid_redirect_uri",
-            "redirect uri is not allowed",
-            state=state,
-        )
 
     session_id = _get_cp_session_cookie(request)
     session_data = _get_valid_cp_session_data(session_id)
