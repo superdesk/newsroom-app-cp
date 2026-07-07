@@ -20,6 +20,10 @@
 
 {% block layout_script %}
 
+{% if config.SENTRY_LOADER_SRC %}
+<script src="{{ config.SENTRY_LOADER_SRC }}" crossorigin="anonymous"></script>
+{% endif %}
+
 {% if config.PRODUCTFRUITS_WORKSPACE_CODE and auth_user %}
 <script type="text/javascript">
     (function(w,d,u){

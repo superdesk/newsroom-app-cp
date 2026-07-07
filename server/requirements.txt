@@ -15,7 +15,7 @@ aiofiles==24.1.0
     #   quart-uploads
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.3
+aiohttp==3.14.1
     # via
     #   aiobotocore
     #   elasticsearch
@@ -120,7 +120,7 @@ click-repl==0.3.0
     # via celery
 croniter==6.0.0
     # via superdesk-core
-cryptography==46.0.6
+cryptography==48.0.1
     # via
     #   authlib
     #   jwcrypto
@@ -208,7 +208,7 @@ hyperframe==6.1.0
     # via h2
 icalendar==5.0.13
     # via superdesk-planning
-idna==3.10
+idna==3.15
     # via
     #   email-validator
     #   requests
@@ -262,7 +262,7 @@ multidict==6.6.4
     #   aiobotocore
     #   aiohttp
     #   yarl
-newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@v3.0.3
+newsroom-core @ git+https://github.com/superdesk/newsroom-core.git@v3.0.5
     # via -r requirements.in
 oauth2client==4.1.3
     # via flask-oidc-ex
@@ -322,7 +322,7 @@ pyparsing==3.2.3
     # via
     #   httplib2
     #   pyrtf3
-pypdf==6.9.2
+pypdf==6.13.3
     # via xhtml2pdf
 pyrtf3==0.47.5
     # via newsroom-core
@@ -420,7 +420,7 @@ six==1.17.0
     #   oauth2client
     #   python-bidi
     #   python-dateutil
-superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@v3.0.0-alpha.8
+superdesk-core @ git+https://github.com/superdesk/superdesk-core.git@v3.0.0-alpha.9
     # via newsroom-core
 superdesk-planning @ git+https://github.com/superdesk/superdesk-planning.git@v3.0.0-alpha.1
     # via newsroom-core
@@ -444,6 +444,7 @@ types-pytz==2025.2.0.20250809
     # via quart-babel
 typing-extensions==4.14.1
     # via
+    #   aiohttp
     #   aiosignal
     #   asgiref
     #   cryptography
@@ -489,7 +490,7 @@ webencodings==0.5.1
     #   cssselect2
     #   html5lib
     #   tinycss2
-websockets==13.1
+websockets==16.0
     # via superdesk-core
 werkzeug==3.1.6
     # via
@@ -505,6 +506,7 @@ wtforms[email]==3.2.1
     # via
     #   newsroom-core
     #   quart-wtforms
+    #   wtforms
 xhtml2pdf==0.2.16
     # via newsroom-core
 xmlsec==1.3.14
