@@ -9,7 +9,7 @@ from re import compile
 from secrets import compare_digest
 from time import time
 from typing import cast
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 from uuid import uuid4
 
 from authlib.jose import jwt
@@ -560,7 +560,9 @@ def init_refresh_session_hook(app):
     @app.after_request
     async def refresh_cp_session(response):
         request = get_current_request()
-        if request.url.endswith("/logout"):
+        request_path = urlparse(request.url).path
+        logout_path = url_for("auth.logout")
+        if request_path == logout_path:
             _clear_cp_session(response, request)
             return response
 
