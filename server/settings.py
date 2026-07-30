@@ -2,6 +2,7 @@ import os
 import pathlib
 
 import cp
+from cp.common_settings import AUTH_PROVIDERS  # noqa
 from newsroom.web.default_settings import (
     CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
 )
