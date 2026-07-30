@@ -38,7 +38,7 @@ PKCE_CODE_VERIFIER_RE = compile(r"^[A-Za-z0-9._~-]{43,128}$")
 PKCE_S256_CODE_CHALLENGE_RE = compile(r"^[A-Za-z0-9_-]{43}$")
 
 CP_SESSION_COOKIE_NAME = "cp_session"
-SESSION_EXPIRY = timedelta(days=1)
+SESSION_EXPIRY = timedelta(hours=8)
 REFRESH_THRESHOLD = timedelta(minutes=5)
 OIDC_AUTH_CODE_EXPIRY = timedelta(minutes=2)
 OIDC_ACCESS_TOKEN_EXPIRY = timedelta(minutes=15)
