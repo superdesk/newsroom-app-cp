@@ -117,10 +117,7 @@ def session_status(args, params, request: Request):
         return {}, 401
 
     session_data = _get_valid_cp_session_data(session_id)
-    if not session_data:
-        return {}, 401
-
-    if not _is_valid_firebase_user(session_data):
+    if not session_data or not _is_valid_firebase_user(session_data):
         return {}, 401
 
     return {}, 200
@@ -307,7 +304,7 @@ def oidc_authorize(args, params, request: Request):
 
     session_id = _get_cp_session_cookie(request)
     session_data = _get_valid_cp_session_data(session_id)
-    if not session_id or not session_data:
+    if not session_id or not session_data or not _is_valid_firebase_user(session_data):
         return _oidc_redirect_error(redirect_uri, "login_required", state=state)
 
     code = str(uuid4())
@@ -367,7 +364,7 @@ async def oidc_token(args, params, request: Request):
         return _oidc_json_response({"error": "invalid_grant"}, status=400)
 
     session_data = _get_valid_cp_session_data(code_data.get("session_id"))
-    if not session_data:
+    if not session_data or not _is_valid_firebase_user(session_data):
         return _oidc_json_response({"error": "invalid_grant"}, status=400)
 
     claims = _build_oidc_claims(
