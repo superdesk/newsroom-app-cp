@@ -1,5 +1,6 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "newsroom-core/assets/auth/firebase/init";
+import { reportFirebaseAuthError } from "newsroom-core/assets/auth/firebase/sentry";
 
 const form = document.querySelector<HTMLFormElement>("#formLogin");
 if (!form) {
@@ -48,6 +49,11 @@ form.onsubmit = (event) => {
     .then((userCredential) => userCredential.user.getIdToken())
     .then((token) => sendTokenToServer(token))
     .catch((reason) => {
+      reportFirebaseAuthError(reason, {
+        action: "login",
+        email,
+        ignoredCodes: ["auth/invalid-credential"],
+      });
       firebaseStatus.value = reason.code;
       form.submit();
     });

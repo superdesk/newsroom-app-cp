@@ -1,9 +1,11 @@
-from base64 import b64decode
+from base64 import b64decode, urlsafe_b64encode
 from datetime import datetime, timedelta
+from hashlib import sha256
 from json import dumps, loads
 from logging import INFO, getLogger
 from os import environ
 from pathlib import Path
+from re import compile
 from secrets import compare_digest
 from time import time
 from urllib.parse import urlencode
@@ -31,8 +33,11 @@ from superdesk.core.web import EndpointGroup
 from superdesk.flask import url_for
 from werkzeug.http import parse_cookie
 
+PKCE_CODE_VERIFIER_RE = compile(r"^[A-Za-z0-9._~-]{43,128}$")
+PKCE_S256_CODE_CHALLENGE_RE = compile(r"^[A-Za-z0-9_-]{43}$")
+
 CP_SESSION_COOKIE_NAME = "cp_session"
-SESSION_EXPIRY = timedelta(days=5)
+SESSION_EXPIRY = timedelta(days=1)
 REFRESH_THRESHOLD = timedelta(minutes=5)
 OIDC_AUTH_CODE_EXPIRY = timedelta(minutes=2)
 OIDC_ACCESS_TOKEN_EXPIRY = timedelta(minutes=15)
@@ -177,6 +182,7 @@ def oidc_openid_configuration(args, params, request: Request):
     issuer = _get_oidc_issuer(request)
     return {
         "authorization_endpoint": f"{issuer}/oidc/authorize",
+        "code_challenge_methods_supported": ["S256"],
         "grant_types_supported": ["authorization_code"],
         "id_token_signing_alg_values_supported": ["RS256"],
         "issuer": issuer,
@@ -198,6 +204,33 @@ def oidc_jwks(args, params, request: Request):
     return {"keys": [loads(oidc_signing_key.export_public())]}, 200
 
 
+def _validate_pkce_challenge(
+    code_challenge: str | None,
+    code_challenge_method: str | None,
+) -> str | None:
+    if not code_challenge:
+        return "code_challenge is required"
+    if code_challenge_method != "S256":
+        return "code_challenge_method must be S256"
+    if not PKCE_S256_CODE_CHALLENGE_RE.match(code_challenge):
+        return "code_challenge is invalid"
+    return None
+
+
+def _is_pkce_verifier_valid(
+    code_verifier: str | None,
+    code_challenge: str | None,
+) -> bool:
+    if not code_verifier or not code_challenge:
+        return False
+    if not PKCE_CODE_VERIFIER_RE.match(code_verifier):
+        return False
+
+    digest = sha256(code_verifier.encode("ascii")).digest()
+    computed = urlsafe_b64encode(digest).decode("ascii").rstrip("=")
+    return compare_digest(computed, code_challenge)
+
+
 @blueprint.endpoint("/oidc/authorize", methods=["GET"], auth=False)
 def oidc_authorize(args, params, request: Request):
     client_id = request.get_url_arg("client_id")
@@ -206,6 +239,8 @@ def oidc_authorize(args, params, request: Request):
     scope = request.get_url_arg("scope") or ""
     state = request.get_url_arg("state")
     nonce = request.get_url_arg("nonce")
+    code_challenge = request.get_url_arg("code_challenge")
+    code_challenge_method = request.get_url_arg("code_challenge_method")
 
     if not redirect_uri:
         return {
@@ -228,6 +263,15 @@ def oidc_authorize(args, params, request: Request):
     if not _is_oidc_client_allowed(client_id):
         return _oidc_redirect_error(redirect_uri, "unauthorized_client", state=state)
 
+    pkce_error = _validate_pkce_challenge(code_challenge, code_challenge_method)
+    if pkce_error:
+        return _oidc_redirect_error(
+            redirect_uri,
+            "invalid_request",
+            pkce_error,
+            state=state,
+        )
+
     session_id = _get_cp_session_cookie(request)
     session_data = _get_valid_cp_session_data(session_id)
     if not session_id or not session_data:
@@ -243,6 +287,8 @@ def oidc_authorize(args, params, request: Request):
             "scope": scope,
             "session_id": session_id,
             "sub": session_data["uid"],
+            "code_challenge": code_challenge or "",
+            "code_challenge_method": code_challenge_method or "",
         },
     )
     return request.redirect(_append_query_params(redirect_uri, code=code, state=state))
@@ -256,6 +302,7 @@ async def oidc_token(args, params, request: Request):
     redirect_uri = form.get("redirect_uri")
     client_id = form.get("client_id")
     client_secret = form.get("client_secret")
+    code_verifier = form.get("code_verifier")
 
     if grant_type != "authorization_code":
         return _oidc_json_response(
@@ -279,6 +326,11 @@ async def oidc_token(args, params, request: Request):
     if code_data.get("client_id") != (client_id or ""):
         return _oidc_json_response({"error": "invalid_grant"}, status=400)
     if code_data.get("redirect_uri") != (redirect_uri or ""):
+        return _oidc_json_response({"error": "invalid_grant"}, status=400)
+    if not _is_pkce_verifier_valid(
+        code_verifier,
+        code_data.get("code_challenge"),
+    ):
         return _oidc_json_response({"error": "invalid_grant"}, status=400)
 
     session_data = _get_valid_cp_session_data(code_data.get("session_id"))
