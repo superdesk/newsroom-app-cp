@@ -2,17 +2,15 @@ import os
 import pathlib
 
 import cp
-from cp.common_settings import AUTH_PROVIDERS  # noqa
 from newsroom.web.default_settings import (
-    AUTH_PROVIDERS,
+    CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
+)
+from newsroom.web.default_settings import (
     CLIENT_CONFIG,
     CLIENT_LOCALE_FORMATS,
     CLIENT_URL,
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
     env,
-)
-from newsroom.web.default_settings import (
-    CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
 )
 from newsroom.web.default_settings import (
     CORE_APPS as DEFAULT_CORE_APPS,

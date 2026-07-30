@@ -344,7 +344,7 @@ async def oidc_token(args, params, request: Request):
     claims = _build_oidc_claims(
         request,
         session_data,
-        audience=code_data.get("client_id"),
+        audience=code_data.get("client_id", ""),
         nonce=code_data.get("nonce"),
     )
     access_token = str(uuid4())
