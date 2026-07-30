@@ -1,21 +1,27 @@
 import os
-import cp
 import pathlib
-from quart_babel import lazy_gettext
-from superdesk.default_settings import strtobool
+
+import cp
+from cp.common_settings import AUTH_PROVIDERS  # noqa
 from newsroom.web.default_settings import (
-    env,
-    CLIENT_CONFIG,
-    CORE_APPS as DEFAULT_CORE_APPS,
-    CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
-    CLIENT_URL,
-    CLIENT_LOCALE_FORMATS,
     AUTH_PROVIDERS,
+    CLIENT_CONFIG,
+    CLIENT_LOCALE_FORMATS,
+    CLIENT_URL,
     CONTENTAPI_ELASTICSEARCH_SETTINGS,
+    env,
+)
+from newsroom.web.default_settings import (
+    CELERY_BEAT_SCHEDULE as DEFAULT_CELERY_BEAT_SCHEDULE,
+)
+from newsroom.web.default_settings import (
+    CORE_APPS as DEFAULT_CORE_APPS,
+)
+from newsroom.web.default_settings import (
     MODULES as DEFAULT_MODULES,
 )
-from cp.common_settings import AUTH_PROVIDERS  # noqa
-
+from quart_babel import lazy_gettext
+from superdesk.default_settings import strtobool
 
 SERVER_PATH = pathlib.Path(__file__).resolve().parent
 CLIENT_PATH = SERVER_PATH.parent.joinpath("client")
@@ -279,7 +285,7 @@ INSTALLED_APPS = [
     "cp.signals",
     "cp.images",
     "newsroom.auth.saml",
-    "cp.auth"
+    "cp.auth",
 ]
 
 WIRE_SUBJECT_SCHEME_WHITELIST = [

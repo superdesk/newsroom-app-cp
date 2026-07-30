@@ -8,6 +8,7 @@ from pathlib import Path
 from re import compile
 from secrets import compare_digest
 from time import time
+from typing import cast
 from urllib.parse import urlencode
 from uuid import uuid4
 
@@ -128,9 +129,12 @@ def _get_cp_session_cookie(request: Request):
 
 def _update_cp_session(session_id: str, data: dict[str, str] | None = None) -> None:
     key = _get_redis_key(session_id)
-    _get_redis().pipeline().hset(
+    pipe = _get_redis().pipeline()
+    pipe.hset(
         key, mapping={**(data or {}), "updated_at": str(datetime.now().timestamp())}
-    ).expire(key, int(SESSION_EXPIRY.total_seconds())).execute()
+    )
+    pipe.expire(key, int(SESSION_EXPIRY.total_seconds()))
+    pipe.execute()
 
 
 def _set_cp_cookie(response: Response, request: Request, session_id: str) -> None:
@@ -154,7 +158,7 @@ def _get_redis_key(session_id: str) -> str:
 
 
 def _get_session_data_from_redis(session_id: str) -> dict[str, str]:
-    value = _get_redis().hgetall(_get_redis_key(session_id))
+    value = cast(dict[bytes, bytes], _get_redis().hgetall(_get_redis_key(session_id)))
     return {k.decode("utf-8"): v.decode("utf-8") for k, v in value.items()}
 
 
@@ -340,7 +344,7 @@ async def oidc_token(args, params, request: Request):
     claims = _build_oidc_claims(
         request,
         session_data,
-        audience=code_data.get("client_id") or client_id,
+        audience=code_data.get("client_id"),
         nonce=code_data.get("nonce"),
     )
     access_token = str(uuid4())
@@ -384,9 +388,10 @@ def _get_oidc_redis_key(kind: str, token: str) -> str:
 
 def _store_oidc_authorization_code(code: str, data: dict[str, str]) -> None:
     key = _get_oidc_redis_key("code", code)
-    _get_redis().pipeline().hset(key, mapping=data).expire(
-        key, int(OIDC_AUTH_CODE_EXPIRY.total_seconds())
-    ).execute()
+    pipe = _get_redis().pipeline()
+    pipe.hset(key, mapping=data)
+    pipe.expire(key, int(OIDC_AUTH_CODE_EXPIRY.total_seconds()))
+    pipe.execute()
 
 
 def _pop_oidc_authorization_code(code: str | None) -> dict[str, str] | None:
@@ -408,13 +413,17 @@ def _pop_oidc_authorization_code(code: str | None) -> dict[str, str] | None:
 def _store_oidc_access_token(token: str, claims: dict[str, str | int | bool]) -> None:
     key = _get_oidc_redis_key("access_token", token)
     mapping = {k: dumps(v) for k, v in claims.items()}
-    _get_redis().pipeline().hset(key, mapping=mapping).expire(
-        key, int(OIDC_ACCESS_TOKEN_EXPIRY.total_seconds())
-    ).execute()
+    pipe = _get_redis().pipeline()
+    pipe.hset(key, mapping=mapping)
+    pipe.expire(key, int(OIDC_ACCESS_TOKEN_EXPIRY.total_seconds()))
+    pipe.execute()
 
 
 def _get_oidc_access_token_data(token: str) -> dict[str, str | int | bool] | None:
-    value = _get_redis().hgetall(_get_oidc_redis_key("access_token", token))
+    value = cast(
+        dict[bytes, bytes],
+        _get_redis().hgetall(_get_oidc_redis_key("access_token", token)),
+    )
     if not value:
         return None
 
