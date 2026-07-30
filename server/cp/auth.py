@@ -137,6 +137,17 @@ def _update_cp_session(session_id: str, data: dict[str, str] | None = None) -> N
     pipe.execute()
 
 
+def _clear_cp_session(response: Response, request: Request) -> None:
+    session_id = _get_cp_session_cookie(request)
+    if session_id:
+        _get_redis().delete(_get_redis_key(session_id))
+
+    response.delete_cookie(
+        CP_SESSION_COOKIE_NAME,
+        path="/",
+    )
+
+
 def _set_cp_cookie(response: Response, request: Request, session_id: str) -> None:
     response.set_cookie(
         CP_SESSION_COOKIE_NAME,
@@ -549,6 +560,10 @@ def init_refresh_session_hook(app):
     @app.after_request
     async def refresh_cp_session(response):
         request = get_current_request()
+        if request.url.endswith("/logout"):
+            _clear_cp_session(response, request)
+            return response
+
         session_id = _get_cp_session_cookie(request)
         if not session_id:
             return response
