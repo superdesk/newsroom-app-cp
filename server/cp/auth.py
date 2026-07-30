@@ -14,7 +14,7 @@ from uuid import uuid4
 
 from authlib.jose import jwt
 from firebase_admin import initialize_app as initialize_firebase_app
-from firebase_admin.auth import verify_id_token
+from firebase_admin.auth import get_user, verify_id_token
 from firebase_admin.credentials import Certificate as FirebaseCertificate
 from flask import Response
 from jwcrypto.jwk import JWK
@@ -120,6 +120,9 @@ def session_status(args, params, request: Request):
     if not session_data:
         return {}, 401
 
+    if not _is_valid_firebase_user(session_data):
+        return {}, 401
+
     return {}, 200
 
 
@@ -182,6 +185,21 @@ def _get_valid_cp_session_data(session_id: str | None) -> dict[str, str] | None:
         return None
 
     return session_data
+
+
+def _is_valid_firebase_user(session_data: dict[str, str]) -> bool:
+    uid = session_data.get("uid")
+    email = session_data.get("email")
+    if not uid or not email:
+        return False
+
+    try:
+        user = get_user(uid, firebase_app)
+    except Exception as e:
+        logger.warning(f"Invalid Firebase user: {e}")
+        return False
+
+    return not user.disabled and user.email == email
 
 
 def _is_secure_request(request: Request) -> bool:
