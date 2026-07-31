@@ -475,6 +475,7 @@ def _get_oidc_access_token_data(token: str) -> dict[str, str | int | bool] | Non
 
 
 def _get_oidc_issuer(request: Request) -> str:
+    assert OIDC_ISSUER is not None
     return OIDC_ISSUER
 
 
