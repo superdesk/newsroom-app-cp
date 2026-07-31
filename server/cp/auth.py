@@ -55,6 +55,8 @@ FIREBASE_CONFIG = environ.get("FIREBASE_CONFIG")
 
 if not OIDC_JWK:
     raise Exception("CP_OIDC_JWK environment variable must be set")
+if not OIDC_ISSUER:
+    raise Exception("CP_OIDC_ISSUER environment variable must be set")
 if not FIREBASE_CONFIG:
     raise Exception("FIREBASE_CONFIG environment variable must be set")
 
@@ -473,7 +475,7 @@ def _get_oidc_access_token_data(token: str) -> dict[str, str | int | bool] | Non
 
 
 def _get_oidc_issuer(request: Request) -> str:
-    return OIDC_ISSUER or request.url.rsplit("/oidc/", 1)[0]
+    return OIDC_ISSUER
 
 
 def _is_oidc_client_allowed(client_id: str | None) -> bool:
