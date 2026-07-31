@@ -10,12 +10,12 @@ const KEYS = [
 ];
 
 const parsed = dotenv.config().parsed ?? {};
-const env = KEYS.reduce((acc, key) => {
-  if (parsed[key] !== undefined) {
-    acc[key] = parsed[key];
-  }
-  return acc;
-}, {});
+const defines = Object.fromEntries(
+  KEYS.map((k) => [
+    `process.env.${k}`,
+    JSON.stringify(process.env[k] ?? parsed[k]),
+  ]),
+);
 
 config.entry.home_js = [
   config.entry.home_js,
@@ -23,11 +23,6 @@ config.entry.home_js = [
 ];
 config.entry.firebase_login_js = "./assets/auth/firebase/login.ts";
 
-config.plugins = [
-  ...(config.plugins || []),
-  new webpack.DefinePlugin({
-    "process.env": JSON.stringify(env),
-  }),
-];
+config.plugins = [...(config.plugins || []), new webpack.DefinePlugin(defines)];
 
 module.exports = config;

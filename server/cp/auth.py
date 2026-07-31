@@ -9,7 +9,7 @@ from re import compile
 from secrets import compare_digest
 from time import time
 from typing import cast
-from urllib.parse import urlencode, urlparse
+from urllib.parse import unquote_plus, urlencode, urlparse
 from uuid import uuid4
 
 from authlib.jose import jwt
@@ -84,6 +84,16 @@ async def firebase_auth_token(args, params, request: Request):
 
     email = claims["email"]
     uid = claims["uid"]
+    if not email or not uid:
+        logger.error("Firebase token missing email or uid")
+        await flash(gettext("User token is not valid"), "danger")
+        return request.redirect(url_for("auth.login", token_error=1))
+
+    email_verified = claims["email_verified"]
+    if email_verified is not True:
+        logger.warning("Firebase token for %s has an unverified email", email)
+        await flash(gettext("Email address is not verified"), "danger")
+        return request.redirect(url_for("auth.login", token_error=1))
 
     response = await sign_user_by_email(
         email,
@@ -104,6 +114,7 @@ async def firebase_auth_token(args, params, request: Request):
             "created_at": str(datetime.now().timestamp()),
             "email": email,
             "uid": uid,
+            "email_verified": "1",
         },
     )
     _set_cp_cookie(response, request, session_id)
@@ -187,7 +198,8 @@ def _get_valid_cp_session_data(session_id: str | None) -> dict[str, str] | None:
 def _is_valid_firebase_user(session_data: dict[str, str]) -> bool:
     uid = session_data.get("uid")
     email = session_data.get("email")
-    if not uid or not email:
+    email_verified = bool(session_data.get("email_verified"))
+    if not uid or not email or not email_verified:
         return False
 
     try:
@@ -196,7 +208,11 @@ def _is_valid_firebase_user(session_data: dict[str, str]) -> bool:
         logger.warning(f"Invalid Firebase user: {e}")
         return False
 
-    return not user.disabled and user.email == email
+    return (
+        not user.disabled
+        and user.email == email
+        and user.emailVerified == email_verified
+    )
 
 
 def _is_secure_request(request: Request) -> bool:
@@ -400,7 +416,7 @@ def oidc_userinfo(args, params, request: Request):
     return _oidc_json_response(
         {
             "email": claims.get("email"),
-            "email_verified": bool(claims.get("email")),
+            "email_verified": bool(claims.get("email_verified")),
             "name": claims.get("name") or claims["sub"],
             "preferred_username": claims.get("email") or claims["sub"],
             "sub": claims["sub"],
@@ -497,7 +513,7 @@ def _parse_basic_auth(request: Request) -> tuple[str | None, str | None]:
     except Exception:
         return None, None
 
-    return username, password
+    return unquote_plus(username), unquote_plus(password)
 
 
 def _get_bearer_token(request: Request) -> str | None:
@@ -517,7 +533,7 @@ def _build_oidc_claims(
     claims: dict[str, str | int | bool] = {
         "aud": audience,
         "email": session_data.get("email", ""),
-        "email_verified": bool(session_data.get("email")),
+        "email_verified": bool(session_data.get("email_verified")),
         "exp": now + int(OIDC_ID_TOKEN_EXPIRY.total_seconds()),
         "iat": now,
         "iss": _get_oidc_issuer(request),
