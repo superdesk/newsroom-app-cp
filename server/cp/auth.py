@@ -82,8 +82,8 @@ async def firebase_auth_token(args, params, request: Request):
         await flash(gettext("User token is not valid"), "danger")
         return request.redirect(url_for("auth.login", token_error=1))
 
-    email = claims["email"]
-    uid = claims["uid"]
+    email = claims.get("email")
+    uid = claims.get("uid")
     if not email or not uid:
         logger.error("Firebase token missing email or uid")
         await flash(gettext("User token is not valid"), "danger")
@@ -211,7 +211,7 @@ def _is_valid_firebase_user(session_data: dict[str, str]) -> bool:
     return (
         not user.disabled
         and user.email == email
-        and user.emailVerified == email_verified
+        and user.email_verified == email_verified
     )
 
 

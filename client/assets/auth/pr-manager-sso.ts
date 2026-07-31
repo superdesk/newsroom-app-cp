@@ -6,7 +6,7 @@ const handlePrManagerClick = (event: Event) => {
   fetch("/cp_session")
     .then((r) => (r.ok ? process.env.AUTH0_FIREBASE_CONNECTION : undefined))
     .then(login)
-    .catch(() => login);
+    .catch(() => login());
 };
 
 const prManagerObserver = new MutationObserver((_, observer) => {
