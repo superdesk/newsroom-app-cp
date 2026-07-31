@@ -27,6 +27,8 @@ amqp==5.3.1
     # via kombu
 annotated-types==0.7.0
     # via pydantic
+anyio==4.14.2
+    # via httpx
 arabic-reshaper==3.0.0
     # via xhtml2pdf
 arrow==1.3.0
@@ -71,6 +73,8 @@ botocore==1.37.3
     #   aiobotocore
     #   boto3
     #   s3transfer
+cachecontrol==0.14.4
+    # via firebase-admin
 cachelib==0.13.0
     # via flask-caching
 cachetools==5.5.2
@@ -91,6 +95,8 @@ certifi==2025.8.3
     # via
     #   elastic-apm
     #   elasticsearch
+    #   httpcore
+    #   httpx
     #   requests
     #   sentry-sdk
 cffi==2.0.0
@@ -126,6 +132,7 @@ cryptography==48.0.1
     #   jwcrypto
     #   pyhanko
     #   pyhanko-certvalidator
+    #   pyjwt
 cssselect2==0.8.0
     # via svglib
 deepdiff==8.6.2
@@ -154,11 +161,14 @@ eve-elastic @ git+https://github.com/superdesk/eve-elastic@async
     # via superdesk-core
 exceptiongroup==1.3.0
     # via
+    #   anyio
     #   celery
     #   hypercorn
     #   taskgroup
 feedparser==6.0.11
     # via superdesk-core
+firebase-admin==7.1.0
+    # via -r requirements.in
 flask==3.1.3
     # via
     #   flask-caching
@@ -180,14 +190,53 @@ frozenlist==1.7.0
     #   aiosignal
 future==1.0.0
     # via python-twitter
+google-api-core[grpc]==2.33.0
+    # via
+    #   firebase-admin
+    #   google-cloud-core
+    #   google-cloud-firestore
+    #   google-cloud-storage
 google-auth==2.29.0
-    # via newsroom-core
+    # via
+    #   google-api-core
+    #   google-cloud-core
+    #   google-cloud-firestore
+    #   google-cloud-storage
+    #   newsroom-core
+google-cloud-core==2.6.0
+    # via
+    #   google-cloud-firestore
+    #   google-cloud-storage
+google-cloud-firestore==2.28.0
+    # via firebase-admin
+google-cloud-storage==3.13.0
+    # via firebase-admin
+google-crc32c==1.8.0
+    # via
+    #   google-cloud-storage
+    #   google-resumable-media
+google-resumable-media==2.10.0
+    # via google-cloud-storage
+googleapis-common-protos==1.75.0
+    # via
+    #   google-api-core
+    #   grpcio-status
+grpcio==1.83.0
+    # via
+    #   google-api-core
+    #   google-cloud-firestore
+    #   grpcio-status
+grpcio-status==1.83.0
+    # via google-api-core
 h11==0.16.0
     # via
+    #   httpcore
     #   hypercorn
     #   wsproto
 h2==4.3.0
-    # via hypercorn
+    # via
+    #   httpx
+    #   hypercorn
 hachoir==3.3.0
     # via superdesk-core
 hermescache==1.0.0
@@ -198,8 +247,12 @@ hpack==4.1.0
     # via h2
 html5lib==1.1
     # via xhtml2pdf
+httpcore==1.0.9
+    # via httpx
 httplib2==0.22.0
     # via oauth2client
+httpx[http2]==0.28.1
+    # via firebase-admin
 hypercorn==0.17.3
     # via
     #   newsroom-core
@@ -210,7 +263,9 @@ icalendar==5.0.13
     # via superdesk-planning
 idna==3.15
     # via
+    #   anyio
     #   email-validator
+    #   httpx
     #   requests
     #   yarl
 isodate==0.7.2
@@ -257,6 +312,8 @@ markupsafe==3.0.2
     #   wtforms
 motor==3.7.1
     # via superdesk-core
+msgpack==1.2.1
+    # via cachecontrol
 multidict==6.6.4
     # via
     #   aiobotocore
@@ -287,7 +344,18 @@ propcache==0.3.2
     # via
     #   aiohttp
     #   yarl
-pyasn1==0.6.4
+proto-plus==1.28.2
+    # via
+    #   google-api-core
+    #   google-cloud-firestore
+protobuf==7.35.1
+    # via
+    #   google-api-core
+    #   google-cloud-firestore
+    #   googleapis-common-protos
+    #   grpcio-status
+    #   proto-plus
+pyasn1==0.6.3
     # via
     #   ldap3
     #   oauth2client
@@ -309,8 +377,10 @@ pyhanko-certvalidator==0.27.0
     # via
     #   pyhanko
     #   xhtml2pdf
-pyjwt==2.10.1
-    # via superdesk-core
+pyjwt[crypto]==2.10.1
+    # via
+    #   firebase-admin
+    #   superdesk-core
 pymemcache==4.0.0
     # via superdesk-core
 pymongo==4.9.2
@@ -394,6 +464,9 @@ reportlab==4.4.3
     #   xhtml2pdf
 requests==2.33.0
     # via
+    #   cachecontrol
+    #   google-api-core
+    #   google-cloud-storage
     #   pyhanko
     #   pyhanko-certvalidator
     #   python-twitter
@@ -446,9 +519,11 @@ typing-extensions==4.14.1
     # via
     #   aiohttp
     #   aiosignal
+    #   anyio
     #   asgiref
     #   cryptography
     #   exceptiongroup
+    #   grpcio
     #   hypercorn
     #   jwcrypto
     #   multidict
@@ -506,7 +581,6 @@ wtforms[email]==3.2.1
     # via
     #   newsroom-core
     #   quart-wtforms
-    #   wtforms
 xhtml2pdf==0.2.16
     # via newsroom-core
 xmlsec==1.3.14
@@ -515,6 +589,6 @@ xmlsec==1.3.14
     #   superdesk-core
 yarl==1.20.1
     # via aiohttp
-firebase-admin==7.1.0
+
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
