@@ -49,7 +49,7 @@ mock.patch(
     "firebase_admin.credentials.Certificate", return_value=mock.MagicMock()
 ).start()
 
-from cp import auth
+auth = importlib.import_module("cp.auth")
 
 REDIRECT_URI = next(iter(auth.OIDC_REDIRECT_URI_LIST))
 CLIENT_ID = auth.OIDC_CLIENT_ID
