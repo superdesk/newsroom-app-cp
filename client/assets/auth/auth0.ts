@@ -38,6 +38,11 @@ function initAuth0() {
 async function login(connection?: string) {
   await initAuth0();
 
+  if (!auth0Client) {
+    console.error("Auth0 client failed to initialize");
+    return;
+  }
+
   try {
     return await auth0Client.loginWithRedirect({
       authorizationParams: { connection },

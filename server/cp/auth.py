@@ -9,7 +9,7 @@ from re import compile
 from secrets import compare_digest
 from time import time
 from typing import cast
-from urllib.parse import unquote_plus, urlencode, urlparse
+from urllib.parse import unquote, urlencode, urlparse
 from uuid import uuid4
 
 from authlib.jose import jwt
@@ -49,29 +49,43 @@ OIDC_CLIENT_ID = environ.get("CP_OIDC_CLIENT_ID")
 OIDC_CLIENT_SECRET = environ.get("CP_OIDC_CLIENT_SECRET")
 OIDC_ISSUER = environ.get("CP_OIDC_ISSUER")
 OIDC_REDIRECT_URI_LIST = {
-    uri for uri in environ.get("CP_OIDC_REDIRECT_URI_LIST", "").split(",") if uri
+    uri.strip()
+    for uri in environ.get("CP_OIDC_REDIRECT_URI_LIST", "").split(",")
+    if uri.strip()
 }
 FIREBASE_CONFIG = environ.get("FIREBASE_CONFIG")
+IS_OIDC_ENABLED = OIDC_JWK is not None and OIDC_ISSUER is not None
 
-if not OIDC_JWK:
-    raise Exception("CP_OIDC_JWK environment variable must be set")
-if not OIDC_ISSUER:
-    raise Exception("CP_OIDC_ISSUER environment variable must be set")
-if not FIREBASE_CONFIG:
-    raise Exception("FIREBASE_CONFIG environment variable must be set")
-
-blueprint = EndpointGroup("cp_auth", __name__)
 logger = getLogger(__name__)
 logger.setLevel(INFO)
 
-firebase_app = initialize_firebase_app(credential=FirebaseCertificate(FIREBASE_CONFIG))
+if not OIDC_JWK:
+    logger.warning("CP_OIDC_JWK environment variable must be set for SSO via OIDC")
+if not OIDC_ISSUER:
+    logger.warning("CP_OIDC_ISSUER environment variable must be set for SSO via OIDC")
+if not FIREBASE_CONFIG:
+    logger.warning(
+        "FIREBASE_CONFIG environment variable must be set for login via Firebase"
+    )
 
-oidc_key = Path(OIDC_JWK).read_text()
-oidc_signing_key = JWK.from_json(oidc_key)
+blueprint = EndpointGroup("cp_auth", __name__)
+
+firebase_app = (
+    initialize_firebase_app(credential=FirebaseCertificate(FIREBASE_CONFIG))
+    if FIREBASE_CONFIG
+    else None
+)
+
+oidc_key = Path(OIDC_JWK).read_text() if IS_OIDC_ENABLED else None
+oidc_signing_key = JWK.from_json(oidc_key) if IS_OIDC_ENABLED else None
 
 
 @blueprint.endpoint("/firebase_auth_token", auth=False)
 async def firebase_auth_token(args, params, request: Request):
+    if not firebase_app:
+        await flash(gettext("Insufficient Permissions. Access denied."), "danger")
+        return request.redirect(url_for("auth.login", fb_error=1))
+
     token = request.get_url_arg("token")
     if not token:
         await flash(gettext("User token is not valid"), "danger")
@@ -198,6 +212,9 @@ def _get_valid_cp_session_data(session_id: str | None) -> dict[str, str] | None:
 
 
 def _is_valid_firebase_user(session_data: dict[str, str]) -> bool:
+    if not firebase_app:
+        return False
+
     uid = session_data.get("uid")
     email = session_data.get("email")
     email_verified = bool(session_data.get("email_verified"))
@@ -227,6 +244,9 @@ def _is_secure_request(request: Request) -> bool:
 
 @blueprint.endpoint("/oidc/.well-known/openid-configuration", auth=False)
 def oidc_openid_configuration(args, params, request: Request):
+    if not IS_OIDC_ENABLED:
+        return {}, 500
+
     issuer = _get_oidc_issuer(request)
     return {
         "authorization_endpoint": f"{issuer}/oidc/authorize",
@@ -249,6 +269,8 @@ def oidc_openid_configuration(args, params, request: Request):
 
 @blueprint.endpoint("/oidc/jwks.json", auth=False)
 def oidc_jwks(args, params, request: Request):
+    if not IS_OIDC_ENABLED:
+        return {}, 500
     return {"keys": [loads(oidc_signing_key.export_public())]}, 200
 
 
@@ -281,6 +303,9 @@ def _is_pkce_verifier_valid(
 
 @blueprint.endpoint("/oidc/authorize", methods=["GET"], auth=False)
 def oidc_authorize(args, params, request: Request):
+    if not IS_OIDC_ENABLED:
+        return {}, 500
+
     client_id = request.get_url_arg("client_id")
     redirect_uri = request.get_url_arg("redirect_uri")
     response_type = request.get_url_arg("response_type")
@@ -344,6 +369,9 @@ def oidc_authorize(args, params, request: Request):
 
 @blueprint.endpoint("/oidc/token", methods=["POST"], auth=False)
 async def oidc_token(args, params, request: Request):
+    if not IS_OIDC_ENABLED:
+        return {}, 500
+
     form = await request.get_form()
     code = form.get("code")
     grant_type = form.get("grant_type")
@@ -407,6 +435,9 @@ async def oidc_token(args, params, request: Request):
 
 @blueprint.endpoint("/oidc/userinfo", methods=["GET"], auth=False)
 def oidc_userinfo(args, params, request: Request):
+    if not IS_OIDC_ENABLED:
+        return {}, 500
+
     token = _get_bearer_token(request)
     if not token:
         return _oidc_json_response({"error": "invalid_token"}, status=401)
@@ -516,7 +547,7 @@ def _parse_basic_auth(request: Request) -> tuple[str | None, str | None]:
     except Exception:
         return None, None
 
-    return unquote_plus(username), unquote_plus(password)
+    return unquote(username), unquote(password)
 
 
 def _get_bearer_token(request: Request) -> str | None:
