@@ -76,8 +76,11 @@ firebase_app = (
     else None
 )
 
-oidc_key = Path(OIDC_JWK).read_text() if IS_OIDC_ENABLED else None
-oidc_signing_key = JWK.from_json(oidc_key) if IS_OIDC_ENABLED else None
+oidc_key = oidc_signing_key = None
+if IS_OIDC_ENABLED:
+    assert OIDC_JWK is not None
+    oidc_key = Path(OIDC_JWK).read_text()
+    oidc_signing_key = JWK.from_json(oidc_key)
 
 
 @blueprint.endpoint("/firebase_auth_token", auth=False)
@@ -271,6 +274,7 @@ def oidc_openid_configuration(args, params, request: Request):
 def oidc_jwks(args, params, request: Request):
     if not IS_OIDC_ENABLED:
         return {}, 500
+    assert oidc_signing_key is not None
     return {"keys": [loads(oidc_signing_key.export_public())]}, 200
 
 
@@ -580,6 +584,7 @@ def _build_oidc_claims(
 
 
 def _encode_oidc_id_token(claims: dict[str, str | int | bool]) -> str:
+    assert oidc_signing_key is not None
     header = {"alg": "RS256", "kid": oidc_signing_key["kid"], "typ": "JWT"}
     token = jwt.encode(
         header, claims, oidc_signing_key.export_to_pem(private_key=True, password=None)
