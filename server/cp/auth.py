@@ -119,6 +119,8 @@ async def firebase_auth_token(args, params, request: Request):
         auth_type=AuthProviderType.FIREBASE,
         validate_login_attempt=True,
     )
+    if not IS_OIDC_ENABLED:
+        return response
 
     user = await UsersService().get_by_email(email)
     logged_in_user = get_user_or_none_from_request(request)
