@@ -445,6 +445,7 @@ QUART_RATE_LIMITER_ENABLED = False
 PR_MANAGER_SIDENAV_ENABLED = strtobool(
     os.environ.get("PR_MANAGER_SIDENAV_ENABLED", is_test_instance)
 )
+CLIENT_CONFIG["prManagerSidenavEnabled"] = PR_MANAGER_SIDENAV_ENABLED
 
 # The URL to use for the PR-Manager (uses different URL in testing and production instances)
 PR_MANAGER_SIDENAV_URL = os.environ.get(
@@ -460,5 +461,15 @@ MAX_CONTENT_LENGTH = int(
     os.environ.get("MAX_CONTENT_LENGTH", 1024 * 1024 * 1000 * 4)
 )  # 4GB
 
-CLIENT_CONFIG["prManagerSidenavEnabled"] = PR_MANAGER_SIDENAV_ENABLED
 SENTRY_LOADER_SRC = os.environ.get("SENTRY_LOADER_SRC", "")
+
+# Auth0
+AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
+AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
+AUTH0_REDIRECT_URI = os.environ.get("AUTH0_REDIRECT_URI")
+AUTH0_FIREBASE_CONNECTION = os.environ.get("AUTH0_FIREBASE_CONNECTION")
+
+CLIENT_CONFIG["auth0Domain"] = AUTH0_DOMAIN
+CLIENT_CONFIG["auth0ClientId"] = AUTH0_CLIENT_ID
+CLIENT_CONFIG["auth0RedirectUri"] = AUTH0_REDIRECT_URI
+CLIENT_CONFIG["auth0FirebaseConnection"] = AUTH0_FIREBASE_CONNECTION

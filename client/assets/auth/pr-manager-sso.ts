@@ -4,7 +4,7 @@ import { login } from "./auth0";
 const handlePrManagerClick = (event: Event) => {
   event.preventDefault();
   fetch("/cp_session")
-    .then((r) => (r.ok ? process.env.AUTH0_FIREBASE_CONNECTION : undefined))
+    .then((r) => (r.ok ? getConfig("auth0FirebaseConnection") : undefined))
     .then(login)
     .catch(() => login());
 };

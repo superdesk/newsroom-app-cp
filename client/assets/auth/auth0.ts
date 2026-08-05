@@ -1,4 +1,5 @@
 import { Auth0Client, createAuth0Client } from "@auth0/auth0-spa-js";
+import { getConfig } from "newsroom-core/assets/utils";
 
 let auth0Client: Auth0Client;
 let init: Promise<void> | null = null;
@@ -9,10 +10,10 @@ function initAuth0() {
   init = (async () => {
     try {
       auth0Client = await createAuth0Client({
-        domain: process.env.AUTH0_DOMAIN!,
-        clientId: process.env.AUTH0_CLIENT_ID!,
+        domain: getConfig("auth0Domain"),
+        clientId: getConfig("auth0ClientId"),
         authorizationParams: {
-          redirect_uri: process.env.AUTH0_REDIRECT_URI,
+          redirect_uri: getConfig("auth0RedirectUri"),
         },
       });
 
