@@ -2,8 +2,12 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-dev python3-pip python3-venv git gcc gnupg curl \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl gnupg ca-certificates && \
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg && \
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-8.0.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-dev python3-pip python3-venv git gcc \
     # lxml
     libxml2-dev libxslt-dev \
     # PIL
@@ -11,13 +15,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # magic
     libmagic-dev \
     # xmlsec
-    pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl \
+    pkg-config libxmlsec1-dev libxmlsec1-openssl \
     # windows tweaks
-    dos2unix && \
-    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor && \
-    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-8.0.list && \
-    apt-get update && \
-    apt-get install -y mongodb-database-tools && \
+    dos2unix \
+    # mongodb tools
+    mongodb-database-tools && \
     rm -rf /var/lib/apt/lists/*
 
 # setup venv
