@@ -7,16 +7,22 @@ services:
             - discovery.type=single-node
         networks:
             - newsroom
+        ports:
+            - 9200:9200
 
     redis:
         image: redis:alpine
         networks:
             - newsroom
+        ports:
+            - 6379:6379
 
     mongo:
         image: mongo:4
         networks:
             - newsroom
+        ports:
+            - 27017:27017
 
     server:
         build: server
@@ -45,6 +51,7 @@ services:
             - REDIS_URL=redis://redis:6379/1
             - DEFAULT_TIMEZONE=Europe/Prague
             - SECRET_KEY=newsroom
+            - PR_MANAGER_SIDENAV_ENABLED=true
 
     client:
         build: client
