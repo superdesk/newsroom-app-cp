@@ -4,7 +4,7 @@
     "build": "webpack --mode production --progress"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "2.16.0",
+    "@auth0/auth0-spa-js": "2.24.1",
     "newsroom-core": "github:superdesk/newsroom-core#v3.0.6"
   },
   "peerDependencies": {
