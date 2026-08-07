@@ -1,3 +1,2 @@
 celery-redbeat
-git+https://github.com/superdesk/newsroom-core.git@v3.0.6#egg=Newsroom-Core
-firebase-admin==7.5.0
+Newsroom-Core[firebase] @ git+https://github.com/superdesk/newsroom-core.git@develop
