@@ -233,7 +233,7 @@ h11==0.16.0
     #   httpcore
     #   hypercorn
     #   wsproto
-h2==4.3.0
+h2==4.4.1
     # via
     #   httpx
     #   hypercorn
@@ -243,7 +243,7 @@ hermescache==1.0.0
     # via superdesk-core
 honcho==2.0.0
     # via newsroom-core
-hpack==4.1.0
+hpack==4.2.0
     # via h2
 html5lib==1.1
     # via xhtml2pdf
