@@ -438,7 +438,9 @@ CALENDAR_LOCATIONS_FILTER_OPTIONS = {
     "place": False,
 }
 
-QUART_RATE_LIMITER_ENABLED = True
+QUART_RATE_LIMITER_ENABLED = strtobool(
+    os.environ.get("QUART_RATE_LIMITER_ENABLED", "on")
+)
 
 # If ``True`` will add the PR-Manager sidenav in the front-end
 # Enabled by default on test instances, Disabled otherwise
