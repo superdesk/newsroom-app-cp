@@ -438,7 +438,7 @@ CALENDAR_LOCATIONS_FILTER_OPTIONS = {
     "place": False,
 }
 
-QUART_RATE_LIMITER_ENABLED = False
+QUART_RATE_LIMITER_ENABLED = True
 
 # If ``True`` will add the PR-Manager sidenav in the front-end
 # Enabled by default on test instances, Disabled otherwise
