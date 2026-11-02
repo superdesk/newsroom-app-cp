@@ -312,7 +312,7 @@ markupsafe==3.0.2
     #   wtforms
 motor==3.7.1
     # via superdesk-core
-msgpack==1.2.1
+msgpack==1.2.3
     # via cachecontrol
 multidict==6.6.4
     # via
